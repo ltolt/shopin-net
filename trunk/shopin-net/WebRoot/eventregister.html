@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>事件登记的四种形式</title>
+<style type="text/css">
+#outer{
+width:15em;
+boder:3px solid #f33;
+color:#f00;
+padding:0.5em;
+}
+#inner{
+  border:3px solid #33f;
+  color:#00f;
+  padding:0.5em;
+}
+
+</style>
+
+</head>
+<body>
+  <div id="outer">
+    this is outer division
+      <div id="inner">
+        this is inner div
+      </div>
+  </div>
+   <script type="text/javascript">
+      //document.getElementById('outer').addEventListener('click',func1,true);
+      //document.getElementById('inner').addEvenetListener('click',func2,true);
+      document.getElementById('outer').addEventListener('click',func1,false);
+      document.getElementById('inner').addEvenetListener('click',func2,false);
+      
+      function func1(){
+    	  alert('red');
+      }
+      function func2(){
+    	  alert('blue');
+      }
+   
+   
+   </script>
+
+
+
+
+  <script type="text/javascript">
+   //1.内联式登记事件
+    function popUp(){
+    	alert('you have clicked a button');
+    }
+  </script>
+  
+  
+  
+  <button id="btn">单击me</button>
+  
+  <script type="text/javascript">
+  //传统式登记事件 软性关联
+     function popUp1(){
+    	 alert('popup1');
+     }
+  	 button = document.getElementById('btn');
+  	 button.onclick =  popUp1;
+     
+  </script>
+  <button id="btn2">单击我</button>
+  <script type="text/javascript">
+     button = document.getElementById('btn2');
+     button.attachEvent('onclick',function(){
+		alert('first handle');    	 
+     });
+     button.attachEvent('onclick',function(){
+    	alert('second handle'); 
+     });
+  
+  </script>
+  
+  
+  <button onclick="popUp();">单击我</button>
+</body>
+</html>
