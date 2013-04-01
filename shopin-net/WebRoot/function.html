@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>函数的作用域</title>
+<script type="text/javascript">
+  //嵌套的函数
+  var testvar = 'window属性';
+  var o1 = {testvar:'1',fun:function(){alert('01:' + this.testvar)}};
+  var o2 = {testvar:'2',fun:function(){alert('o2:' + this.testvar)}};
+  o1.fun();
+  o2.fun();
+  o1.fun.call(o2);
+
+</script>
+
+
+</head>
+<body>
+
+</body>
+</html>
