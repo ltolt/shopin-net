@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:amq="http://activemq.apache.org/schema/core"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://activemq.apache.org/schema/core
+       http://activemq.apache.org/schema/core/activemq-core.xsd">
+   
+   <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+     <property name="connectionFactory">
+       <bean class="org.springframework.jms.connection.SingleConnectionFactory">
+                <property name="targetConnectionFactory" ref="jmsConnectionFactory"/>
+            </bean>
+     </property>
+     <property name="messageConverter" ref="defaultMessageConverter"></property>
+   </bean>
+   
+   <amq:connectionFactory id="jmsConnectionFactory" brokerURL="failover:tcp://172.16.103.145:61616"></amq:connectionFactory>
+ 
+   <bean id="defaultMessageConverter" class="base.framework.jms.converter.DefaultMessageConverter"/>
+   
+   <amq:queue name="QUEUE1" physicalName="JMS-METHOD-QUEUE-kongm"></amq:queue>
+
+   <bean id="methodMessageProducer" class="base.framework.jms.MethodMessageProducer">
+     <property name="template" ref="jmsTemplate"/>
+     <property name="destination" ref="QUEUE1"/> 
+   </bean>
+
+
+
+</beans>
