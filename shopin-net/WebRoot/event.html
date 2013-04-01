@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>浏览器事件对象</title>
+</head>
+<body>
+   <div id="foo">请单击我</div>
+   <script type="text/javascript">
+      document.getElementById('foo').onclick = handleEvent;
+      function handleEvent(e){
+    	 var eventObj,eventTarget;
+    	 if(e){
+    		 //按照现代编码风格来讲，不提倡全局变量的编程手法，因此w3c的参数方案
+    		 //较Microsoft的方案略显优雅
+    		 eventObj = e;
+    	 }else{
+    		 //若参数e不存在,保存window.event变量到Eventobj对象
+    		 eventObj = window.event;
+    	 }
+    	 //事件目标对象w3c成为Target Microsoft成为srcElement
+    	 eventTarget = eventObj.target ||　eventObj.srcElement;
+    	 alert(eventTarget.id);//弹出foo
+      }
+   
+   
+   
+   </script>
+
+
+</body>
+</html>
