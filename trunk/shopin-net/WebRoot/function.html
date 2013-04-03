@@ -8,9 +8,26 @@
   var testvar = 'window属性';
   var o1 = {testvar:'1',fun:function(){alert('01:' + this.testvar)}};
   var o2 = {testvar:'2',fun:function(){alert('o2:' + this.testvar)}};
-  o1.fun();
+  /* o1.fun();
   o2.fun();
-  o1.fun.call(o2);
+  o1.fun.call(o2); */
+  var o3 = {
+		  testvar:'3',
+		  testvar2:'3**',
+		  fun:function(){
+			  alert('o3: ' + this.testvar);
+			  var innner = function(){
+				  alert('o3 - inner : ' + this.testvar);
+				  alert('o3-inner:' + this.testvar2);
+			  };
+			  inner();
+		  }
+		  
+  };
+  o3.fun();
+  
+  
+  
 
 </script>
 
