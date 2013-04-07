@@ -42,7 +42,7 @@
         		},[
         		   {name:'id',type:'int'},
         		   {name:'nodename'},
-        		   {name:'fatherNodeSid'},
+        		   {name:'fathername'},
         		   ]
         		
         		),
@@ -80,15 +80,74 @@
         		},{
         			header:'父节点名',
         			width:80,
-        			dataIndex:'fatherNodeSid',
+        			dataIndex:'fathername',
         		}],
         		stripeRows:true,
-        		autoExpandColumn:1
+        		autoExpandColumn:1,
+        		tbar:[{
+        			text:'上移',
+        			iconCls:'up',
+        			scope:this,
+        			handler:function(){
+        				buttonMove(-1);
+        			}
+        		},{
+        			text:'下移',
+        			iconCls:'down',
+        			scope:this,
+        			handler:function(){
+        				buttonMove(1);
+        			}
+        		},'-',{
+        			text:'保存',
+        			iconCls:'save',
+        			scope:this,
+        			handler:function(){
+        				var ds = grid.getStore();
+        				var sortIndex = [];
+        				for(var i = 0;i<ds.getCount();i++){
+        					sortIndex.push(ds.data.items[i].id);
+        					Ext.get('op').dom.value +="--------\n" + sortIndex + "\n";
+        					Ext.Ajax.request({
+        						url:'${ctx}/saveClass.html',
+        						params:{
+        							sortIndex:sortIndex
+        							
+        						},
+        						success:function(response,op){
+        							var msg = response.responseText;
+        							var obj = Ext.decode(msg);
+        							if(obj){
+        								if(obj.success){
+        									msg='新的顺序保存成功'
+        								}else{
+        									msg = obj.data;
+        								}
+        							}
+        							Ext.Msg.alert('信息',msg);
+        						},
+        						failure:function(response,op){
+        							Ext.Msg.alert('信息',response.responseText);
+        						}
+        						
+        					});
+        				}
+        			}
+        		}]
         		
         	
         	});
         	
         	grid.render('panel1');
+        	function buttonMove(toward){
+        		var sm = grid.getSelectionModel();
+        		var data = sm.getSelections();
+        		if(sm.hasSelection()){
+        			var 
+        		}
+        		
+        	}
+        	
         	store.load();
         	
         	
