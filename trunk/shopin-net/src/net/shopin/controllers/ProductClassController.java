@@ -76,6 +76,8 @@ public class ProductClassController {
 		map.put("rows", rows);
 		map.put("results", 10);
 		String json = JsonUtil.Object2JsonFilter(map);
+		json = "{rows:" + rows + ",results:10}";
+		log.info(json);
 		try {
 			Map logMap = new LinkedHashMap();
 			logMap.put("action","listClass");
