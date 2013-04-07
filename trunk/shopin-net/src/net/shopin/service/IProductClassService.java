@@ -4,6 +4,7 @@ import java.util.List;
 
 public interface IProductClassService {
 	
+    String getListClassForGrid();
 	
 	List getAllProductClasses();
 
