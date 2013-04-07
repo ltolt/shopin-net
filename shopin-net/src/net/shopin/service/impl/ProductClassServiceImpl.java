@@ -1,5 +1,6 @@
 package net.shopin.service.impl;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -89,6 +90,24 @@ public class ProductClassServiceImpl implements IProductClassService {
 			
 		}
 		
+		return json.toString();
+	}
+
+	@Transactional
+	public String getListClassForGrid() {
+		List list = this.getAllProductClasses();
+		JSONArray json = new JSONArray();
+		JSONObject obj;
+		if(list!=null && list.size()>0){
+			for(Iterator iter = list.iterator();iter.hasNext();){
+				ProductClass proClass = (ProductClass) iter.next();
+				obj = new JSONObject();
+				obj.put("id", proClass.getSid());
+				obj.put("nodename",proClass.getNodeName());
+				obj.put("fathername", proClass.getFatherNodeSid());
+				json.add(obj);
+			}
+		}
 		return json.toString();
 	}
 }
