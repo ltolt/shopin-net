@@ -49,8 +49,8 @@ public class ProductClassController {
 	@ResponseBody
 	@RequestMapping(value = {"/catetreeload"},method = {RequestMethod.GET,RequestMethod.POST})
 	public void cateTreeJson(Model m,HttpServletRequest request,HttpServletResponse response,String node ){
-		Assert.notNull(request.getParameter("node"));
-		Assert.notNull(this.productClassService,"productClassService can not be null");
+		/*Assert.notNull(request.getParameter("node"));
+		Assert.notNull(this.productClassService,"productClassService can not be null");*/
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/json;charset=UTF-8");
 		PrintWriter out = null;
