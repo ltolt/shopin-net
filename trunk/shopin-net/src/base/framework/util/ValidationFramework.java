@@ -6,7 +6,6 @@ package base.framework.util;
 
 import java.util.Map;
 
-import com.util.BeanUtil;
 
 public class ValidationFramework {
 	boolean flag = true;
