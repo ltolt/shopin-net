@@ -8,6 +8,8 @@ package base.framework.domain;
 
 import java.io.Serializable;
 
+import base.framework.constants.Constants;
+
 
 
 public class PageDomain extends BaseDomain implements Serializable {
