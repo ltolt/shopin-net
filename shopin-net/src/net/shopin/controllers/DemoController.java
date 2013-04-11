@@ -2,6 +2,7 @@ package net.shopin.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +36,16 @@ public class DemoController extends AbstractControllerSupport {
 	
 	@Autowired
 	private TestService testService;
+	
+	@RequestMapping(value = {"/testJson"},method = {RequestMethod.GET,RequestMethod.POST})
+	public void testJson(Model m,HttpServletRequest request){
+		List  list = Arrays.asList("1,2,3,4");
+		m.addAttribute("result",list);
+		
+		
+	}
+	
+	
 	
 	@RequestMapping(value={"/train/{forward}"},method = {RequestMethod.GET,RequestMethod.POST})
 	public String forward(Model m,HttpServletRequest request,HttpServletResponse response,@PathVariable String forward){
