@@ -37,6 +37,14 @@ public class DemoController extends AbstractControllerSupport {
 	@Autowired
 	private TestService testService;
 	
+
+	@RequestMapping(value = {"/svn"},method = {RequestMethod.GET,RequestMethod.POST})
+	public void testSvn(Model m){
+		m.addAttribute("test", "svn");
+	}
+	
+	
+
 	@RequestMapping(value = {"/testJson"},method = {RequestMethod.GET,RequestMethod.POST})
 	public void testJson(Model m,HttpServletRequest request){
 		List  list = Arrays.asList("1,2,3,4");
@@ -47,6 +55,7 @@ public class DemoController extends AbstractControllerSupport {
 	
 	
 	
+
 	@RequestMapping(value={"/train/{forward}"},method = {RequestMethod.GET,RequestMethod.POST})
 	public String forward(Model m,HttpServletRequest request,HttpServletResponse response,@PathVariable String forward){
 		Assert.notNull(forward);
