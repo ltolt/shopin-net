@@ -112,7 +112,7 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/org.springframework.test-3.0.3.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/org.springframework.transaction-3.0.3.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/org.springframework.web-3.0.3.RELEASE.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/org.springframework.web.servlet-3.0.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/org.springframework.web.servlet-3.0.3.RELEASE.jar" sourcepath="D:/maven/repo/org/springframework/spring-webmvc/3.0.3.RELEASE/spring-webmvc-3.0.3.RELEASE-sources.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/pinyin4j-2.5.0.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/poi-3.2-FINAL.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/quartz-1.6.1.jar"/>
