@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	
+	<bean id="placeholderConfig"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="ldap.properties" />
+	</bean>
+	
+	<bean id="contextSourceTarget"
+		class="org.springframework.ldap.core.support.LdapContextSource">
+		<property name="url" value="ldap://127.0.0.1:389"></property>
+		<property name="base" value="dc=maxcrc,dc=com"></property>
+		<property name="userDn" value="cn=Manager,dc=maxcrc,dc=com"></property>
+		<property name="password" value="secret"></property>
+	</bean>
+	
+	 
+	<bean id="poolingContextSource" class="org.springframework.ldap.pool.factory.PoolingContextSource">
+		<property name="contextSource" ref="contextSourceTarget" />
+		<property name="dirContextValidator" ref="dirContextValidator" />
+		<property name="testOnBorrow" value="true" />
+		<property name="testWhileIdle" value="true" />
+		<property name="maxActive" value="10" />
+		<property name="maxTotal" value="10" />
+		<property name="maxIdle" value="10" />
+		<property name="minIdle" value="5" />
+		<property name="maxWait" value="5" />
+	</bean>
+	
+	<bean id="dirContextValidator"
+		class="org.springframework.ldap.pool.validation.DefaultDirContextValidator" />
+	 
+	<!--
+	<bean id="contextSource"
+		class="org.springframework.ldap.transaction.compensating.manager.TransactionAwareContextSourceProxy">
+		<constructor-arg ref="contextSourceTarget"></constructor-arg>
+	</bean>
+	-->
+	
+	<bean id="ldapTemplate"
+		class="org.springframework.ldap.core.LdapTemplate">	
+		<!--	
+		<constructor-arg ref="contextSource" />
+		-->
+		
+		<constructor-arg ref="poolingContextSource" />
+		
+	</bean>
+	
+	
+	<bean id="personDao"
+		class="org.springframework.ldap.samples.article.dao.PersonDaoImpl">
+		<property name="ldapTemplate" ref="ldapTemplate" />
+	</bean>
+	
+	
+	
+	
+	<!-- <bean id="contextSource" class="org.springframework.ldap.test.TestContextSourceFactoryBean">
+	    <property name="defaultPartitionSuffix" value="dc=maxcrc,dc=com" />
+		<property name="defaultPartitionName" value="maxcrc" />
+	    <property name="principal" value="cn=Manager,dc=maxcrc,dc=com" />
+		<property name="password" value="secret" />
+		<property name="ldifFile" value="setup_data.ldif" />
+		<property name="port" value="389" />
+	</bean>
+	 
+	<bean id="ldapTemplate"
+		class="org.springframework.ldap.core.LdapTemplate">
+		<constructor-arg ref="contextSource" />
+	</bean> -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</beans>	
