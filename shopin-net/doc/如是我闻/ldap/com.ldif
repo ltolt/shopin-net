@@ -1,0 +1,52 @@
+version: 1
+
+dn: dc=maxcrc,dc=com
+objectClass: domain
+objectClass: top
+dc: maxcrc
+
+dn: ou=People,dc=maxcrc,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: People
+description: Container for user entries
+
+dn: ou=users,dc=maxcrc,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: users
+description: Container for user entries
+
+dn: ou=mem,dc=maxcrc,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: mem
+description: Container for user entries
+
+dn: cn=kongm,sn=km,dc=maxcrc,dc=com
+objectClass: top
+objectClass: person
+cn: kongm
+sn: km
+description: Container for user entries
+
+dn: uid=kkk,ou=mem,dc=maxcrc,dc=com
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: kk
+sn: smith
+description: Container for user entries
+ou: mem
+uid: kkk
+
+dn: uid=kongm,ou=mem,dc=maxcrc,dc=com
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: kongm
+sn: kongm
+description: everyone in organisation
+ou: mem
+uid: kongm
+
