@@ -56,6 +56,7 @@ public class PersonDaoImpl implements PersonDao {
 	 */
 	public void create(Person person) {
 		Name dn = buildDn(person);
+		System.out.println(dn.toString());
 		DirContextAdapter context = new DirContextAdapter(dn);
 		mapToContext(person, context);
 		ldapTemplate.bind(dn, context, null);
@@ -68,9 +69,11 @@ public class PersonDaoImpl implements PersonDao {
 
 	private DistinguishedName buildDn(String country, String company, String fullname) {
 		DistinguishedName dn = new DistinguishedName();
-		dn.add("c", country);
-		dn.add("ou", company);
-		dn.add("cn", fullname);
+		dn.add("dc","com");
+		dn.add("dc","maxcrc");
+		dn.add("ou", "people");
+		dn.add("cn",fullname);
+		
 		return dn;
 	}
 
