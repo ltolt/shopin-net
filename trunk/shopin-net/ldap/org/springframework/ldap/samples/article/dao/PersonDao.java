@@ -28,5 +28,16 @@ import org.springframework.ldap.samples.article.domain.Person;
  */
 public interface PersonDao {
    void create(Person person);
+   
+   void update(Person person);
 
+   void delete(Person person);
+   
+   List getAllPersonNames();
+   
+   List findAll();
+   
+   Person findByPrimaryKey(String fullName);
+   
+   
 }
