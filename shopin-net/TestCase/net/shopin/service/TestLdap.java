@@ -1,5 +1,7 @@
 package net.shopin.service;
 
+import java.util.List;
+
 import javax.naming.Name;
 
 import org.apache.commons.logging.Log;
@@ -11,6 +13,7 @@ import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.samples.article.dao.PersonDao;
 import org.springframework.ldap.samples.article.domain.Person;
+import org.springframework.ldap.samples.utils.LdapTreeBuilder;
 import org.springframework.util.Assert;
 
 public class TestLdap extends BaseServiceTest{
@@ -25,6 +28,73 @@ public class TestLdap extends BaseServiceTest{
 	@Autowired
 	protected LdapTemplate ldapTemplate;
 	
+	@Autowired
+	protected LdapTreeBuilder ldapTreeBuilder;
+	/**
+	 * 
+	 */
+	@Test
+	public void testTree(){
+		Assert.notNull(this.ldapTreeBuilder);
+		DistinguishedName dn = new DistinguishedName();
+		dn.add("ou","mem");
+		System.out.println(this.ldapTreeBuilder.getLdapTree(dn));
+	}
+	
+	
+	//@Test
+	public void testCreatePerson(){
+		Assert.notNull(this.ldapTemplate);
+		Person person = new Person();
+		person.setFullName("jiangzemin");
+		person.setLastName("jiang");
+		this.personDao.create(person);
+		
+	}
+	
+	//@Test
+	public void testUpdate(){
+		Assert.notNull(this.personDao);
+		Person p = new Person();
+		p.setFullName("jiangzemin");
+		p.setLastName("zemin");
+		p.setDescription("heishehui");
+		this.personDao.update(p);
+		
+	}
+	
+	//@Test
+	public void testDelete(){
+		Person p = new Person();
+		p.setFullName("jiangzemin");
+		this.personDao.delete(p);
+	}
+	
+	/**
+	 * @see PersonDao#getAllPersonNames()
+	 */
+	//@Test
+	public void testGetAllPersonNames(){
+		List list =  this.personDao.getAllPersonNames();
+		System.out.println(list);
+	}
+	/**
+	 * @see PersonDao#findAll()
+	 */
+	//@Test
+	public void  testFindAll(){
+		List list = this.personDao.findAll();
+		System.out.println(list);
+	}
+	
+	//@Test
+	public void testFindByPrimaryKey(){
+		Person p =  this.personDao.findByPrimaryKey("jiangzemin");
+		System.out.println(p);
+	}
+	
+	
+	
 	//@Test
 	public void test(){
 		Assert.notNull(this.ldapTemplate);
@@ -36,7 +106,7 @@ public class TestLdap extends BaseServiceTest{
 	/**
 	 * 
 	 */
-	@Test
+	//@Test
 	public void testLdif(){
 		DistinguishedName dn = new DistinguishedName();
 //		dn.add("dc","com");
