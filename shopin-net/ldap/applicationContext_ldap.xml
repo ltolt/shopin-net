@@ -4,11 +4,11 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	
-	<bean id="placeholderConfig"
+<!-- 	<bean id="placeholderConfig"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="ldap.properties" />
 	</bean>
-	
+	 -->
 	<bean id="contextSourceTarget"
 		class="org.springframework.ldap.core.support.LdapContextSource">
 		<property name="url" value="ldap://127.0.0.1:389"></property>
@@ -56,7 +56,10 @@
 		<property name="ldapTemplate" ref="ldapTemplate" />
 	</bean>
 	
-	
+	<bean
+	    id="ldapTreeBuilder"	class="org.springframework.ldap.samples.utils.LdapTreeBuilder" >
+		<constructor-arg ref="ldapTemplate" />
+	</bean>
 	
 	
 	<!-- <bean id="contextSource" class="org.springframework.ldap.test.TestContextSourceFactoryBean">

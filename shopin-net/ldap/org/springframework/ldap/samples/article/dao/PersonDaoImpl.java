@@ -21,11 +21,14 @@ import javax.naming.Name;
 import javax.naming.NamingException;
 import javax.naming.directory.Attributes;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.ContextMapper;
 import org.springframework.ldap.core.DirContextAdapter;
 import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.ldap.core.LdapTemplate;
+import org.springframework.ldap.core.NameClassPairCallbackHandler;
 import org.springframework.ldap.filter.EqualsFilter;
 import org.springframework.ldap.samples.article.domain.Person;
 
@@ -48,6 +51,7 @@ import org.springframework.ldap.samples.article.domain.Person;
  * @author Ulrik Sandberg
  */
 public class PersonDaoImpl implements PersonDao {
+	protected static final Log log = LogFactory.getLog(PersonDaoImpl.class);
 
 	private LdapTemplate ldapTemplate;
 
@@ -57,61 +61,111 @@ public class PersonDaoImpl implements PersonDao {
 	public void create(Person person) {
 		Name dn = buildDn(person);
 		System.out.println(dn.toString());
+		log.info(dn.toString());
 		DirContextAdapter context = new DirContextAdapter(dn);
 		mapToContext(person, context);
 		ldapTemplate.bind(dn, context, null);
 	}
+	/**
+	 * @see PersonDao#update(Person)
+	 */
+	@Override
+	public void update(Person person) {
+		Name dn = buildDn(person);
+		DirContextAdapter context = (DirContextAdapter) ldapTemplate.lookup(dn);
+		mapToContext(person, context);
+		ldapTemplate.modifyAttributes(dn, context.getModificationItems());
+	}
 
+	/**
+	 * @author k
+	 * @see PersonDao#delete(Person)
+	 */
+	@Override
+	public void delete(Person person) {
+		this.ldapTemplate.unbind(buildDn(person));
+	}
 
+	/**
+	 * @see PersonDao#getAllPersonNames()
+	 */
+	@Override
+	public List getAllPersonNames() {
+		EqualsFilter filter = new EqualsFilter("objectclass", "person");
+		return this.ldapTemplate.search(DistinguishedName.EMPTY_PATH, filter.encode(), new AttributesMapper() {
+			@Override
+			public Object mapFromAttributes(Attributes attrs) throws NamingException {
+				return attrs.get("cn").get();
+			}
+		});
+	}
+	/**
+	 * @see PersonDao#findAll()
+	 */
+	@Override
+	public List findAll() {
+		EqualsFilter filter = new EqualsFilter("objectclass", "person");	
+		return this.ldapTemplate.search(DistinguishedName.EMPTY_PATH, filter.encode(), getContextMapper());
+	}
+
+	/**
+	 * @see PersonDao#findByPrimaryKey(String)
+	 */
+	@Override
+	public Person findByPrimaryKey(String fullName) {
+		DistinguishedName dn = buildDn(null, null, fullName);
+		return (Person) this.ldapTemplate.lookup(dn, getContextMapper());
+	}
+	
+	
+	
+	
+	private ContextMapper getContextMapper() {
+		return new PersonContextMapper();
+	}
+	/**
+	 * 说明:
+	 *    maps from DirContextAdapter to a Person Object 
+	 *	  @author k
+	 *
+	 */
+	private static class PersonContextMapper implements ContextMapper{
+		@Override
+		public Object mapFromContext(Object ctx) {
+			DirContextAdapter context = (DirContextAdapter) ctx;
+			DistinguishedName dn = new DistinguishedName(context.getDn());
+			Person person = new Person();
+			person.setFullName(dn.getLdapRdn(1).getComponent().getValue());
+			person.setLastName(context.getStringAttribute("sn"));
+			person.setDescription(context.getStringAttribute("description"));
+			return person;
+		}
+	}
+	
+	
 	private DistinguishedName buildDn(Person person) {
 		return buildDn(person.getCountry(), person.getCompany(), person.getFullName());
 	}
 
 	private DistinguishedName buildDn(String country, String company, String fullname) {
 		DistinguishedName dn = new DistinguishedName();
-		dn.add("dc","com");
-		dn.add("dc","maxcrc");
 		dn.add("ou", "people");
-		dn.add("cn",fullname);
-		
+		dn.add("uid",fullname);
 		return dn;
 	}
 
 	private void mapToContext(Person person, DirContextAdapter context) {
-		context.setAttributeValues("objectclass", new String[] { "top", "person" });
+		context.setAttributeValues("objectclass", new String[] {"person","organizationalPerson","inetOrgPerson"});
 		context.setAttributeValue("cn", person.getFullName());
 		context.setAttributeValue("sn", person.getLastName());
 		context.setAttributeValue("description", person.getDescription());
-		context.setAttributeValue("telephoneNumber", person.getPhone());
+		context.setAttributeValue("uid", person.getFullName());
+		context.setAttributeValue("ou", "people");
 	}
 
-	/**
-	 * Maps from DirContextAdapter to Person objects. A DN for a person will be
-	 * of the form <code>cn=[fullname],ou=[company],c=[country]</code>, so
-	 * the values of these attributes must be extracted from the DN. For this,
-	 * we use the DistinguishedName.
-	 * 
-	 *Mattias Hellborg Arthurssonellborg Arthursson
-	 * @author Ulrik Sandberg
-	 */
-	private static class PersonContextMapper implements ContextMapper {
-
-		public Object mapFromContext(Object ctx) {
-			DirContextAdapter context = (DirContextAdapter) ctx;
-			DistinguishedName dn = new DistinguishedName(context.getDn());
-			Person person = new Person();
-			person.setCountry(dn.getLdapRdn(0).getComponent().getValue());
-			person.setCompany(dn.getLdapRdn(1).getComponent().getValue());
-			person.setFullName(context.getStringAttribute("cn"));
-			person.setLastName(context.getStringAttribute("sn"));
-			person.setDescription(context.getStringAttribute("description"));
-			person.setPhone(context.getStringAttribute("telephoneNumber"));
-
-			return person;
-		}
-	}
 
 	public void setLdapTemplate(LdapTemplate ldapTemplate) {
 		this.ldapTemplate = ldapTemplate;
 	}
-}
+	
+	}
