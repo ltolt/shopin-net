@@ -13,7 +13,7 @@
 
 	<context:annotation-config />
 	<!-- 使用annotation 自动注册bean,并检查@Required,@Autowired的属性已被注入 -->
-	<context:component-scan base-package="net.shopin.service" />
+	<context:component-scan base-package="*" />
 
 	<bean id="mainDataSource" class="com.jolbox.bonecp.BoneCPDataSource"
 		destroy-method="close">
