@@ -17,6 +17,7 @@
     
     <script type="text/javascript">
        var app = {};
+       
        Ext.onReady(function(){
     	   Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
     	   Ext.QuickTips.init();
@@ -88,7 +89,17 @@
     		            {header:'时间',width:85,sortable:true,renderer:Ext.util.Format.dateRenderer('Y-m-d'),dataIndex:'datetime'},
     		            {header:'图标',width:75,sortable:true,renderer:icon,dataIndex:'icon'},
     		            {header:'图片提示',width:75,sortable:true,renderer:qtips,dataIndex:'qtips'},
-    		            {header:'文字提示',width:75,sortable:true,renderer:tips,dataIndex:'tips'}
+    		            {header:'文字提示',width:75,sortable:true,renderer:tips,dataIndex:'tips'},
+    		            {xtype:'actioncolumn',width:50,items:
+    		            [{
+    		            	icon:'${ctx}/images/application_go.png',
+    		            	tooltip:'查看',
+    		            	handler:function(grid,rowIndex,colIndex){
+    		            		var rec = store.getAt(rowIndex);
+    		            		alert(rec);
+    		            	}
+    		            }]	
+    		            }
     		            ],
     		            stripeRows:true,
     		            autoExpandColumn:5,
@@ -100,6 +111,12 @@
     	   });
 			 grid.render('panel1');    	   
     	     Ext.get('op').dom.value = "";
+    	     var a = "${resources}";
+    	     var arr = a.split(',');
+    	     for(var i =0;i<arr.length;i++){
+    	    	 alert(arr[i]);
+    	     }
+    	     
        });
     
     
