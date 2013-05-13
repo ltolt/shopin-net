@@ -1,3 +1,5 @@
 https://appengine.google.com/dashboard/nonedeployed?app_id=s~thus-hearsay
 https://code.google.com/p/goagent/wiki/InstallGuide#%E4%B8%80%E3%80%81%E7%94%B3%E8%AF%B7Google_App_Engine%E5%B9%B6%E5%88%9B%E5%BB%BAappid
 https://code.google.com/p/goagent/
+我的googlecode 密码:
+Ya6WN9WQ2cy5
