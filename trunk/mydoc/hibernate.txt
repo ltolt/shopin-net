@@ -1,0 +1,5 @@
+hibernate常用查询
+1.场景:模糊查询
+代码实例:
+userDao.createCriteria().add(Restrictions.like("brandName","n",MatchMode.START)).list()
+
