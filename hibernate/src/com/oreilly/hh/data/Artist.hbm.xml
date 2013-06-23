@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+  <class name="com.oreilly.hh.data.Artist" table="ARTIST">
+    <meta attribute="class-description">
+      Represents an artist who is associated with a track or album.
+      @author Jim Elliott (with help from Hibernate)
+    </meta>
+
+   <id name="id" type="int" column="ARTIST_ID">
+     <meta attribute="scope-set">protected</meta>
+     <generator class="native"/>
+   </id>
+
+   <property name="name" type="string">
+    <meta attribute="use-in-tostring">true</meta>
+    <column name="NAME" not-null="true" unique="true" index="ARTIST_NAME"/>
+   </property>
+
+   <set name="tracks" table="TRACK_ARTISTS" inverse="true">
+     <meta attribute="field-description">Tracks by this artist</meta>
+     <key column="ARTIST_ID"/>
+     <many-to-many class="com.oreilly.hh.data.Track" column="TRACK_ID"/>
+   </set>
+
+  </class>
+
+  <query name="com.oreilly.hh.artistByName">
+    <![CDATA[
+        from Artist as artist
+        where upper(artist.name) = upper(:name)
+      ]]>
+  </query>
+
+</hibernate-mapping>
