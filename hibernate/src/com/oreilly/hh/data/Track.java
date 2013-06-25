@@ -1,5 +1,5 @@
 package com.oreilly.hh.data;
-// Generated 2013-6-24 0:19:45 by Hibernate Tools 3.2.0.b9
+// Generated 2013-6-26 0:15:42 by Hibernate Tools 3.2.0.b9
 
 
 import java.util.Date;
@@ -21,6 +21,7 @@ public class Track  implements java.io.Serializable {
       * Playing time
      */
      private Date playTime;
+     private Set<Artist> artists = new HashSet<Artist>(0);
      /**
       * When the track was created
      */
@@ -29,7 +30,6 @@ public class Track  implements java.io.Serializable {
       * How loud to play the track
      */
      private short volume;
-     private Set<Artist> artists = new HashSet<Artist>(0);
      private Set<String> comments = new HashSet<String>(0);
 
     public Track() {
@@ -41,13 +41,13 @@ public class Track  implements java.io.Serializable {
         this.filePath = filePath;
         this.volume = volume;
     }
-    public Track(String title, String filePath, Date playTime, Date added, short volume, Set<Artist> artists, Set<String> comments) {
+    public Track(String title, String filePath, Date playTime, Set<Artist> artists, Date added, short volume, Set<String> comments) {
        this.title = title;
        this.filePath = filePath;
        this.playTime = playTime;
+       this.artists = artists;
        this.added = added;
        this.volume = volume;
-       this.artists = artists;
        this.comments = comments;
     }
    
@@ -82,6 +82,13 @@ public class Track  implements java.io.Serializable {
     public void setPlayTime(Date playTime) {
         this.playTime = playTime;
     }
+    public Set<Artist> getArtists() {
+        return this.artists;
+    }
+    
+    public void setArtists(Set<Artist> artists) {
+        this.artists = artists;
+    }
     /**       
      *      * When the track was created
      */
@@ -102,13 +109,6 @@ public class Track  implements java.io.Serializable {
     public void setVolume(short volume) {
         this.volume = volume;
     }
-    public Set<Artist> getArtists() {
-        return this.artists;
-    }
-    
-    public void setArtists(Set<Artist> artists) {
-        this.artists = artists;
-    }
     public Set<String> getComments() {
         return this.comments;
     }
@@ -117,6 +117,19 @@ public class Track  implements java.io.Serializable {
         this.comments = comments;
     }
 
+    /**
+     * toString
+     * @return String
+     */
+     public String toString() {
+	  StringBuffer buffer = new StringBuffer();
+
+      buffer.append(getClass().getName()).append("@").append(Integer.toHexString(hashCode())).append(" [");
+      buffer.append("title").append("='").append(getTitle()).append("' ");			
+      buffer.append("]");
+      
+      return buffer.toString();
+     }
 
 
 

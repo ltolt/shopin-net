@@ -26,6 +26,10 @@
      <many-to-many class="com.oreilly.hh.data.Track" column="TRACK_ID"/>
    </set>
 
+   <many-to-one name="actualArtist" class="com.oreilly.hh.data.Artist">
+     <meta attribute="use-in-tostring">true</meta>
+   </many-to-one>
+
   </class>
 
   <query name="com.oreilly.hh.artistByName">

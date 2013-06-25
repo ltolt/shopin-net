@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="com.oreilly.hh.data.Album" table="ALBUM">
+    <meta attribute="class-description">
+      Represents an album in the music database, an organized list of tracks.
+      @author Jim Elliott (with help from Hibernate)
+    </meta>
+
+    <id column="ALBUM_ID" name="id" type="int">
+      <meta attribute="scope-set">protected</meta>
+      <generator class="native" />
+    </id>
+
+    <property name="title" type="string">
+      <meta attribute="use-in-tostring">true</meta>
+      <column index="ALBUM_TITLE" name="TITLE" not-null="true" />
+    </property>
+
+    <property name="numDiscs" type="integer" />
+
+    <set name="artists" table="ALBUM_ARTISTS">
+      <key column="ALBUM_ID" />
+      <many-to-many class="com.oreilly.hh.data.Artist" column="ARTIST_ID" />
+    </set>
+
+    <set name="comments" table="ALBUM_COMMENTS">
+      <key column="ALBUM_ID" />
+      <element column="COMMENT" type="string" />
+    </set>
+
+    <list name="tracks" table="ALBUM_TRACKS" cascade="all">
+      <meta attribute="use-in-tostring">true</meta>
+      <key column="ALBUM_ID" />
+      <index column="LIST_POS" />
+      <composite-element class="com.oreilly.hh.data.AlbumTrack">
+	<many-to-one class="com.oreilly.hh.data.Track" name="track"
+                     cascade="all">
+	  <meta attribute="use-in-tostring">true</meta>
+	  <column name="TRACK_ID" />
+	</many-to-one>
+	<property name="disc" type="integer" />
+	<property name="positionOnDisc" type="integer" />
+      </composite-element>
+    </list>
+
+    <property name="added" type="date">
+      <meta attribute="field-description">
+	When the album was created
+      </meta>
+    </property>
+
+  </class>
+</hibernate-mapping>

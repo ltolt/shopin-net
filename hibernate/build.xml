@@ -1,4 +1,3 @@
-<?xml version="1.0"?>
 <project name="Harnessing Hibernate 3 (Developer's Notebook Second Edition)"
          default="db" basedir="."
          xmlns:artifact="antlib:org.apache.maven.artifact.ant">
@@ -105,13 +104,19 @@ against the database file--use when application is not running">
       <classpath refid="project.class.path"/>
     </java>
   </target>
-	
-	<target name="qtest2" description="Run a simple Artist exploration GUI"
-	          depends="compile">
-	    <java classname="com.oreilly.hh.QueryTest2" fork="true" failonerror="true">
-	      <classpath refid="project.class.path"/>
-	    </java>
-	  </target>
 
+  <target name="qtest2" description="Run a simple Artist exploration GUI"
+          depends="compile">
+    <java classname="com.oreilly.hh.QueryTest2" fork="true" failonerror="true">
+      <classpath refid="project.class.path"/>
+    </java>
+  </target>
+
+  <target name="atest" description="Creates and persists some album data"
+          depends="compile">
+    <java classname="com.oreilly.hh.AlbumTest" fork="true" failonerror="true">
+      <classpath refid="project.class.path"/>
+    </java>
+  </target>
 
 </project>

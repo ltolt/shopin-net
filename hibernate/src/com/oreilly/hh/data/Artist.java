@@ -1,5 +1,5 @@
 package com.oreilly.hh.data;
-// Generated 2013-6-24 0:19:45 by Hibernate Tools 3.2.0.b9
+// Generated 2013-6-26 0:15:42 by Hibernate Tools 3.2.0.b9
 
 
 import java.util.HashSet;
@@ -19,6 +19,7 @@ public class Artist  implements java.io.Serializable {
       * Tracks by this artist
      */
      private Set<Track> tracks = new HashSet<Track>(0);
+     private Artist actualArtist;
 
     public Artist() {
     }
@@ -27,9 +28,10 @@ public class Artist  implements java.io.Serializable {
     public Artist(String name) {
         this.name = name;
     }
-    public Artist(String name, Set<Track> tracks) {
+    public Artist(String name, Set<Track> tracks, Artist actualArtist) {
        this.name = name;
        this.tracks = tracks;
+       this.actualArtist = actualArtist;
     }
    
     public int getId() {
@@ -56,6 +58,13 @@ public class Artist  implements java.io.Serializable {
     public void setTracks(Set<Track> tracks) {
         this.tracks = tracks;
     }
+    public Artist getActualArtist() {
+        return this.actualArtist;
+    }
+    
+    public void setActualArtist(Artist actualArtist) {
+        this.actualArtist = actualArtist;
+    }
 
     /**
      * toString
@@ -66,6 +75,7 @@ public class Artist  implements java.io.Serializable {
 
       buffer.append(getClass().getName()).append("@").append(Integer.toHexString(hashCode())).append(" [");
       buffer.append("name").append("='").append(getName()).append("' ");			
+      buffer.append("actualArtist").append("='").append(getActualArtist()).append("' ");			
       buffer.append("]");
       
       return buffer.toString();

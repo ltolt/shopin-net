@@ -15,13 +15,21 @@
       <generator class="native"/>
     </id>
 
-    <property name="title" type="string" not-null="true"/>
+    <property name="title" type="string">
+      <meta attribute="use-in-tostring">true</meta>
+      <column name="TITLE" not-null="true" index="TRACK_TITLE"/>
+    </property>
 
     <property name="filePath" type="string" not-null="true"/>
 
     <property name="playTime" type="time">
       <meta attribute="field-description">Playing time</meta>
     </property>
+
+    <set name="artists" table="TRACK_ARTISTS">
+      <key column="TRACK_ID"/>
+      <many-to-many class="com.oreilly.hh.data.Artist" column="ARTIST_ID"/>
+    </set>
 
     <property name="added" type="date">
       <meta attribute="field-description">When the track was created</meta>
@@ -30,32 +38,19 @@
     <property name="volume" type="short" not-null="true">
       <meta attribute="field-description">How loud to play the track</meta>
     </property>
-    
-    <set name="artists" table="TRACK_ARTISTS">
-      <key column="TRACK_ID"/>
-      <many-to-many class="com.oreilly.hh.data.Artist" column="ARTIST_ID"/>
-    </set>
-     <set name="comments" table="TRACK_COMMENTS">
+
+    <set name="comments" table="TRACK_COMMENTS">
        <key column="TRACK_ID"/>
        <element column="COMMENT" type="string"/>
     </set>
 
-
   </class>
-  
+
   <query name="com.oreilly.hh.tracksNoLongerThan">
-   <![CDATA[
-     from Track as track
+    <![CDATA[
+        from Track as track
         where track.playTime <= :length
-   ]]>
+      ]]>
   </query>
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
 </hibernate-mapping>
