@@ -1,0 +1,9 @@
+{
+ success:true,
+ users:[
+    {id:1,name:'ned stark',email:'ned@blood'},
+    {id:2,name:'sersi',email:'sersi@blood'}
+ ]
+
+}
+
