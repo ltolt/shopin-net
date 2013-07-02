@@ -37,7 +37,7 @@ Ext.define('ex.controller.AppCtrl', {
         alert('click');
 //        var view = Ext.widget('form1');
         alert(this);
-        this.application.widget(this.getTabPanel(),"","form1","1");
+        this.application.widget(this.getTab(),"FormCtrl","form1","1");
 //        Ext.getCmp('tab').add();
     },
     

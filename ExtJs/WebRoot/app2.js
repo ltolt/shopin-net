@@ -20,17 +20,19 @@ Ext.Loader.setConfig({
 
 Ext.application({
 
+	name: 'ex',
     requires: [
-        'ex.view.manage'
+        'ex.view.manage',
+        'ex.view.form1'
     ],
     views: [
-        'manage'
+        'manage','form1'
     ],
     autoCreateViewport: true,
     controllers: [
         'AppCtrl'
     ],
-    name: 'ex',
+    
     findTab: function(tabPanel,  record) {
         var ret,
         activeTab = tabPanel.getActiveTab();
@@ -59,13 +61,13 @@ Ext.application({
         if (findRes) {
             this.activateTab(tabPanel, findRes);   
         } else {
-            var ctrl = this.getController(controllerName),
+            //var ctrl = this.getController(controllerName),
             tab = Ext.widget(widgetName, {record: record, closable: true});
             if (cfg) {
                 Ext.apply(tab, cfg);
             }
             tabPanel.setActiveTab(tabPanel.add(tab));
-            ctrl.init();
+            //ctrl.init();
         }
     }
 

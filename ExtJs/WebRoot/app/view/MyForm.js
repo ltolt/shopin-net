@@ -16,7 +16,6 @@
 Ext.define('MyApp.view.MyForm', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.MyForm',
-
     itemId: 'sampleTest',
     layout: {
         type: 'border'

@@ -70,14 +70,14 @@ Ext.define('ex.view.manage', {
                     xtype: 'tabpanel',
                     region: 'center',
                     itemId: 'tab',
-                    activeTab: 0,
-                    items: [
-                        {
-                            xtype: 'panel',
-                            html: 'welcome to peking',
-                            title: '欢迎'
-                        }
-                    ]
+                    activeTab: 0
+//                    items: [
+//                        {
+//                            xtype: 'panel',
+//                            html: 'welcome to peking',
+//                            title: '欢迎'
+//                        }
+//                    ]
                 }
             ]
         });
