@@ -21,7 +21,8 @@ public class AlbumTest {
                                       Time length, Artist artist, int disc,
                                       int positionOnDisc, Session session) {
         Track track = new Track(title, file, length, new HashSet<Artist>(),
-                                new Date(), (short)0, new HashSet<String>());
+                                new Date(), new StereoVolume(), SourceMedia.CD,
+                                new HashSet<String>());
         track.getArtists().add(artist);
         // session.save(track);
         album.getTracks().add(new AlbumTrack(track, disc, positionOnDisc));

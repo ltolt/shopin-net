@@ -47,8 +47,22 @@ against the database file--use when application is not running">
       </java>
   </target>
 
+  <!-- Compile the UserType definitions so they can be used in the code
+       generation phase. -->
+  <target name="usertypes" depends="prepare"
+          description="Compile custom type definitions needed in by codegen">
+    <javac srcdir="${source.root}"
+           includes="com/oreilly/hh/*Type.java"
+           destdir="${class.root}"
+           debug="on"
+           optimize="off"
+           deprecation="on">
+      <classpath refid="project.class.path"/>
+    </javac>
+  </target>
+
   <!-- Generate the java code for all mapping files in our source tree -->
-  <target name="codegen" depends="prepare"
+  <target name="codegen" depends="usertypes"
           description="Generate Java source from the O/R mapping files">
     <hibernatetool destdir="${source.root}">
       <configuration configurationfile="${source.root}/hibernate.cfg.xml"/>
@@ -70,7 +84,7 @@ against the database file--use when application is not running">
   </target>
 
   <!-- Generate the schemas for all mapping files in our class tree -->
-  <target name="schema" depends="prepare"
+  <target name="schema" depends="compile"
           description="Generate DB schema from the O/R mapping files">
 
     <hibernatetool destdir="${source.root}">
@@ -80,7 +94,7 @@ against the database file--use when application is not running">
   </target>
 
   <!-- Compile the java source of the project -->
-  <target name="compile" depends="prepare"
+  <target name="compile" depends="codegen"
           description="Compiles all Java classes">
     <javac srcdir="${source.root}"
            destdir="${class.root}"
@@ -118,5 +132,14 @@ against the database file--use when application is not running">
       <classpath refid="project.class.path"/>
     </java>
   </target>
+
+	<target name="query" description="criteria query example" depends="compile">
+	   <java classname="com.oreilly.hh.CriteriaTest" fork="true" failonerror="true">
+	     <classpath refid="project.class.path"/>
+	   </java>
+	</target>
+	
+	
+	
 
 </project>

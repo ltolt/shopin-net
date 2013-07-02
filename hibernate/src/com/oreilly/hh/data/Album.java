@@ -1,5 +1,5 @@
 package com.oreilly.hh.data;
-// Generated 2013-6-26 0:15:42 by Hibernate Tools 3.2.0.b9
+// Generated 2013-7-3 0:35:06 by Hibernate Tools 3.2.0.b9
 
 
 import java.util.ArrayList;
@@ -16,13 +16,7 @@ import java.util.Set;
 public class Album  implements java.io.Serializable {
 
 
-     /**
-	 * @Field long serialVersionUID 
-	 */
-	private static final long serialVersionUID = 8095902033248261086L;
-	
-	
-	private int id;
+     private int id;
      private String title;
      private Integer numDiscs;
      private Set<Artist> artists = new HashSet<Artist>(0);

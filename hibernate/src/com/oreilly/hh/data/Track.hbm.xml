@@ -35,8 +35,16 @@
       <meta attribute="field-description">When the track was created</meta>
     </property>
 
-    <property name="volume" type="short" not-null="true">
+    <property name="volume" type="com.oreilly.hh.StereoVolumeType">
       <meta attribute="field-description">How loud to play the track</meta>
+      <meta attribute="use-in-tostring">true</meta>
+      <column name="VOL_LEFT"/>
+      <column name="VOL_RIGHT"/>
+    </property>
+
+    <property name="sourceMedia" type="com.oreilly.hh.SourceMediaType">
+      <meta attribute="field-description">Media on which track was obtained</meta>
+      <meta attribute="use-in-tostring">true</meta>
     </property>
 
     <set name="comments" table="TRACK_COMMENTS">

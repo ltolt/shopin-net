@@ -8,8 +8,8 @@
         <version>2.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>hib-dev-ch05</artifactId>
+    <artifactId>hib-dev-ch08</artifactId>
     <packaging>jar</packaging>
-    <name>Harnessing Hibernate: Chapter Five: Richer Associations</name>
+    <name>Harnessing Hibernate: Chapter Eight: Criteria</name>
     <version>2.0-SNAPSHOT</version>
 </project>

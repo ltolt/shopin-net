@@ -1,5 +1,5 @@
 package com.oreilly.hh.data;
-// Generated 2013-6-26 0:15:42 by Hibernate Tools 3.2.0.b9
+// Generated 2013-7-3 0:35:06 by Hibernate Tools 3.2.0.b9
 
 
 import java.util.HashSet;
