@@ -7,12 +7,15 @@
  */
 package com.oreilly.hh;
 
+import java.sql.Time;
 import java.util.List;
+import java.util.Timer;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projection;
@@ -48,6 +51,11 @@ public class CriteriaTest {
         
         //Print track titles that contain the letter "a"
         try {
+//        	List list = disjunctionQuery(Time.valueOf("00:06:00"), session);
+//        	System.out.println(list);
+        	
+        	List list =  tracksWithArtistLike("a", session);
+        	System.out.println(list);
 			//System.out.println(queryTrack("a",session));
 //			List list = queryTrackWithOther("a", session);
 //			for(Object obj : list) {
@@ -55,24 +63,55 @@ public class CriteriaTest {
 //				System.out.println("Track:title : " + array[0] + "  playtime : "  + array[1] );
 //			}
 //			
-			printMediaStatistics(session);
+			//printMediaStatistics(session);
         	
         	
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        
-        
-        
-        
-        
-        
-		
 		
 
 	}
+	
+	
+	
+	
+	/**
+	 * @sql select * from tracks t,artists a where a. = t. order by a.name asc
+	 * @Methods Name tracksWithArtistLike
+	 * @Create In 2013-7-3 By k
+	 * @param namePattern
+	 * @param session
+	 * @return List
+	 */
+	public static List tracksWithArtistLike(String namePattern, Session session){
+		Criteria criteria = session.createCriteria(Track.class);
+		Criteria artistCriteria = criteria.createCriteria("artists");
+		artistCriteria.add(Restrictions.like("name", namePattern,MatchMode.ANYWHERE));
+        artistCriteria.addOrder(Order.asc("name").ignoreCase());
+		return criteria.list();
+	}
 
+	/**
+	 * @sql  select * from tracks t where t.title like ..  or playtime < ..
+	 * @Methods Name disjunctionQuery
+	 * @Create In 2013-7-3 By k
+	 * @param length
+	 * @param session
+	 * @return List
+	 */
+	public static List disjunctionQuery(Time length, Session session){
+		Criteria criteria = session.createCriteria(Track.class);
+		Disjunction any = Restrictions.disjunction();
+		any.add(Restrictions.le("playTime", length));
+		any.add(Restrictions.like("title", "%A%"));
+		criteria.add(any);
+		criteria.addOrder(Order.asc("title").ignoreCase());
+		return  criteria.list();
+	}
+	
+	
 	/**
 	 * @sql selec title from track t where t.title like %a%
 	 * @Methods Name queryTrack
