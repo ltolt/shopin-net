@@ -18,9 +18,7 @@ Ext.define('hw.controller.Users',{
 			'useredit button[action=save]':{
 				click:this.updateUser
 			}
-			
 		});
-		
 		//console.log('Initialized Users!this happens before the application launch function is called');
 //		this.control({
 //			'viewport> panel':{
@@ -29,9 +27,7 @@ Ext.define('hw.controller.Users',{
 //			}
 //			
 //		});
-		
 	},
-	
 	editUser:function(grid,record){
 		var view = Ext.widget('useredit');
 		view.down('form').loadRecord(record);
@@ -48,10 +44,8 @@ Ext.define('hw.controller.Users',{
 		win.close();
 		//this.getUsersStore().sync();
 	}
-	
 //	onPanelRendered:function(){
 //		console.log('The panel was rendered');
 //		
 //	}
-	
 });

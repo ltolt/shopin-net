@@ -13,11 +13,5 @@ Ext.define('hw.store.userstore',{
 			root:'users',
 			successProperty:'success'
 		}
-		
-		
 	}
-	
-	
 });
-
-

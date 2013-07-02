@@ -13,7 +13,7 @@
  * Do NOT hand edit this file.
  */
 
-Ext.define('MyApp.view.Viewport', {
-    extend: 'MyApp.view.MyViewport',
+Ext.define('ex.view.Viewport', {
+    extend: 'ex.view.manage',
     renderTo: Ext.getBody()
 });
