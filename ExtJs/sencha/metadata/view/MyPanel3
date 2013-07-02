@@ -1,0 +1,65 @@
+{
+    "type": "Ext.panel.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "height": 688,
+        "itemId": "test1",
+        "width": 1011,
+        "designer|userClassName": "MyPanel3",
+        "layout": "border",
+        "title": "表单"
+    },
+    "designerId": "e8b6d53b-43f0-4f8d-a40d-cdbdb3fe6620",
+    "cn": [
+        {
+            "type": "Ext.form.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "layout|region": "center",
+                "bodyPadding": 10,
+                "title": "基本信息"
+            },
+            "designerId": "5d1cc5b9-dba7-42ff-9eda-0de361713683",
+            "cn": [
+                {
+                    "type": "Ext.form.FieldSet",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "height": 340,
+                        "width": 987,
+                        "title": "基本信息列表"
+                    },
+                    "designerId": "5c06735c-df73-4f5b-bf38-5ed790d36bd4",
+                    "cn": [
+                        {
+                            "type": "Ext.form.field.Text",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "layout|anchor": "50%",
+                                "width": 965,
+                                "fieldLabel": "频道名称"
+                            },
+                            "designerId": "acd4f672-5253-4614-92a0-bc3b4deb6c78"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "type": "Ext.app.Application",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "views": [
+            "manage",
+            "MyPanel3"
+        ],
+        "autoCreateViewport": true,
+        "controllers": [
+            "AppCtrl"
+        ],
+        "name": "MyApp"
+    },
+    "designerId": "application"
+}

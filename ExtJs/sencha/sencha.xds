@@ -1,0 +1,59 @@
+{
+    "name": "sencha",
+    "settings": {},
+    "xdsVersion": "2.2.2",
+    "xdsBuild": 991,
+    "schemaVersion": 1,
+    "upgradeVersion": 210000000503,
+    "framework": "ext41",
+    "topInstanceFileMap": {
+        "14d4f5cc-e417-45de-b1d4-5346aafa8fb0": {
+            "paths": [
+                "metadata/view/manage",
+                "app/view/override/manage.js",
+                "app/view/manage.js",
+                "app/view/Viewport.js"
+            ],
+            "className": "manage"
+        },
+        "e4c5b401-0c59-4be4-bf69-843fda6813a9": {
+            "paths": [
+                "metadata/resource/Library"
+            ],
+            "className": "Library"
+        },
+        "f32fdc1e-6845-4384-a364-cbd1fd2c61e8": {
+            "paths": [
+                "metadata/controller/AppCtrl",
+                "app/controller/override/AppCtrl.js",
+                "app/controller/AppCtrl.js"
+            ],
+            "className": "AppCtrl"
+        },
+        "e8b6d53b-43f0-4f8d-a40d-cdbdb3fe6620": {
+            "paths": [
+                "metadata/view/MyPanel3",
+                "app/view/override/MyPanel3.js",
+                "app/view/MyPanel3.js"
+            ],
+            "className": "MyPanel3"
+        }
+    },
+    "viewOrderMap": {
+        "view": [
+            "14d4f5cc-e417-45de-b1d4-5346aafa8fb0",
+            "e8b6d53b-43f0-4f8d-a40d-cdbdb3fe6620"
+        ],
+        "store": [],
+        "controller": [
+            "f32fdc1e-6845-4384-a364-cbd1fd2c61e8"
+        ],
+        "model": [],
+        "resource": [
+            "e4c5b401-0c59-4be4-bf69-843fda6813a9"
+        ],
+        "app": [
+            "application"
+        ]
+    }
+}

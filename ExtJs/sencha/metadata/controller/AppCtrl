@@ -1,0 +1,118 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "AppCtrl"
+    },
+    "designerId": "f32fdc1e-6845-4384-a364-cbd1fd2c61e8",
+    "cn": [
+        {
+            "type": "controllerref",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "ref": "btns",
+                "selector": "#navi button"
+            },
+            "designerId": "07638e3a-e7b0-4e85-96a7-8fb8e7438448"
+        },
+        {
+            "type": "fixedfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "init",
+                "designer|params": [
+                    "application"
+                ],
+                "implHandler": [
+                    ""
+                ]
+            },
+            "designerId": "b3ee5927-5ffb-4018-bcda-442b96024fdd",
+            "customConfigs": [
+                {
+                    "group": "(Custom Properties)",
+                    "name": "control",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onButtonClick",
+                "implHandler": [
+                    "\r",
+                    "alert('click');"
+                ],
+                "name": "click",
+                "scope": "me",
+                "designer|targetType": "Ext.button.Button",
+                "designer|controlQuery": "#btnAdd"
+            },
+            "designerId": "ca1482aa-29a4-4f09-9f94-58f180a2eb67"
+        },
+        {
+            "type": "fixedfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onLaunch",
+                "implHandler": [
+                    ""
+                ]
+            },
+            "designerId": "18d3957a-d4dd-46ac-94b1-57e40e3d4b37"
+        },
+        {
+            "type": "processcfgfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "processAppCtrl",
+                "designer|params": [
+                    "config"
+                ],
+                "implHandler": [
+                    "return config;"
+                ]
+            },
+            "designerId": "5f38ee42-7401-4562-b603-8f510ac0c86a"
+        },
+        {
+            "type": "controllerref",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "ref": "test",
+                "selector": "#test1"
+            },
+            "designerId": "05c71351-595b-4fce-94d1-7eb9f793843e"
+        }
+    ]
+}

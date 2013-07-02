@@ -1,0 +1,141 @@
+{
+    "type": "Ext.container.Viewport",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "manage",
+        "designer|initialView": true,
+        "layout": "border"
+    },
+    "designerId": "14d4f5cc-e417-45de-b1d4-5346aafa8fb0",
+    "cn": [
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "layout|region": "north",
+                "height": 72,
+                "padding": 0,
+                "bodyPadding": 0,
+                "title": ""
+            },
+            "designerId": "678b96a2-ff47-4b75-a7f4-89b4ec6328f3",
+            "cn": [
+                {
+                    "type": "Ext.Img",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "height": 201,
+                        "width": 201,
+                        "src": "images/logo.png"
+                    },
+                    "designerId": "ec25a70a-f9e7-4ea0-b152-2494f9922d0e"
+                }
+            ]
+        },
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "layout|region": "west",
+                "layout|split": true,
+                "itemId": "navi",
+                "width": 163,
+                "bodyPadding": 20,
+                "title": "菜单"
+            },
+            "designerId": "1dcefb25-7e86-46b1-b72d-a251c2a05522",
+            "cn": [
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "height": 79,
+                        "itemId": "btnAdd",
+                        "margin": 5,
+                        "width": 97,
+                        "enableToggle": true,
+                        "iconAlign": "top",
+                        "iconCls": "add",
+                        "pressed": true,
+                        "scale": "large",
+                        "text": "表单",
+                        "toggleGroup": "menu"
+                    },
+                    "designerId": "ef51247c-12ed-43f8-8862-5261b8a321a8"
+                }
+            ]
+        },
+        {
+            "type": "Ext.tab.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "layout|region": "center",
+                "itemId": "tabpanel",
+                "activeTab": 0
+            },
+            "designerId": "3fad7946-4eab-4a5d-888d-e4c680576f30",
+            "cn": [
+                {
+                    "type": "Ext.panel.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "html": [
+                            "welcome to peking\r",
+                            ""
+                        ],
+                        "title": "欢迎"
+                    },
+                    "designerId": "678e97b1-530f-48cf-98db-5849673f99a8",
+                    "cn": [
+                        {
+                            "type": "Ext.tab.Tab",
+                            "reference": {
+                                "name": "tabConfig",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "designerId": "e99786f6-7ff5-47b6-9cf3-7b78edab6b1e"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "customevent",
+            "reference": {
+                "name": "customEvents",
+                "type": "array"
+            },
+            "codeClass": null,
+            "designerId": "8e82f107-65f5-4a93-9d4e-fe4d1124f587"
+        }
+    ]
+}
