@@ -16,7 +16,7 @@ public class WesternTrousers extends Trousers{
 	   private int waistSize;
 	   private int height;
 	   private String name;
-	   WesternTrousers(String name,int waistSize,int height){
+	   public WesternTrousers(String name,int waistSize,int height){
 	       this.name=name;
 	       this.waistSize=waistSize;
 	       this.height=height;

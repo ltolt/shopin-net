@@ -18,7 +18,7 @@ public class CowboyUpperClothes extends UpperClothes {
 	   private int chestSize;
 	   private int height;
 	   private String name;
-	   CowboyUpperClothes(String name,int chestSize,int height){
+	   public  CowboyUpperClothes(String name,int chestSize,int height){
 	       this.name=name;
 	       this.chestSize=chestSize;
 	       this.height=height;
