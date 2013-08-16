@@ -4,10 +4,12 @@
 	<classpathentry kind="src" path="robust-java"/>
 	<classpathentry kind="src" path="TestCase"/>
 	<classpathentry kind="src" path="resources"/>
+	<classpathentry kind="src" path="log"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0_35"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/log"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/json"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/apache"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/log-back"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
