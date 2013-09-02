@@ -11,7 +11,7 @@ package chapter2.item3;
 
 /**
  * @Class Name SingltonOne
- * @Author k
+ * @Author k 
  * @Create In 2013-8-18
  */
 public class SingltonOne {
@@ -24,7 +24,7 @@ public class SingltonOne {
 	public void leaveTheBuilding() {
 		System.out.println("Whoa baby, I'm outta here!");
 	}
-	public static void main(String[] args) {
+	public static void main(String[] args)  {
 		SingltonOne instance = SingltonOne.INSTANCE;
 		instance.leaveTheBuilding();
 	}
