@@ -48,7 +48,6 @@ public class HttpServer {
 		try {
 			serverSocket = new ServerSocket(port,1,InetAddress.getByName("127.0.0.1"));
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -61,6 +60,7 @@ public class HttpServer {
 			OutputStream output = null;
 			try {
 				socket = serverSocket.accept();
+				System.out.println(socket.getPort());
 				input = socket.getInputStream();
 				output = socket.getOutputStream();
 				//create request object and parse
@@ -74,7 +74,6 @@ public class HttpServer {
 				//check if the previous URI is a shutdown command
 				shutdown = request.getUri().equals(SHUTDOWN_COMMAND);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				continue;
 			}
