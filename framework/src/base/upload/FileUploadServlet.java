@@ -54,7 +54,8 @@ public class FileUploadServlet extends HttpServlet {
 			List items = upload.parseRequest(req);
 			Iterator iter = items.iterator();
 			while(iter.hasNext()){
-				FileItem item = (FileItem) iter.next(); 
+				FileItem item = (FileItem) iter.next();
+				
 				if(item.isFormField()){
 					System.out.println("表单参数名:" + item.getFieldName() + 
 							 "表单参数值:" + item.getString("UTF-8"));
