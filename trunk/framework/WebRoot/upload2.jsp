@@ -4,140 +4,209 @@
  <head>  
   <title> New Document </title>  
  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript"></script>  
-     
-<script type="text/javascript">    
-//全局变量  
-var FileCount=0;//上传文件总数  
- //添加上传文件按钮  
- function addFile(obj)  
- {  
-  var filePath=$(obj).prev().val();  
-  var FireFoxFileName="";  
-  //FireFox文件的路径需要特殊处理  
-  if(window.navigator.userAgent.indexOf("Firefox")!=-1)  
-  {  
-     FireFoxFileName=filePath;  
-     filePath=$(obj).prev()[0].files.item(0).getAsDataURL();  
-  }  
-  if(!checkFile(filePath,FireFoxFileName))  
-  {  
-    $(obj).prev().val("");  
-    return;  
-  }  
-  if(filePath.length==0)  
-  {  
-    alert("请选择上传文件");  
-   return false;  
-  }  
-   FileCount++;  
-   //添加上传按钮  
-   var html='<span>';  
-       html+='<input id="f'+FileCount+'" name="'+FileCount+'" type="file"/> ';  
-       html+='<input type="button" value="添加" onclick="addFile(this)"/>';  
-       html+='</span>';  
-   $("#fil").append(html);  
-   //添加图片预览  
-   html='<li>';  
-   html+='<img id="img'+(FileCount-1)+'" src="'+filePath+'" width="100" height="100" style="cursor:pointer;" alt="暂无预览" />';  
-   html+='<br/>';  
-   html+='<a href="#" name="img'+(FileCount-1)+'" onclick="DelImg(this)">删除</a>';  
-   html+='</li>';  
-   $("#ImgList").append(html);  
- }  
- //删除上传文件（file以及img）  
- function DelImg(obj)  
- {  
-     var ID=$(obj).attr("name");  
-     ID=ID.substr(3,ID.length-3);  
-     $("#f"+ID).parent().remove();  
-     $(obj).parent().remove();  
-     return false;  
- }  
-  //检查上传文件是否重复,以及扩展名是否符合要求  
-function checkFile(fileName,FireFoxFileName)  
-{  
- var flag=true;  
- $("#ImgList").find(":img").each(function(){  
-     if(fileName==$(this).attr("src"))  
-     {  
-        flag=false;  
-        if(FireFoxFileName!='')  
-        {  
-         alert('上传文件中已经存在\''+FireFoxFileName+'\'!');  
-        }  
-        else  
-        {  
-         alert('上传文件中已经存在\''+fileName+'\'!');  
-        }  
-        return;  
-     }  
- });  
- //文件类型判断  
- var str="jpg|jpeg|bmp|gif";  
- var fileExtName=fileName.substring(fileName.indexOf(".")+1);//获取上传文件扩展名  
- if(FireFoxFileName!='')//fireFox单独处理  
- {  
-  fileExtName=FireFoxFileName.substring(FireFoxFileName.indexOf(".")+1);  
- }  
- //alert(fileExtName);  
- if(str.indexOf(fileExtName.toLowerCase())==-1)  
- {  
-   alert("只允许上传格式为jpg，jpeg，bmp，gif的文件。");  
-    flag=false;  
- }  
- return flag;  
-}  
-</script>     
-<style type="text/css">     
-  .fil  
-  {     
-    width:300px;  
-  }  
-  .fieldset_img  
-  {  
-     border:1px solid blue;  
-     width:550px;  
-     height:180px;  
-     text-align:left;  
-  
-  }  
-  .fieldset_img img  
-  {  
-     border:1px solid #ccc;  
-     padding:2px;  
-     margin-left:5px;  
-  }  
-  #ImgList li   
-  {  
-     text-align:center;  
-     list-style:none;  
-     display:block;  
-     float:left;  
-     margin-left:5px;  
-  }  
-</style>     
-</head>     
-<body>     
-<p>上传预览图片:<br>  
-<div id="fil" class="fil">  
-  <span>  
-   <input id="f0" name="f0" type="file"/>  
-   <input type="button" value="添加" onclick="addFile(this)"/>  
-  </span>  
-</div>   
-</p>  
-<div id="ok">  
-<fieldset class="fieldset_img">  
-<legend>图片展示</legend>  
-<ul id="ImgList">  
-<!--li>  
-<img id="img1" width="100" height="100" style="cursor:pointer;">  
-<br/>  
-<a href="#" name="img1" onclick="DelImg(this)">删除</a>  
-</li-->  
-</ul>  
-</fieldset>  
-</div>  
-     
- </body>  
+    <link rel="stylesheet" type="text/css" href="http://localhost:86/resources/css/ext-all.css" />
+    <!-- ExtJS -->
+    <script type="text/javascript" src="http://localhost:86/ext-all.js"></script>
+    <!-- Shared -->
+    <link rel="stylesheet" type="text/css" href="http://localhost:86/examples/shared/example.css" />
+ 
+ 
+ 
+ <script type="text/javascript">
+ Ext.onReady(function(){
+	//创建相册窗口
+		var win = Ext.create('Ext.window.Window', {
+					title : 'Ext相册',
+					width : 700,
+					height : 400,
+					iconCls : 'ablum',
+					layout : 'fit',
+					plain : false,
+					items : [view],
+					buttons : [{
+								text : '上传', //上传按钮
+								handler : upload,
+								iconCls : 'upload'
+							}, {
+								text : '清空',
+								handler : function() {
+									store.removeAll();
+								},
+								iconCls : 'clear'
+							}]
+				});
+		win.show();
+		//创建图片数据模型 ，数据源需要
+		var PhotoModel = Ext.define('ImageModel', {
+					extend : 'Ext.data.Model',
+					fields : [{name : 'name'},
+							{name : 'type'}, 
+							{name : 'size', type : 'float'},
+							{name : 'lastmod', type : 'date',dateFormat : 'timestamp'},
+							{name : 'file'},
+							{name : 'src'}]
+				});
+
+		//创建数据源
+		var store = Ext.create("Ext.data.Store", {
+					model : PhotoModel
+				});
+
+		var ddtip;
+		
+		//图片提示模板
+		var tiptpl = '名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称：{0}<br/>' +
+				  '类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型：{1}<br/>' +
+				 '大&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;小：{2}<br/>' + 
+				 '修改时间：{3}<br/>'
+		
+		//创建图片存放的容器
+		var view = Ext.create('Ext.view.View', {
+					store : store, //指定数据源
+					tpl : [ //设置展示模板
+							'<tpl for=".">',
+							'<div class="thumb-wrap" id="{name}">',
+							'<div class="upload-progress">0%</div>',
+							'<div class="thumb"><img src="{src}"></div>',
+							'<span>{name}</span></div>', '</tpl>',
+							'<div class="x-clear"></div>'],
+					style : {
+						backgroundColor : '#FFFFFF',
+						fontFamily : '微软雅黑'
+					},
+					multiSelect : true,
+					trackOver : true,
+					overItemCls : 'x-item-over',
+					itemSelector : 'div.thumb-wrap',
+					emptyText : '没有显示的相片',
+					autoScroll : true,
+					listeners : {
+						'afterrender' : function() {
+							//创建用户拖拽提示
+							ddtip = view.el.createChild({
+										tag : 'div',
+										cls : 'dd-tip',
+										html : '请将图片拖动到这里'
+									});
+							//创建相片浮动提示
+							Ext.create('Ext.tip.ToolTip', {
+									target : view.el,
+									delegate : view.itemSelector,
+									trackMouse : true,
+									renderTo : Ext.getBody(),
+									anchor : 'right',
+									listeners : {
+										beforeshow : function(tip) {
+											var record = view
+														.getRecord(tip.triggerElement);
+												tip.update(Ext.String.format(
+														tiptpl, record
+																.get('name'),
+														record.get('type'), record
+																.get('size'),
+														Ext.Date.format(
+																record.get('lastmod'),
+																'Y年m月d日 H时i分')));
+											 
+										}
+									}
+								});
+						}
+					}
+				});
+
+		//给body添加事件，如果有拖拽的话提示用户拖拽到指定区域
+		Ext.getBody().on('dragover', function(e) {
+					ddtip.show();
+				});
+		//当用户拖拽离开时隐藏提示信息
+		Ext.getBody().on('dragleave', function(e) {
+					ddtip.hide();
+				});
+		//当用户拖拽到指定区域时，隐藏提示信息
+		view.el.on('dragenter', function(e) {
+					e.stopPropagation();
+					e.preventDefault();
+					ddtip.hide();
+					view.el.highlight();
+				});
+
+		//当用户拖拽离开指定区域时显示提示信息
+		view.el.on('dragleave', function(e) {
+					e.stopPropagation();
+					e.preventDefault();
+					ddtip.show();
+				});
+
+		//很关键！！当用户拖拽文件并放下的时候触发时间
+		view.el.dom.ondrop = function(e) {
+			e.stopPropagation();
+			e.preventDefault();
+			ddtip.hide();//隐藏提示信息
+			//处理用户拖拽过来的文件
+			process(e.dataTransfer.files);
+		};
+		function process(files) {
+			var count = 0;
+			for (var i = 0; i < files.length; i++) {
+				var file = files[i];//这个一个File对象
+				//创建一个相片数据实例，保存名称，大小，类型，修改日期，文件等信息
+				var photo = Ext.ModelManager.create({
+							name : file.fileName,
+							size : file.fileSize,
+							type : file.type,
+							file : file,
+							lastmod : file.lastModifiedDate
+						}, PhotoModel);
+				//添加到数据源中，这时候容易会发生相应的变化
+				store.add(photo);
+				//通过FileReader对象获取预览
+				var reader = new FileReader();
+				//当读取完成之后执行的回调
+				reader.onload = (function(p) {
+					return function() {
+						count++;
+						//将获取到的Base64格式的图片数据，存放起来
+						p.data.src = this.result;
+						if (count == files.length) {
+							//当所有图片都加载完了之后，渲染图片
+							view.refresh();
+						}
+					}
+				})(photo);//这个地方利用了JS的闭包原理
+				//读取图片
+				reader.readAsDataURL(file);
+			}
+		}
+		function upload(){ //执行上传
+			store.each(function(photo){//遍历数据源的数据
+				var progress = Ext.get(view.getNode(photo)).down('div.upload-progress');//显示进度信息
+				progress.show();
+				var xhr = new XMLHttpRequest(); //初始化XMLHttpRequest
+				xhr.open('post', 'upload', true);
+				xhr.upload.onprogress = function(p) { //添加数据上传进度，获取实时的上传进度
+					return function(e) {
+						if (e.lengthComputable) {
+							var percentage = Math.round((e.loaded * 100) / e.total);
+							progress.update(percentage + "%");
+						}
+					}
+				}(progress);
+				xhr.upload.onload = function(p) { //当上传完之后执行的回调函数
+					return function(e) {
+						progress.update("上传成功!");
+					}
+				}(progress);
+				var fd = new FormData(); //这里很关键，初始化一个FormData，并将File文件发送到后台
+				fd.append("file", photo.data.file);
+				xhr.send(fd);
+			});
+		}
+
+	 
+ });
+ 
+ </script>
+
+</head>
 </html> 

@@ -23,6 +23,7 @@ import java.net.UnknownHostException;
 public class HttpServer1 {
 	
 	private static final String SHUT_DOWN = "/shutdown";
+	
 	//the shutdown command received
 	private boolean shutdown;
 	
@@ -44,6 +45,15 @@ public class HttpServer1 {
 			OutputStream output = null;
 			try {
 				socket = serverSocket.accept();
+				input = socket.getInputStream();
+				output = socket.getOutputStream();
+				//create Request object and parse
+				Request request = new Request(input);
+				request.parse();
+				//create response object
+				Response response = new Response(output);
+				response.setRequest(request);
+				// check if this is a request for a servlet or // a static resource // a request for a servlet begins with "/servlet/"
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
