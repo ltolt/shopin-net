@@ -31,7 +31,7 @@ public class HttpServer1 {
 		ServerSocket serverSocket = null;
 		int port = 8080;
 		try {
-			serverSocket = new ServerSocket(port, 1, InetAddress.getByName("127.0.0.1"));
+			serverSocket = new ServerSocket(port, 10, InetAddress.getByName("127.0.0.1"));
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -54,8 +54,20 @@ public class HttpServer1 {
 				Response response = new Response(output);
 				response.setRequest(request);
 				// check if this is a request for a servlet or // a static resource // a request for a servlet begins with "/servlet/"
+				if(request.getUri().startsWith("/servlet/")){
+					ServletProcessor processor = new ServletProcessor();
+					processor.process(request, response);
+				}else{
+					StaticResourceProcessor processor = new StaticResourceProcessor();
+					processor.process(request, response);
+				}
+				//close the socket
+				socket.close();
+				//check if the previous uri is a shutdown command
+				shutdown = request.getUri().equals(SHUT_DOWN);
 			} catch (IOException e) {
 				e.printStackTrace();
+				System.exit(1);
 			}
 			
 		}
