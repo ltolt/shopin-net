@@ -25,6 +25,10 @@ import javax.servlet.ServletResponse;
  * @Create In 2013-9-2
  */
 public class ServletProcessor {
+	
+	public static void main(String[] args) {
+		
+	}
 
 	public void process(Request request, Response response) {
 		String uri = request.getUri();
