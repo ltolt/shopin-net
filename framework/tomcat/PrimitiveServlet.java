@@ -7,6 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import ex.ex02.Request;
+import ex.ex02.Response;
+
 
 public class PrimitiveServlet implements Servlet {
 
@@ -36,6 +39,8 @@ public class PrimitiveServlet implements Servlet {
 	@Override
 	public void service(ServletRequest request, ServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("enter servlet");
+		Request req = (Request) request;
 		System.out.println("from service");
 		PrintWriter out = response.getWriter();
 		out.println("Hello Roses are red");
