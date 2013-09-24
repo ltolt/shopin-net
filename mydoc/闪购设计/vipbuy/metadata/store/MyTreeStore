@@ -1,0 +1,69 @@
+{
+    "type": "Ext.data.TreeStore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "autoLoad": true,
+        "autoSync": true,
+        "storeId": "MyTreeStore",
+        "designer|userClassName": "MyTreeStore",
+        "root": [
+            "    {  \r",
+            "        expanded: true  \r",
+            "    }  "
+        ]
+    },
+    "designerId": "9c0c5890-4c28-409a-b9c5-0663af953e32",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Ajax",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "url": "http://localhost:86/treepanel.json"
+            },
+            "designerId": "6108e2ea-2a97-4f18-af1e-1e57c49041b5",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "designerId": "c31637db-d549-441c-bb8f-6875cc4a2deb"
+                }
+            ]
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "text"
+            },
+            "designerId": "86dda9f7-321a-4be4-a4d5-2d6d8ee1e2ca"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "id"
+            },
+            "designerId": "d59a8afc-2efc-4572-b2ff-fe9089ddfb2f"
+        }
+    ]
+}

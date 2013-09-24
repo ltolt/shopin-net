@@ -1,0 +1,59 @@
+{
+    "name": "vipbuy",
+    "settings": {},
+    "xdsVersion": "2.2.2",
+    "xdsBuild": 991,
+    "schemaVersion": 1,
+    "upgradeVersion": 210000000503,
+    "framework": "ext42",
+    "topInstanceFileMap": {
+        "d331a8cd-dd6b-458e-be45-2ce4f27c9aec": {
+            "paths": [
+                "metadata/resource/Library"
+            ],
+            "className": "Library"
+        },
+        "3650e296-ee50-4314-b5fc-afc92c587b37": {
+            "paths": [
+                "metadata/view/MyViewport",
+                "app/view/override/MyViewport.js",
+                "app/view/MyViewport.js",
+                "app/view/Viewport.js"
+            ],
+            "className": "MyViewport"
+        },
+        "2a5e8fe6-f5ab-4306-b330-9c54b0d196cb": {
+            "paths": [
+                "metadata/store/MyJsonStore",
+                "app/store/override/MyJsonStore.js",
+                "app/store/MyJsonStore.js"
+            ],
+            "className": "MyJsonStore"
+        },
+        "9c0c5890-4c28-409a-b9c5-0663af953e32": {
+            "paths": [
+                "metadata/store/MyTreeStore",
+                "app/store/override/MyTreeStore.js",
+                "app/store/MyTreeStore.js"
+            ],
+            "className": "MyTreeStore"
+        }
+    },
+    "viewOrderMap": {
+        "view": [
+            "3650e296-ee50-4314-b5fc-afc92c587b37"
+        ],
+        "store": [
+            "2a5e8fe6-f5ab-4306-b330-9c54b0d196cb",
+            "9c0c5890-4c28-409a-b9c5-0663af953e32"
+        ],
+        "controller": [],
+        "model": [],
+        "resource": [
+            "d331a8cd-dd6b-458e-be45-2ce4f27c9aec"
+        ],
+        "app": [
+            "application"
+        ]
+    }
+}
