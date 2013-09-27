@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UMLProfile>
+	<Documentation id="9EFBDDC5-1" name="gson" version="1.0" notes="gson"/>
+	<!-- The profile content -->
+	<Content>
+		<!-- List of stereotypes used in this profile-->
+		<Stereotypes>
+			<Stereotype name="DefaultDateTypeAdapter" notes="This type adapter supports three subclasses of date: Date, Timestamp, and java.sql.Date. &#xA;" cx="" cy="" metafile="" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo/>
+				<TaggedValues>
+					<Tag name="enUsFormat" description="" values="" default=""/>
+					<Tag name="iso8601Format" description="" values="" default=""/>
+					<Tag name="localFormat" description="" values="" default=""/>
+				</TaggedValues>
+				<Constraints/>
+			</Stereotype>
+			<Stereotype name="FieldAttributes" notes="A data object that stores attributes of a field. &#xA;&lt;p&gt;This class is immutable; therefore, it can be safely shared across threads. &#xA;@since 1.4" cx="" cy="" metafile="" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo/>
+				<TaggedValues>
+					<Tag name="field" description="" values="" default=""/>
+				</TaggedValues>
+				<Constraints/>
+			</Stereotype>
+			<Stereotype name="FieldNamingPolicy" notes="An enumeration that defines a few standard naming conventions for JSON field names. This enumeration should be used in conjunction with {@link com.google.gson.GsonBuilder} to configure a {@link com.google.gson.Gson} instance to properly translate Java field names into the desired JSON field names. &#xA;" cx="" cy="" metafile="" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo/>
+				<TaggedValues>
+					<Tag name="enumType" description="" values="" default=""/>
+					<Tag name="IDENTITY" description="" values="" default=""/>
+					<Tag name="UPPER_CAMEL_CASE" description="" values="" default=""/>
+					<Tag name="UPPER_CAMEL_CASE_WITH_SPACES" description="" values="" default=""/>
+					<Tag name="LOWER_CASE_WITH_UNDERSCORES" description="" values="" default=""/>
+					<Tag name="LOWER_CASE_WITH_DASHES" description="" values="" default=""/>
+				</TaggedValues>
+				<Constraints/>
+			</Stereotype>
+			<Stereotype name="Gson" notes="This is the main class for using Gson. Gson is typically used by first constructing a Gson instance and then invoking {@link #toJson(Object)} or {@link #fromJson(String, Class)} methods on it. &#xA;&lt;p&gt;You can create a Gson instance by invoking {@code new Gson()} if the default configuration is all you need. You can also use {@link GsonBuilder} to build a Gson instance with various configuration options such as versioning support, pretty printing, custom {@link JsonSerializer}s, {@link JsonDeserializer}s, and {@link InstanceCreator}s.&lt;/p&gt; &#xA;&lt;p&gt;Here is an example of how Gson is used for a simple Class: &#xA;&lt;pre&gt; Gson gson = new Gson(); // Or use new GsonBuilder().create(); MyType target = new MyType(); String json = gson.toJson(target); // serializes target to Json MyType target2 = gson.fromJson(json, MyType.class); // deserializes json into target2&#xA;&lt;/pre&gt;&lt;/p&gt; &#xA;&lt;p&gt;If the object that your are serializing/deserializing is a {@code ParameterizedType} (i.e. contains at least one type parameter and may be an array) then you must use the {@link #toJson(Object, Type)} or {@link #fromJson(String, Type)} method.  Here is an example for serializing and deserialing a {@code ParameterizedType}: &#xA;&lt;pre&gt; Type listType = new TypeToken&amp;lt;List&amp;lt;String&amp;gt;&amp;gt;() {}.getType(); List&amp;lt;String&amp;gt; target = new LinkedList&amp;lt;String&amp;gt;(); target.add(&quot;blah&quot;);  Gson gson = new Gson(); String json = gson.toJson(target, listType); List&amp;lt;String&amp;gt; target2 = gson.fromJson(json, listType);&#xA;&lt;/pre&gt;&lt;/p&gt; &#xA;&lt;p&gt;See the &lt;a href=&quot;https://sites.google.com/site/gson/gson-user-guide&quot;&gt;Gson User Guide&lt;/a&gt; for a more complete set of examples.&lt;/p&gt; &#xA;@see com.google.gson.reflect.TypeToken &#xA;" cx="" cy="" metafile="" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo/>
+				<TaggedValues>
+					<Tag name="calls" description="" values="" default=""/>
+					<Tag name="constructorConstructor" description="" values="" default=""/>
+					<Tag name="DEFAULT_JSON_NON_EXECUTABLE" description="" values="" default=""/>
+					<Tag name="deserializationContext" description="" values="" default=""/>
+					<Tag name="factories" description="" values="" default=""/>
+					<Tag name="generateNonExecutableJson" description="" values="" default=""/>
+					<Tag name="htmlSafe" description="" values="" default=""/>
+					<Tag name="JSON_NON_EXECUTABLE_PREFIX" description="" values="" default=""/>
+					<Tag name="prettyPrinting" description="" values="" default=""/>
+					<Tag name="serializationContext" description="" values="" default=""/>
+					<Tag name="serializeNulls" description="" values="" default=""/>
+					<Tag name="typeTokenCache" description="" values="" default=""/>
+				</TaggedValues>
+				<Constraints/>
+			</Stereotype>
+			<Stereotype name="FutureTypeAdapter" notes="" cx="" cy="" metafile="" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo/>
+				<TaggedValues>
+					<Tag name="delegate" description="" values="" default=""/>
+				</TaggedValues>
+				<Constraints/>
+			</Stereotype>
+			<Stereotype name="GsonBuilder" notes="&lt;p&gt;Use this builder to construct a {@link Gson} instance when you need to set configuration options other than the default. For {@link Gson} with default configuration, it is simpler to use {@code new Gson()}. {@code GsonBuilder} is best used by creating it, and then invoking its various configuration methods, and finally calling create.&lt;/p&gt; &#xA;&lt;p&gt;The following is an example shows how to use the {@code GsonBuilder} to construct a Gson instance: &#xA;&lt;pre&gt; Gson gson = new GsonBuilder() .registerTypeAdapter(Id.class, new IdTypeAdapter()) .enableComplexMapKeySerialization() .serializeNulls() .setDateFormat(DateFormat.LONG) .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE) .setPrettyPrinting() .setVersion(1.0) .create();&#xA;&lt;/pre&gt;&lt;/p&gt; &#xA;&lt;p&gt;NOTES:&#xA;&lt;ul&gt;&#xA;&lt;li&gt; the order of invocation of configuration methods does not matter.&lt;/li&gt;&#xA;&lt;li&gt; The default serialization of {@link Date} and its subclasses in Gson does not contain time-zone information. So, if you are using date/time instances, use {@code GsonBuilder} and its {@code setDateFormat} methods.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/p&gt; &#xA;" cx="" cy="" metafile="" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo/>
+				<TaggedValues>
+					<Tag name="complexMapKeySerialization" description="" values="" default=""/>
+					<Tag name="datePattern" description="" values="" default=""/>
+					<Tag name="dateStyle" description="" values="" default=""/>
+					<Tag name="escapeHtmlChars" description="" values="" default=""/>
+					<Tag name="excluder" description="" values="" default=""/>
+					<Tag name="factories" description="" values="" default=""/>
+					<Tag name="fieldNamingPolicy" description="" values="" default=""/>
+					<Tag name="generateNonExecutableJson" description="" values="" default=""/>
+					<Tag name="hierarchyFactories" description="" values="" default=""/>
+					<Tag name="instanceCreators" description="" values="" default=""/>
+					<Tag name="longSerializationPolicy" description="" values="" default=""/>
+					<Tag name="prettyPrinting" description="" values="" default=""/>
+					<Tag name="serializeNulls" description="" values="" default=""/>
+					<Tag name="serializeSpecialFloatingPointValues" description="" values="" default=""/>
+					<Tag name="timeStyle" description="" values="" default=""/>
+				</TaggedValues>
+				<Constraints/>
+			</Stereotype>
+			<Stereotype name="JsonArray" notes="A class representing an array type in Json. An array is a list of {@link JsonElement}s each of which can be of a different type. This is an ordered list, meaning that the order in which elements are added is preserved. &#xA;" cx="" cy="" metafile="" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo/>
+				<TaggedValues>
+					<Tag name="elements" description="" values="" default=""/>
+				</TaggedValues>
+				<Constraints/>
+			</Stereotype>
+			<Stereotype name="JsonElement" notes="A class representing an element of Json. It could either be a {@link JsonObject}, a {@link JsonArray}, a {@link JsonPrimitive} or a {@link JsonNull}. &#xA;" cx="" cy="" metafile="" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo/>
+				<TaggedValues/>
+				<Constraints/>
+			</Stereotype>
+			<Stereotype name="JsonIOException" notes="This exception is raised when Gson was unable to read an input stream or write to one. &#xA;" cx="" cy="" metafile="" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo/>
+				<TaggedValues>
+					<Tag name="serialVersionUID" description="" values="" default=""/>
+					<Tag name="serialVersionUID" description="" values="" default=""/>
+				</TaggedValues>
+				<Constraints/>
+			</Stereotype>
+			<Stereotype name="JsonNull" notes="A class representing a Json {@code null} value. &#xA;@since 1.2" cx="" cy="" metafile="" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo/>
+				<TaggedValues>
+					<Tag name="INSTANCE" description="" values="" default=""/>
+				</TaggedValues>
+				<Constraints/>
+			</Stereotype>
+			<Stereotype name="JsonObject" notes="A class representing an object type in Json. An object consists of name-value pairs where names are strings, and values are any other type of {@link JsonElement}. This allows for a creating a tree of JsonElements. The member elements of this object are maintained in order they were added. &#xA;" cx="" cy="" metafile="" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo/>
+				<TaggedValues>
+					<Tag name="members" description="" values="" default=""/>
+				</TaggedValues>
+				<Constraints/>
+			</Stereotype>
+			<Stereotype name="JsonParseException" notes="This exception is raised if there is a serious issue that occurs during parsing of a Json string.  One of the main usages for this class is for the Gson infrastructure.  If the incoming Json is bad/malicious, an instance of this exception is raised. &#xA;&lt;p&gt;This exception is a {@link RuntimeException} because it is exposed to the client.  Using a {@link RuntimeException} avoids bad coding practices on the client side where they catch the exception and do nothing.  It is often the case that you want to blow up if there is a parsing error (i.e. often clients do not know how to recover from a {@link JsonParseException}.&lt;/p&gt; &#xA;" cx="" cy="" metafile="" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo/>
+				<TaggedValues>
+					<Tag name="serialVersionUID" description="" values="" default=""/>
+				</TaggedValues>
+				<Constraints/>
+			</Stereotype>
+			<Stereotype name="JsonParser" notes="A parser to parse Json into a parse tree of {@link JsonElement}s &#xA;@since 1.3" cx="" cy="" metafile="" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo/>
+				<TaggedValues/>
+				<Constraints/>
+			</Stereotype>
+			<Stereotype name="JsonPrimitive" notes="A class representing a Json primitive value. A primitive value is either a String, a Java primitive, or a Java primitive wrapper type. &#xA;" cx="" cy="" metafile="" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo/>
+				<TaggedValues>
+					<Tag name="PRIMITIVE_TYPES" description="" values="" default=""/>
+					<Tag name="value" description="" values="" default=""/>
+				</TaggedValues>
+				<Constraints/>
+			</Stereotype>
+			<Stereotype name="JsonStreamParser" notes="A streaming parser that allows reading of multiple {@link JsonElement}s from the specified reader asynchronously. &#xA;&lt;p&gt;This class is conditionally thread-safe (see Item 70, Effective Java second edition). To properly use this class across multiple threads, you will need to add some external synchronization.  For example: &#xA;&lt;pre&gt; JsonStreamParser parser = new JsonStreamParser(&quot;['first'] {'second':10} 'third'&quot;); JsonElement element; synchronized (parser) {  // synchronize on an object shared by threads if (parser.hasNext()) { element = parser.next(); } }&#xA;&lt;/pre&gt; &#xA;@since 1.4" cx="" cy="" metafile="" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo/>
+				<TaggedValues>
+					<Tag name="lock" description="" values="" default=""/>
+					<Tag name="parser" description="" values="" default=""/>
+				</TaggedValues>
+				<Constraints/>
+			</Stereotype>
+			<Stereotype name="JsonSyntaxException" notes="This exception is raised when Gson attempts to read (or write) a malformed JSON element. &#xA;" cx="" cy="" metafile="" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo/>
+				<TaggedValues>
+					<Tag name="serialVersionUID" description="" values="" default=""/>
+					<Tag name="serialVersionUID" description="" values="" default=""/>
+				</TaggedValues>
+				<Constraints/>
+			</Stereotype>
+			<Stereotype name="LongSerializationPolicy" notes="Defines the expected format for a {@code long} or {@code Long} type when its serialized. &#xA;@since 1.3 &#xA;" cx="" cy="" metafile="" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo/>
+				<TaggedValues>
+					<Tag name="DEFAULT" description="" values="" default=""/>
+					<Tag name="STRING" description="" values="" default=""/>
+				</TaggedValues>
+				<Constraints/>
+			</Stereotype>
+			<Stereotype name="TreeTypeAdapter" notes="Adapts a Gson 1.x tree-style adapter as a streaming TypeAdapter. Since the tree adapter may be serialization-only or deserialization-only, this class has a facility to lookup a delegate type adapter on demand." cx="" cy="" metafile="" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo/>
+				<TaggedValues>
+					<Tag name="delegate" description="" values="" default=""/>
+					<Tag name="deserializer" description="" values="" default=""/>
+					<Tag name="gson" description="" values="" default=""/>
+					<Tag name="serializer" description="" values="" default=""/>
+					<Tag name="skipPast" description="" values="" default=""/>
+					<Tag name="typeToken" description="" values="" default=""/>
+				</TaggedValues>
+				<Constraints/>
+			</Stereotype>
+			<Stereotype name="SingleTypeFactory" notes="" cx="" cy="" metafile="" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo/>
+				<TaggedValues>
+					<Tag name="deserializer" description="" values="" default=""/>
+					<Tag name="exactType" description="" values="" default=""/>
+					<Tag name="hierarchyType" description="" values="" default=""/>
+					<Tag name="matchRawType" description="" values="" default=""/>
+					<Tag name="serializer" description="" values="" default=""/>
+				</TaggedValues>
+				<Constraints/>
+			</Stereotype>
+			<Stereotype name="TypeAdapter" notes="non-Javadoc: &#xA;&lt;h3&gt;JSON Conversion&lt;/h3&gt;&#xA;&lt;p&gt;A type adapter registered with Gson is automatically invoked while serializing or deserializing JSON. However, you can also use type adapters directly to serialize and deserialize JSON. Here is an example for deserialization: &lt;pre&gt;   {@code  String json = &quot;{'origin':'0,0','points':['1,2','3,4']}&quot;; TypeAdapter&lt;Graph&gt; graphAdapter = gson.getAdapter(Graph.class); Graph graph = graphAdapter.fromJson(json); }&lt;/pre&gt; And an example for serialization: &lt;pre&gt;   {@code  Graph graph = new Graph(...); TypeAdapter&lt;Graph&gt; graphAdapter = gson.getAdapter(Graph.class); String json = graphAdapter.toJson(graph); }&lt;/pre&gt; &#xA;&lt;p&gt;Type adapters are &lt;strong&gt;type-specific&lt;/strong&gt;. For example, a {@code TypeAdapter&lt;Date&gt;} can convert {@code Date} instances to JSON and JSON to instances of {@code Date}, but cannot convert any other types." cx="" cy="" metafile="" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo/>
+				<TaggedValues/>
+				<Constraints/>
+			</Stereotype>
+		</Stereotypes>
+		<TaggedValueTypes/>
+	</Content>
+</UMLProfile>
