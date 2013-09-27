@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--project 用于定义一个ant工程，其中的三项name、default、basedir缺一不可。
+作用分别为：定义工程名、制定默认执行的任务、以及工程基础的路径型(它是计算其它路径的基础，一般情况下使用.即在java工程根目录即可)-->
+<project name="framework" default="jar" basedir=".">
+	<!--描述，个人觉得就是一提示作用，没什么实际用途-->
+	<description>use jar test</description>
+	<!--定义源文件路径，其中的value换成location也行，使用value的时候，${src}得到的就是src这个值，如果使用location，得到的是src这个目录的绝对路径-->
+	<property name="src" value="src" />
+	<property name="classes" value="webRoot/WEB-INF/classes" />
+	<property name="adminLib" value="../SSD_Admin/webRoot/WEB-INF/lib" />
+	<property name="serviceLib" value="../SSD_Service/webRoot/WEB-INF/lib" />
+	<property name="synLib" value="../SSD_Syn/webRoot/WEB-INF/lib" />
+
+	<!-- 构造打包时Class-Path需要的路径 结束-->
+
+	<!--创建任务init，负责初始化一些条件-->
+	<target name="init">
+		<!-- 创建存放编译后的class的目录
+			mkdir可以创建多级目录 
+		-->
+		<mkdir dir="${classes}" />
+	</target>
+
+	<!-- 创建时间戳 -->
+	<tstamp />
+
+	<!--定义jarfilename，准备进行打包操作。其中ant.project.name是ant默认的一个变量，值为最上面定义的project的name
+	${DSTAMP}为日期，格式为20111123；${TSTAMP}为时间，格式为2256，表示22点56分。
+		-->
+	<property name="jarfilename" value="${ant.project.name}.jar" />
+	<!--打包开始，名字为jar，依赖任务为compile-->
+	<target name="jar" depends="init" description="make jar file">
+		<!--jar操作，jarfile指定jar包存放路径，basedir为编译后的class的目录-->
+		<jar jarfile="${jarfilename}">
+			<fileset dir="${classes}">
+				<exclude name="application.properties" />
+				<exclude name="application*.xml" />
+			</fileset>
+		</jar>
+		<copy todir="${adminLib}" file="${jarfilename}" overwrite="true" />
+		<copy todir="${serviceLib}" file="${jarfilename}" overwrite="true" />
+		<copy todir="${synLib}" file="${jarfilename}" overwrite="true" />
+
+	</target>
+
+</project>
