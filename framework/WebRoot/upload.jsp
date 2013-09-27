@@ -34,7 +34,7 @@ function readURL(input) {
   
    function upload(){
 	   $.ajaxFileUpload({
-			  url:'http://localhost/frame/action',//服务器端程序
+			  url:'http://localhost/photoupload',//服务器端程序
 			  secureuri:false,
 			  fileElementId:'up',//input框的ID
 			  //dataType: 'json',//返回数据类型
@@ -80,7 +80,7 @@ function readURL(input) {
 </style>
 <body>
 <p align="center"> 请您选择需要上传的文件</p>
-<form id="form1" name="form1" method="post" action="http://172.16.103.147:7081/oms_core/refundApply/fileuploadLocal" enctype="multipart/form-data">
+<form id="form1" name="form1" method="post" action="http://localhost/photoupload" enctype="multipart/form-data">
  <table border="0" align="center">
   <tr>
    <td>上传人：</td>
