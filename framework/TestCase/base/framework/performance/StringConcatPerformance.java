@@ -69,6 +69,10 @@ public class StringConcatPerformance {
 				concatTestSbu.append("*");
 			stopWatch.stop();
 		}
+		
+		
+		
+		
 
 	}
 
