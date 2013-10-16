@@ -69,7 +69,7 @@ class Goo{
 	
 	int x;
 	int y;
-	Foo(){
+	Goo(){
 		this.x = 0;
 		this.y = 0;
 	}

@@ -28,7 +28,7 @@ public class Perf4JAppenderTest {
 		//log4j 框架会自动从classpath中加载log4j.xml
 		Logger rootLogger = Logger.getRootLogger();
 		
-		for(int i=0;i < 20;i++){
+		for(int i=0;i < 10;i++){
 			//默认的Log4JStopWatch会使用名为org.perf4j.TimeLogger的logger
 			StopWatch stopWatch = new Log4JStopWatch();
 			//demo dummy code

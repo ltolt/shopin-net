@@ -4,7 +4,6 @@
 
     <display-name>framework</display-name>
     
-    
     <servlet>
         <servlet-name>perf4j</servlet-name>
         <servlet-class>org.perf4j.log4j.servlet.GraphingServlet</servlet-class>
@@ -24,7 +23,7 @@
         <url-pattern>/perf4j</url-pattern>
     </servlet-mapping>
     
-     <servlet>
+     <!-- <servlet>
        <servlet-name>upload</servlet-name>
        <servlet-class>base.upload.FileUploadServlet</servlet-class>
        <init-param>
@@ -39,12 +38,12 @@
     </servlet-mapping>
     
       <servlet>
-	    <!--定义自己的servlet类-->
+	    定义自己的servlet类
 	    <servlet-name>ActionServlet</servlet-name>
 	    <servlet-class>base.upload.ActionServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-	<!-- 明确servlet类需要拦截的是哪个ACTION提交的数据 -->
+	明确servlet类需要拦截的是哪个ACTION提交的数据
 	<servlet-name>ActionServlet</servlet-name>
 	    <url-pattern>/action</url-pattern>
 	</servlet-mapping>
@@ -53,4 +52,4 @@
         <welcome-file>/index.jsp</welcome-file>
     </welcome-file-list>
     
-</web-app>
+ --></web-app>

@@ -31,7 +31,7 @@
         <appender-ref ref="graphExecutionTimes"/>
         <appender-ref ref="graphExecutionTPS"/>
         <!-- We add the JMX Appender reference onto the CoalescingStatistics -->
-        <appender-ref ref="perf4jJmxAppender"/>
+        <!-- <appender-ref ref="perf4jJmxAppender"/> -->
     </appender>
 
     <!-- This file appender is used to output aggregated performance statistics -->
@@ -94,7 +94,7 @@
           value should be less than 1500 ms. You can also set thresholds on the Min,
           Mean, StdDev, Count and TPS statistics - e.g. firstBlockMean(<600).
         -->
-        <param name="NotificationThresholds" value="firstBlockMax(0-800),secondBlockMax(&lt;1500)"/>
+        <param name="NotificationThresholds" value="firstblockMax(0-800),secondblockMax(&lt;1500)"/>
         <!--
           You can also specify an optional MBeanName param, which overrides
           the default MBean name of org.perf4j:type=StatisticsExposingMBean,name=Perf4J
