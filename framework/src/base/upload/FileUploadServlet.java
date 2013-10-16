@@ -43,6 +43,7 @@ public class FileUploadServlet extends HttpServlet {
 		doPost(req, resp);
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -51,7 +52,9 @@ public class FileUploadServlet extends HttpServlet {
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		try {
+			System.out.println(req.toString());
 			List items = upload.parseRequest(req);
+			System.out.println(items);
 			Iterator iter = items.iterator();
 			while(iter.hasNext()){
 				FileItem item = (FileItem) iter.next();

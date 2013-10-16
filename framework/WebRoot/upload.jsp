@@ -33,8 +33,9 @@ function readURL(input) {
   }
   
    function upload(){
+	   console.log($('#up').val());
 	   $.ajaxFileUpload({
-			  url:'http://localhost/photoupload',//服务器端程序
+			  url:'http://localhost/frame/photoupload',//服务器端程序
 			  secureuri:false,
 			  fileElementId:'up',//input框的ID
 			  //dataType: 'json',//返回数据类型
@@ -89,7 +90,7 @@ function readURL(input) {
   </tr>   
   <tr>
    <td>上传文件：</td>
-   <td><input id="up" name="file" type="file" size="20" onchange="readURL(this);" ></td>
+  <td><input id="up" name="file" type="file" size="20" onchange="readURL(this);" ></td>
   <td><input name="btnUpload" value="upload" type="button" size="20" onclick="upload(this);"></td>
   </tr>    
   <tr>   
