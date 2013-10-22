@@ -1,0 +1,22 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+	<display-name>shopin-core</display-name>
+
+	<servlet>
+		<servlet-name>perf4j</servlet-name>
+		<servlet-class>org.perf4j.log4j.servlet.GraphingServlet</servlet-class>
+		<!-- graphExecutionTimes和graphExecutionTPS就是我们在log4j中配置的名称 -->
+		<init-param>
+			<param-name>graphNames</param-name>
+			<param-value>graphExecutionTimes,graphExecutionTPS</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>perf4j</servlet-name>
+		<url-pattern>/perf4j</url-pattern>
+	</servlet-mapping>
+</web-app>
