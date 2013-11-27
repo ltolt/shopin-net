@@ -115,6 +115,37 @@ public class SortAlgorithm
         printArray(data);
     }
     
+    public static void quickSort(int[] array){
+        if(array.length > 0){
+            quickSort(array,0,array.length - 1);
+        }
+    }
+    
+    public static void quickSort(int[] array , int start ,int end ){
+        if( start < end ){
+            int middle = getMiddle(array , start , end);
+            quickSort(array,start,middle - 1);
+            quickSort(array,middle + 1, end);
+        }
+        printArray(array);
+    }
+    
+    public static int getMiddle(int[] array, int start , int end){
+        int pivot = array[start];//中轴默认为第一个
+        while(start < end ){
+            while(start < end && array[end] <= pivot){
+                end --;
+            }
+                array[start] = array[end];
+            while(start < end && array[start] >= pivot){
+                start ++;
+            }
+            array[end] = array[start];
+        }
+        array[start] = pivot;
+        return start;
+    }
+    
 
     /* ------------------------------------------------------------ */
     /**
@@ -134,7 +165,9 @@ public class SortAlgorithm
         selectSort(result);
         System.out.println("插入排序");
         insertSort(result);
-
+        System.out.println("快速排序");
+        quickSort(result);
+        printArray(result);
     }
 
 }
