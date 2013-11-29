@@ -1,6 +1,6 @@
 net\shopin\redis\RedisApplication.class
-net\shopin\redis\Receiver.class
 net\shopin\util\FileUploader.class
 net\shopin\web\UploadApp.class
-net\shopin\redis\RedisApplication$1.class
 net\shopin\web\FileUploadController.class
+net\shopin\redis\Receiver.class
+net\shopin\redis\RedisApplication$1.class
