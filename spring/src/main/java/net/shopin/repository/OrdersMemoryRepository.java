@@ -23,7 +23,7 @@ import net.shopin.domain.Order;
  * @Author kongm
  * @Create In 2013-11-29
  */
-@Repository("ordersRepository")
+//@Repository("ordersRepository")
 public class OrdersMemoryRepository implements OrdersRepository {
 
 	

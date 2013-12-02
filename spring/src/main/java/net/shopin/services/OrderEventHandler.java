@@ -8,6 +8,7 @@
 package net.shopin.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,11 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import net.shopin.domain.Order;
+import net.shopin.domain.OrderStatus;
 import net.shopin.events.orders.AllOrdersEvent;
+import net.shopin.events.orders.CreateOrderEvent;
 import net.shopin.events.orders.DeleteOrderEvent;
+import net.shopin.events.orders.OrderCreatedEvent;
 import net.shopin.events.orders.OrderDeletedEvent;
 import net.shopin.events.orders.OrderDetails;
 import net.shopin.events.orders.OrderDetailsEvent;
@@ -29,8 +33,8 @@ import net.shopin.repository.OrdersRepository;
  * @Author kongm
  * @Create In 2013-11-29
  */
-@Component("orderService")
-@Scope("prototype")
+//@Component("orderService")
+//@Scope("prototype")
 public class OrderEventHandler implements OrderService {
 	
 	
@@ -87,6 +91,14 @@ public class OrderEventHandler implements OrderService {
 			return OrderDeletedEvent.deletionForbidden(deleteOrderEvent.getKey(), details);
 		}
 		return new OrderDeletedEvent(deleteOrderEvent.getKey(), details);
+	}
+
+
+	public OrderCreatedEvent createOrder(CreateOrderEvent event) {
+		Order order = Order.fromOrderDetails(event.getDetails());
+		order.addStatus(new OrderStatus(new Date(), "Order Created"));
+		order = ordersRepository.save(order);
+		return new OrderCreatedEvent(order.getKey(),order.toOrderDetails());
 	}
 
 }
