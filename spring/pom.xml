@@ -13,6 +13,13 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>0.5.0.M6</version>
     </parent>
+    
+     <properties>
+        <!-- use UTF-8 for everything -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+     </properties>
+
 
     <dependencies>
         <dependency>
@@ -59,6 +66,16 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
         </dependency>
+        <!-- hibernate config  -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf-spring3</artifactId>
+        </dependency>
+        
         <!-- spring test -->
         <dependency>
         	<groupId>org.springframework</groupId>
@@ -71,6 +88,11 @@
 		    <artifactId>json-path-assert</artifactId>
 		    <version>0.8.1</version>
 		</dependency>
+        <dependency>
+        	<groupId>org.hamcrest</groupId>
+        	<artifactId>hamcrest-core</artifactId>
+        	<version>1.2.1</version>
+        </dependency>
     </dependencies>
 
     <build>
