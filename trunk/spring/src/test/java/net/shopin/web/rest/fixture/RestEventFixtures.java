@@ -10,6 +10,7 @@ package net.shopin.web.rest.fixture;
 import java.util.Date;
 import java.util.UUID;
 
+import net.shopin.events.orders.OrderCreatedEvent;
 import net.shopin.events.orders.OrderDeletedEvent;
 import net.shopin.events.orders.OrderDetailsEvent;
 import net.shopin.events.orders.OrderStatusDetails;
@@ -23,6 +24,11 @@ import static net.shopin.web.rest.fixture.RestDataFixture.*;
  */
 public class RestEventFixtures {
 
+	public static OrderCreatedEvent orderCreated(UUID key){
+		return new OrderCreatedEvent(key, customKeyOrderDetails(key));
+	}
+	
+	
 	public static OrderStatusEvent orderStatusNotFound(UUID key) {
 		return OrderStatusEvent.notFound(key);
 	}
