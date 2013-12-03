@@ -18,6 +18,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.codec.Base64;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import static junit.framework.TestCase.*;
 /**
@@ -30,12 +33,13 @@ public class OrdersTests {
 	
 	@Test
 	public void thatOrdersCanBeAddedAndQueried(){
-		HttpHeaders headers = new HttpHeaders();
+	/*	HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+	*/	
 		RestTemplate template = new RestTemplate();
-		
-		HttpEntity<String> requestEntity = new HttpEntity<String>(RestDataFixture.standardOrderJSON(),headers);
+		HttpEntity<String> requestEntity = new HttpEntity<String>(RestDataFixture.standardOrderJSON(),
+				getHeaders("letsnosh" + ":" + "noshing"));
 		
 		ResponseEntity<Order> entity = 
 				template.postForEntity("http://localhost:8080/orders",requestEntity, Order.class);
@@ -50,7 +54,33 @@ public class OrdersTests {
 		assertEquals(2, order.getItems().size());
 	}
 	
+	@Test
+	public void thatOrdersCannotBeAddedAndQueriedWithBadUser(){
+		HttpEntity<String> requestEntity = new HttpEntity<String>(RestDataFixture.standardOrderJSON(),
+				getHeaders("letsnosh:BADPASSWORD"));
+		RestTemplate template = new RestTemplate();
+		try {
+			ResponseEntity<Order> entity = template.postForEntity("http://localhost:8080/orders", 
+					requestEntity,Order.class);
+			fail("Request Passed incorrectly with status " + entity.getStatusCode());
+		} catch (HttpClientErrorException e) {
+			assertEquals(HttpStatus.UNAUTHORIZED, e.getStatusCode());
+		}
+		
+	}
 	
+	
+	
+	//{!begin httpheaders}
+	public static HttpHeaders getHeaders(String auth){
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		byte[] encodedAuthorisation = Base64.encode(auth.getBytes());
+		headers.add("Authorization", "Basic " + new String(encodedAuthorisation));
+		return headers;
+	}
+	//{!end httpheaders}
 	
 	
 
