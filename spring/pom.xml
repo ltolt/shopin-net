@@ -100,11 +100,43 @@
         	<version>4.0.0.RC1</version>
         	<type>pom</type>
         </dependency>
+        <!-- begin hateoas -->
         <dependency>
         	<groupId>org.springframework.hateoas</groupId>
         	<artifactId>spring-hateoas</artifactId>
         	<version>0.7.0.RELEASE</version>
         </dependency>
+        <!-- end hateoas -->
+        <!--begin  mongoDB -->
+        <dependency>
+        	<groupId>org.springframework.data</groupId>
+        	<artifactId>spring-data-mongodb</artifactId>
+        	<version>1.2.3.RELEASE</version>
+        </dependency>
+        <dependency>
+        	<groupId>cglib</groupId>
+        	<artifactId>cglib</artifactId>
+        	<version>2.2.2</version>
+        </dependency>
+        <!--end  mongoDB -->
+        <!-- begin JPA  -->
+        <dependency>
+        	<groupId>org.springframework.data</groupId>
+        	<artifactId>spring-data-jpa</artifactId>
+        	<version>1.3.4.RELEASE</version>
+        </dependency>
+        
+        <dependency>
+        	<groupId>org.hibernate.javax.persistence</groupId>
+        	<artifactId>hibernate-jpa-2.1-api</artifactId>
+        	<version>1.0.0.Draft-16</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.hibernate</groupId>
+        	<artifactId>hibernate-entitymanager</artifactId>
+        	<version>4.0.1.Final</version>
+        </dependency>
+        <!-- end JPA  -->
     </dependencies>
 
     <build>
