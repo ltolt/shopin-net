@@ -15,7 +15,11 @@ import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.ResourceSupport;
+
 import net.shopin.events.orders.OrderDetails;
+import net.shopin.web.rest.OrderQueriesController;
 
 /**
  * @Class Name Order
@@ -23,7 +27,7 @@ import net.shopin.events.orders.OrderDetails;
  * @Create In 2013-11-29
  */
 @XmlRootElement
-public class Order implements Serializable {
+public class Order extends ResourceSupport implements Serializable {
 
 	private Date dateTimeOfSubmission;
 
@@ -75,7 +79,12 @@ public class Order implements Serializable {
 		order.dateTimeOfSubmission = orderDetails.getDateTimeOfSubmission();
 		order.key = orderDetails.getKey();
 		order.setItems(orderDetails.getOrderItems());
+		//TODOCUMENT.  Adding the library, the above extends ResourceSupport and
+	    //this section is all that is actually needed in our model to add hateoas support.
 
+	    //Much of the rest of the framework is helping deal with the blending of domains that happens in many spring apps
+	    //We have explicitly avoided that.
+	    // {!begin selfRel}
 		return order;
 	}
 
