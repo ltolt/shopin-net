@@ -81,6 +81,26 @@ public class SortAlgorithm
     }
     
     /**
+     * 2.冒泡排序的第二种实现
+     * 
+     */
+    public static void bubbleSort2(int[] array){
+        int in,out;
+        for(out = array.length - 1;out >= 1;out --){//out loop backward 控制最右边的游标
+            for(in = 0;in < out;in ++){//inner loop forward 控制左边无序区
+                if(array[in] > array[in + 1]){
+                    swap(array,in,in + 1);//swap 
+                }
+            }
+        }
+        
+    }
+    
+    
+    
+    
+    
+    /**
      * 说明:
      *      直接选择排序
      */
@@ -100,6 +120,24 @@ public class SortAlgorithm
     }
     
     /**
+     * 选择排序的第二种实现
+     * 选择排序的不变性: out左边的总是有序的
+     */
+    public static void selectSort2(int[] array){
+        int out,in,min;
+        for(out = 0;out < array.length - 1;out ++){//outer loop 游标在最左边开始
+            min = out;//min默认始终在左边
+            for(in = out + 1; in < array.length - 1;in ++){//inner loop 
+                if(array[in] < array[min]){
+                    min = in;//交换index
+                }
+            }
+            swap(array,out,min);
+        }
+    }
+    
+    
+    /**
      * 说明:
      *     插入排序 
      */
@@ -114,6 +152,26 @@ public class SortAlgorithm
         }
         printArray(data);
     }
+    
+    /**
+     * 插入排序的第二种实现
+     */
+    public static void insertSort2(int[] array){
+        int in,out;
+        for(out = 1;out < array.length - 1;out ++){//从左边第二个开始 divide ranges 
+            int temp = array[out];//腾出位置
+            in = out;//从当前位置开始向左找到正确位置插入
+            while(in > 0&& array[in - 1] > temp){
+                array[in] = array[in - 1];//比要插入的数大的右移
+                --in;
+            }
+            array[in] = temp;//插入带排序的数
+        }
+        
+    }
+    
+    
+    
     
     public static void quickSort(int[] array){
         if(array.length > 0){
@@ -168,6 +226,21 @@ public class SortAlgorithm
         System.out.println("快速排序");
         quickSort(result);
         printArray(result);
+        
+        
+        System.out.println("冒泡排序第二种实现");
+        bubbleSort2(result);
+        printArray(result);
+        
+        System.out.println("选择排序的第二种实现");
+        selectSort2(result);
+        printArray(result);
+        
+        System.out.println("插入排序的第二种实现");
+        insertSort2(result);
+        printArray(result);
+        
+        
     }
 
 }
