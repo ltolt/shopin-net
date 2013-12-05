@@ -137,6 +137,11 @@
         	<version>4.0.1.Final</version>
         </dependency>
         <!-- end JPA  -->
+        <dependency>
+        	<groupId>org.springframework</groupId>
+        	<artifactId>spring-orm</artifactId>
+        	<version>3.2.4.RELEASE</version>
+        </dependency>
     </dependencies>
 
     <build>
