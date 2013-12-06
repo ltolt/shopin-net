@@ -7,6 +7,7 @@
  */
 package net.shopin.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -14,7 +15,7 @@ import java.util.Date;
  * @Author kongm
  * @Create In 2013-11-28
  */
-public class OrderStatus {
+public class OrderStatus implements Serializable{
 	
 	private Date statusDate;
 	private String status;
