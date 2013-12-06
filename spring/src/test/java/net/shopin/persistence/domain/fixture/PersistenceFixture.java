@@ -9,10 +9,16 @@ package net.shopin.persistence.domain.fixture;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.UUID;
 
 import net.shopin.persistence.domain.Ingredient;
+import net.shopin.persistence.domain.JPAOrder;
 import net.shopin.persistence.domain.MenuItem;
+import net.shopin.persistence.domain.OrderStatus;
 
 /**
  * @Class Name PersistenceFixture
@@ -44,6 +50,38 @@ public class PersistenceFixture {
 		return item;
 	}
 	
+	public static JPAOrder standardOrder(){
+		String key = UUID.randomUUID().toString();
+		JPAOrder order = new JPAOrder();
+		order.setDateTimeOfSubmission(new Date());
+		order.setId(key);
+		Map<String, Integer> items = new HashMap<String, Integer>();
+		items.put("yummy1", 15);
+		items.put("yummy2", 12);
+		items.put("yummy3", 14);
+		order.setOrderItems(items);
+		return order;
+	}
+	
+	 public static JPAOrder yummy16Order() {
+		    String key = UUID.randomUUID().toString();
+
+		    JPAOrder order = new JPAOrder();
+		    order.setDateTimeOfSubmission(new Date());
+		    order.setId(key);
+
+		    Map<String, Integer> items = new HashMap<String, Integer>();
+
+		    items.put("yummy16", 22);
+
+		    order.setOrderItems(items);
+
+		    return order;
+		  }
 	
 	
+	 public static OrderStatus startedCooking(UUID orderId){
+		 return new OrderStatus(orderId, UUID.randomUUID(), new Date(), "start cooking");
+	 }
+	 
 }

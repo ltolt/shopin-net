@@ -7,9 +7,13 @@
  */
 package net.shopin.persistence.repository;
 
+import java.util.List;
+
 import net.shopin.persistence.domain.JPAOrder;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 /**
  * @Class Name OrdersRepository
@@ -19,5 +23,9 @@ import org.springframework.data.repository.CrudRepository;
 public interface OrdersRepository extends CrudRepository<JPAOrder, String>{
 	
 	JPAOrder findById(String key);
+	
+	//{!begin query}
+	@Query(value = "select no.* from  NOODLE_ORDERS no where no.ORDER_ID in (select ID from ORDER_ORDER_ITEMS where MENU_ID=:menuId)",nativeQuery = true)
+	List<JPAOrder> findOrdersContaining(@Param("menuId")String menuId);
 	
 }

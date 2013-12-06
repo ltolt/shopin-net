@@ -103,6 +103,16 @@ public class JPAOrder {
 	}
 
 	
+	@Override
+	public String toString() {
+		return String
+				.format("JPAOrder [dateTimeOfSubmission=%s, orderItems=%s, orderStatus=%s, id=%s]",
+						dateTimeOfSubmission, orderItems, orderStatus, id);
+	}
+	
+	
+	
+	
 	
 	
 	
