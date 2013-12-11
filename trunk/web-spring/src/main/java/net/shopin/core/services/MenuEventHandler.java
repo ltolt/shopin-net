@@ -9,6 +9,7 @@ package net.shopin.core.services;
 
 import net.shopin.events.menu.AllMenuItemsEvent;
 import net.shopin.events.menu.RequestAllMenuItemsEvent;
+import net.shopin.persistence.services.MenuPersistenceService;
 
 /**
  * @Class Name MenuEventHandler
@@ -17,15 +18,22 @@ import net.shopin.events.menu.RequestAllMenuItemsEvent;
  */
 public class MenuEventHandler implements MenuService {
 	
+	private MenuPersistenceService menuPersistenceService;
+
 	
+	
+	public MenuEventHandler(MenuPersistenceService menuPersistenceService) {
+		this.menuPersistenceService = menuPersistenceService;
+	}
+
+
 
 	/* (non-Javadoc)
 	 * @see net.shopin.core.services.MenuService#requestAllMenuItems(net.shopin.events.menu.RequestAllMenuItemsEvent)
 	 */
 	public AllMenuItemsEvent requestAllMenuItems(
 			RequestAllMenuItemsEvent requestAllMenuItemsEvent) {
-		// TODO Auto-generated method stub
-		return null;
+		return menuPersistenceService.requestAllMenuItems(requestAllMenuItemsEvent);
 	}
 
 }

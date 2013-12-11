@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content="Simplicity Itself"/>
+
+    <title>Yummy Noodle Bar</title>
+
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+    </link>
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+    </style>
+    <!-- See http://twitter.github.com/bootstrap/scaffolding.html#responsive -->
+    <link href="/resources/css/bootstrap-responsive.min.css" rel="stylesheet">
+    </link>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!-- <div th:include="layout :: head"></div> -->
+
+<div class="container-fluid">
+     <div th:include="layout :: left"></div> 
+    <div class="hero-unit span9">
+        <h3>Yummy</h3>
+
+        <p>
+            Welcome to the home of all things Noodle
+        </p>
+
+        <p>
+            <a class="btn btn-primary btn-large" href="http://spring.io/">Learn more about Spring</a>
+            <a th:if="${basket.size &gt; 0}"
+               class="btn btn-primary btn-large"
+               th:href="@{/showBasket}">Look in your basket</a>
+        </p>
+
+    </div>
+
+    <div class="row-fluid">
+        <div class="span9">
+
+            <div id="message" class="alert alert-info">
+                Select from the menu. Currently your basket contains <em th:text="${basket.size}">SOME</em> truly
+                scrumptious item(s).
+            </div>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Cost</th>
+                    <th>Mins to prepare</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="item,status : ${menuItems}">
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.name}"></td>
+                    <td th:text="${item.cost}"></td>
+                    <td th:text="${item.minutesToPrepare}"></td>
+                    <td>
+                        <form action="/addToBasket" method="POST">
+                            <input id="id" name="id" type="hidden" th:value="${item.id}"/>
+                            <input id="name" name="name" type="hidden" th:value="${item.name}"/>
+                            <input id="cost" name="cost" type="hidden" th:value="${item.cost}"/>
+                            <input id="minutesToPrepare" name="minutesToPrepare" type="hidden"
+                                   th:value="${item.minutesToPrepare}"/>
+                            <input type="submit" value="Add to basket"/>
+                        </form>
+                    </td>
+
+                </tr>
+                <!-- This example data will be removed by thmyeleafe during processing and replaced with the rows generated above -->
+                <tr th:remove="all">
+                    <td>Yummy1</td>
+                    <td>Noodles, with Cheese</td>
+                    <td>$13.99</td>
+                    <td>15</td>
+                </tr>
+                </tbody>
+            </table>
+            <div th:include="layout :: foot"></div>
+
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

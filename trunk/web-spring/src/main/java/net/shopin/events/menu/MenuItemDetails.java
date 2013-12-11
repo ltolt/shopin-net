@@ -4,49 +4,58 @@ import java.math.BigDecimal;
 
 public class MenuItemDetails {
 
-  private String id;
-  private String name;
+	private String id;
+	private String name;
 
-  private BigDecimal cost;
+	private BigDecimal cost;
 
-  private int minutesToPrepare;
+	private int minutesToPrepare;
 
-  public MenuItemDetails(String id, String name, BigDecimal cost, int minutesToPrepare) {
-    this.id = id;
-    this.name = name;
-    this.cost = cost;
-    this.minutesToPrepare = minutesToPrepare;
-  }
+	public MenuItemDetails(String id, String name, BigDecimal cost,
+			int minutesToPrepare) {
+		this.id = id;
+		this.name = name;
+		this.cost = cost;
+		this.minutesToPrepare = minutesToPrepare;
+	}
 
-  public String getId() {
-    return id;
-  }
+	public String getId() {
+		return id;
+	}
 
-  public void setId(String id) {
-    this.id = id;
-  }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-  public String getName() {
-    return name;
-  }
+	public String getName() {
+		return name;
+	}
 
-  public void setName(String name) {
-    this.name = name;
-  }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-  public BigDecimal getCost() {
-    return cost;
-  }
+	public BigDecimal getCost() {
+		return cost;
+	}
 
-  public void setCost(BigDecimal cost) {
-    this.cost = cost;
-  }
+	public void setCost(BigDecimal cost) {
+		this.cost = cost;
+	}
 
-  public int getMinutesToPrepare() {
-    return minutesToPrepare;
-  }
+	public int getMinutesToPrepare() {
+		return minutesToPrepare;
+	}
 
-  public void setMinutesToPrepare(int minutesToPrepare) {
-    this.minutesToPrepare = minutesToPrepare;
-  }
+	public void setMinutesToPrepare(int minutesToPrepare) {
+		this.minutesToPrepare = minutesToPrepare;
+	}
+
+	@Override
+	public String toString() {
+		return String
+				.format("MenuItemDetails [id=%s, name=%s, cost=%s, minutesToPrepare=%s]",
+						id, name, cost, minutesToPrepare);
+	}
+
 }
