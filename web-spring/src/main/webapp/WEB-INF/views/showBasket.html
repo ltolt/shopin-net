@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content="Simplicity Itself"/>
+
+    <title>Yummy Noodle Bar</title>
+
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+    </link>
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+    </style>
+    <!-- See http://twitter.github.com/bootstrap/scaffolding.html#responsive -->
+    <link href="/resources/css/bootstrap-responsive.min.css" rel="stylesheet">
+    </link>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<!-- <div th:include="layout :: head"></div> -->
+
+<div class="container-fluid">
+     <div th:include="layout :: left"></div> 
+
+	<div class="hero-unit span9">
+		<h3>Basket</h3>
+		<p>
+			<a class="btn btn-primary btn-large" href="/">Continue eating</a>
+            <a th:if="${basket.size > 0}"
+               class="btn btn-primary btn-large" href="/checkout">Go ahead and order</a>
+		</p>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span8">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Cost</th>
+						<th>Mins to prepare</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+                    <tr th:each="basketItem : ${basket.items}">
+                        <td th:text="${basketItem.id}"></td>
+                        <td th:text="${basketItem.name}"></td>
+                        <td th:text="${basketItem.cost}"></td>
+                        <td th:text="${basketItem.minutesToPrepare}"></td>
+                        <td>
+                            <form id="${itemFormId}" action="/removeFromBasket" method="POST">
+                                <input id="id" name="id" type="hidden" th:value="${basketItem.id}" />
+                                <input type="submit" value="Remove" />
+                            </form>
+                        </td>
+                    </tr>
+				</tbody>
+			</table>
+             <div th:include="layout :: foot"></div> 
+		</div>
+	</div>
+</div>
+</body>
+</html>
