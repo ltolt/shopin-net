@@ -9,7 +9,10 @@ package net.shopin.config;
 
 import net.shopin.core.services.MenuEventHandler;
 import net.shopin.core.services.MenuService;
+import net.shopin.core.services.OrderEventHandler;
+import net.shopin.core.services.OrderService;
 import net.shopin.persistence.services.MenuPersistenceService;
+import net.shopin.persistence.services.OrderPersistenceService;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,5 +30,9 @@ public class CoreConfig {
 		return new MenuEventHandler(menuPersistenceService);
 	}
 	
+	@Bean
+	public OrderService orderService(OrderPersistenceService orderPersistenceService){
+		return new OrderEventHandler(orderPersistenceService);
+	}
 
 }

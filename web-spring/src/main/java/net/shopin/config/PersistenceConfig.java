@@ -10,12 +10,20 @@ package net.shopin.config;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import net.shopin.persistence.domain.MenuItem;
+import net.shopin.persistence.domain.Order;
 import net.shopin.persistence.repository.MenuItemMemoryRepository;
 import net.shopin.persistence.repository.MenuItemRepository;
+import net.shopin.persistence.repository.OrderStatusMemoryRepository;
+import net.shopin.persistence.repository.OrderStatusRepository;
+import net.shopin.persistence.repository.OrdersMemoryRepository;
+import net.shopin.persistence.repository.OrdersRepository;
 import net.shopin.persistence.services.MenuPersistenceEventHandler;
 import net.shopin.persistence.services.MenuPersistenceService;
+import net.shopin.persistence.services.OrderPersistenceEventHandler;
+import net.shopin.persistence.services.OrderPersistenceService;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,6 +36,22 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class PersistenceConfig {
 
+	@Bean
+	public OrdersRepository orderRepository(){
+		return new OrdersMemoryRepository(new HashMap<UUID, Order>());
+	}
+	
+	@Bean
+	public OrderStatusRepository orderStatusRepository(){
+		return new OrderStatusMemoryRepository();
+	}
+	
+	@Bean
+	public OrderPersistenceService orderPersistenceService(){
+		return new OrderPersistenceEventHandler(orderRepository(), orderStatusRepository());
+	}
+	
+	
 	@Bean
 	public MenuItemRepository menuItemRepository() {
 		return new MenuItemMemoryRepository(defaultMenu());
