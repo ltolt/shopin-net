@@ -46,7 +46,15 @@ public class LinkedList
         first = first.next;
         return temp;
     }
-
+    
+    public Link getFirst(){
+        return first;
+    }
+    
+    public void setFirst(Link link){
+        first = link;
+    }
+    
     /**
      * 链表是否为空
      */
@@ -54,6 +62,11 @@ public class LinkedList
         return first == null;
     }
 
+    public LinkedIterator getIterator(){
+        return new LinkedIterator(this);
+    }
+    
+    
     /**
      * 遍历链表
      */
