@@ -1,0 +1,46 @@
+1.svn路径
+	项目主路径：http://172.16.100.24/svn/www25/11_message_management/trunk
+2.代码说明：
+	mms的代码分为5个子项目，下面分别进行说明：
+	2.1 MMS_ServerJar
+		●MMS系统通用逻辑jar包
+		●后台配置表CRUD操作对应的的Mapper
+		●数据表维护Service
+		●节点注册的Service
+		●Broker创建链接工厂的Service
+		●提供build.xml，执行后会将本项目打jar包，并拷贝到其他项目的lib下。
+	2.2 MMS_ProducerAgent
+		■引用MMS_ServerJar
+		■消息发送的RESTfullAPIController代码
+		■初始化节点Service，负责注入Broker链接工厂，创建消息路由表
+	2.3 MMS_ConsumerAgent
+		●引用MMS_ServerJar
+		●消息监听器的Listener
+		●初始化Service，负责注入Broker链接工厂，创建监听器
+	2.4 MMS_Admin_UI MMS_Admin
+		■实现UI界面，用于维护mms的表数据
+		■维护Node节点，Broker，队列与监听器节点，初始化ProducerAgent和ConsumerAgent
+		■利用JMX监控Broker，实时监控Broker的健康状况
+		■该项目基于上品OA框架开发，代码分为js部分和RESTFull接口部分
+		■MMS_Admin_UI实现了js部分，代码在MMS_Admin_UI\WebRoot\js\mms目录下
+		■MMS_Admin_UI实现了RESTFull部分，并引用了MMS_ServerJar
+	2.5 MMS_ClientJar1.1
+		●封装了访问ProducerAgent的DefaultMessageClient和SendMessageRequest。
+	2.5 MMS_Test
+		■开发阶段使用的测试应用
+		■提供了一个测试用的消息发送工具和消息处理Controller
+
+3.注意事项：
+	1.MMS_ProducerAgent和MMS_ConsumerAgent只能部署在Tomcat容器下
+		初始化节点时，使用IP+端口来标志Node，此信息是通过读取Tomcat的service.xml实现的，此功能不支持其他容器（比如JBoss等）。
+		如需扩展支持其他容器，请阅读并扩展NodeServiceImpl的代码。
+	2.MMS_Admin_UI和MMS_Admin必须部署在同一个tomcat实例下
+		MMS_Admin_UI的extjs框架不支持js跨域访问。
+	3.MMS_Admin_UI框架略显笨重，考虑用更轻量级的UI工具重写，方便扩展。
+
+4.后期规划：
+	MMS_Admin可以提供消息路由表由。
+	MMS_Admin基于Zookeeper实现高可用集群，确保路由表的可用性。	
+	MMS_ClientJar具备获取路由表，实现消息路由的能力。
+	MMS_ProducerAgent可以将路由功能托给客户端实现，也可以自己路由（提供给不能实现客户端路由的ERP或单品系统）
+	

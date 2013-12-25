@@ -1,0 +1,74 @@
+  Ext Js 
+Javascript闭包
+闭包
+闭包并不是什么新奇的概念,它早在高级语言开始发展的时代就产生了.闭包(closure)是词法闭包的简称.
+所谓闭包即是由函数和其相关的引用环境组合而成的实体,在实现深约束时，需要创建一个能显示表示引用环境的东西,并将它与相关的子程序捆绑在一起.这样捆绑起来的整体成为闭包.
+支持嵌套作用域的语言特点：
+1.函数是第一阶值即函数可以作为另一个函数的返回值和参数,还可以作为一个变量的值.
+2.函数可以嵌套定义，即在一个函数内部可以定义另一个函数
+实例:
+function makePowerFn(power){
+	  function powerFn(base){
+		  return Math.pow(base,power);
+	  }
+	  return powerFn;
+  }
+  
+  var square = makePowerFn(2);
+  alert(square(3));
+
+执行过程:
+执行makePowerFn函数并传入参数2,此时参数power的值2被js引擎保存起来,
+执行square函数并传入3赋给参数base,此时会使用javascript数学函数对象Math.pow方法计算base的power次幂,即9
+保存这些值得现象被称为闭包
+
+另一种说法:函数makePowerFn外的变量square引用了函数makePowerFn内的局部函数powerFn，也就说:当函数makerPowerFn的局部函数powerFn被函数makePowerFn外的一个变量引用的时候就创建了一个闭包.
+
+闭包成员的生命周期
+ECMAScript有自动的垃圾回收机制.与java类似,但是规范也没有对该机制详细定义，而是让浏览器等规范实现厂家来实现,与各种浏览器不一样，垃圾回收的算法也不同。上面的代码中,在square函数执行完毕后,makePowerFn函数内的参数power与局部函数powerFn并不会被垃圾回收器回收.
+ //一个普通的函数
+   function makerPowerFn2(power){
+	   return power;
+   }
+   alert(makerPowerFn2(3));
+此时的函数makePowerFn2除了返回power没有做任何事情,在执行完毕后,调用堆栈马上就被销毁,垃圾回收器会回收执行中在堆栈中生成的makePowerFn2函数对象.
+闭包的应用场景
+安全性 
+成员持久性
+
+  在EXt框架中，大量的使用了闭包的成员持久模式。如function扩展的createCallback,createInterceptor方法等,
+createCallback的意思是创建一个回调函数,回调函数的参数值是可选的
+
+ Ext.onReady(function(){
+	   function show(x,y){
+		   Ext.MessageBox.alert("提示","x=" + x + " y = " + y);
+	   }
+	   var f1= show.createCallback(1,2);
+	   f1();
+	   
+	   
+   });
+在上面的代码中,我们为show函数创建了一个带有俩个参数值的回调函数f1(),然后执行f1(),我们虽然在执行f1()的时候没有传入参数,但却在执行过程中,使用了创建f1回调函数的时候传入的参数值,每次f1函数执行完毕后,并没有将函数内的局部参数销毁,这就是闭包的成员持久性作用所在.
+
+面向对象的客户端脚本设计
+实例:
+  //function的概念
+   function Person(name,age){
+	   this.name = name;
+	   this.age = age;
+   }
+   
+   function sayHi(){
+	   alert(this.name + " 嗨");
+   }
+   Person.prototype.sayHi = sayHi;//注意函数名后面不带括号,表示函数的引用
+   var someone = new Person('jack',18);
+   someone.sayHi();
+
+这里的new关键字把function当做构造器看待,执行实例化Person类的工作.
+这里利用javascript的原型链(Prototype chain)方式定义,每个javascript对象都有一个特殊的prototype属性,这个属性石整个原型链寻址的依据.另外,new命令的操作除了建立实例外，还有一个功能就是讲构造器与prototype相关联,为新的对象在原型链上确定一个位置.
+基于类的javascript继承
+概述:在javascript中,我们修改类的原型,讲子类的原型设置为父类的一个实例即可实现继承.
+例如:
+Function subclass(){}
+Subclass.prototype = new Person();
