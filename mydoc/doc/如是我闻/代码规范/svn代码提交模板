@@ -1,0 +1,8 @@
+代码svn提交时,使用注释模板
+svn制作模板过程
+svn --> 提交 --> Configure Comment Template .. --> 注释模板 -->新建
+Commend By  [luxiangxing 姓名] :
+[NETCURRENT-2 --问题号]  #resolve
+#comment [注释]
+1.
+2.
