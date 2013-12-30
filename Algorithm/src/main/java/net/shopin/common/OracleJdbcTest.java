@@ -7,7 +7,6 @@
  */
 package net.shopin.common;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
@@ -41,6 +40,7 @@ public class OracleJdbcTest {
         Class.forName(driverClass);  
   
         con=DriverManager.getConnection(url, userName, password);  
+   
     }
 
 	
