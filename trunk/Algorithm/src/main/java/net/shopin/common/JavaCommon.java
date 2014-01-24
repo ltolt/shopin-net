@@ -8,10 +8,13 @@
 package net.shopin.common;
 
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.MediaTracker;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
@@ -24,15 +27,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.channels.FileChannel;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
+import javax.imageio.ImageIO;
+
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfWriter;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGEncodeParam;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
@@ -118,7 +122,7 @@ public class JavaCommon {
 		
 		//9.使用iText jar 生成pdf
 		try {
-			OutputStream file = new FileOutputStream(new File("D:\\test.pdf"));
+			OutputStream file = new FileOutputStream(new File("test.pdf"));
 			Document document = new Document();
 			PdfWriter.getInstance(document, file);
 			document.add(new Paragraph("hello pdf"));
@@ -132,6 +136,13 @@ public class JavaCommon {
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//9.抓屏实现
+		try {
+			captureScreen("screen.png");
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
@@ -216,5 +227,19 @@ public class JavaCommon {
         encoder.encode(thumbImage);  
         out.close();  
 	}
+	
+	/**
+	 * 9.抓屏程序
+	 */
+	public static void captureScreen(String filename) throws Exception{
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		Rectangle screenRectangle = new Rectangle(screenSize);
+		Robot robot = new Robot();
+		BufferedImage image = robot.createScreenCapture(screenRectangle);
+		ImageIO.write(image, "png", new File(filename));  
+	}
 
+	
+	
+	
 }
