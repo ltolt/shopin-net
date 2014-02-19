@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +32,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -96,6 +99,26 @@ public class SiteController {
 		return mv;
 	}
 
+
+	/**
+	 * test esi
+	 * @Methods Name test
+	 * @Create In 2014-2-18 By kongm
+	 * @param request
+	 * @param response
+	 * @return ModelAndView
+	 */
+	@RequestMapping(value = "/test",method = RequestMethod.GET)
+	public ModelAndView test(HttpServletRequest request,HttpServletResponse response){
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("test");
+		return mv;
+	}
 	
+	@RequestMapping(value = "/date",method = RequestMethod.GET)
+	@ResponseBody
+	public String date(){
+		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());	
+	}
 
 }
