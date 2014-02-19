@@ -42,12 +42,23 @@
 		  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		  	<load-on-startup>1</load-on-startup>
 	  </servlet>
-	  <servlet-mapping>
+	   <servlet-mapping>
+        <servlet-name>spmvc</servlet-name>
+        <url-pattern>*.html</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>spmvc</servlet-name>
+        <url-pattern>*.json</url-pattern>
+    </servlet-mapping>
+
+	  
+	<!--   <servlet-mapping>
 			<servlet-name>spmvc</servlet-name>
 			<url-pattern>/</url-pattern>
-			<!-- 
+			
 			<url-pattern>*.json</url-pattern>
-			 -->
+			
 	  </servlet-mapping>
-
+ -->
   </web-app>
