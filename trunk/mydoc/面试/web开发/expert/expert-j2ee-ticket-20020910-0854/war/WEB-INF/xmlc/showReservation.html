@@ -1,0 +1,61 @@
+
+<html>
+<head>
+<title id="title">Seats reserved for </title>
+</head>
+
+<body>
+<b><span id="performanceName">Hamlet</span>:
+<span id="date">January 1, 1983</span>
+at
+<span id="time">7:30 pm</span>
+</b>
+<br/>
+<p/>
+
+
+<span id="seatsRequested">2</span>
+seats in
+<span id="seatType">Seat Type</span>
+have been reserved
+for you for
+<span id="minutesHeld">5</span>
+minutes to give you time to complete your purchase.
+The seat numbers are:
+
+<ul>
+    <li id="seat">Z1</li>
+    <li class="mockup">Z2</li>
+    <li class="mockup">Z3</li>
+</ul>
+
+
+<p />
+The total cost of these tickets will be
+<span id="totalPrice">totalPrice</span>.
+This includes a booking fee of
+<span id="bookingFee">bookingFee</span> .
+
+<p />
+
+<div id ="nonAdjacentWarning" >
+<b>Please note that due to lack of availability, some of the
+seats offered are not adjacent.</b>
+<form method="GET" action="otherDate.html">
+	<input type="submit" value="Try another date">
+	<!-- Input elements with / upset XMLC -->
+</form>
+</div>
+
+
+<!-- Form without any parameters: just needs to look like a form to the user -->
+<form method="GET" action="payment.html">
+	<input type="submit" value="Proceed">
+</form>
+
+
+Please check the seating plan below for the location of the reserved seats.
+<br/>
+<br/>
+
+<img alt="Seating plan" id="seatingPlanImg" src="../../static/seatingplans/1.jpg" />

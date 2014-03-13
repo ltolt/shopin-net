@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE data-sources PUBLIC "Orion data-sources" "http://www.orionserver.com/dtds/data-sources.dtd">
+
+<data-sources>
+	<!--
+		An example/default DataSource that uses an ordinary
+		JDBC-driver (in this case hsql) to create the connections. 
+		This tag creates all the needed kinds
+		of data-sources, transactional, pooled and EJB-aware sources.
+		The source generally used in application code is the "EJB"
+		one - it provides transactional safety and connection pooling.
+	-->
+	
+	<!--
+	<data-source
+		class="com.evermind.sql.DriverManagerDataSource"
+		name="Hypersonic"
+		location="jdbc/HypersonicCoreDS"
+		xa-location="jdbc/xa/HypersonicXADS"
+		ejb-location="jdbc/HypersonicDS"
+		connection-driver="org.hsql.jdbcDriver"
+		username="sa"
+		password=""
+		url="jdbc:HypersonicSQL:./database/defaultdb"
+		inactivity-timeout="30"
+	/>
+	-->
+	
+	
+	
+		<data-source
+			class="com.evermind.sql.DriverManagerDataSource"
+			name="Oracle"
+			location="jdbc/oracle"
+			xa-location="jdbc/xa/oracle"
+			ejb-location="jdbc/oracle"
+			connection-driver="oracle.jdbc.driver.OracleDriver"
+			username="SYSTEM"
+			password="MANAGER"
+			url="jdbc:oracle:thin:@127.0.0.1:1521:rj"
+			inactivity-timeout="30"
+		/>
+	
+	
+	
+</data-sources>

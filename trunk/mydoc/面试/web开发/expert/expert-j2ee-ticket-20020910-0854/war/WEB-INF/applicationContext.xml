@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- <!DOCTYPE web-app-config SYSTEM 'file:///c:/rj/controller/WEB-INF/web-app-config-1-0.dtd'>
+-->
+
+<beans>		
+
+	<!-- ===========================================================-->
+	<!-- Global Message source. For all servlets.					-->
+	<!-- ===========================================================-->
+	<bean name="messageSource" class="com.interface21.context.support.ResourceBundleMessageSource">	
+		<property name="basename">messages</property>										
+	</bean>
+
+
+	<!-- ===========================================================-->
+	<!-- Listeners							-->
+	<!-- ===========================================================-->
+	<!--
+	<bean name="performanceMonitor" class="com.interface21.web.context.support.PerformanceMonitorListener"/>
+
+	<bean name="consoleListener" class="com.interface21.context.support.ConsoleListener"/>	
+	-->
+	
+	
+	
+
+
+</beans>
+

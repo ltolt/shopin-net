@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<reservationInfo>
+  <item key="priceband" type="com.wrox.expertj2ee.ticket.referencedata.support.PriceBandImpl">
+    <name>AA</name>
+    <id>1</id>
+    <description>Premium Reserve</description>
+    <price>102.5</price>
+    <seatTypeId>1</seatTypeId>
+  </item>
+  <item key="request-info" type="com.interface21.web.servlet.view.RequestInfo">
+    <language>en</language>
+    <country>GB</country>
+  </item>
+  <item key="reservation" type="com.wrox.expertj2ee.ticket.boxoffice.support.ReservationImpl">
+    <timestamp>1027759539235</timestamp>
+    <reference>AA</reference>
+    <totalPrice>10.0</totalPrice>
+    <quoteRequest>
+      <performanceID>1</performanceID>
+      <seatsRequested>2</seatsRequested>
+      <seatsMustBeAdjacent>false</seatsMustBeAdjacent>
+      <bookingFee>3.5</bookingFee>
+      <holdTill>
+        <date>27</date>
+        <time>1027759839235</time>
+        <year>102</year>
+        <month>6</month>
+        <hours>9</hours>
+        <minutes>50</minutes>
+        <seconds>39</seconds>
+        <day>6</day>
+        <timezoneOffset>-60</timezoneOffset>
+      </holdTill>
+      <classID>1</classID>
+      <reserve>true</reserve>
+    </quoteRequest>
+    <seats>
+      <item type="com.wrox.expertj2ee.ticket.boxoffice.Seat">
+        <name>A1</name>
+        <id>1</id>
+        <seatClassId>1</seatClassId>
+        <left>0</left>
+        <right>0</right>
+      </item>
+      <item type="com.wrox.expertj2ee.ticket.boxoffice.Seat">
+        <name>A2</name>
+        <id>2</id>
+        <seatClassId>1</seatClassId>
+        <left>0</left>
+        <right>0</right>
+      </item>
+    </seats>
+    <seatsAreAdjacent>true</seatsAreAdjacent>
+    <reserved>true</reserved>
+    <minutesReservationWillBeValid>5</minutesReservationWillBeValid>
+  </item>
+  <item key="performance" type="com.wrox.expertj2ee.ticket.referencedata.support.PerformanceImpl">
+    <name>1</name>
+    <id>1</id>
+    <show>
+      <name>Romeo and Juliet</name>
+      <id>1</id>
+      <seatingPlanId>1</seatingPlanId>
+      <seatTypes/>
+    </show>
+    <when>
+      <date>27</date>
+      <time>1027759539245</time>
+      <year>102</year>
+      <month>6</month>
+      <hours>9</hours>
+      <minutes>45</minutes>
+      <seconds>39</seconds>
+      <day>6</day>
+      <timezoneOffset>-60</timezoneOffset>
+    </when>
+    <priceStructureId>1</priceStructureId>
+  </item>
+</reservationInfo>

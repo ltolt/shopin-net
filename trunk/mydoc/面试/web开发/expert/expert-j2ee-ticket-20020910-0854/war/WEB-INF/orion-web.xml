@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE orion-web-app PUBLIC "-//Evermind//DTD Orion Web Application 2.3//EN" "http://www.orionserver.com/dtds/orion-web.dtd">
+
+<orion-web-app
+	deployment-version="1.6.0"
+	persistence-path="./persistence/state.ser"
+	jsp-cache-directory="./persistence"
+	temporary-directory="./temp"
+	servlet-webdir="/servlet/"
+>
+	<ejb-ref-mapping name="ejb/BoxOffice" />
+</orion-web-app>

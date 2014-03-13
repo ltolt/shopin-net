@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-web>
+    <resource-ref>
+        <res-ref-name>jdbc/ticket-ds</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <jndi-name>java:/OracleDS</jndi-name>
+    </resource-ref>
+    
+    
+    <resource-ref>
+		<res-ref-name>jms/TopicFactory</res-ref-name>
+		<res-type>javax.jms.TopicConnectionFactory</res-type>
+		<jndi-name>java:ConnectionFactory</jndi-name>
+	  </resource-ref>
+	  
+	  
+	  <!--
+	  	This topic is actually defined in jbossmq-destinations-service.xml for this server
+	  -->
+	  <resource-ref>
+	  		<res-ref-name>jms/topic/data-update</res-ref-name>
+	  		<res-type>javax.jms.Topic</res-type>
+	  		<jndi-name>topic/data-update</jndi-name>
+	  </resource-ref>
+
+</jboss-web>
+

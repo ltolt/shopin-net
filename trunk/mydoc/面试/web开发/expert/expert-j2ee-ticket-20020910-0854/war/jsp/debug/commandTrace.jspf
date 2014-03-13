@@ -1,0 +1,26 @@
+
+<%@ page import="com.interface21.framework.web.servlet.*,com.interface21.framework.web.workflow.*,com.interface21.framework.web.workflow.support.*" %>
+
+<br>
+<br>
+
+<br>
+
+Command was <%= request.getAttribute(CommandWorkflowHandlerAdapter.COMMAND_REQUEST_ATTRIBUTE)%>
+
+<br/>
+
+Command generator was '<%= request.getAttribute(CommandWorkflowHandlerAdapter.COMMAND_GENERATOR_ATTRIBUTE)%>'
+
+
+<br/>
+
+Command workflow was '<%= request.getAttribute(CommandWorkflowHandlerAdapter.COMMAND_WORKFLOW_ATTRIBUTE)%>'
+
+
+<br/>
+
+View name is '<%= request.getAttribute(ControllerServlet.VIEW_NAME_ATTRIBUTE)%>'
+
+
+<br/>

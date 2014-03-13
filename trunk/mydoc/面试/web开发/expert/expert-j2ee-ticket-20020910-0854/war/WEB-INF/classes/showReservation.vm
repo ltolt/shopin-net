@@ -1,0 +1,67 @@
+<!-- Velocity -->
+
+<!--
+$simpleDateFormat.applyPattern("EEEE MMMM dd, yyyy")
+#set ($formattedDate = $simpleDateFormat.format($performance.when) )
+$simpleDateFormat.applyPattern("h:mm a")
+#set ($formattedTime = $simpleDateFormat.format($performance.when) )
+-->
+
+<html>
+<head>
+<title>Seats reserved for $performance.show.name</title>
+</head>
+
+<body>
+<b>$performance.show.name:
+$formattedDate at $formattedTime
+</b>
+<br/>
+<p>
+
+
+## Long way, as we can't get an array's length
+$reservation.quoteRequest.seatsRequested
+seats in 
+$priceband.description
+have been reserved
+for you for
+$reservation.minutesReservationWillBeValid
+minutes to give you time to complete your purchase.
+The seat numbers are:
+
+<ul>
+#foreach ($seat in $reservation.seats)
+    <li>$seat.name
+#end
+</ul>
+
+
+<p/>
+The total cost of these tickets will be 
+$currencyFormat.format($reservation.totalPrice).
+This includes a booking fee of
+$currencyFormat.format($reservation.quoteRequest.bookingFee).
+
+<p/>
+
+#if (!$reservation.seatsAreAdjacent)
+	<b>Please note that due to lack of availability, some of the
+	seats offered are not adjacent.</b>
+	<form method="GET" action="payment.html">
+		<input type="submit" value="Try another date"></input>
+	</form>
+#end
+
+
+<!-- Form without any parameters: just needs to look like a form to the user -->
+<form method="GET" action="payment.html">
+	<input type="submit" value="Proceed"></input>
+</form>
+
+
+Please check the seating plan below for the location of the reserved seats.
+<br/>
+<br/>
+
+<img src="static/seatingplans/${performance.show.seatingPlanId}.jpg" />
