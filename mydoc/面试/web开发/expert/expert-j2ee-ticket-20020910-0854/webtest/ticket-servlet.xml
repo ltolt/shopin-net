@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	Definitions for ticketing controller servlet.
+	
+	Each <bean> element in this file defines a Java bean instance,
+	providing the necessary class type and property settings.
+	Properties may be set to references to other beans.
+	Type conversion happens automatically.
+	
+	Errors in this file will cause the application to fail to start.
+	Check the log file (the location is defined in the log4j.properties file)
+	for information in this case. Error messages usually display pinpoint the
+	problem precisely.
+	
+	Certain bean names have special significance: e.g. "messageSource",
+	which defines an internationalizable repository for error and
+	other message, and "viewResolver", which defines where views
+	are defined.
+	
+	See also: /WEB-INF/classes/views.properties, which
+	defines the views used by this application. Views are
+	also defined as Java beans, using the same underlying implementation.
+-->
+
+<beans>		
+
+	<!-- ===========================================================-->
+	<!-- Message source												-->
+	<!-- ===========================================================-->
+	<!-- Messages will be taken from classpath.
+				Place file under /WEB-INF/classes in the WAR
+	-->
+	<!--
+	<bean name="messageSource" class="com.interface21.context.support.ResourceBundleMessageSource">	
+		<property name="basename">ticket-servlet-messages</property>										
+	</bean>
+-->
+
+
+	<!-- ===========================================================-->
+	<!-- Application beans				-->
+	<!-- ===========================================================-->
+	<bean name="realCalendar" 
+			singleton="false"
+			class="com.wrox.expertj2ee.ticket.referencedata.jdbc.JdbcCalendar" >	
+	</bean>
+	
+	
+	<!-- DO WE NEED A SIMILAR CACHING BOX OFFICE!? TO PICK UP METHOD 
+	GET FREE SEATS!? LISTENER WILL UPDATE WHEN BOOKING EVENT COMES:
+	ASSOCIATED WITH PERFORMANCE
+	-->
+	
+	<bean name="calendar" class="com.wrox.expertj2ee.ticket.referencedata.support.CachingCalendar" >	
+	</bean>
+	
+	
+	<!-- Type is BoxOfficeFactory --> 
+	<bean name="boxOfficeFactory" 
+		class="com.wrox.expertj2ee.ticket.framework.ejb.LocalSLSBBoxOfficeFactory" >	
+		<property name="jndiName">ejb/BoxOffice</property>
+	</bean>
+	
+	
+	
+	<!-- Proxy for local EJB -->
+
+	<bean name="boxOffice" 
+			definitionClass="com.interface21.ejb.access.LocalStatelessSessionProxyBeanDefinition"
+		>	
+			
+			<customDefinition property="businessInterface">com.wrox.expertj2ee.ticket.boxoffice.BoxOffice</customDefinition>
+			<customDefinition property="jndiName">ejb/BoxOffice</customDefinition>
+			<customDefinition property="reuseEjbObject">false</customDefinition>
+
+	</bean>
+	
+	
+	
+	<!-- Direct reference -->
+	<!--
+	<bean name="boxOffice" 
+			definitionClass="com.interface21.ejb.access.LocalStatelessSessionReferenceBeanDefinition"
+		>	
+
+			<customDefinition property="businessInterface">com.wrox.expertj2ee.ticket.boxoffice.BoxOffice</customDefinition>
+			<customDefinition property="jndiName">ejb/BoxOffice</customDefinition>
+	</bean>
+	-->
+	
+	
+	<bean name="availabilityCheck" 
+			class="com.wrox.expertj2ee.ticket.command.support.CachingAvailabilityCheck">
+		<property name="calendar" beanRef="true">calendar</property>
+		<property name="boxOffice" beanRef="true">boxOffice</property>
+	</bean>
+	
+	
+	<!-- COULD A CACHING FILTER LISTEN TO SUCH EVENTS!?
+	BENCHMARK IN PERFORMANCE CHAPTER: if needed speedup
+	-->
+	
+	<bean name="referenceDataListener" 
+			definitionClass="com.interface21.jms.JmsListenerBeanDefinition"
+		>	
+
+		<customDefinition property="listenerBean">com.wrox.expertj2ee.ticket.referencedata.support.DataUpdateJmsListener</customDefinition>
+		<customDefinition property="topicConnectionFactoryName">jms/TopicFactory</customDefinition>
+		<customDefinition property="topicName">jms/topic/referencedata</customDefinition>
+
+		<!-- <customDefinition property="messageSelector"></customDefinition> -->
+	
+		<property name="cachingCalendar" beanRef="true">calendar</property>
+		
+	</bean>
+	
+	
+	
+	
+	<bean name="userValidator" 
+			class="com.wrox.expertj2ee.ticket.customer.DefaultUserValidator" >	
+			<property name="minEmail">6</property>
+			<property name="maxEmail">64</property>
+	</bean>
+
+	
+	<!-- ===========================================================-->
+	<!-- View resolver. Required by web framework.					-->
+	<!-- ===========================================================-->
+	<bean name="viewResolver" class="com.interface21.web.servlet.view.ResourceBundleViewResolver">			
+		<!-- Development only: REPLACE BY true OR COMMENT OUT IN PRODUCTION OR 
+		     performance will be severely impacted. **************
+		-->
+		<property name="cache">true</property>
+		
+		
+		<!-- We can use this to avoid conflict with other command servlets -->		
+		<property name="basename">views</property>
+		
+	</bean>
+	
+	
+	<!-- ===========================================================-->
+	<!-- Listeners to this servlet only								-->
+	<!-- ===========================================================-->
+
+	<bean name="consoleListener" class="com.interface21.context.support.ConsoleListener"/>	
+
+
+
+	<!-- ===========================================================-->
+	<!-- URL mappings for web framework.							-->
+	<!-- ===========================================================-->
+	<!--
+		These bean definitions have a special meaning to the default 
+		com.interface21..web.servlet.UrlHandlerMapping
+		In the following mappings, the bean name is the URL that will be
+		mapped on the bean, which is a request controller.
+		This is not the only way to map requests onto controllers,
+		but it's the simplest and usually the best.
+	-->
+	
+			<!-- Override the default acceptance of GET and POST -->
+	
+	
+	<bean name="/welcome.html,/show.html,/bookseats.html,/reservation.html,/payment.html,/confirmation.html" 
+		class="com.wrox.expertj2ee.ticket.web.BrowseController" >
+			<property name="calendar" beanRef="true">calendar</property>
+			<property name="boxOffice" beanRef="true">boxOffice</property>
+			<property name="availabilityCheck" beanRef="true">availabilityCheck</property>
+			<property name="userValidator" beanRef="true">userValidator</property>
+			<property name="bookingFee">3.50</property>
+			<property name="minutesToHoldReservations">1</property>
+	</bean>
+	
+	
+	<!--
+	<bean name="/welcome.html" class="com.wrox.expertj2ee.ticket.web.WelcomeController" >
+		<property name="calendar" beanRef="true">calendar</property>
+		<property name="boxOffice" beanRef="true">boxOffice</property>
+	</bean>
+	
+	<bean name="/show.html" class="com.wrox.expertj2ee.ticket.web.DisplayShowController" >
+			<property name="supportedMethods">POST</property>
+	
+			<property name="calendar" beanRef="true">calendar</property>
+			<property name="boxOffice" beanRef="true">boxOffice</property>
+			<property name="availabilityCheck" beanRef="true">availabilityCheck</property>
+	</bean>
+	-->
+	
+	
+	<!-- Handles payment confirmation -->
+	<!--
+	<bean name="/confirmation.html" class="com.wrox.expertj2ee.ticket.web.ConfirmationController" >	
+			<property name="calendar" beanRef="true">calendar</property>
+			<property name="boxOffice" beanRef="true">boxOffice</property>
+			<property name="userValidator" beanRef="true">userValidator</property>
+	</bean>
+	
+	
+	<bean name="/payment.html" class="com.wrox.expertj2ee.ticket.web.PaymentDetailsController" >	
+			<property name="calendar" beanRef="true">calendar</property>
+			<property name="boxOffice" beanRef="true">boxOffice</property>
+	</bean>
+	-->
+	
+	
+	
+	
+	
+	<bean name="/foo.html,/bar.html,/baz.html,/sess.html" class="com.wrox.expertj2ee.ticket.web.MultiTestController" >	
+			
+	</bean>
+	
+	<bean name="/freeSeats.html" class="com.wrox.expertj2ee.ticket.web.BOController" >	
+		<property name="calendar" beanRef="true">calendar</property>
+		<property name="boxOffice" beanRef="true">boxOffice</property>
+	</bean>
+	
+	<bean name="/pbs.html" class="com.wrox.expertj2ee.ticket.web.PBController" >	
+			<property name="requireSession">true</property>
+
+		<property name="calendar" beanRef="true">calendar</property>
+		<property name="boxOffice" beanRef="true">boxOffice</property>
+	</bean>
+	
+	
+</beans>		

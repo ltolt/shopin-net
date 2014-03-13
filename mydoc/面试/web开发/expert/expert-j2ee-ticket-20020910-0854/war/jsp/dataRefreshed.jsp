@@ -1,0 +1,1 @@
+Reference data was refreshed: <%=new java.util.Date() %>.

@@ -1,0 +1,641 @@
+<?xml version="1.0"?>
+
+<!--
+	Ant build script for ticketing sample application with
+	"Expert One-in-One J2EE", Wrox Press, 2002.
+	Author: Rod Johnson
+	
+	Requirements: 
+		J2SDKEE 1.2 or 1.3
+		Ant optional task support (jakarta-ant-1.4.1-optional.jar must be in
+		Ant /lib directory)
+-->
+
+<project name="ticket" default="usage" basedir=".">
+
+<!--
+	<available 
+		classname="org.eclipse.core.launcher.Main" 
+		property="build.compiler" 
+		value="org.eclipse.pde.internal.core.JDTCompilerAdapter"
+		>
+		-->
+		
+		
+	<!-- ===========================================================-->
+	<!-- Change these absolute path settings to match OS and file paths	-->
+	<!-- ===========================================================-->
+	
+	<!-- Root directory of the Sun J2EE 1.3 Reference Implementation
+	-->
+	<property name="j2ee.dir" value="C:\j2sdkee1.3.1"/>
+	
+	<!-- Root directory of JBoss 3.0 installation -->
+	<property name="jboss.home" value="c:\servers\jboss-3.0.0"/>
+	
+	<!-- Name of the JBoss server we want to deploy to. JBoss 3.0 final,
+	 like BEA WebLogic, can run multiple servers from the one installation.
+	 -->
+	<property name="jboss.server" value="default"/>
+	
+	
+	
+	<property name="orion.home" value="c:\servers\orion"/>
+
+	
+	
+	<!-- ===========================================================-->
+	<!-- End absolute path settings									-->
+	<!-- ===========================================================-->
+	
+	<!-- Name of this application -->
+	<property name="name" value="ticket"/>
+
+	<!-- Location of j2ee.jar from J2EE RI -->
+	<property name="j2ee.jar" value="${j2ee.dir}/lib/j2ee.jar"/>
+
+	
+	<property name="junit.reports.dir" value="test-reports"/>
+	
+	<property name="debug" value="on"/>
+	
+	<!-- Location to write J2EE Reference Implementation verifier output -->
+	<property name="verifier.file" value="ri-verifier-results"/>
+	
+	<!-- Root of book project -->
+	<property name="book.dir" value="c:\work\book\project"/>
+	
+	<!-- Directory of framework code within this directory -->
+	<property name="framework.dir" value="framework/src"/>
+		
+
+	<!-- Library directory within project -->
+	<property name="lib.dir" value="lib"/>
+	
+	<property name="dist.dir" value="dist"/>
+
+	
+	<!-- Output directory within project.
+		The contents of this directory are temporary, although
+		they are cached for efficiency between builds.
+	-->
+	<property name="output.dir" value="temp-build"/>
+	
+	<!-- Directory for generated API documentation -->
+	<property name="docs.dir" value="./docs/api" />
+	
+	<property name="classes.dir" value="${output.dir}/classes/web"/>
+
+	<property name="ejbclasses.dir" value="${output.dir}/classes/ejb"/>
+	
+	<property name="testclasses.dir" value="${output.dir}/classes/test"/>
+
+
+	<property name="app-ear.dir" value="ear"/>
+	<property name="app-ear.product" value="${dist.dir}/${name}.ear"/>
+
+	<property name="ejb-jar.dir" value="ejb"/>
+	<property name="ejb-jar.file" value="${name}-ejb.jar"/>
+	<property name="ejb-jar.product" value="${dist.dir}/${ejb-jar.file}"/>
+
+	<property name="web-war.dir" value="war"/>
+	<property name="web-war.file" value="${name}.war"/>
+	<property name="web-war.product" value="${dist.dir}/${web-war.file}"/>
+
+	
+
+	<path id="master-classpath">
+		<pathelement location="${j2ee.jar}"/>
+			<fileset dir="${lib.dir}">
+				<include name="**/*.jar"/>
+				<!-- Don't want WAR compilation -->
+				<exclude name="**/i21framework.jar" />
+		</fileset>
+		
+		
+	</path>
+
+
+	<path id="jboss-client-classpath">
+		<fileset dir="${jboss.home}/client">
+			<include name="jboss-client.jar"/>
+			<include name="jbosssx-client.jar"/>
+			<include name="jnp-client.jar"/>
+		</fileset>
+	</path>
+
+	<target name="usage" >
+	
+	        <echo message=""/>
+	        <echo message="${name} build file"/>
+	        <echo message="------------------------------------------------------"/>
+	        <echo message=""/>
+	        <echo message=" Available targets are :"/>
+	        <echo message=""/>
+	        <echo message="clean    --> delete all binaries and enterprise archives"/>
+	        <echo message=" war    --> generates the war file"/>
+	        <echo message=" tests    --> run JUnit test suites"/>
+	        <echo message=" jboss    --> deploy on JBoss"/>
+	        <echo message=" javadoc    --> generates Javadoc"/>
+	        <echo message="verify    --> run the J2EE Reference Implementation verifier to check J2EE standards compliance"/>
+
+        	<echo message=" " />
+        </target>
+	
+
+	<!-- Delete all binaries and generated distribution units -->
+	<target name="clean">
+		<delete dir="${output.dir}"/>
+		<delete file="lib/runtime/i21framework.jar"/>
+	</target>
+
+
+	
+	
+	<!-- Compile the classes in the EJB JAR -->
+	<target name="build-ejb">
+	
+		<!-- Overrides property in framework.xml -->
+			<!-- Can't have everything in EJB JAR! -->
+			
+		<ant antfile="framework/build.xml" target="core">
+		    <property name="i21-core.jar" value="${dist.dir}/i21-core.jar"/>
+		  </ant>
+		  <ant antfile="framework/build.xml" target="ejbimpl">
+		  		    <property name="i21-ejbimpl.jar" value="${dist.dir}/i21-ejbimpl.jar"/>
+		  </ant>
+		 <ant antfile="framework/build.xml" target="jdbc">
+		 		    <property name="i21-jdbc.jar" value="${dist.dir}/i21-jdbc.jar"/>
+		  </ant>
+
+		<mkdir dir="${ejbclasses.dir}"/>
+		<javac destdir="${ejbclasses.dir}" debug="${debug}">
+		
+		<classpath refid="master-classpath"/>
+		<classpath location="${dist.dir}/i21-core.jar"/>
+		<classpath location="${dist.dir}/i21-ejbimpl.jar"/>
+		<classpath location="${dist.dir}/i21-jdbc.jar"/>
+
+
+
+		<src path="src"/>
+		<include name="com/wrox/**/boxoffice/**"/> 
+		
+		
+		</javac>
+	</target>
+	
+	
+	
+	<!-- Compile the classes in the WAR -->
+	<target name="build-war" depends="build-ejb">
+	
+	
+	<ant antfile="framework/build.xml" target="web">
+			    <property name="i21-web.jar" value="${dist.dir}/i21-web.jar"/>
+		  </ant>
+		  
+		<mkdir dir="${classes.dir}"/>
+		<javac destdir="${classes.dir}" debug="${debug}">
+		<classpath refid="master-classpath"/>
+		
+				<classpath location="${dist.dir}/i21-core.jar"/>
+
+		<classpath location="${dist.dir}/i21-web.jar"/>
+		<classpath location="${dist.dir}/i21-jdbc.jar"/>
+
+		<src path="src"/>
+		
+				
+		<!-- Don't take the EJBs below it -->
+		<include name="com/wrox/expertj2ee/ticket/boxoffice/*"/> 
+		
+		<include name="com/wrox/expertj2ee/ticket/referencedata/**"/> 
+
+	
+		<!-- Web tier and common classes -->
+		<include name="com/wrox/expertj2ee/ticket/web/**" /> 
+		
+				
+		<!-- EJB references. We don't need bean implementation classes or support classes. -->
+		<include name="com/wrox/expertj2ee/ticket/boxoffice/ejb/BoxOfficeHome.java" />
+		<include name="com/wrox/expertj2ee/ticket/boxoffice/ejb/BoxOfficeLocal.java" />
+		
+		<!-- CUSTOM CONNECTOR: don't really need to use this approach -->
+		<include name="com/wrox/expertj2ee/ticket/framework/**" />
+		
+		
+		<!-- in EJB? -->
+		<include name="com/wrox/expertj2ee/ticket/customer/**" />
+		<include name="com/wrox/expertj2ee/ticket/command/**" />	
+		</javac>
+	</target>
+	
+	
+	
+	
+
+	<target name="ejb-jar" depends="build-ejb">
+		<mkdir dir="${ejbclasses.dir}/log4j"/>
+		<copy file="war/WEB-INF/classes/logging.properties" todir="${ejbclasses.dir}"/>
+		<copy file="war/WEB-INF/classes/log4j/log4j.properties" todir="${ejbclasses.dir}/log4j"/>
+		<copy file="war/WEB-INF/classes/log4j/log4j_PRODUCTION.properties" todir="${ejbclasses.dir}/log4j"/>
+
+		
+		<jar jarfile="${ejb-jar.product}"
+			basedir="${ejbclasses.dir}" 
+			manifest="${ejb-jar.dir}/manifest"
+		>
+				<metainf dir="${ejb-jar.dir}">
+					<include name="*/**"/>
+				</metainf>
+		  </jar>
+	</target>
+
+
+
+	<!-- Create a WAR distribution unit, using the
+		Ant WAR task
+		-->
+	<target name="war" depends="build-war">
+		  
+		<war warfile="${web-war.product}" 
+			webxml="${web-war.dir}/WEB-INF/web.xml">
+			
+			
+			<!-- TO USE WAR MANIFEST
+			manifest="${web-war.dir}/WEB-INF/manifest">
+			-->
+			
+			<fileset dir="${web-war.dir}" excludes="WEB-INF/**"/>
+			
+			<webinf dir="${web-war.dir}/WEB-INF">
+				<!-- This goes in automatically -->
+				<exclude name="web.xml"/>
+				<exclude name="manifest"/>
+			</webinf>
+
+			<!-- Take all the compiled classes from the war -->
+			<classes dir="${classes.dir}">
+				<include name="**/*.class"/>
+			</classes>
+
+			<!-- Take all library files -->
+			<lib dir="${lib.dir}/runtime/common" /> 
+				
+			<!-- Comment out what isn't needed -->
+	
+			<lib dir="${lib.dir}/runtime/jsp-stl" />
+			<lib dir="${lib.dir}/runtime/velocity" />
+			<lib dir="${lib.dir}/runtime/xmlc" />
+			<lib dir="${lib.dir}/runtime/itext-pdf" />
+			
+			<!--  Interface21 framework.
+			Comment out first two if using WAR manifest classpath
+			-->
+			<lib dir="${dist.dir}" >
+			
+				<include name="i21-core.jar"/>
+				<include name="i21-jdbc.jar"/>
+
+				<include name="i21-web.jar"/>
+			</lib>
+
+			<!-- Test framework -->
+			<!--
+			<lib dir="${lib.dir}/runtime/cactus" />
+			-->
+		</war>
+	</target>
+
+	
+	<!-- Build an EAR application deployment unit.
+	 	Useful for servers that don't accept WARs.
+	-->
+	<target name="ear" depends="ejb-jar,war">
+		 <ear earfile="${app-ear.product}" appxml="ear/application.xml">
+		      <fileset dir="${dist.dir}">
+		      	<include name="ticket.war"/>
+		      	<include name="ticket-ejb.jar"/>
+		      	
+		      	<!-- Binary dependencies -->
+		      	<include name="i21-core.jar"/>
+		      	<include name="i21-ejbimpl.jar"/>
+		      	<include name="i21-jdbc.jar"/>
+		      	
+		       </fileset>	
+		      	<fileset dir="lib/runtime/common">
+		      	<include name="log4j*.jar"/>
+		      </fileset>
+		   </ear>
+
+	</target>
+
+	
+	
+	
+	<!-- Deploy on JBoss 
+		This simply involves copying the EAR to the JBoss /deploy directory.
+		There should be no need to restart JBoss.
+	-->
+	<target name="jboss" depends="ear">	 	  		  
+		<copy todir="${jboss.home}/server/${jboss.server}/lib"
+			file="lib/oracle/classes12.zip"/> 
+		
+		<copy todir="${jboss.home}/server/${jboss.server}/deploy"
+			file="deploy/jboss/ticket-service.xml"/> 
+		<copy todir="${jboss.home}/server/${jboss.server}/deploy"
+		   file="${app-ear.product}"/> 
+	</target>
+	
+	
+	
+	<!-- Deploy on JBoss 
+			This simply involves copying the EAR to the JBoss /deploy directory.
+			There should be no need to restart JBoss.
+		-->
+		<target name="orion" depends="ear">	 
+		
+		
+				  
+			<copy todir="${orion.home}/lib"
+				file="lib/oracle/classes12.zip" />
+		
+		<!--
+			<copy todir="${orion.home}/applications"
+				file="deploy/jboss/ticket-service.xml"/> 
+			-->
+			<copy todir="${orion.home}/applications"
+			   file="${app-ear.product}"/> 
+		</target>
+	
+	  
+	  
+	  <!-- Build the tests
+	  -->
+	  <target name="build-tests" depends="build-ejb">
+	  		<mkdir dir="${testclasses.dir}"/>
+	  		
+	  		<copy file="test/jndi.properties" tofile="${testclasses.dir}/jndi.properties" />
+
+
+	  		<javac destdir="${testclasses.dir}" debug="${debug}">
+				<classpath refid="master-classpath"/>
+				<classpath location="${ejbclasses.dir}"/>
+				
+				<classpath location="src"/>
+				<!-- ****TODO -->
+				<classpath location="${book.dir}/i21-framework/test"/>
+
+				<src path="test"/>
+				<include name="com/wrox/**"/> 
+	  		</javac>
+	</target>
+	
+		  
+	<!-- Just publish JSPs etc -->
+	<target name="publish" >
+		<copy todir="${jboss.home}/server/${jboss.server}/deploy/ticket.ear/ticket.war/">
+				  <fileset dir="war" >
+					   </fileset>
+			</copy>
+	</target>
+	
+	<!-- Quick war deploy -->
+	<target name="ward" depends="ear, publish">	 
+		<copy todir="${jboss.home}/server/${jboss.server}/deploy/ticket.ear/" file="dist/ticket-ejb.jar" />
+				
+			  <copy todir="${jboss.home}/server/${jboss.server}/deploy/ticket.ear/ticket.war/">
+				       <fileset dir="war" >
+				       </fileset>
+				</copy>
+				<copy todir="${jboss.home}/server/${jboss.server}/deploy/ticket.ear/ticket.war/WEB-INF/classes">
+					   <fileset dir="${classes.dir}" >
+					   </fileset>
+				</copy>
+				
+				<copy todir="${jboss.home}/server/${jboss.server}/deploy/ticket.ear/ticket.war/WEB-INF/lib">
+					<fileset dir="${lib.dir}/runtime/common" /> 
+				<fileset dir="${lib.dir}/runtime/jsp-stl" />
+				<!-- <fileset dir="${lib.dir}/runtime/jakarta" /> -->
+				<fileset dir="${lib.dir}/runtime/velocity" />
+				<fileset dir="${lib.dir}/runtime/xmlc" />
+				<fileset dir="${lib.dir}/runtime/itext-pdf" />
+				
+				<fileset dir="${lib.dir}/runtime/cactus" />
+
+			</copy>
+				
+			<touch file="${jboss.home}/server/${jboss.server}/deploy/ticket.ear/META-INF/application.xml" />
+
+	  </target>
+	  
+
+	  
+	  
+	  
+	<!-- Run the JUnit test suites
+	-->
+	  <target name="tests" depends="build-tests">
+	  		<tstamp/>
+	  
+	  			<!-- Once in production -->
+	  	  		<!-- <property name="reports.dir" value="${junit.reports.dir}/${DSTAMP}-${TSTAMP}" /> -->
+
+	  		<property name="reports.dir" value="${junit.reports.dir}/last" />
+	  		
+	  		<mkdir dir="${reports.dir}"/>
+	  
+	  		<junit printsummary="yes" haltonfailure="yes">
+	  	  	  	  		
+	  	  	  	  		<!-- Must pick up same version of Show binaries or we get an incompatible class problem -->
+	  	  	  	  		<classpath location="${ejbclasses.dir}" />
+	  	  	  	  		
+	  	  	  	  	<!-- Must go first to ensure the jndi.properties takes precedence  -->
+	  	  	  	  <classpath location="${testclasses.dir}"/>
+
+
+	  			  <classpath refid="master-classpath"/>
+	  			  
+	  			  
+	  			  <classpath location="src"/>
+	  			  <!-- ****TODO -->
+	  			  <classpath location="${book.dir}/i21-framework/test"/>
+	  			  
+	  			  <classpath refid="jboss-client-classpath"/>
+	  			  <classpath location="${ejbclasses.dir}"/>
+	  			  
+	  
+	  			  <formatter type="plain"/> 	  
+	  
+	  			  <!-- Convention is that our JUnit test classes have names like
+	  			   XXXXTestSuite.java
+	  			   -->
+	  			  <batchtest fork="yes" todir="${reports.dir}">
+	  			      <fileset dir="test">
+	  				<include name="**/*TestSuite.java"/>
+	  			      </fileset>
+	  			    </batchtest>
+	  		</junit>
+	</target>
+
+	
+	<!-- Validate the WAR with the J2EE Reference Implementation verifier tool
+	-->
+	<target name="validate">	
+		<!-- Won't validate: just check well formed -->
+	    <xmlvalidate failonerror="no" lenient="yes" warn="yes">
+	        <fileset dir="../xml samples" includes="*.xml"/>  
+	    </xmlvalidate>
+	</target>
+	
+	
+	<!-- Create Javadoc -->
+	<target name="javadoc">
+		
+		<delete dir="${docs.dir}" />
+		<mkdir dir="${docs.dir}" />
+
+		<javadoc packagenames="com.interface21.*"
+			sourcepath="${framework.dir}"
+			defaultexcludes="yes"
+			destdir="${docs.dir}"
+			author="true"
+			version="true"
+			use="true"
+			windowtitle="Expert One-on-One-J2EE">
+			<doctitle><![CDATA[<h1>Expert One-on-One-J2EE: Framework</h1>]]></doctitle>
+			<bottom><![CDATA[<i>Copyright Rod Johnson, 2001-2.</i>]]></bottom>
+			<classpath refid="master-classpath" />
+		</javadoc>
+  	</target>
+
+
+
+ 
+ <!-- 
+ 	Use the J2EE Reference Implementation Verifier tool to
+ 	Verify J2EE compliance.
+ 	Verifying the EAR verifies all subcomponents
+ -->
+ <target name="verify" depends="ear">		
+		<java classname="com.sun.enterprise.tools.verifier.Verifier" fork="yes">
+		<classpath>
+		<fileset dir="${j2ee.dir}">
+			<include name="**/*.jar"/>
+		</fileset>
+		</classpath>
+
+		<sysproperty key="com.sun.enterprise.home" value="${j2ee.dir}"/>
+
+		<!--	<arg value="-v"/> -->
+
+		<arg value="-o${verifier.file}"/>
+		<arg value="${dist.dir}/${name}.ear"/>
+		</java> 			
+	</target>
+	
+	
+	<target name="xmlc" >
+	
+ 	<java classname="org.enhydra.xml.xmlc.commands.xmlc.XMLC" fork="yes">
+				  <classpath>
+				<fileset dir="${lib.dir}">
+						<include name="runtime/xmlc/*.jar"/>
+				</fileset>
+				</classpath>
+
+
+		<arg value="-keep"/>
+		<arg value="-nocompile"/>
+			<arg value="-dump"/>
+	  <arg value="-ssi"/>
+	  
+	  
+	  <arg line="-sourceout src"/> 
+	 
+	   <arg line="-delete-class mockup"/>
+	   
+	  <arg line="-class com.wrox.expertj2ee.ticket.web.xmlc.generated.ShowReservationXmlcObject"/>
+	 
+	  <arg value="war/WEB-INF/xmlc/showReservation.html"/>
+ 		  </java> 
+		
+	  </target>
+	  
+	  
+	  
+	
+	
+	<target name="dist" >
+			<!-- Create time stamp -->
+			<tstamp/>
+			
+			<mkdir dir="${dist.dir}" />
+	
+			<zip zipfile="${dist.dir}/expert-j2ee-${name}-${DSTAMP}-${TSTAMP}.zip" update="false"
+			>
+				<zipfileset dir="." excludes="**/.*,**/*.class,**/*.zip,**/*.*ar,reports/**,/temp*/**,log/**,bin/**,docs/**,ri-ver*,**/java.hprof.txt,dist/**" />
+			  </zip>
+	  </target>
+	  
+	  <target name="dist-source" >
+			<!-- Create time stamp -->
+			<tstamp/>
+
+			<mkdir dir="${dist.dir}" />
+
+			<zip zipfile="${dist.dir}/${name}-source-only-${DSTAMP}-${TSTAMP}.zip" update="false"
+			>
+				<zipfileset dir="." excludes="**/*.class,**/*.jar,**/*.zip,**/*.war,reports/**,docs/**,**/*.tws,**/.*" />
+			  </zip>
+	  </target>
+	  
+	 
+	 
+	 <target name="load" >
+	 	  		
+		<java classname="com.interface21.load.PropertiesTestSuiteLoader" fork="yes"
+			dir="src">
+			<!-- Only in eclipse's compiled directory -->
+		<classpath location="bin"/>
+
+		<classpath refid="master-classpath"/>
+		
+		<!-- <jvmarg line="-Xrunhprof:cpu=samples,thread=y" /> -->
+		<!-- <arg file="framework/test/com/interface21/load/avail.properties"/> -->
+			<!--	<arg file="framework/test/reflection/reflection.properties"/> -->
+			<arg file="framework/test/com/interface21/load/test.properties"/>
+		</java> 			
+	</target>
+	
+	
+	 
+	  
+	  
+	  <target name="cactus">
+	  
+	      <junit printsummary="yes" haltonfailure="yes" haltonerror="yes"
+	          fork="yes">
+	  
+	  <classpath refid="master-classpath"/>
+	  	  			  
+	  	  			  
+	  			  <classpath location="${classes.dir}"/>
+	          <classpath>
+	              <!-- Cactus.propertie and log_client.properties need to be in
+	                   the classpath -->
+	              <pathelement location="webtest"/>
+
+	          </classpath>
+	  
+	          <formatter type="plain" usefile="false"/>
+	          <test name="com.wrox.expertj2ee.ticket.web.CactusTest"/>
+	  
+	      </junit>
+	  
+	  </target>
+
+	  
+	
+</project>

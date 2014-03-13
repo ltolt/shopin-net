@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE web-app PUBLIC '-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN' 'http://java.sun.com/dtd/web-app_2_3.dtd'>
+
+
+<web-app>
+	<display-name>ticket-webapp</display-name>
+	<description>Ticket web interface</description>
+	
+	
+	<!-- Argument for XmlWebApplicationContext (see below) -->
+	<context-param>
+		<param-name>configUrl</param-name>
+  		<param-value>/WEB-INF/applicationContext.xml</param-value>   	
+	</context-param>
+     
+
+	<!-- This servlet must be loaded first
+	 to create the WebApplicationContext.
+	 This is the parent context shared by all servlets
+	 in this web application.
+	 -->
+	<servlet>
+		<servlet-name>config</servlet-name>
+		<servlet-class>com.interface21.web.context.ContextLoaderServlet</servlet-class>
+		<init-param>
+			<param-name>contextClass</param-name>
+			<param-value>com.interface21.web.context.support.XmlWebApplicationContext</param-value>   		
+		</init-param>	
+		
+		<!-- This is essential. Everything else depends on this servlet. -->
+		<load-on-startup>1</load-on-startup>
+	  </servlet>
+  
+  
+  
+  <!-- 
+  	This is the controller servlet that handles all incoming requests,
+  	delegating work to Controller implementations according to mappings in the
+  	ticket-servlet.xml file.
+  	Our framework supports multiple controllers, but we only need one for
+  	the ticketing application.
+  -->
+  <servlet>
+        	<servlet-name>ticket</servlet-name>
+        	<servlet-class>com.interface21.web.servlet.ControllerServlet</servlet-class>
+        	
+        	<!-- Causes informative attributes to be placed in request. Can be
+        	 commented out in production, but won't affect performance much or compromise security
+        	 -->
+        	<init-param>
+  		<param-name>debug</param-name>
+  		<param-value>false</param-value>   		
+  		</init-param>	
+  		
+  		<load-on-startup>2</load-on-startup>  		
+  </servlet>  
+  
+  
+  <!--
+    <servlet>
+          	<servlet-name>xmlcConfig</servlet-name>
+          	<servlet-class>com.interface21.web.servlet.view.xmlc.XmlcConfigServlet</servlet-class>
+    	 <load-on-startup>3</load-on-startup>
+  </servlet> 
+  -->
+  
+  
+  <!--
+  <servlet>
+  		<servlet-name>JUnitEETestServlet</servlet-name>
+  		<description>JUnitEE test harness</description>
+  		<servlet-class>com.wrox.expertj2ee.junitee.TestServlet</servlet-class>
+  	</servlet>
+  	<servlet-mapping>
+  		<servlet-name>JUnitEETestServlet</servlet-name>
+  		<url-pattern>/TestServlet</url-pattern>
+	</servlet-mapping>
+  -->
+  
+  
+  <!-- Cactus -->
+  <!--  Note I dropped trailing / -->
+  <!--
+  <servlet>
+          <servlet-name>ServletRedirector</servlet-name>
+          <servlet-class>org.apache.cactus.server.ServletTestRedirector</servlet-class>
+      </servlet>
+      
+      <servlet>
+	      <servlet-name>ServletTestRunner</servlet-name>
+	      <servlet-class>org.apache.cactus.server.runner.ServletTestRunner</servlet-class>
+</servlet>
+  
+      <servlet-mapping>
+          <servlet-name>ServletRedirector</servlet-name>
+         
+          <url-pattern>/ServletRedirector</url-pattern>
+      </servlet-mapping> 
+
+
+<servlet-mapping>
+    <servlet-name>ServletTestRunner</servlet-name>
+    <url-pattern>/ServletTestRunner</url-pattern>
+</servlet-mapping>
+-->
+
+  
+  
+  
+  	<!-- 
+  		Mapping of all .html URLs onto the controller servlet
+  	-->
+   <servlet-mapping>
+	<servlet-name>ticket</servlet-name>
+	<url-pattern>*.html</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+		<servlet-name>ticket</servlet-name>
+		<url-pattern>*.pdf</url-pattern>
+  </servlet-mapping>
+ 
+  
+
+<session-config>
+<session-timeout>60</session-timeout>
+</session-config>
+
+<welcome-file-list>
+ <welcome-file>index.jsp</welcome-file>
+</welcome-file-list>
+
+   
+   	<!-- 
+   		Display this page to handle unexpected exceptions gracefully.
+   		Otherwise we get whatever error page the container chooses.
+   		-->
+     <error-page>
+            <exception-type>java.lang.Exception</exception-type>
+            <location>/jsp/uncaughtException.jsp</location>
+  </error-page>
+  
+  
+  
+  <taglib>
+		<taglib-uri>/i21</taglib-uri>
+		<taglib-location>/WEB-INF/tlds/i21/i21.tld</taglib-location>
+  </taglib>
+  
+  <!-- JSP STL 1.0 -->
+  <taglib>
+		<taglib-uri>/c</taglib-uri>
+		<taglib-location>/WEB-INF/tlds/jsp-stl/c.tld</taglib-location>
+  </taglib>
+  
+   <taglib>
+  		<taglib-uri>/x</taglib-uri>
+  		<taglib-location>/WEB-INF/tlds/jsp-stl/x.tld</taglib-location>
+  </taglib>
+  <taglib>
+  		<taglib-uri>/fmt</taglib-uri>
+  		<taglib-location>/WEB-INF/tlds/jsp-stl/fmt.tld</taglib-location>
+  </taglib>
+  
+  <!-- Jakarta tag libraries -->
+  
+  <!--
+  <taglib>
+    	<taglib-uri>/string</taglib-uri>
+    	<taglib-location>/WEB-INF/tlds/jakarta/string.tld</taglib-location>
+  </taglib>
+  -->
+  
+  
+  <resource-ref>
+	  <res-ref-name>jdbc/ticket-ds</res-ref-name>
+	  <res-type>javax.sql.DataSource</res-type>
+	  <res-auth>Container</res-auth>
+	  <res-sharing-scope>Shareable</res-sharing-scope>
+	</resource-ref>
+	
+<!--
+	<resource-ref>
+		  <res-ref-name>jms/TopicFactory</res-ref-name>
+		  <res-type>javax.jms.TopicConnectionFactory</res-type>
+		  <res-auth>Container</res-auth>
+		  <res-sharing-scope>Shareable</res-sharing-scope>
+	</resource-ref>
+	
+	<resource-ref>
+		  <res-ref-name>jms/topic/data-update</res-ref-name>
+		  <res-type>javax.jms.Topic</res-type>
+		  <res-auth>Container</res-auth>
+		  <res-sharing-scope>Shareable</res-sharing-scope>
+	</resource-ref>
+-->
+  
+  
+   <ejb-local-ref>
+        <ejb-ref-name>ejb/BoxOffice</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local-home>com.wrox.expertj2ee.ticket.boxoffice.ejb.BoxOfficeHome</local-home>
+        <local>com.wrox.expertj2ee.ticket.boxoffice.ejb.BoxOfficeLocal</local>
+        <ejb-link>BoxOffice</ejb-link>
+  </ejb-local-ref>
+	
+</web-app>

@@ -1,0 +1,1 @@
+Files in here get copied into WAR, and are included on compilation path.

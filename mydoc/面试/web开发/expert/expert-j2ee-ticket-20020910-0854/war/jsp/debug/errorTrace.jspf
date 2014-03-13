@@ -1,0 +1,53 @@
+<%-- 
+	$Id: errorTrace.jsp,v 1.4 2001/05/21 15:50:45 rodj Exp $
+	Language: JSP 1.1
+	Author: Rod Johnson
+	Java JSP fragment to format a stack trace
+	Assumes a variable named exception is defined
+        Also shows server identification and all cookies available in this context.
+--%>
+
+<%-- 
+ 	Orion doesn't translate anything in HTML comments, so we have to do
+ 	this without out.println().
+--%>
+<% 
+	// The spec guarantees this
+	Exception exception = (Exception) request.getAttribute("javax.servlet.error.exception"); 
+
+	out.println("<!-- ");
+
+	// Show server identification .
+	// This will be useful in a cluster
+	java.net.InetAddress inetAddr = java.net.InetAddress.getLocalHost(); 
+	out.println("Server identification: " + inetAddr);
+	    if (exception != null) {
+		if (exception instanceof ServletException) {
+			// It's a ServletException: we should extract the root cause
+			ServletException sex = (ServletException) exception;
+			Throwable rootCause = sex.getRootCause();
+			if (rootCause == null)
+				rootCause = sex;
+			out.println("** Root cause is: "+ rootCause.getMessage());
+			rootCause.printStackTrace(new java.io.PrintWriter(out)); 
+		}
+		else {
+			// It's not a ServletException, so we'll just show it
+			exception.printStackTrace(new java.io.PrintWriter(out)); 
+		}
+	    } 
+	    else  {
+		out.println("No error information available");
+	    } 
+
+	    // Display cookies
+	    out.println("\nCookies:\n");
+	    Cookie[] cookies = request.getCookies();
+	    if (cookies != null) {
+		    for (int i = 0; i < cookies.length; i++) {
+			  out.println(cookies[i].getName() + "=[" + cookies[i].getValue() + "]");
+		    }
+		}
+	    
+	    out.println(" -->");
+%>

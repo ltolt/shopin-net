@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE taglib
+        PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+	"http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+<taglib>
+	<tlib-version>1.0</tlib-version>
+	
+	<jsp-version>1.2</jsp-version>
+	
+	<short-name>examples</short-name>
+
+	<description>Simple example library. Author: Rod Johnson</description>
+	
+	<tag>	
+		<name>domify</name>
+		<tag-class>com.interface21.web.tags.DomifyTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>Simple example with attributes</description>
+
+		<variable>
+			<name-given>node</name-given>	
+			<variable-class>org.w3c.dom.Node</variable-class>
+		</variable>
+		
+		<attribute>
+			<name>model</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>root</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>excludedProperties</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>	
+		<name>message</name>
+		<tag-class>com.interface21.web.tags.MessageTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>Simple example with attributes</description>
+
+		<attribute>
+			<name>code</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>	
+		<name>hasBindErrors</name>
+		<tag-class>com.interface21.web.tags.BindErrorsTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>
+			Analogous to jsp:getProperty but can take value from data binding
+		</description>
+
+		<!-- need to actually have error? -->
+		<variable>
+			<name-given>count</name-given>	
+			<variable-class>java.lang.Integer</variable-class>
+		</variable>
+	</tag>
+
+
+
+	<!-- Nest JSP STL tags within this -->
+<tag>	
+		<name>bind</name>
+		<tag-class>com.interface21.web.tags.BindTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>
+			Analogous to jsp:getProperty but can take value from data binding
+		</description>
+		
+			
+		<variable>
+				<name-given>status</name-given>	
+				<variable-class>com.interface21.web.tags.BindStatus</variable-class>
+		</variable>
+		
+		<attribute>
+				<name>value</name>
+				<required>true</required>
+				<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	
+	
+	<tag>	
+			<name>noBreaks</name>
+			<tag-class>com.interface21.web.tags.DeletionTag</tag-class>
+			<body-content>JSP</body-content>
+			<description>Simple example with attributes</description>
+	</tag>
+
+	
+</taglib>

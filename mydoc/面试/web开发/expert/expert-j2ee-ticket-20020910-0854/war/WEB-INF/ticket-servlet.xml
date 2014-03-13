@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	Definitions for ticketing controller servlet.
+	
+	Each <bean> element in this file defines a Java bean instance,
+	providing the necessary class type and property settings.
+	Properties may be set to references to other beans.
+	Type conversion happens automatically.
+	
+	Errors in this file will cause the application to fail to start.
+	Check the log file (the location is defined in the log4j.properties file)
+	for information in this case. Error messages usually pinpoint the
+	problem precisely. NB: Error listings can be lengthy.
+	Be sure to scroll back to the start of the error message.
+	
+	Certain bean names have special significance: e.g. "messageSource",
+	which defines an internationalizable repository for error and
+	other message, and "viewResolver", which defines where views
+	are defined.
+	
+	See also: /WEB-INF/classes/views.properties, which
+	defines the views used by this application. Views are
+	also defined as Java beans, using the same underlying implementation.
+	
+	For dynamic properties, create one bean that updates the properties it
+	exposes and give other beans access to it.
+-->
+
+<beans>		
+
+	<!-- ===========================================================-->
+	<!-- Message source												-->
+	<!-- ===========================================================-->
+	<!-- Messages will be taken from classpath.
+				Place file under /WEB-INF/classes in the WAR
+	-->
+	<!--
+	<bean name="messageSource" class="com.interface21.context.support.ResourceBundleMessageSource">	
+		<property name="basename">ticket-servlet-messages</property>										
+	</bean>
+-->
+
+	<!-- Configure velocity -->
+	<!--
+	<bean name="velocityConfig" 
+		class="com.interface21.web.servlet.view.velocity.VelocityConfigurer">	
+		<property name="url">/WEB-INF/velocity.properties</property>										
+	</bean>
+	-->
+	
+	
+	<!-- ===========================================================-->
+	<!-- View resolver. Required by web framework.					-->
+	<!-- ===========================================================-->
+	<bean name="viewResolver" class="com.interface21.web.servlet.view.ResourceBundleViewResolver">			
+		<!-- Development only: REPLACE BY true OR COMMENT OUT IN PRODUCTION OR 
+			 performance will be severely impacted. **************
+		-->
+		<property name="cache">true</property>
+
+
+		<!-- 
+			We can use this to avoid conflict with other command servlets.
+			It's the name of the resource bundle loaded from the classpath.
+		-->		
+		<property name="basename">views</property>
+			
+	</bean>
+	
+
+	<!-- ===========================================================-->
+	<!-- Application beans				-->
+	<!-- ===========================================================-->
+	<bean name="realCalendar" 
+			singleton="false"
+			class="com.wrox.expertj2ee.ticket.referencedata.jdbc.JdbcCalendar" >	
+	</bean>
+	
+	
+	<!-- DO WE NEED A SIMILAR CACHING BOX OFFICE!? TO PICK UP METHOD 
+	GET FREE SEATS!? LISTENER WILL UPDATE WHEN BOOKING EVENT COMES:
+	ASSOCIATED WITH PERFORMANCE
+	-->
+	
+	<bean name="calendar" class="com.wrox.expertj2ee.ticket.referencedata.support.CachingCalendar" >	
+	</bean>
+	
+	
+	<!-- Type is BoxOfficeFactory --> 
+	<bean name="boxOfficeFactory" 
+		class="com.wrox.expertj2ee.ticket.framework.ejb.LocalSLSBBoxOfficeFactory" >	
+		<property name="jndiName">ejb/BoxOffice</property>
+	</bean>
+	
+	
+	
+	<!-- Proxy for local EJB -->
+
+	<bean name="boxOffice" 
+			definitionClass="com.interface21.ejb.access.LocalStatelessSessionProxyBeanDefinition"
+		>	
+			
+			<customDefinition property="businessInterface">com.wrox.expertj2ee.ticket.boxoffice.BoxOffice</customDefinition>
+			<customDefinition property="jndiName">ejb/BoxOffice</customDefinition>
+			<customDefinition property="reuseEjbObject">false</customDefinition>
+
+	</bean>
+	
+	
+	
+	<!-- Direct reference -->
+	<!--
+	<bean name="boxOffice" 
+			definitionClass="com.interface21.ejb.access.LocalStatelessSessionReferenceBeanDefinition"
+		>	
+
+			<customDefinition property="businessInterface">com.wrox.expertj2ee.ticket.boxoffice.BoxOffice</customDefinition>
+			<customDefinition property="jndiName">ejb/BoxOffice</customDefinition>
+	</bean>
+	-->
+	
+	
+	<bean name="availabilityCheck" 
+			class="com.wrox.expertj2ee.ticket.command.support.CachingAvailabilityCheck">
+		<property name="calendar" beanRef="true">calendar</property>
+		<property name="boxOffice" beanRef="true">boxOffice</property>
+		<property name="timeout">20</property>
+
+	</bean>
+	
+	
+	<!-- COULD A CACHING FILTER LISTEN TO SUCH EVENTS!?
+	BENCHMARK IN PERFORMANCE CHAPTER: if needed speedup
+	-->
+
+<!--	
+	<bean name="referenceDataListener" 
+			definitionClass="com.interface21.jms.JmsListenerBeanDefinition"
+		>	
+
+		<customDefinition property="listenerBean">com.wrox.expertj2ee.ticket.referencedata.support.DataUpdateJmsListener</customDefinition>
+		<customDefinition property="topicConnectionFactoryName">jms/TopicFactory</customDefinition>
+		<customDefinition property="topicName">jms/topic/data-update</customDefinition>
+
+		
+	
+		<property name="cachingCalendar" beanRef="true">calendar</property>
+		
+	</bean>
+	
+	-->
+	<!-- <customDefinition property="messageSelector"></customDefinition> -->
+	
+	
+	
+	
+	<bean name="userValidator" 
+			class="com.wrox.expertj2ee.ticket.customer.DefaultUserValidator" >	
+			<property name="minEmail">6</property>
+			<property name="maxEmail">64</property>
+	</bean>
+
+	
+	
+	<!-- ===========================================================-->
+	<!-- Listeners to this servlet only								-->
+	<!-- ===========================================================-->
+
+<!--
+	<bean name="consoleListener" class="com.interface21.context.support.ConsoleListener"/>	
+-->
+
+
+	<!-- ===========================================================-->
+	<!-- URL mappings for web framework.							-->
+	<!-- ===========================================================-->
+	<!--
+		Simple HandlerMapping implementation that maps from request URL
+		to handler bean name in this application context.
+		Handlers can have any bean name, and are applied in alphabetical order by bean name (
+		hence "a.urlMap" will be applied before "b.urlMap").
+		This application uses only one handler map.
+	-->
+	<bean name="a.urlMap" 
+		class="com.interface21.web.servlet.UrlHandlerMapping">	
+		<property name="mappings">
+			/welcome.html=ticketController
+			/show.html=ticketController
+			/bookseats.html=ticketController
+			/reservation.html=ticketController
+			/payment.html=ticketController
+			/confirmation.html=ticketController
+			
+			/reservationTEST.html=ticketController
+			/reservation.pdf=ticketController
+			/refresh.html=ticketController
+			
+		</property>
+	</bean>
+	
+	
+	<!-- ===========================================================-->
+		<!-- Controllers for ticket application	
+		-->
+	<!-- ===========================================================-->
+	
+	<!-- 
+		Map from application URLs to method names in the TicketController class.
+		Analogous to Struts LookupDispatchAction approach.
+	-->
+	<bean name="ticketControllerMethodNameResolver" 
+		class="com.interface21.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">	
+			<property name="mappings">
+				/welcome.html=displayGenresPage
+				/show.html=displayShow
+				/bookseats.html=displayBookSeatsForm
+				/reservation.html=processSeatSelectionFormSubmission
+				/reservation.pdf=processSeatSelectionFormSubmissionTEST
+				/payment.html=displayPaymentForm
+				/confirmation.html=processPaymentFormSubmission
+				
+				/reservationTEST.html=processSeatSelectionFormSubmissionTEST
+				/reservation.pdf=processSeatSelectionFormSubmissionTEST
+				/refresh.html=refreshReferenceData
+			</property>
+	</bean>
+		
+	
+	<bean name="ticketController" 
+		class="com.wrox.expertj2ee.ticket.web.TicketController" >
+		<property name="methodNameResolver" beanRef="true">ticketControllerMethodNameResolver</property>
+
+		<property name="calendar" beanRef="true">calendar</property>
+		<property name="boxOffice" beanRef="true">boxOffice</property>
+		<property name="availabilityCheck" beanRef="true">availabilityCheck</property>
+		<property name="userValidator" beanRef="true">userValidator</property>
+		<property name="bookingFee">3.50</property>
+		<property name="minutesToHoldReservations">5</property>
+	</bean>
+	
+	
+</beans>		
