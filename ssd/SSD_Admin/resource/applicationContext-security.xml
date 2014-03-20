@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<b:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:b="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+
+	<http access-denied-page="/login.jsp?error=true"><!-- 当访问被拒绝时，会转到403.jsp -->
+		<!-- <intercept-url pattern="/*.do" access="ROLE_USER"/>  --> 
+		<form-login login-page="/login.jsp"
+			authentication-failure-url="/login.jsp?error=true"
+			default-target-url="/menu.html" />
+		<logout logout-success-url="/login.jsp" />
+		<http-basic />
+		<!-- 增加一个filter，这点与Acegi是不一样的，不能修改默认的filter了，这个filter位于FILTER_SECURITY_INTERCEPTOR之前 -->
+		<custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="myFilter" />
+	</http>
+
+	<!-- 一个自定义的filter，必须包含authenticationManager,accessDecisionManager,securityMetadataSource三个属性， 
+		我们的所有控制将在这三个类中实现，解释详见具体配置 -->
+	<b:bean id="myFilter"
+		class="net.shopin.security.MyFilterSecurityInterceptor">
+		<b:property name="authenticationManager" ref="authenticationManager" />
+		<b:property name="accessDecisionManager" ref="myAccessDecisionManagerBean" />
+		<b:property name="securityMetadataSource" ref="securityMetadataSource" />
+	</b:bean>
+
+	<!-- 认证管理器，实现用户认证的入口，主要实现UserDetailsService接口即可 -->
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="myUserDetailService">
+			<!-- 如果用户的密码采用加密的话，可以加点“盐” <password-encoder hash="md5" /> -->
+		</authentication-provider>
+	</authentication-manager>
+	<b:bean id="myUserDetailService"
+		class="net.shopin.security.MyUserDetailService" />
+
+	<!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源 -->
+	<b:bean id="myAccessDecisionManagerBean"
+		class="net.shopin.security.MyAccessDecisionManager">
+	</b:bean>
+
+	<!-- 资源源数据定义，即定义某一资源可以被哪些角色访问 -->
+	<b:bean id="securityMetadataSource"
+		class="net.shopin.security.MyInvocationSecurityMetadataSource" />
+		
+	<!--  
+	<http auto-config="true">  
+	  <form-login login-page="/login.jsp"/>  
+	  <logout logout-success-url="/login.jsp"/>  
+	  <intercept-url pattern="/*" access="ROLE_USER"/>
+	</http>  	
+   -->
+
+</b:beans>
