@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+
+   <description url="http://subclipse.tigris.org/update_1.0.x">
+      Eclipse Install/Update site for Subclipse
+   </description>
+   <feature url="features/org.tigris.subversion.subclipse_1.0.6.jar" id="org.tigris.subversion.subclipse" version="1.0.6">
+      <category name="Subclipse"/>
+   </feature>
+   <category-def name="Subclipse" label="Subclipse Plugin">
+      <description>
+         The Subclipse plug-in for Subversion.
+      </description>
+   </category-def>
+</site>

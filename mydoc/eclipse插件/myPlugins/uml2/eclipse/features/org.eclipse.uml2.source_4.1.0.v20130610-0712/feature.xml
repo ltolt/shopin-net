@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.uml2.source"
+      label="%feature.label"
+      version="4.1.0.v20130610-0712"
+      provider-name="%feature.provider-name">
+
+   <description>
+      %description
+   </description>
+
+   <copyright url="http://www.eclipse.org/legal/epl-v10.html">
+      Copyright (c) 2003, 2012 IBM Corporation, Embarcadero Technologies, CEA, and others.
+All rights reserved.   This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <url>
+      <update label="%update.label" url="http://www.eclipse.org/modeling/updates/"/>
+      <discovery label="%update.label" url="http://www.eclipse.org/modeling/updates/"/>
+   </url>
+
+   <plugin
+         id="org.eclipse.uml2.uml.resources.source"
+         download-size="0"
+         install-size="0"
+         version="4.1.0.v20130610-0712"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.uml2.common.edit.source"
+         download-size="0"
+         install-size="0"
+         version="1.6.0.v20130610-0712"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.uml2.uml.editor.source"
+         download-size="0"
+         install-size="0"
+         version="4.1.0.v20130610-0712"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.uml2.common.source"
+         download-size="0"
+         install-size="0"
+         version="1.8.0.v20130610-0712"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.uml2.codegen.ecore.ui.source"
+         download-size="0"
+         install-size="0"
+         version="1.8.0.v20130610-0712"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.uml2.source"
+         download-size="0"
+         install-size="0"
+         version="4.1.0.v20130610-0712"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.uml2.uml.profile.l2.source"
+         download-size="0"
+         install-size="0"
+         version="1.1.0.v20130610-0712"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.uml2.uml.ecore.exporter.source"
+         download-size="0"
+         install-size="0"
+         version="2.7.0.v20130610-0712"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.uml2.types.source"
+         download-size="0"
+         install-size="0"
+         version="1.1.0.v20130610-0712"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.uml2.uml.source"
+         download-size="0"
+         install-size="0"
+         version="4.1.0.v20130610-0712"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.uml2.codegen.ecore.source"
+         download-size="0"
+         install-size="0"
+         version="1.9.0.v20130610-0712"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.uml2.uml.ecore.importer.source"
+         download-size="0"
+         install-size="0"
+         version="2.7.0.v20130610-0712"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.uml2.uml.edit.source"
+         download-size="0"
+         install-size="0"
+         version="4.1.0.v20130610-0712"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.uml2.uml.profile.l3.source"
+         download-size="0"
+         install-size="0"
+         version="1.1.0.v20130610-0712"
+         unpack="false"/>
+
+</feature>
