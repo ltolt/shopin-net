@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.shopin.wms.persistence.PromotionsMapper" >
+  <resultMap id="BaseResultMap" type="net.shopin.wms.domain.entity.Promotions" >
+    <id column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="page_layout_sid" property="pageLayoutSid" jdbcType="INTEGER" />
+    <result column="page_template_sid" property="pageTemplateSid" jdbcType="INTEGER" />
+    <result column="promotion_title" property="promotionTitle" jdbcType="VARCHAR" />
+    <result column="promotion_link" property="promotionLink" jdbcType="VARCHAR" />
+    <result column="promotion_desc" property="promotionDesc" jdbcType="VARCHAR" />
+    <result column="promotion_spict" property="promotionSpict" jdbcType="VARCHAR" />
+    <result column="promotion_bpict" property="promotionBpict" jdbcType="VARCHAR" />
+    <result column="promotion_status" property="promotionStatus" jdbcType="INTEGER" />
+    <result column="promotion_begin_time" property="promotionBeginTime" jdbcType="TIMESTAMP" />
+    <result column="promotion_end_time" property="promotionEndTime" jdbcType="TIMESTAMP" />
+    <result column="seq" property="seq" jdbcType="VARCHAR" />
+    <result column="promotion_type_sid" property="promotionTypeSid" jdbcType="INTEGER" />
+    <result column="promotion_vpict" property="promotionVpict" jdbcType="VARCHAR" />
+    <result column="promotion_cpict" property="promotionCpict" jdbcType="VARCHAR"/>
+    <result column="promotion_cgpict" property="promotionCgpict" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sid, page_layout_sid, page_template_sid, promotion_title, promotion_link, promotion_desc, 
+    promotion_spict, promotion_bpict, promotion_status, promotion_begin_time, promotion_end_time, 
+    seq, promotion_type_sid, promotion_vpict, promotion_cpict, promotion_cgpict
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from promotions
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAllPromotions" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from promotions  order by sid asc  
+  </select>
+  <select id="selectByTitle"  resultMap="BaseResultMap" parameterType="net.shopin.wms.domain.entity.Promotions">
+	   select
+	   <include refid="Base_Column_List"/>
+	   from promotions
+	   <where>
+	       <if test="promotionTitle != null">
+				 promotion_title like "%"#{promotionTitle,jdbcType=VARCHAR}"%"
+			</if>
+	   </where>
+  </select>
+  <select id="selectByPrams" resultMap="BaseResultMap" parameterType="net.shopin.wms.domain.view.PromotionsVO">
+  	select
+  	<include refid="Base_Column_List" />
+  	from promotions
+  	<where>
+  		<if test="proSid != null and proSid !='' ">
+  			sid = #{proSid}
+  		</if>
+  		<if test="title != null and title !='' ">
+			and promotion_title like "%"#{title,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="startTime != null and startTime !='' ">
+			and promotion_begin_time &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d %T')
+		</if>
+		<if test="endTime != null and endTime !='' ">
+			and promotion_end_time &lt;= DATE_FORMAT(#{endTime},'%Y-%m-%d %T')
+		</if>
+		<if test="proStatus != null ">
+		 	and promotion_status = ${proStatus}
+		</if>
+		<if test="promotionTypeSid != null and promotionTypeSid !='' ">
+			and promotion_type_sid = #{promotionTypeSid}
+		</if>
+  	</where>
+  	order 
+  		by sid desc
+  	limit
+  		#{startRecords},#{pageSize}
+  </select>
+  <select id="selectCountByParms" resultType="java.lang.Integer" parameterType="net.shopin.wms.domain.view.PromotionsVO">
+  	select count(sid)
+  	<include refid="Base_Column_List" />
+  	from promotions
+  	<where>
+  	 	<if test="proSid != null and proSid !='' ">
+  			sid = #{proSid}
+  		</if>
+  		<if test="title != null and title !='' ">
+			and promotion_title like "%"#{title,jdbcType=VARCHAR}"%"
+		</if>
+ 
+		<if test="startTime != null and startTime !='' ">
+			and promotion_begin_time &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d %T')
+		</if>
+		<if test="endTime != null and endTime !='' ">
+			and promotion_end_time &lt;= DATE_FORMAT(#{endTime},'%Y-%m-%d %T')
+		</if>
+		<if test="proStatus != null ">
+		 	and promotion_status = #{proStatus}
+		</if>
+		<if test="promotionTypeSid != null and promotionTypeSid !='' ">
+			and promotion_type_sid = #{promotionTypeSid}
+		</if>
+  	</where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from promotions
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="net.shopin.wms.domain.entity.Promotions" >
+    insert into promotions (sid, page_layout_sid, page_template_sid, 
+      promotion_title, promotion_link, promotion_desc, 
+      promotion_spict, promotion_bpict, promotion_status, 
+      promotion_begin_time, promotion_end_time, 
+      seq, promotion_type_sid, promotion_vpict, promotion_cpict, promotion_cgpict)
+    values (#{sid,jdbcType=INTEGER}, #{pageLayoutSid,jdbcType=INTEGER}, #{pageTemplateSid,jdbcType=INTEGER}, 
+      #{promotionTitle,jdbcType=VARCHAR}, #{promotionLink,jdbcType=VARCHAR}, #{promotionDesc,jdbcType=VARCHAR}, 
+      #{promotionSpict,jdbcType=VARCHAR}, #{promotionBpict,jdbcType=VARCHAR}, #{promotionStatus,jdbcType=INTEGER}, 
+      #{promotionBeginTime,jdbcType=TIMESTAMP}, #{promotionEndTime,jdbcType=TIMESTAMP}, 
+      #{seq,jdbcType=VARCHAR}, #{promotionTypeSid,jdbcType=INTEGER}, #{promotionVpict,jdbcType=VARCHAR},
+      #{promotionCpict,jdbcType=VARCHAR}, #{promotionCgpict,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="net.shopin.wms.domain.entity.Promotions" useGeneratedKeys="true" keyProperty="sid">
+    insert into promotions
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="pageLayoutSid != null" >
+        page_layout_sid,
+      </if>
+      <if test="pageTemplateSid != null" >
+        page_template_sid,
+      </if>
+      <if test="promotionTitle != null" >
+        promotion_title,
+      </if>
+      <if test="promotionLink != null" >
+        promotion_link,
+      </if>
+      <if test="promotionDesc != null" >
+        promotion_desc,
+      </if>
+      <if test="promotionSpict != null" >
+        promotion_spict,
+      </if>
+      <if test="promotionBpict != null" >
+        promotion_bpict,
+      </if>
+      <if test="promotionStatus != null" >
+        promotion_status,
+      </if>
+      <if test="promotionBeginTime != null" >
+        promotion_begin_time,
+      </if>
+      <if test="promotionEndTime != null" >
+        promotion_end_time,
+      </if>
+      <if test="seq != null" >
+        seq,
+      </if>
+      <if test="promotionTypeSid != null" >
+        promotion_type_sid,
+      </if>
+      <if test="promotionVpict != null" >
+        promotion_vpict,
+      </if>
+      <if test="promotionCpict != null">
+      	promotion_cpict,
+      </if>
+      <if test="promotionCgpict != null">
+      	promotion_cgpict,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="pageLayoutSid != null" >
+        #{pageLayoutSid,jdbcType=INTEGER},
+      </if>
+      <if test="pageTemplateSid != null" >
+        #{pageTemplateSid,jdbcType=INTEGER},
+      </if>
+      <if test="promotionTitle != null" >
+        #{promotionTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionLink != null" >
+        #{promotionLink,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionDesc != null" >
+        #{promotionDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionSpict != null" >
+        #{promotionSpict,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionBpict != null" >
+        #{promotionBpict,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionStatus != null" >
+        #{promotionStatus,jdbcType=INTEGER},
+      </if>
+      <if test="promotionBeginTime != null" >
+        #{promotionBeginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="promotionEndTime != null" >
+        #{promotionEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="seq != null" >
+        #{seq,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionTypeSid != null" >
+        #{promotionTypeSid,jdbcType=INTEGER},
+      </if>
+      <if test="promotionVpict != null" >
+        #{promotionVpict,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionCpict != null" >
+        #{promotionCpict,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionCgpict != null" >
+        #{promotionCgpict,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="net.shopin.wms.domain.entity.Promotions" >
+    update promotions
+    <set >
+      <if test="sid != null" >
+        sid = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="pageLayoutSid != null" >
+        page_layout_sid = #{pageLayoutSid,jdbcType=INTEGER},
+      </if>
+      <if test="pageTemplateSid != null" >
+        page_template_sid = #{pageTemplateSid,jdbcType=INTEGER},
+      </if>
+      <if test="promotionTitle != null" >
+        promotion_title = #{promotionTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionLink != null" >
+        promotion_link = #{promotionLink,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionDesc != null" >
+        promotion_desc = #{promotionDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionSpict != null" >
+        promotion_spict = #{promotionSpict,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionBpict != null" >
+        promotion_bpict = #{promotionBpict,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionStatus != null" >
+        promotion_status = #{promotionStatus,jdbcType=INTEGER},
+      </if>
+      <if test="promotionBeginTime != null" >
+        promotion_begin_time = #{promotionBeginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="promotionEndTime != null" >
+        promotion_end_time = #{promotionEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="seq != null" >
+        seq = #{seq,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionTypeSid != null" >
+        promotion_type_sid = #{promotionTypeSid,jdbcType=INTEGER},
+      </if>
+      <if test="promotionVpict != null" >
+        promotion_vpict = #{promotionVpict,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionCpict != null" >
+        promotion_cpict = #{promotionCpict,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionCgpict != null" >
+        promotion_cgpict = #{promotionCgpict,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.shopin.wms.domain.entity.Promotions" >
+    update promotions
+    set page_layout_sid = #{pageLayoutSid,jdbcType=INTEGER},
+      page_template_sid = #{pageTemplateSid,jdbcType=INTEGER},
+      promotion_title = #{promotionTitle,jdbcType=VARCHAR},
+      promotion_link = #{promotionLink,jdbcType=VARCHAR},
+      promotion_desc = #{promotionDesc,jdbcType=VARCHAR},
+      promotion_spict = #{promotionSpict,jdbcType=VARCHAR},
+      promotion_bpict = #{promotionBpict,jdbcType=VARCHAR},
+      promotion_status = #{promotionStatus,jdbcType=INTEGER},
+      promotion_begin_time = #{promotionBeginTime,jdbcType=TIMESTAMP},
+      promotion_end_time = #{promotionEndTime,jdbcType=TIMESTAMP},
+      seq = #{seq,jdbcType=VARCHAR},
+      promotion_type_sid = #{promotionTypeSid,jdbcType=INTEGER},
+      promotion_vpict = #{promotionVpict,jdbcType=VARCHAR},
+      promotion_cpict = #{promotionCpict,jdbcType=VARCHAR},
+      promotion_cgpict = #{promotionCgpict,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  
+   <select id="queryMaxSid" resultType="java.lang.Integer">
+		SELECT max(p.sid) 
+		from promotions p  
+		
+  </select>
+</mapper>

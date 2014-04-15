@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.shopin.wms.persistence.TRuleDetailMqlMapper" >
+  <resultMap id="BaseResultMap" type="net.shopin.wms.domain.entity.TRuleDetailMql" >
+    <id column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="rule_sid" property="ruleSid" jdbcType="INTEGER" />
+    <result column="brand_sid" property="brandSid" jdbcType="INTEGER" />
+    <result column="product_class_sid" property="productClassSid" jdbcType="INTEGER" />
+    <result column="product_class_name" property="productClassName" jdbcType="VARCHAR" />
+    <result column="brand_name" property="brandName" jdbcType="VARCHAR" />
+    <result column="off_min" property="offMin" jdbcType="DOUBLE" />
+    <result column="off_max" property="offMax" jdbcType="DOUBLE" />
+    <result column="price_min" property="priceMin" jdbcType="DECIMAL" />
+    <result column="price_max" property="priceMax" jdbcType="DECIMAL" />
+    <result column="stock_min" property="stockMin" jdbcType="INTEGER" />
+    <result column="stock_max" property="stockMax" jdbcType="INTEGER" />
+    <result column="shop_sid" property="shopSid" jdbcType="INTEGER" />
+    <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
+    <result column="sale_code" property="saleCode" jdbcType="VARCHAR" />
+    <result column="sale_sum" property="saleSum" jdbcType="INTEGER" />
+    <result column="price_update_time" property="priceUpdateTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sid, rule_sid, brand_sid, product_class_sid, product_class_name, brand_name, off_min, 
+    off_max, price_min, price_max, stock_min, stock_max, shop_sid, shop_name, sale_code, 
+    sale_sum, price_update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_rule_detail
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  
+   <select id="findObjByRuleSid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" />
+        from t_rule_detail  where rule_sid=#{ruleSid,jdbcType=INTEGER}
+     </select> 
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_rule_detail
+    where rule_sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="net.shopin.wms.domain.entity.TRuleDetailMql" >
+    insert into t_rule_detail (sid, rule_sid, brand_sid, 
+      product_class_sid, product_class_name, brand_name, 
+      off_min, off_max, price_min, 
+      price_max, stock_min, stock_max, 
+      shop_sid, shop_name, sale_code, 
+      sale_sum, price_update_time)
+    values (#{sid,jdbcType=INTEGER}, #{ruleSid,jdbcType=INTEGER}, #{brandSid,jdbcType=INTEGER}, 
+      #{productClassSid,jdbcType=INTEGER}, #{productClassName,jdbcType=VARCHAR}, #{brandName,jdbcType=VARCHAR}, 
+      #{offMin,jdbcType=DOUBLE}, #{offMax,jdbcType=DOUBLE}, #{priceMin,jdbcType=DECIMAL}, 
+      #{priceMax,jdbcType=DECIMAL}, #{stockMin,jdbcType=INTEGER}, #{stockMax,jdbcType=INTEGER}, 
+      #{shopSid,jdbcType=INTEGER}, #{shopName,jdbcType=VARCHAR}, #{saleCode,jdbcType=VARCHAR}, 
+      #{saleSum,jdbcType=INTEGER}, #{priceUpdateTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="net.shopin.wms.domain.entity.TRuleDetailMql" >
+    insert into t_rule_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="ruleSid != null" >
+        rule_sid,
+      </if>
+      <if test="brandSid != null" >
+        brand_sid,
+      </if>
+      <if test="productClassSid != null" >
+        product_class_sid,
+      </if>
+      <if test="productClassName != null" >
+        product_class_name,
+      </if>
+      <if test="brandName != null" >
+        brand_name,
+      </if>
+      <if test="offMin != null" >
+        off_min,
+      </if>
+      <if test="offMax != null" >
+        off_max,
+      </if>
+      <if test="priceMin != null" >
+        price_min,
+      </if>
+      <if test="priceMax != null" >
+        price_max,
+      </if>
+      <if test="stockMin != null" >
+        stock_min,
+      </if>
+      <if test="stockMax != null" >
+        stock_max,
+      </if>
+      <if test="shopSid != null" >
+        shop_sid,
+      </if>
+      <if test="shopName != null" >
+        shop_name,
+      </if>
+      <if test="saleCode != null" >
+        sale_code,
+      </if>
+      <if test="saleSum != null" >
+        sale_sum,
+      </if>
+      <if test="priceUpdateTime != null" >
+        price_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="ruleSid != null" >
+        #{ruleSid,jdbcType=INTEGER},
+      </if>
+      <if test="brandSid != null" >
+        #{brandSid,jdbcType=INTEGER},
+      </if>
+      <if test="productClassSid != null" >
+        #{productClassSid,jdbcType=INTEGER},
+      </if>
+      <if test="productClassName != null" >
+        #{productClassName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null" >
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="offMin != null" >
+        #{offMin,jdbcType=DOUBLE},
+      </if>
+      <if test="offMax != null" >
+        #{offMax,jdbcType=DOUBLE},
+      </if>
+      <if test="priceMin != null" >
+        #{priceMin,jdbcType=DECIMAL},
+      </if>
+      <if test="priceMax != null" >
+        #{priceMax,jdbcType=DECIMAL},
+      </if>
+      <if test="stockMin != null" >
+        #{stockMin,jdbcType=INTEGER},
+      </if>
+      <if test="stockMax != null" >
+        #{stockMax,jdbcType=INTEGER},
+      </if>
+      <if test="shopSid != null" >
+        #{shopSid,jdbcType=INTEGER},
+      </if>
+      <if test="shopName != null" >
+        #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="saleCode != null" >
+        #{saleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="saleSum != null" >
+        #{saleSum,jdbcType=INTEGER},
+      </if>
+      <if test="priceUpdateTime != null" >
+        #{priceUpdateTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="net.shopin.wms.domain.entity.TRuleDetailMql" >
+    update t_rule_detail
+    <set >
+      <if test="ruleSid != null" >
+        rule_sid = #{ruleSid,jdbcType=INTEGER},
+      </if>
+      <if test="brandSid != null" >
+        brand_sid = #{brandSid,jdbcType=INTEGER},
+      </if>
+      <if test="productClassSid != null" >
+        product_class_sid = #{productClassSid,jdbcType=INTEGER},
+      </if>
+      <if test="productClassName != null" >
+        product_class_name = #{productClassName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null" >
+        brand_name = #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="offMin != null" >
+        off_min = #{offMin,jdbcType=DOUBLE},
+      </if>
+      <if test="offMax != null" >
+        off_max = #{offMax,jdbcType=DOUBLE},
+      </if>
+      <if test="priceMin != null" >
+        price_min = #{priceMin,jdbcType=DECIMAL},
+      </if>
+      <if test="priceMax != null" >
+        price_max = #{priceMax,jdbcType=DECIMAL},
+      </if>
+      <if test="stockMin != null" >
+        stock_min = #{stockMin,jdbcType=INTEGER},
+      </if>
+      <if test="stockMax != null" >
+        stock_max = #{stockMax,jdbcType=INTEGER},
+      </if>
+      <if test="shopSid != null" >
+        shop_sid = #{shopSid,jdbcType=INTEGER},
+      </if>
+      <if test="shopName != null" >
+        shop_name = #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="saleCode != null" >
+        sale_code = #{saleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="saleSum != null" >
+        sale_sum = #{saleSum,jdbcType=INTEGER},
+      </if>
+      <if test="priceUpdateTime != null" >
+        price_update_time = #{priceUpdateTime,jdbcType=DATE},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.shopin.wms.domain.entity.TRuleDetailMql" >
+    update t_rule_detail
+    set rule_sid = #{ruleSid,jdbcType=INTEGER},
+      brand_sid = #{brandSid,jdbcType=INTEGER},
+      product_class_sid = #{productClassSid,jdbcType=INTEGER},
+      product_class_name = #{productClassName,jdbcType=VARCHAR},
+      brand_name = #{brandName,jdbcType=VARCHAR},
+      off_min = #{offMin,jdbcType=DOUBLE},
+      off_max = #{offMax,jdbcType=DOUBLE},
+      price_min = #{priceMin,jdbcType=DECIMAL},
+      price_max = #{priceMax,jdbcType=DECIMAL},
+      stock_min = #{stockMin,jdbcType=INTEGER},
+      stock_max = #{stockMax,jdbcType=INTEGER},
+      shop_sid = #{shopSid,jdbcType=INTEGER},
+      shop_name = #{shopName,jdbcType=VARCHAR},
+      sale_code = #{saleCode,jdbcType=VARCHAR},
+      sale_sum = #{saleSum,jdbcType=INTEGER},
+      price_update_time = #{priceUpdateTime,jdbcType=DATE}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>

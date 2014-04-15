@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+    <!DOCTYPE mapper 
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.shopin.back.mapper.ProBestDetailMapper"> 
+
+        <sql id="proBestDetailColumns"> sid sid,product_list_sid productListSid,page_layout_sid pageLayoutSid,order_number orderNumber</sql>
+    
+	<select id="findObjBySid" parameterType="int" resultType="proBestDetailVO" >
+		select <include refid="proBestDetailColumns"/>
+		  from PRO_BEST_DETAIL pbd  where pbd.sid=#{sid}
+	</select>
+
+	
+	
+	
+	
+	
+	<select id="queryMaxOrderNum" parameterType="int" resultType="Integer">
+		SELECT max(PBD.ORDER_NUMBER) 
+		from PRO_BEST_DETAIL pbd 
+		where PBD.PAGE_LAYOUT_SID=#{pageLayoutSid}
+	</select>
+
+
+  <!--
+>>>>>>> .r11961
+    <select id="queryProductsByPsid" parameterType="int"   resultType="productResultVO">
+        select p.sid sid,p.pro_sku proSku, b.BRAND_NAME brandName, p.product_name productName,smp.ORIGINAL_PRICE proOldPrice,smp.CURRENT_PRICE proCurPrice, SMP.PROMOTION_PRICE proPmtPrice,smp.PRO_SUM proStock, SI.SHOP_NAME shopName
+		from DANPIN_0408.PRODUCT_LIST p,SUPPLY_MIN_PRICE smp,V_PRO_SALE_CODE vp,DANPIN_0408.SALE_CODE sc,DANPIN_0408.SHOP_INFO si,
+		PRODUCT_WITH_CLASS pwc,BRAND b 
+		where  
+		p.BRAND_SID=b.sid and 
+		si.sid=sc.shop_sid and 
+		p.sid=PWC.PRODUCT_LIST_SID and
+		p.sid=VP.PRODUCT_SID and 
+		SC.sid=VP.SALE_CODE_SID and
+		p.sid=SMP.PRODUCT_SID and
+		p.PRESENT_FLG != 1 
+		and p.PRO_SELLING=1
+		and  EXISTS
+		(select PR.PRODUCT_LIST_SID from PRO_BEST_DETAIL pr where PR.PRODUCT_LIST_SID=p.sid and PR.PAGE_LAYOUT_SID=#{pageLayoutSid})
+		 ORDER BY p.sid asc 
+    </select>
+    
+ --> 
+  
+ 
+     <select id="queryProductsByPsid" parameterType="int"   resultType="productResultVO">
+        select a.product_sid sid,a.ORDER_NUMBER orderNumber, a.pro_sku proSku,a.brand_name brandName, a.product_name productName, a."PRODUCT_SID",a."PROMOTION_PRICE" proPmtPrice,a."ORIGINAL_PRICE" proOldPrice,a."CURRENT_PRICE" proCurPrice,a."PROMOTION_BEGIN_TIME",a."PROMOTION_END_TIME",a."OFF_VALUE",a."PRO_SUM" proStock,a.shop_name shopName
+               from (select p.product_sid,
+               p.promotion_price,
+               p.original_price,
+               p.current_price,
+               p.promotion_begin_time,
+               p.promotion_end_time,
+               p.off_value,
+               si.shop_name,
+               pl.pro_sku, 
+               pl.product_name,
+               b.brand_name, 
+               pb.ORDER_NUMBER,
+               sum(s.pro_sum) pro_sum,
+               row_number() OVER(PARTITION BY p.product_sid ORDER BY p.promotion_price) rn
+          from DANPIN_0408.pro_detail d, DANPIN_0408.pro_stock s, DANPIN_0408.pro_supply_price p,DANPIN_0408.sale_code sc,DANPIN_0408.shop_info si,
+           DANPIN_0408.PRODUCT_LIST pl,DANPIN_0408.BRAND b,SPWG_0408.PRO_BEST_DETAIL pb
+         where p.product_sid = d.product_sid
+           and p.PRODUCT_SID=pb.PRODUCT_LIST_SID
+            and PL.BRAND_SID = b."SID"
+           and p.PRODUCT_SID=PL."SID"
+           and d.sid = s.pro_detail_sid
+           and d.pro_active_bit=1
+           and s.stock_type_sid = 0
+           and s.pro_sum > =0
+           and sc.shop_sid=si.sid
+           and si.net_bit=1
+           and s.sale_code_sid = p.sale_code_sid
+           and s.sale_code_sid = sc.sid
+           and sc.supply_saling_bit=0
+           and sc.net_sale_bit=1
+           and pb.PAGE_LAYOUT_SID = #{pageLayoutSid} 
+           and EXISTS (select * from SPWG_0408.PRO_BEST_DETAIL pbd where pbd.PRODUCT_LIST_SID = p.product_sid and pbd.PAGE_LAYOUT_SID=#{pageLayoutSid})
+         group by p.product_sid,
+                  p.promotion_price,
+                  p.original_price,
+                  p.current_price,
+                  p.promotion_begin_time,
+                  p.promotion_end_time,
+								  si.shop_name, 
+                  pl.pro_sku,
+                  pl.product_name,
+								  b.brand_name, 
+                  pb.ORDER_NUMBER,
+                  p.off_value 
+                 ORDER BY PB.ORDER_NUMBER ASC ) a
+     where rn = 1
+    </select>
+    
+     
+    
+	
+    <select id="queryObjsList" parameterType="proBestDetailCond" resultType="proBestDetailVO" >
+			<![CDATA[ 
+			SELECT * FROM
+			(
+			SELECT A.*, ROWNUM RN
+			FROM (
+			]]>	
+				select <include refid="proBestDetailColumns"/>  from PRO_BEST_DETAIL pbd 
+				  <where>
+				<if test="productListSid != null and productListSid != '' " >
+				      and  pbd.product_list_sid = #{productListSid} 
+				</if>
+				<if test="pageLayoutSid != null and pageLayoutSid != '' " >
+				      and  pbd.page_layout_sid = #{pageLayoutSid} 
+				</if>
+				<if test="orderNumber != null and orderNumber != '' " >
+				      and  pbd.order_number = #{orderNumber} 
+				</if>
+
+				  </where>
+				order by pbd.sid desc
+	
+			<![CDATA[ 
+			) A
+			WHERE ROWNUM <= #{endRecords}
+			)
+			WHERE RN >= #{startRecords}
+			]]>
+	</select>
+	
+	
+	<select id="queryOrderNumber" parameterType="proBestDetailCond" resultType="proBestDetailVO" >
+			
+				select <include refid="proBestDetailColumns"/>  from PRO_BEST_DETAIL pbd 
+				  <where>
+				<if test="productListSid != null and productListSid != '' " >
+				      and  pbd.product_list_sid = #{productListSid} 
+				</if>
+				<if test="pageLayoutSid != null and pageLayoutSid != '' " >
+				      and  pbd.page_layout_sid = #{pageLayoutSid} 
+				</if>
+				<if test="orderNumber != null and orderNumber != '' " >
+				      and  pbd.order_number = #{orderNumber} 
+				</if>
+
+				  </where>
+				order by pbd.sid desc
+	
+			
+	</select>
+	
+	
+	<select id="queryObjsCount" parameterType="proBestDetailCond" resultType="Integer" >
+	  select count(*) from PRO_BEST_DETAIL pbd 
+	  <where>
+		<if test="productListSid != null and productListSid != '' " >
+				      and  pbd.product_list_sid = #{productListSid} 
+				</if>
+				<if test="pageLayoutSid != null and pageLayoutSid != '' " >
+				      and  pbd.page_layout_sid = #{pageLayoutSid} 
+				</if>
+				<if test="orderNumber != null and orderNumber != '' " >
+				      and  pbd.order_number = #{orderNumber} 
+				</if>
+
+	   </where>
+	</select>
+	
+	<insert id="insert" parameterType="proBestDetail"  >
+	      insert into PRO_BEST_DETAIL (sid ,product_list_sid  ,page_layout_sid ,order_number )values
+	      (PRO_BEST_DETAIL_SEQ.nextval,#{productListSid,jdbcType=NUMERIC} ,#{pageLayoutSid,jdbcType=NUMERIC},#{orderNumber,jdbcType=NUMERIC})
+	</insert>                 
+	
+	<update id="update" parameterType="proBestDetail">
+		 update PRO_BEST_DETAIL pbd
+		 <set>
+		<if test="productListSid != null and productListSid != '' " >
+				       pbd.product_list_sid = #{productListSid}
+				</if>
+				<if test="pageLayoutSid != null and pageLayoutSid != '' " >
+				     ,   pbd.page_layout_sid = #{pageLayoutSid}
+				</if>
+				<if test="orderNumber != null and orderNumber != '' " >
+				     ,  pbd.order_number = #{orderNumber} 
+				</if>
+				<if test="sid != null and sid != '' " >
+				     ,  pbd.sid = #{sid} 
+				</if>
+
+		</set>
+		 where pbd.sid = #{sid}
+	</update>
+	
+	<delete id="delete" parameterType="Integer" >
+		 delete from PRO_BEST_DETAIL  where sid = #{sid}
+	</delete>
+
+	
+	
+	<update id="updateProBestDetail" parameterType="proBestDetail">
+		 update PRO_BEST_DETAIL pbd
+		 <set>
+		<if test="productListSid != null and productListSid != '' " >
+				       pbd.product_list_sid = #{productListSid}
+				</if>
+				<if test="pageLayoutSid != null and pageLayoutSid != '' " >
+				     ,   pbd.page_layout_sid = #{pageLayoutSid}
+				</if>
+				<if test="orderNumber != null and orderNumber != '' " >
+				     ,  pbd.order_number = #{orderNumber} 
+				</if>
+
+		</set>
+		 where pbd.product_list_sid = #{productListSid} and pbd.page_layout_sid = #{pageLayoutSid}
+	</update>
+
+	
+	<delete id="deleteByProductListSid" parameterType="proBestDetail" >
+		 delete from PRO_BEST_DETAIL pbd where  pbd.product_list_sid= #{productListSid} and pbd.page_layout_sid = #{pageLayoutSid}
+	</delete>
+
+</mapper>
+

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.shopin.wms.persistence.NavPromotionMapper" >
+  <resultMap id="BaseResultMap" type="net.shopin.wms.domain.entity.NavPromotion" >
+    <result column="nav_sid" property="navSid" jdbcType="BIGINT" />
+    <result column="promotion_sid" property="promotionSid" jdbcType="INTEGER" />
+  </resultMap>
+  
+   <sql id="Base_Column_List" >
+    nav_sid, promotion_sid
+  </sql>
+  <insert id="insert" parameterType="net.shopin.wms.domain.entity.NavPromotion" >
+    insert into nav_promotion (nav_sid, promotion_sid)
+    values (#{navSid,jdbcType=BIGINT}, #{promotionSid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="net.shopin.wms.domain.entity.NavPromotion" >
+    insert into nav_promotion
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="navSid != null" >
+        nav_sid,
+      </if>
+      <if test="promotionSid != null" >
+        promotion_sid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="navSid != null" >
+        #{navSid,jdbcType=BIGINT},
+      </if>
+      <if test="promotionSid != null" >
+        #{promotionSid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="selectByNavSid" resultMap="BaseResultMap" parameterType="net.shopin.wms.domain.entity.NavPromotion"  >
+    select 
+    <include refid="Base_Column_List" />
+    from nav_promotion  
+    <where>
+	       <if test="navSid != null">
+				 nav_sid = #{navSid,jdbcType=BIGINT}
+			</if>
+	 </where>
+	 group by promotion_sid
+  </select>
+  
+  <select id="countNavPromotionRecord"  parameterType="net.shopin.wms.domain.entity.NavPromotion"  resultType="Integer">
+    select 
+    count(*) 
+    from nav_promotion
+    where nav_sid = #{navSid,jdbcType=BIGINT} and promotion_sid = #{promotionSid,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteByNavPro"  parameterType="net.shopin.wms.domain.entity.NavPromotion" >
+    delete from nav_promotion
+    where promotion_sid = #{promotionSid,jdbcType=BIGINT} and nav_sid = #{navSid,jdbcType=BIGINT}
+  </delete>
+</mapper>

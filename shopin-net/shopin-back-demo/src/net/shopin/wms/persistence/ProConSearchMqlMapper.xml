@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.shopin.wms.persistence.ProConSearchMqlMapper" >
+  <resultMap id="BaseResultMap" type="net.shopin.wms.domain.entity.ProConSearchMql" >
+    <id column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="sale_code_sid" property="saleCodeSid" jdbcType="INTEGER" />
+    <result column="pro_sku" property="proSku" jdbcType="VARCHAR" />
+    <result column="off_min" property="offMin" jdbcType="DOUBLE" />
+    <result column="off_max" property="offMax" jdbcType="DOUBLE" />
+    <result column="price_min" property="priceMin" jdbcType="DOUBLE" />
+    <result column="price_max" property="priceMax" jdbcType="DOUBLE" />
+    <result column="pro_begin_time" property="proBeginTime" jdbcType="TIMESTAMP" />
+    <result column="pro_end_time" property="proEndTime" jdbcType="TIMESTAMP" />
+    <result column="brand_sid" property="brandSid" jdbcType="INTEGER" />
+    <result column="product_class_sid" property="productClassSid" jdbcType="INTEGER" />
+    <result column="page_layout_sid" property="pageLayoutSid" jdbcType="INTEGER" />
+    <result column="pro_stock_num" property="proStockNum" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sid, sale_code_sid, pro_sku, off_min, off_max, price_min, price_max, pro_begin_time, 
+    pro_end_time, brand_sid, product_class_sid, page_layout_sid, pro_stock_num
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pro_con_search
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pro_con_search
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="net.shopin.wms.domain.entity.ProConSearchMql" >
+    insert into pro_con_search (sid, sale_code_sid, pro_sku, 
+      off_min, off_max, price_min, 
+      price_max, pro_begin_time, pro_end_time, 
+      brand_sid, product_class_sid, page_layout_sid, 
+      pro_stock_num)
+    values (#{sid,jdbcType=INTEGER}, #{saleCodeSid,jdbcType=INTEGER}, #{proSku,jdbcType=VARCHAR}, 
+      #{offMin,jdbcType=DOUBLE}, #{offMax,jdbcType=DOUBLE}, #{priceMin,jdbcType=DOUBLE}, 
+      #{priceMax,jdbcType=DOUBLE}, #{proBeginTime,jdbcType=TIMESTAMP}, #{proEndTime,jdbcType=TIMESTAMP}, 
+      #{brandSid,jdbcType=INTEGER}, #{productClassSid,jdbcType=INTEGER}, #{pageLayoutSid,jdbcType=INTEGER}, 
+      #{proStockNum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="net.shopin.wms.domain.entity.ProConSearchMql" >
+    insert into pro_con_search
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="saleCodeSid != null" >
+        sale_code_sid,
+      </if>
+      <if test="proSku != null" >
+        pro_sku,
+      </if>
+      <if test="offMin != null" >
+        off_min,
+      </if>
+      <if test="offMax != null" >
+        off_max,
+      </if>
+      <if test="priceMin != null" >
+        price_min,
+      </if>
+      <if test="priceMax != null" >
+        price_max,
+      </if>
+      <if test="proBeginTime != null" >
+        pro_begin_time,
+      </if>
+      <if test="proEndTime != null" >
+        pro_end_time,
+      </if>
+      <if test="brandSid != null" >
+        brand_sid,
+      </if>
+      <if test="productClassSid != null" >
+        product_class_sid,
+      </if>
+      <if test="pageLayoutSid != null" >
+        page_layout_sid,
+      </if>
+      <if test="proStockNum != null" >
+        pro_stock_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="saleCodeSid != null" >
+        #{saleCodeSid,jdbcType=INTEGER},
+      </if>
+      <if test="proSku != null" >
+        #{proSku,jdbcType=VARCHAR},
+      </if>
+      <if test="offMin != null" >
+        #{offMin,jdbcType=DOUBLE},
+      </if>
+      <if test="offMax != null" >
+        #{offMax,jdbcType=DOUBLE},
+      </if>
+      <if test="priceMin != null" >
+        #{priceMin,jdbcType=DOUBLE},
+      </if>
+      <if test="priceMax != null" >
+        #{priceMax,jdbcType=DOUBLE},
+      </if>
+      <if test="proBeginTime != null" >
+        #{proBeginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="proEndTime != null" >
+        #{proEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="brandSid != null" >
+        #{brandSid,jdbcType=INTEGER},
+      </if>
+      <if test="productClassSid != null" >
+        #{productClassSid,jdbcType=INTEGER},
+      </if>
+      <if test="pageLayoutSid != null" >
+        #{pageLayoutSid,jdbcType=INTEGER},
+      </if>
+      <if test="proStockNum != null" >
+        #{proStockNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="net.shopin.wms.domain.entity.ProConSearchMql" >
+    update pro_con_search
+    <set >
+      <if test="saleCodeSid != null" >
+        sale_code_sid = #{saleCodeSid,jdbcType=INTEGER},
+      </if>
+      <if test="proSku != null" >
+        pro_sku = #{proSku,jdbcType=VARCHAR},
+      </if>
+      <if test="offMin != null" >
+        off_min = #{offMin,jdbcType=DOUBLE},
+      </if>
+      <if test="offMax != null" >
+        off_max = #{offMax,jdbcType=DOUBLE},
+      </if>
+      <if test="priceMin != null" >
+        price_min = #{priceMin,jdbcType=DOUBLE},
+      </if>
+      <if test="priceMax != null" >
+        price_max = #{priceMax,jdbcType=DOUBLE},
+      </if>
+      <if test="proBeginTime != null" >
+        pro_begin_time = #{proBeginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="proEndTime != null" >
+        pro_end_time = #{proEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="brandSid != null" >
+        brand_sid = #{brandSid,jdbcType=INTEGER},
+      </if>
+      <if test="productClassSid != null" >
+        product_class_sid = #{productClassSid,jdbcType=INTEGER},
+      </if>
+      <if test="pageLayoutSid != null" >
+        page_layout_sid = #{pageLayoutSid,jdbcType=INTEGER},
+      </if>
+      <if test="proStockNum != null" >
+        pro_stock_num = #{proStockNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.shopin.wms.domain.entity.ProConSearchMql" >
+    update pro_con_search
+    set sale_code_sid = #{saleCodeSid,jdbcType=INTEGER},
+      pro_sku = #{proSku,jdbcType=VARCHAR},
+      off_min = #{offMin,jdbcType=DOUBLE},
+      off_max = #{offMax,jdbcType=DOUBLE},
+      price_min = #{priceMin,jdbcType=DOUBLE},
+      price_max = #{priceMax,jdbcType=DOUBLE},
+      pro_begin_time = #{proBeginTime,jdbcType=TIMESTAMP},
+      pro_end_time = #{proEndTime,jdbcType=TIMESTAMP},
+      brand_sid = #{brandSid,jdbcType=INTEGER},
+      product_class_sid = #{productClassSid,jdbcType=INTEGER},
+      page_layout_sid = #{pageLayoutSid,jdbcType=INTEGER},
+      pro_stock_num = #{proStockNum,jdbcType=INTEGER}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+ 
+  <update id="updateProConSearch" parameterType="net.shopin.back.view.ProductKey">
+       update PRO_CON_SEARCH
+       <set>
+		    <if test="saleCode != null and saleCode != ''">
+             sale_code_sid = #{saleCodeSid,jdbcType=INTEGER},
+          </if>
+          <if test="proSku!=null and proSku != '' ">
+             pro_sku = #{proSku,jdbcType=VARCHAR},
+          </if>
+          <if test="offMin != null and offMin != ''">
+             off_min = #{offMin,jdbcType=DOUBLE},
+          </if>
+          <if test="offMax != null and offMax != ''">
+            off_max = #{offMax,jdbcType=DOUBLE},
+          </if>
+          <if test="priceMin != null and priceMin != ''">
+           price_min = #{priceMin,jdbcType=DOUBLE},
+          </if>
+          <if test="priceMax != null and priceMax != ''">
+             price_max  = #{offMax,jdbcType=DOUBLE},
+          </if>
+          <if test="proBeginTime != null and proBeginTime != ''">
+            pro_begin_time = #{proBeginTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="proEndTime != null and proEndTime != ''">
+            pro_end_time = #{proEndTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="brandSid != null and brandSid != ''">
+            brand_sid = #{brandSid,jdbcType=INTEGER},
+          </if>
+          <if test="productClassSid != null and productClassSid!=''">
+            product_class_sid = #{productClassSid,jdbcType=INTEGER},
+          </if>
+          <if test="pageLayoutSid != null and pageLayoutSid != ''">
+            page_layout_sid = #{pageLayoutSid,jdbcType=INTEGER},
+          </if>
+          <if test="proStockNum != null and proStockNum != ''">
+           pro_stock_num = #{proStockNum,jdbcType=INTEGER}
+          </if>   
+       </set>
+       where page_layout_sid = #{pageLayoutSid,jdbcType=INTEGER},
+     </update>
+     
+</mapper>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+    <!DOCTYPE mapper 
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.shopin.back.mapper.ProConSearchMapper">
+     <sql id="pcsColumns">sid sid,sale_code_sid saleCodeSid,pro_sku proSku,off_min offMin,off_max offMax,price_min priceMin,price_max priceMax,pro_begin_time proBeginTime,pro_end_time proEndTime,brand_sid brandSid,product_class_sid productClassSid,page_layout_sid pageLayoutSid,pro_stock_num proStockNum</sql>
+    
+     <select id="findObjBySid" parameterType="int" resultType="proConSearchVO">
+        select <include refid="pcsColumns"/>
+        from PRO_CON_SEARCH　pcs where pcs.sid=#{sid}
+     </select>   
+
+	 <select id="queryObjsList" parameterType="pcsCond" resultType="proConSearchVO">
+        <![CDATA[
+			select * from
+			(
+			select A.*,ROWNUM RN 
+			from     
+			(    
+        ]]>
+        select <include refid="pcsColumns"/>  from PRO_CON_SEARCH　pcs
+        <where>
+          <if test="saleCodeSid != null and saleCodeSid != ''">
+             and pcs.sale_code_sid = #{saleCodeSid} 
+          </if>
+          <if test="proSku!=null and proSku != '' ">
+            and pcs.pro_sku = #{proSku}
+          </if>
+          <if test="offMin != null and offMin != ''">
+            and pcs.off_min = #{offMin} 
+          </if>
+          <if test="offMax != null and offMax != ''">
+           and pcs.off_max = #{offMax}
+          </if>
+          <if test="priceMin != null and priceMin != ''">
+           and pcs.price_min = #{priceMin}
+          </if>
+          <if test="priceMax != null and priceMax != ''">
+            and pcs.price_max  =  #{priceMax}
+          </if>
+          <if test="proBeginTime != null and proBeginTime != ''">
+           and pcs.pro_begin_time = #{proBeginTime}
+          </if>
+          <if test="proEndTime != null and proEndTime != ''">
+           and pcs.pro_end_time = #{proEndTime}
+          </if>
+          <if test="brandSid != null and brandSid != ''">
+           and pcs.brand_sid = #{brandSid}
+          </if>
+          <if test="productClassSid != null and productClassSid!=''">
+           and pcs.product_class_sid = #{productClassSid}
+          </if>
+          <if test="pageLayoutSid != null and pageLayoutSid != ''">
+           and pcs.page_layout_sid = #{pageLayoutSid}
+          </if>
+          <if test="proStockNum != null and proStockNum != ''">
+          and pcs.pro_stock_num = #{proStockNum}
+          </if>
+        </where> 	     
+	       order by pcs.sid desc 
+	      <![CDATA[
+	      ) A 
+	      where ROWNUM <= #{endRecords}
+	      )
+	      WHERE  RN >= #{startRecords}
+	      ]]>
+	 </select>
+
+     <select id="queryObjsCount" parameterType="pcsCond" resultType="Integer">
+         select count(*) from PRO_CON_SEARCH　pcs      
+         <where>
+          <if test="saleCodeSid != null and saleCodeSid != ''">
+             and pcs.sale_code_sid = #{saleCodeSid} 
+          </if>
+          <if test="proSku!=null and proSku != '' ">
+            and pcs.pro_sku = #{proSku}
+          </if>
+          <if test="offMin != null and offMin != ''">
+            and pcs.off_min = #{offMin} 
+          </if>
+          <if test="offMax != null and offMax != ''">
+           and pcs.off_max = #{offMax}
+          </if>
+          <if test="priceMin != null and priceMin != ''">
+           and pcs.price_min = #{priceMin}
+          </if>
+          <if test="priceMax != null and priceMax != ''">
+            and pcs.price_max  =  #{priceMax}
+          </if>
+          <if test="proBeginTime != null and proBeginTime != ''">
+           and pcs.pro_begin_time = #{proBeginTime}
+          </if>
+          <if test="proEndTime != null and proEndTime != ''">
+           and pcs.pro_end_time = #{proEndTime}
+          </if>
+          <if test="brandSid != null and brandSid != ''">
+           and pcs.brand_sid = #{brandSid}
+          </if>
+          <if test="productClassSid != null and productClassSid!=''">
+           and pcs.product_class_sid = #{productClassSid}
+          </if>
+          <if test="pageLayoutSid != null and pageLayoutSid != ''">
+           and pcs.page_layout_sid = #{pageLayoutSid}
+          </if>
+          <if test="proStockNum != null and proStockNum != ''">
+          and pcs.pro_stock_num = #{proStockNum}
+          </if>
+        </where> 	     
+     </select>
+
+     <insert id="insert" parameterType="pcs">
+       insert into PRO_CON_SEARCH  (sid,sale_code_sid,pro_sku,off_min,off_max,price_min,price_max,pro_begin_time,pro_end_time,brand_sid,product_class_sid,page_layout_sid,pro_stock_num)    
+       values(PRO_CON_SEARCH_SEQ.nextval,#{saleCodeSid,jdbcType=NUMERIC},#{proSku,jdbcType=VARCHAR}, #{offMin,jdbcType=NUMERIC}, #{offMax,jdbcType=NUMERIC}, #{priceMin,jdbcType=NUMERIC},#{priceMax,jdbcType=NUMERIC},#{proBeginTime,jdbcType=TIMESTAMP},#{proEndTime,jdbcType=TIMESTAMP},#{brandSid,jdbcType=NUMERIC},#{productClassSid,jdbcType=NUMERIC},#{pageLayoutSid,jdbcType=NUMERIC},#{proStockNum,jdbcType=NUMERIC})
+     </insert>
+     
+     <update id="update" parameterType="pcs">
+       update PRO_CON_SEARCH pcs
+       <set>
+		    <if test="saleCodeSid != null and saleCodeSid != ''">
+              pcs.sale_code_sid = #{saleCodeSid},
+          </if>
+          <if test="proSku!=null and proSku != '' ">
+             pcs.pro_sku = #{proSku,jdbcType=VARCHAR},
+          </if>
+          <if test="offMin != null and offMin != ''">
+             pcs.off_min = #{offMin} ,
+          </if>
+          <if test="offMax != null and offMax != ''">
+            pcs.off_max = #{offMax},
+          </if>
+          <if test="priceMin != null and priceMin != ''">
+           pcs.price_min = #{priceMin},
+          </if>
+          <if test="priceMax != null and priceMax != ''">
+             pcs.price_max  =  #{priceMax},
+          </if>
+          <if test="proBeginTime != null and proBeginTime != ''">
+            pcs.pro_begin_time = #{proBeginTime},
+          </if>
+          <if test="proEndTime != null and proEndTime != ''">
+            pcs.pro_end_time = #{proEndTime},
+          </if>
+          <if test="brandSid != null and brandSid != ''">
+            pcs.brand_sid = #{brandSid},
+          </if>
+          <if test="productClassSid != null and productClassSid!=''">
+            pcs.product_class_sid = #{productClassSid},
+          </if>
+          <if test="pageLayoutSid != null and pageLayoutSid != ''">
+            pcs.page_layout_sid = #{pageLayoutSid},
+          </if>
+          <if test="proStockNum != null and proStockNum != ''">
+           pcs.pro_stock_num = #{proStockNum}
+          </if>   
+       </set>
+       where pcs.sid = #{sid}
+     </update>
+     
+     <update id="updateProConSearch" parameterType="productKey">
+       update PRO_CON_SEARCH pcs
+       <set>
+		    <if test="saleCode != null and saleCode != ''">
+              pcs.sale_code_sid = #{saleCode},
+          </if>
+          <if test="proSku!=null and proSku != '' ">
+             pcs.pro_sku = #{proSku,jdbcType=VARCHAR},
+          </if>
+          <if test="offMin != null and offMin != ''">
+             pcs.off_min = #{offMin} ,
+          </if>
+          <if test="offMax != null and offMax != ''">
+            pcs.off_max = #{offMax},
+          </if>
+          <if test="priceMin != null and priceMin != ''">
+           pcs.price_min = #{priceMin},
+          </if>
+          <if test="priceMax != null and priceMax != ''">
+             pcs.price_max  =  #{priceMax},
+          </if>
+          <if test="proBeginTime != null and proBeginTime != ''">
+            pcs.pro_begin_time = #{proBeginTime},
+          </if>
+          <if test="proEndTime != null and proEndTime != ''">
+            pcs.pro_end_time = #{proEndTime},
+          </if>
+          <if test="brandSid != null and brandSid != ''">
+            pcs.brand_sid = #{brandSid},
+          </if>
+          <if test="productClassSid != null and productClassSid!=''">
+            pcs.product_class_sid = #{productClassSid},
+          </if>
+          <if test="pageLayoutSid != null and pageLayoutSid != ''">
+            pcs.page_layout_sid = #{pageLayoutSid},
+          </if>
+          <if test="proStockNum != null and proStockNum != ''">
+           pcs.pro_stock_num = #{proStockNum}
+          </if>   
+       </set>
+       where pcs.page_layout_sid = #{pageLayoutSid}
+     </update>
+
+ 	<delete id="delete" parameterType="Integer">
+ 	 delete from PRO_CON_SEARCH where sid = #{sid}
+ 	</delete>
+      
+
+
+
+
+
+
+</mapper>        
+        

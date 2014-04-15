@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.shopin.wms.persistence.NavContentMapper" >
+  <resultMap id="BaseResultMap" type="net.shopin.wms.domain.entity.NavContent" >
+    <id column="sid" property="sid" jdbcType="BIGINT" />
+    <result column="main_title" property="mainTitle" jdbcType="VARCHAR" />
+    <result column="sub_title" property="subTitle" jdbcType="VARCHAR" />
+    <result column="link" property="link" jdbcType="VARCHAR" />
+    <result column="pic" property="pic" jdbcType="VARCHAR" />
+    <result column="nav_sid" property="navSid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sid, main_title, sub_title, link, pic, nav_sid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from nav_content
+    where sid = #{sid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from nav_content
+    where sid = #{sid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="net.shopin.wms.domain.entity.NavContent" >
+    insert into nav_content (sid, main_title, sub_title, 
+      link, pic, nav_sid)
+    values (#{sid,jdbcType=BIGINT}, #{mainTitle,jdbcType=VARCHAR}, #{subTitle,jdbcType=VARCHAR}, 
+      #{link,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, #{navSid,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="net.shopin.wms.domain.entity.NavContent" >
+    insert into nav_content
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="mainTitle != null" >
+        main_title,
+      </if>
+      <if test="subTitle != null" >
+        sub_title,
+      </if>
+      <if test="link != null" >
+        link,
+      </if>
+      <if test="pic != null" >
+        pic,
+      </if>
+      <if test="navSid != null" >
+        nav_sid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=BIGINT},
+      </if>
+      <if test="mainTitle != null" >
+        #{mainTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="subTitle != null" >
+        #{subTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null" >
+        #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null" >
+        #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="navSid != null" >
+        #{navSid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="net.shopin.wms.domain.entity.NavContent" >
+    update nav_content
+    <set >
+      <if test="mainTitle != null" >
+        main_title = #{mainTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="subTitle != null" >
+        sub_title = #{subTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null" >
+        link = #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null" >
+        pic = #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="navSid != null" >
+        nav_sid = #{navSid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.shopin.wms.domain.entity.NavContent" >
+    update nav_content
+    set main_title = #{mainTitle,jdbcType=VARCHAR},
+      sub_title = #{subTitle,jdbcType=VARCHAR},
+      link = #{link,jdbcType=VARCHAR},
+      pic = #{pic,jdbcType=VARCHAR},
+      nav_sid = #{navSid,jdbcType=BIGINT}
+    where sid = #{sid,jdbcType=BIGINT}
+  </update>
+</mapper>

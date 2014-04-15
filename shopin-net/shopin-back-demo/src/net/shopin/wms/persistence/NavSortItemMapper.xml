@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.shopin.wms.persistence.NavSortItemMapper" >
+  <resultMap id="BaseResultMap" type="net.shopin.wms.domain.entity.NavSortItem" >
+    <id column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="nav_sort_sid" property="navSortSid" jdbcType="INTEGER" />
+    <result column="class_name" property="className" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="order_by" property="orderBy" jdbcType="INTEGER" />
+    <result column="is_top" property="isTop" jdbcType="INTEGER" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sid, nav_sort_sid, class_name, url, order_by, is_top, parent_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from nav_sort_item
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from nav_sort_item
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="net.shopin.wms.domain.entity.NavSortItem" >
+    insert into nav_sort_item (sid, nav_sort_sid, class_name, 
+      url, order_by, is_top, 
+      parent_id)
+    values (#{sid,jdbcType=INTEGER}, #{navSortSid,jdbcType=INTEGER}, #{className,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{orderBy,jdbcType=INTEGER}, #{isTop,jdbcType=INTEGER}, 
+      #{parentId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="net.shopin.wms.domain.entity.NavSortItem" >
+    insert into nav_sort_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="navSortSid != null" >
+        nav_sort_sid,
+      </if>
+      <if test="className != null" >
+        class_name,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="orderBy != null" >
+        order_by,
+      </if>
+      <if test="isTop != null" >
+        is_top,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="navSortSid != null" >
+        #{navSortSid,jdbcType=INTEGER},
+      </if>
+      <if test="className != null" >
+        #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBy != null" >
+        #{orderBy,jdbcType=INTEGER},
+      </if>
+      <if test="isTop != null" >
+        #{isTop,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="net.shopin.wms.domain.entity.NavSortItem" >
+    update nav_sort_item
+    <set >
+      <if test="navSortSid != null" >
+        nav_sort_sid = #{navSortSid,jdbcType=INTEGER},
+      </if>
+      <if test="className != null" >
+        class_name = #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBy != null" >
+        order_by = #{orderBy,jdbcType=INTEGER},
+      </if>
+      <if test="isTop != null" >
+        is_top = #{isTop,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.shopin.wms.domain.entity.NavSortItem" >
+    update nav_sort_item
+    set nav_sort_sid = #{navSortSid,jdbcType=INTEGER},
+      class_name = #{className,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      order_by = #{orderBy,jdbcType=INTEGER},
+      is_top = #{isTop,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=INTEGER}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  
+  <select id="queryList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" />
+  	from nav_sort_item n
+  	where n.nav_sort_sid = #{navSortSid,jdbcType=INTEGER}
+  	and parent_id is null order by n.order_by
+  </select>
+  
+  <select id="queryItemList" parameterType="net.shopin.wms.domain.entity.NavSortItem" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" />
+  	from nav_sort_item n
+  	where n.nav_sort_sid = #{navSortSid,jdbcType=INTEGER}
+  	and parent_id = #{parentId,jdbcType=INTEGER}
+  	order by n.order_by
+  </select>
+</mapper>

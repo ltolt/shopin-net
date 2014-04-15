@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+    <!DOCTYPE mapper 
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.UserMapper"> 
+
+        <sql id="userColumns"> sid sid,user_name userName,password password,remark remark </sql>
+    
+	<select id="findObjBySid" parameterType="int" resultType="userVO" >
+		select <include refid="userColumns"/>
+		  from T_USER t  where t.sid=#{sid}
+	</select>
+	
+	<select id="queryObjsList" parameterType="userCond" resultType="userVO" >
+			<![CDATA[ 
+			SELECT * FROM
+			(
+			SELECT A.*, ROWNUM RN
+			FROM (
+			]]>	
+				select <include refid="userColumns"/>  from T_USER t 
+				  <where>
+				<if test="userName != null and userName != '' " >
+				      and  t.user_name = #{userName} 
+				</if>
+				<if test="password != null and password != '' " >
+				      and  t.password = #{password} 
+				</if>
+				<if test="remark != null and remark != '' " >
+				      and  t.remark = #{remark} 
+				</if>
+
+				  </where>
+				order by t.sid desc
+	
+			<![CDATA[ 
+			) A
+			WHERE ROWNUM <= #{endRecords}
+			)
+			WHERE RN >= #{startRecords}
+			]]>
+	</select>
+
+
+	<select id="queryObjsCount" parameterType="userCond" resultType="Integer" >
+	  select count(*) from T_USER t 
+	  <where>
+		<if test="userName != null and userName != '' " >
+		      and  t.user_name = #{userName} 
+		</if>
+		<if test="password != null and password != '' " >
+		      and  t.password = #{password} 
+		</if>
+		<if test="remark != null and remark != '' " >
+		      and  t.remark = #{remark} 
+		</if>
+
+	   </where>
+	</select>
+
+
+	<insert id="insert" parameterType="user"  >
+	      insert into T_USER (sid ,user_name ,password ,remark )values(#{sid} ,#{userName} ,#{password} ,#{remark} )
+	</insert>
+	
+	
+	<update id="update" parameterType="user">
+		 update T_USER t 
+		 <set>
+		<if test="userName != null and userName != '' " >
+		      ,  t.user_name = #{userName} 
+		</if>
+		<if test="password != null and password != '' " >
+		      ,  t.password = #{password} 
+		</if>
+		<if test="remark != null and remark != '' " >
+		      ,  t.remark = #{remark} 
+		</if>
+
+		</set>
+		 where t.sid = #{sid}
+	</update>
+	
+	
+	<delete id="delete" parameterType="Integer" >
+		 delete from T_USER  where sid = #{sid}
+	</delete>
+
+</mapper>
+

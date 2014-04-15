@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.shopin.wms.persistence.LeaveMessageMapper" >
+  <resultMap id="BaseResultMap" type="net.shopin.wms.domain.entity.LeaveMessage" >
+    <id column="msgid" property="msgid" jdbcType="INTEGER" />
+    <result column="tid" property="tid" jdbcType="INTEGER" />
+    <result column="msgcontent" property="msgcontent" jdbcType="VARCHAR" />
+    <result column="replaycontent" property="replaycontent" jdbcType="VARCHAR" />
+    <result column="leavemsgtime" property="leavemsgtime" jdbcType="TIMESTAMP" />
+    <result column="replaytime" property="replaytime" jdbcType="TIMESTAMP" />
+    <result column="replayer" property="replayer" jdbcType="VARCHAR" />
+    <result column="replaystatu" property="replaystatu" jdbcType="INTEGER" />
+    <result column="commonvisible" property="commonvisible" jdbcType="INTEGER" />
+    <result column="disablereson" property="disablereson" jdbcType="VARCHAR" />
+    <result column="needreplay" property="needreplay" jdbcType="INTEGER" />
+    <result column="useremail" property="useremail" jdbcType="VARCHAR" />
+    <result column="blanklist" property="blanklist" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="orderno" property="orderno" jdbcType="VARCHAR" />
+    <result column="userprovince" property="userprovince" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    msgid, tid, msgcontent, replaycontent, leavemsgtime, replaytime, replayer, replaystatu, 
+    commonvisible, disablereson, needreplay, useremail, blanklist, username, tel, orderno, 
+    userprovince
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from leave_message
+    where msgid = #{msgid,jdbcType=INTEGER}
+  </select>
+  <select id="selectByParms" resultMap="BaseResultMap" parameterType="net.shopin.wms.domain.view.LeaveMessageVO">
+  	select
+  	<include refid="Base_Column_List" />
+  	from leave_message
+  	<where>
+		<if test="startTime != null">
+			leavemsgtime &gt;= #{startTime}
+		</if>
+		<if test="endTime != null">
+			and leavemsgtime &lt;= #{endTime}
+		</if>
+		<if test="orderno != null">
+			and orderno = #{orderno}
+		</if>
+		<if test="replyStatus != null">
+		 	and replaystatu = #{relyStatus}
+		</if>
+		<if test="userEmail != null">
+			and useremail = #{userEmail}
+		</if>
+		<if test="blacklist != null">
+			and blanklist = #{blacklist}
+		</if>
+		<if test="leaveMessageType != null">
+			and tid = #{leaveMessageType}
+		</if>
+  	</where>
+  	order by
+  		leavemsgtime ${orderKey}
+  	limit
+  		#{start},#{pageSize}
+  </select>
+  <select id="selectPageCount" resultType="java.lang.Integer" parameterType="net.shopin.wms.domain.view.LeaveMessageVO">
+  	select
+  		count(msgid)
+  	from leave_message
+  	<where>
+		<if test="startTime != null">
+			leavemsgtime &gt;= #{startTime}
+		</if>
+		<if test="endTime != null">
+			and leavemsgtime &lt;= #{endTime}
+		</if>
+		<if test="orderno != null">
+			and orderno = #{orderno}
+		</if>
+		<if test="replyStatus != null">
+		 	and replaystatu = #{relyStatus}
+		</if>
+		<if test="userEmail != null">
+			and useremail = #{userEmail}
+		</if>
+		<if test="blacklist != null">
+			and blanklist = #{blacklist}
+		</if>
+		<if test="leaveMessageType != null">
+			and tid = #{leaveMessageType}
+		</if>
+  	</where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from leave_message
+    where msgid = #{msgid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="net.shopin.wms.domain.entity.LeaveMessage" >
+    insert into leave_message (msgid, tid, msgcontent, 
+      replaycontent, leavemsgtime, replaytime, 
+      replayer, replaystatu, commonvisible, 
+      disablereson, needreplay, useremail, 
+      blanklist, username, tel, 
+      orderno, userprovince)
+    values (#{msgid,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER}, #{msgcontent,jdbcType=VARCHAR}, 
+      #{replaycontent,jdbcType=VARCHAR}, #{leavemsgtime,jdbcType=TIMESTAMP}, #{replaytime,jdbcType=TIMESTAMP}, 
+      #{replayer,jdbcType=VARCHAR}, #{replaystatu,jdbcType=INTEGER}, #{commonvisible,jdbcType=INTEGER}, 
+      #{disablereson,jdbcType=VARCHAR}, #{needreplay,jdbcType=INTEGER}, #{useremail,jdbcType=VARCHAR}, 
+      #{blanklist,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
+      #{orderno,jdbcType=VARCHAR}, #{userprovince,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="net.shopin.wms.domain.entity.LeaveMessage" >
+    insert into leave_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="msgid != null" >
+        msgid,
+      </if>
+      <if test="tid != null" >
+        tid,
+      </if>
+      <if test="msgcontent != null" >
+        msgcontent,
+      </if>
+      <if test="replaycontent != null" >
+        replaycontent,
+      </if>
+      <if test="leavemsgtime != null" >
+        leavemsgtime,
+      </if>
+      <if test="replaytime != null" >
+        replaytime,
+      </if>
+      <if test="replayer != null" >
+        replayer,
+      </if>
+      <if test="replaystatu != null" >
+        replaystatu,
+      </if>
+      <if test="commonvisible != null" >
+        commonvisible,
+      </if>
+      <if test="disablereson != null" >
+        disablereson,
+      </if>
+      <if test="needreplay != null" >
+        needreplay,
+      </if>
+      <if test="useremail != null" >
+        useremail,
+      </if>
+      <if test="blanklist != null" >
+        blanklist,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="orderno != null" >
+        orderno,
+      </if>
+      <if test="userprovince != null" >
+        userprovince,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="msgid != null" >
+        #{msgid,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="msgcontent != null" >
+        #{msgcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="replaycontent != null" >
+        #{replaycontent,jdbcType=VARCHAR},
+      </if>
+      <if test="leavemsgtime != null" >
+        #{leavemsgtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replaytime != null" >
+        #{replaytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replayer != null" >
+        #{replayer,jdbcType=VARCHAR},
+      </if>
+      <if test="replaystatu != null" >
+        #{replaystatu,jdbcType=INTEGER},
+      </if>
+      <if test="commonvisible != null" >
+        #{commonvisible,jdbcType=INTEGER},
+      </if>
+      <if test="disablereson != null" >
+        #{disablereson,jdbcType=VARCHAR},
+      </if>
+      <if test="needreplay != null" >
+        #{needreplay,jdbcType=INTEGER},
+      </if>
+      <if test="useremail != null" >
+        #{useremail,jdbcType=VARCHAR},
+      </if>
+      <if test="blanklist != null" >
+        #{blanklist,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="orderno != null" >
+        #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="userprovince != null" >
+        #{userprovince,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="net.shopin.wms.domain.entity.LeaveMessage" >
+    update leave_message
+    <set >
+      <if test="tid != null" >
+        tid = #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="msgcontent != null" >
+        msgcontent = #{msgcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="replaycontent != null" >
+        replaycontent = #{replaycontent,jdbcType=VARCHAR},
+      </if>
+      <if test="leavemsgtime != null" >
+        leavemsgtime = #{leavemsgtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replaytime != null" >
+        replaytime = #{replaytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replayer != null" >
+        replayer = #{replayer,jdbcType=VARCHAR},
+      </if>
+      <if test="replaystatu != null" >
+        replaystatu = #{replaystatu,jdbcType=INTEGER},
+      </if>
+      <if test="commonvisible != null" >
+        commonvisible = #{commonvisible,jdbcType=INTEGER},
+      </if>
+      <if test="disablereson != null" >
+        disablereson = #{disablereson,jdbcType=VARCHAR},
+      </if>
+      <if test="needreplay != null" >
+        needreplay = #{needreplay,jdbcType=INTEGER},
+      </if>
+      <if test="useremail != null" >
+        useremail = #{useremail,jdbcType=VARCHAR},
+      </if>
+      <if test="blanklist != null" >
+        blanklist = #{blanklist,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="orderno != null" >
+        orderno = #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="userprovince != null" >
+        userprovince = #{userprovince,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where msgid = #{msgid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.shopin.wms.domain.entity.LeaveMessage" >
+    update leave_message
+    set tid = #{tid,jdbcType=INTEGER},
+      msgcontent = #{msgcontent,jdbcType=VARCHAR},
+      replaycontent = #{replaycontent,jdbcType=VARCHAR},
+      leavemsgtime = #{leavemsgtime,jdbcType=TIMESTAMP},
+      replaytime = #{replaytime,jdbcType=TIMESTAMP},
+      replayer = #{replayer,jdbcType=VARCHAR},
+      replaystatu = #{replaystatu,jdbcType=INTEGER},
+      commonvisible = #{commonvisible,jdbcType=INTEGER},
+      disablereson = #{disablereson,jdbcType=VARCHAR},
+      needreplay = #{needreplay,jdbcType=INTEGER},
+      useremail = #{useremail,jdbcType=VARCHAR},
+      blanklist = #{blanklist,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      orderno = #{orderno,jdbcType=VARCHAR},
+      userprovince = #{userprovince,jdbcType=VARCHAR}
+    where msgid = #{msgid,jdbcType=INTEGER}
+  </update>
+</mapper>
