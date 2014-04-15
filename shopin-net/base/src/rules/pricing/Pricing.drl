@@ -1,0 +1,12 @@
+package com.shopin.modules.rules.pricing
+
+import com.shopin.modules.rules.Order;
+global com.shopin.modules.rules.OrderPricer pricer;
+
+rule "discount is 90%  when more than 100RMB"
+	when
+		o : Order( totalPrice >=100)
+	then
+		pricer.discount(o,90);
+end
+

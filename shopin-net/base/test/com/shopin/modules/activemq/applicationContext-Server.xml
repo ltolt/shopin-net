@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:amq="http://activemq.apache.org/schema/core"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://activemq.apache.org/schema/core
+       http://activemq.apache.org/schema/core/activemq-core.xsd">
+
+    <bean id="topicMessageProducer" class="com.shopin.modules.activemq.TopicMessageProducer">
+        <property name="template" ref="jmsTemplate"/>
+        <property name="destination" ref="TOPIC"/>
+    </bean>
+
+    <bean id="queueMessageProducer" class="com.shopin.modules.activemq.QueueMessageProducer">
+        <property name="template" ref="jmsTemplate"/>
+        <property name="destination" ref="QUEUE"/>
+    </bean>
+
+    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory">
+            <bean class="org.springframework.jms.connection.SingleConnectionFactory">
+                <property name="targetConnectionFactory" ref="jmsConnectionFactory"/>
+            </bean>
+        </property>
+        <property name="messageConverter" ref="defaultMessageConverter"/>
+    </bean>
+
+    <amq:connectionFactory id="jmsConnectionFactory"
+                           brokerURL="failover:tcp://localhost:61616"/>
+
+    <!-- JMS消息服务器端配置结束 -->
+    <!--  使用topic方式-->
+
+    <amq:topic name="TOPIC" physicalName="JMS-IM-TOPIC"/>
+
+    <!--  使用Queue方式-->
+    <amq:queue name="QUEUE" physicalName="JMS-TEST-QUEUE"/>
+    <!-- converter  -->
+    <bean id="defaultMessageConverter" class="com.shopin.modules.activemq.DefaultMessageConverter"/>
+</beans>

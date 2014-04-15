@@ -1,0 +1,31 @@
+package com.shopin.modules.rules
+
+import com.shopin.modules.rules.Account;
+
+rule "basic1 rule"
+dialect "java"
+when
+    a:Account( balance < 100, balance : balance ) // condition
+then
+    System.out.println("Account balance is less than 100"); // consequence
+    modify ( a ) { balance = balance+20};
+    System.out.println("Account balance ="+balance);
+end
+
+rule "basic2 rule"
+dialect "java"
+when
+    a:Account( balance > 100, balance : balance ) // condition
+then
+    System.out.println("Account balance is more than 100"); // consequence
+    System.out.println("Account balance ="+balance);
+end
+
+rule "basic3 rule"
+dialect "java"
+when
+    a:Account( balance == 100 , balance : balance) // condition
+then
+    System.out.println("Account balance is equals 100"); // consequence
+    System.out.println("Account balance ="+balance);
+end
