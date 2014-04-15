@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+				http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+				http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+    <description>Spring公共配置文件</description>
+
+    <context:property-placeholder location="classpath*:/application.properties"/>
+
+    <context:annotation-config/>
+    <!-- 使用annotation 自动注册bean,并检查@Required,@Autowired的属性已被注入 -->
+    <context:component-scan base-package="net.shopin.service"/>
+
+    <!-- 数据源配置,主要用于开发测试环境 -->
+    <!--
+<bean id="mainDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="initialPoolSize" value="${jdbc.initialPoolSize}"/>
+        <property name="minPoolSize" value="${jdbc.minPoolSize}"/>
+        <property name="maxPoolSize" value="${jdbc.maxPoolSize}"/>
+        <property name="acquireIncrement" value="5"/>
+        <property name="maxIdleTime" value="60"/>
+        <property name="maxStatements" value="100"/>
+    </bean>
+-->
+<!---->
+    <bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
+       <property name="driverClass" value="${jdbc.driver}" />
+       <property name="jdbcUrl" value="${jdbc.url}" />
+       <property name="username" value="${jdbc.username}"/>
+       <property name="password" value="${jdbc.password}"/>
+       <property name="idleConnectionTestPeriod" value="5"/>
+       <property name="idleMaxAge" value="10"/>
+       <property name="maxConnectionsPerPartition" value="${jdbc.maxPoolSize}"/>
+       <property name="minConnectionsPerPartition" value="${jdbc.minPoolSize}"/>
+       <property name="partitionCount" value="2"/>
+       <property name="acquireIncrement" value="10"/>
+       <property name="statementCacheSize" value="0"/>
+       <property name="statementsCachedPerConnection" value="0"/>
+       <property name="releaseHelperThreads" value="3"/>
+    </bean>
+<!--
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
+        <property name="targetDataSource" ref="mainDataSource"/>
+    </bean>
+-->
+    <bean id="defaultSaveOrUpdateEventListener" class="org.hibernate.event.def.DefaultSaveOrUpdateEventListener"/>
+
+    <!-- Hibernate配置 -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <prop key="jdbc.fetch_size">${hibernate.jdbc.fetch_size}</prop>
+                <prop key="jdbc.batch_size">${hibernate.jdbc.batch_size}</prop>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+                <prop key="hibernate.cache.use_query_cache">${hibernate.cache.use_query_cache}</prop>
+                <prop key="hibernate.cache.use_second_level_cache">${hibernate.cache.use_second_level_cache}</prop>
+                <prop key="hibernate.query.substitutions">true 1,false 0</prop>
+                <prop key="hibernate.autoReconnect">true</prop>
+            </props>
+        </property>
+        <property name="packagesToScan">
+            <list>
+                <value>net.shopin.entity</value>
+            </list>
+        </property>
+        <property name="eventListeners">
+            <map>
+                <entry key="save-update">
+                    <list>
+                        <ref bean="defaultSaveOrUpdateEventListener"/>
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <!-- 事务配置 -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!-- 使用annotation定义事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="methodInterceptor" class="com.shopin.modules.interceptor.MethodCacheInterceptor"
+          destroy-method="destroy">
+        <property name="useSecondCache" value="false"/>
+    </bean>
+
+    <!---->
+    <aop:config proxy-target-class="true">
+        <aop:advisor
+                pointcut="execution(* net.shopin.service.*.*(..))"
+                advice-ref="methodInterceptor"/>
+    </aop:config>
+
+    <bean name="masterCacheClient"
+          class="net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean">
+        <property name="servers">
+            <value>${memcached.servers}</value>
+        </property>
+        <property name="weights">
+            <list>
+			  <value>1</value>
+			  <value>1</value>   
+			  <value>1</value>                 
+            </list>
+        </property>
+        <property name="commandFactory">
+            <bean class="net.rubyeye.xmemcached.command.TextCommandFactory"></bean>
+        </property>
+        <property name="sessionLocator">
+            <bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator"></bean>
+        </property>
+        <property name="transcoder">
+            <bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder"/>
+        </property>
+        <property name="bufferAllocator">
+            <bean class="net.rubyeye.xmemcached.buffer.SimpleBufferAllocator"></bean>
+        </property>
+    </bean>
+
+    <bean name="slaveCacheClient"
+          class="net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean">
+        <property name="servers">
+            <value>${memcached.slaveservers}</value>
+        </property>
+        <property name="weights">
+            <list>
+			  <value>1</value>
+			  <value>1</value>   
+			  <value>1</value>   
+            </list>
+        </property>
+        <property name="commandFactory">
+            <bean class="net.rubyeye.xmemcached.command.TextCommandFactory"></bean>
+        </property>
+        <property name="sessionLocator">
+            <bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator"></bean>
+        </property>
+        <property name="transcoder">
+            <bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder"/>
+        </property>
+        <property name="bufferAllocator">
+            <bean class="net.rubyeye.xmemcached.buffer.SimpleBufferAllocator"></bean>
+        </property>
+    </bean>
+
+    <bean name="securityCacheClient"
+          class="net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean">
+        <property name="servers">
+            <value>${memcached.securityServers}</value>
+        </property>
+        <property name="weights">
+            <list>
+			  <value>1</value>
+			  <value>1</value>   
+			  <value>1</value>   				
+            </list>
+        </property>
+        <property name="commandFactory">
+            <bean class="net.rubyeye.xmemcached.command.TextCommandFactory"></bean>
+        </property>
+        <property name="sessionLocator">
+            <bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator"></bean>
+        </property>
+        <property name="transcoder">
+            <bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder"/>
+        </property>
+        <property name="bufferAllocator">
+            <bean class="net.rubyeye.xmemcached.buffer.SimpleBufferAllocator"></bean>
+        </property>
+    </bean>
+
+    <bean name="cartCacheClient"
+          class="net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean">
+        <property name="servers">
+            <value>${cart.servers}</value>
+        </property>
+        <property name="weights">
+            <list>       
+			  <value>1</value>
+			  <value>1</value>   
+			  <value>1</value>   				
+            </list>
+        </property>
+        <property name="commandFactory">
+            <bean class="net.rubyeye.xmemcached.command.TextCommandFactory"></bean>
+        </property>
+        <property name="sessionLocator">
+            <bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator"></bean>
+        </property>
+        <property name="transcoder">
+            <bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder"/>
+        </property>
+        <property name="bufferAllocator">
+            <bean class="net.rubyeye.xmemcached.buffer.SimpleBufferAllocator"></bean>
+        </property>
+    </bean>
+
+
+</beans>
+
+

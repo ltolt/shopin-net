@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd"
+	default-lazy-init="true">
+
+
+	<bean scope="prototype" name="/cartService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="cartService" />
+		<property name="serviceInterface" value="net.shopin.api.ICartService" />
+	</bean>
+	<bean scope="prototype" name="/promotionService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="promotionService" />
+		<property name="serviceInterface" value="net.shopin.api.IPromotionService" />
+	</bean>
+
+	<bean scope="prototype" name="/noticeService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="noticeService" />
+		<property name="serviceInterface" value="net.shopin.api.INoticeService" />
+	</bean>
+
+	<bean scope="prototype" name="/channelService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="channelService" />
+		<property name="serviceInterface" value="net.shopin.api.IChannelService" />
+	</bean>
+
+	<bean scope="prototype" name="/pageFieldService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="pageFieldService" />
+		<property name="serviceInterface" value="net.shopin.api.IPageFieldService" />
+	</bean>
+
+	<bean scope="prototype" name="/navigationService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="navigationService" />
+		<property name="serviceInterface" value="net.shopin.api.INavigationService" />
+	</bean>
+
+	<bean scope="prototype" name="/sysParameterService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="sysParameterService" />
+		<property name="serviceInterface" value="net.shopin.api.ISysParameterService" />
+	</bean>
+
+	<bean scope="prototype" name="/templateService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="templateService" />
+		<property name="serviceInterface" value="net.shopin.api.ITemplateService" />
+	</bean>
+
+	<bean scope="prototype" name="/productService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="productService" />
+		<property name="serviceInterface" value="net.shopin.api.IProductService" />
+	</bean>
+
+	<bean scope="prototype" name="/brandService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="brandService" />
+		<property name="serviceInterface" value="net.shopin.api.IBrandService" />
+	</bean>
+	<bean scope="prototype" name="/favorService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="favorService" />
+		<property name="serviceInterface" value="net.shopin.api.IFavorService" />
+	</bean>
+	<bean scope="prototype" name="/securityService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="securityService" />
+		<property name="serviceInterface" value="net.shopin.api.ISecurityService" />
+	</bean>
+	<bean scope="prototype" name="/paymentService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="paymentService" />
+		<property name="serviceInterface" value="net.shopin.api.IPaymentService" />
+	</bean>
+	
+	<bean scope="prototype" name="/leaveMessageService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="leaveMessageService" />
+		<property name="serviceInterface" value="net.shopin.api.ILeaveMessageService" />
+	</bean>
+
+	<bean scope="prototype" name="/womaiService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="womaiService" />
+		<property name="serviceInterface" value="net.shopin.api.IWoMaiService" />
+	</bean>
+</beans>
