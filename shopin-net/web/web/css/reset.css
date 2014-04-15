@@ -1,0 +1,187 @@
+/* Reset重置默认样式 */
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
+body,button,input,select,textarea{font:12px/1.5 arial,Verdana,\5b8b\4f53,sans-serif;color:#444}
+h1,h2,h3,h4,h5,h6{font-size:100%}
+address,cite,dfn,em,var,i{font-style:normal}
+code,kbd,pre,samp{font-family:courier new,courier,monospace}
+small{font-size:12px}
+ul,ol{list-style:none}
+u{text-decoration:none}
+a{text-decoration:none;color:#444;outline:none}
+a:hover{color:#e94609}
+img{ vertical-align:top}
+sup{vertical-align:text-top}
+sub{vertical-align:text-bottom}
+legend{color:#000}
+fieldset,img{border:0}
+button,input,select,textarea{font-size:100%}
+table{border-collapse:collapse;border-spacing:0}
+/* 自定义 */
+.cl{clear:both}
+.clear:after{height:0;clear:both;content:".";visibility:hidden;display:block}
+.oz{overflow:hidden;zoom:1}
+.hidden{display:none}
+
+.fs{font-family:宋体}
+.f12{font-size:12px}
+.f14{font-size:14px}
+.f16{font-size:16px}
+.f18{font-size:18px}
+.f20{font-size:20px}
+.fb{font-weight:bold}
+.fn{font-weight:normal}
+.t2{text-indent:2em}
+.tu{text-decoration:underline}
+.tn{text-decoration:none}
+.bos{border:1px solid #e5e8ea}
+.bot{border-top:1px solid #e5e8ea}
+.bn{border:none}
+.hl {color:#e94609}
+
+.tl{text-align:left}
+.tc{text-align:center}
+.tr{text-align:right}
+.bc{margin:0 auto}
+.fl{float:left}
+.fr{float:right}
+.vm{vertical-align:middle}
+.pr{position:relative}
+.pa{position:absolute}
+.dis{display:block}
+.undis{display:none}
+
+.mt{margin-top:10px}
+.mt4{margin-top:4px}
+.mt2{margin-top:2px}
+.mt15{margin-top:15px}
+.mt20{margin-top:20px}
+.mt-20{margin-top:-20px}
+.mt-30{margin-top:-30px}
+.mt-40{margin-top:-40px}
+.mb{margin-bottom:10px}
+.mb15{margin-bottom:15px}
+.mb25{margin-bottom:25px}
+.ml{margin-left:10px}
+.ml5{margin-left:5px}
+.ml25{margin-left:25px}
+.ml60{margin-left:60px}
+.ml78{margin-left:78px}
+.mr{margin-right:10px}
+.mr5{margin-right:5px}
+.mr15{margin-right:15px}
+.mr20{margin-right:20px}
+.p10{padding:10px}
+.pt{padding-top:10px}
+.ptb5{padding-top:5px;padding-botom:5px}
+.pb5{padding-bottom:5px}
+.pb{padding-bottom:10px}
+.pl5{padding-left:5px}
+.pl15{padding-left:15px}
+.pl25{padding-left:25px}
+.pl50{padding-left:50px}
+.pl65{padding-left:65px}
+.pl70{padding-left:70px}
+
+.w798{width:798px}
+.w210{width:210px}
+.h320{height:320px}
+.txt-gray{color:#aaa}
+.txt-gray1{color:#888}
+.txt-red{color:#ff4700}
+.txt-red1{color:#e94609}
+.txt-blue,.txt-blue a{color:#005aa0}
+.txt-blue a:hover{color:#ff4700}
+.txt-edit a,.confirm-td .txt-edit a,.cart-edit a{color:#e94609;font-family:宋体}
+.txt-edit a:hover,.confirm-td .txt-edit a:hover,.cart-edit a:hover{color:#000}
+.cprice{color:#ff4700;vertical-align:bottom}
+
+.input-invoice,.input-addr,.input-code,.input-quan{line-height:20px;height:20px;padding-left:3px;color:#666}
+.input-invoice{width:200px}
+.input-addr{width:250px}
+.input-code{width:100px}
+.input-quan{width:200px;color:#999;border:1px solid #ddd}
+/*background*/
+.attrName span,.attrMore a,.attrMore a i,.attrMore a:hover i,.attrMore a.retract i,.attrMore a.retract:hover i,.selectAttrs li i,.selectAttrs li a:hover i,.comment-detail sub.star,.ico-buy,.ico-success,.cart-success .list i,.cart-success .close,.payment-success .close,.info-success .close,.upload-image .del,.shopin-table .close,.sports_list .tabHd li.cur i,.hot_women .tabHd li i{background:url(http://images.shopin.net/s/images/s02.png) no-repeat}
+.product-list .favor,.advice .more,.comment-detail .reply,.comment-detail a:hover.reply,.shangou h3,.channel_ad h2,.hot_women .title h2 span,.categorys .catehd,.subnav .allcate a{background:url(http://images.shopin.net/s/images/ico_favor.gif) no-repeat}
+.allColor ul li.hover span,.btn-product a,.btn-cart a,.btn-confirm,.btn-payment,.btn-tocart,.shopin .search .btn,.btn-quan,.btn-edit a,.btn-apply a,.btn-apply-return a,.no-result a.submit,.btn-save,.buy-cart a,.sitemap .list .ul1 li,.sitemap .list .ul2 li,.sitemap .list .ul3 li,.channel_sports h2,.channel_men h2,.shoes_list .tabHd li.cur a,.channel_shoes h2 em,.channel_shoes h2 span,.hot_women .title h2{background:url(http://images.shopin.net/s/images/btn_product.png) no-repeat;display:block;cursor:pointer}
+.integrity li img,#footer .integrity li img,.shopinIcon li,.zang a{background:url(http://images.shopin.net/s/images/cx.png) no-repeat}
+/*翻页*/
+.page{width:400px;position:relative;left:50%;margin-top:15px;margin-left:-135px;padding-bottom:15px}
+.page a,.page span,.page .page_dots,.page .page_pre,.page .page_next,.page .page_fir,.page .page_last{background:#fcfcfc;border:1px solid #dadada;font-size:14px;color:#555;display:inline;float:left;height:23px;line-height:23px;margin-left:3px;text-align:center;width:23px}
+.page .page_pre,.page .page_next,.page .page_fir,.page .page_last,.page .page_dots{font-family:宋体,arial,sans-serif}
+.page .page_pre,.page .page_next,.page a:hover.page_pre,.page a:hover.page_next,.page .page_fir,.page .page_last,.page a:hover.page_fir,.page a:hover.page_last{font-size:15px}
+.page .page_dots{letter-spacing:-2px;line-height:18px;text-indent:3px}
+.page .page_select,.page a:hover{background:#fff7f4;border:1px solid #f07d52;font-weight:bold;color:#e94609;float:left;height:23px;font-size:14px;line-height:23px;margin-left:3px;text-align:center;width:23px}
+.page .page_total{padding-left:10px;line-height:26px}
+.shopin .rightlist .page{left:78.7%;margin-top:0}
+.shopin .rightlist .notice-list .page{left:50%;padding:15px 0 0}
+
+/*购物车弹出框*/
+.cart-success,.login-success,.payment-success,.info-success{background:#eff1e8;width:395px;height:275px;padding:20px 15px 20px 30px;position:absolute;left:50%;top:50%;margin-left:-220px;margin-top:-110px;color:#57676f;line-height:20px;z-index:99999}
+.login-success{width:305px;height:65px;line-height:65px;margin-left:-175px;margin-top:-80px;overflow:hidden}
+.payment-load{width:100%;height:100%;position:fixed;left:0;top:0;opacity:0.5;background:#444;z-index:99;overflow:hidden}
+.payment-success,.info-success{height:155px;padding:20px;line-height:30px;z-index:999;position:fixed}
+.info-success{width:350px;height:85px;margin-left:-100px;background:#f7ffec;border:1px solid #a2d76d;padding-top:15px}
+.payment-success h2{border-bottom:1px solid #ccc;margin-bottom:5px;text-indent:5px}
+.cart-success .list{border-bottom:1px dashed #57676f;padding:0 0 15px 50px}
+.cart-success .list i{background-position:0px -80px;position:absolute;top:1px;left:-3px;width:31px;height:33px}
+.cart-success a{color:#57676f}
+.cart-success a:hover{color:#e94609}
+a.btn-tocart{background-position:-20px -184px;color:#eff1e8;display:block;width:118px;height:29px;line-height:29px;text-align:center;font-weight:bold}
+a:hover.btn-tocart{background-position:-20px -214px;color:#eff1e8}
+.pro-list{border-top:1px dashed #ccc;padding-top:10px}
+.cart-success ul,.pro-list ul{width:88px;float:left;margin:6px 10px 0 0;text-align:center}
+.cart-success ul li img,.pro-list ul li img{width:88px;height:88px;margin-bottom:3px}
+.cart-success .price,.pro-list .price{font-size:16px;font-weight:bold;vertical-align:bottom;color:#e94609}
+.cart-success .discount,.pro-list .discount{font-size:12px;color:#e94609}
+.cart-success .guang{line-height:29px;color:#005aa0;padding-left:10px}
+.cart-success .close,.payment-success .close,.info-success .close{background-position:-33px -79px;width:19px;height:18px;text-indent:-9999em;position:absolute;right:-5px;top:-10px;outline:none}
+.cart-success a:hover.close,.payment-success a:hover.close,.info-success a:hover.close{background-position:-33px -107px}
+.payment-success .close,.info-success .close{position:absolute;right:8px;top:8px}
+/*index单品秒杀轮替*/
+.hot-event{ border: 1px solid #E5E8EA;position:relative;height:320px}
+.hot-event .switch-tab{text-align:center;padding:10px 0}
+.hot-event .switch-tab a,.hot-event .switch-tab .current{margin:0 2px;display:inline-block;width:15px;height:15px;background:url(http://images.shopin.net/s/images/bg.png) -161px 0;font:0/0 arial;color:transparent;overflow:hidden;vertical-align:top}
+.hot-event .switch-tab .current{background:url(http://images.shopin.net/s/images/bg.png) -195px 0}
+.hot-event .event-item{height:290px}
+.hot-event .event-item .banner{display:block}
+.hot-event .event-item img{-webkit-box-reflect:below 0 -webkit-gradient(linear,0 0,0 100%,from(transparent),color-stop(85%,transparent),to(rgba(255,255,255,.2)));border:0}
+
+/*帮助中心*/
+.shopin .rightlist.helplist,.shopin .rightlist.service{width:808px;min-height:873px;border:1px solid #e9e9e9;padding-top:3px}
+.shopin .rightlist.service{min-height:580px}
+.shopin .helplist h2,.shopin .service h2{color:#e94609}
+.helpCon{padding:15px;color:#666;line-height:22px}
+.helpCon h3{font-size:14px;color:#666;border-bottom:1px solid #e5e5e5;line-height:30px;margin-bottom:8px}
+.helpCon p{padding-bottom:15px;text-align:justify;text-justify:inter-ideograph;font-family:Arial}
+.helpCon dl{margin-bottom:12px}
+.helpCon dt{color:#005aa0;line-height:22px;padding-left:10px}
+.helpCon dd{background:#f8f8f8;padding:5px 12px 5px 35px;text-align:justify;text-justify:inter-ideograph}
+.helpCon dd span{margin-left:-25px}
+.helpCon p a,.helpCon .fs a{color:#e94609}
+.helpCon p a:hover,.helpCon .fs a:hover{color:#005aa0}
+.helpCon img{padding:5px;border:3px solid #f3f3f3}
+.helpbox{border:1px solid #d7edf0}
+.helpbox th,.helpbox td{border-top:1px solid #d7edf0;border-left:1px solid #d7edf0;padding:4px 10px}
+.helpbox th{background:#f6fbfc}
+.helpbox img{border:none}
+.helpbox a{color:#005aa0}
+.helpbox a:hover{color:#ff4700}
+.links ul li{width:24%;padding-left:0.5%;float:left;line-height:26px}
+.links ul li a{color:#777}
+.links ul li a:hover{color:#005aa0}
+.sitemap .title{background:url(http://images.shopin.net/s/images/help/sitemap.gif) center 0 no-repeat;height:59px;padding-top:72px}
+.sitemap .title li{margin:0 50px 0 20px;float:left;display:inline;width:133px;height:35px}
+.sitemap .list ul{margin:0 54px 0 25px;float:left;display:inline;width:124px}
+.sitemap .list ul li{width:116px;height:30px;line-height:30px;text-align:center;margin-bottom:5px}
+.sitemap .list ul li,.sitemap .list ul li a{color:#fff}
+.sitemap .list .ul1 li{background-position:0 -471px}
+.sitemap .list .ul1 li a:hover{background-position:0 -502px}
+.sitemap .list .ul2 li{background-position:-117px -471px}
+.sitemap .list .ul2 li a:hover{background-position:-117px -502px}
+.sitemap .list .ul3 li{background-position:-234px -471px}
+.sitemap .list .ul3 li a:hover{background-position:-234px -502px}
+.sitemap .title .li4{margin:0 0 0 20px}
+.sitemap .title a{width:133px;height:35px;display:block;text-indent:-9999em}
+/*公告*/
+.notice-list li{border-bottom:1px dashed #e8e8e8;line-height:32px;padding:0 15px;background:url(http://images.shopin.net/s/images/ico_favor.gif) 0 -159px no-repeat}

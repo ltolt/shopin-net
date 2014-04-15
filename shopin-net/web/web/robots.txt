@@ -1,0 +1,11 @@
+User-agent:* 
+Allow: /
+
+
+User-agent: Sogou*
+Disallow: /
+User-agent: YodaoBot*
+Disallow: /
+User-agent: Sosospider*
+Disallow: /
+Sitemap:http://www.shopin.net/yitao/sitemap/sitemap.xml
