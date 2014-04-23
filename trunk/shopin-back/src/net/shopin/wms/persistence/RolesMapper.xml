@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.shopin.wms.persistence.RolesMapper" >
+  <resultMap id="BaseResultMap" type="net.shopin.wms.domain.entity.Roles" >
+    <id column="sid" property="sid" jdbcType="BIGINT" />
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sid, role_name, memo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from roles
+    where sid = #{sid,jdbcType=BIGINT}
+  </select>
+  
+  <select id="selectList" resultMap="BaseResultMap" parameterType="net.shopin.wms.domain.entity.Roles" >
+    select 
+    <include refid="Base_Column_List" />
+    from roles r
+   <where>
+   	<if test="sid != null" >
+        r.sid = #{sid,jdbcType=BIGINT}
+      </if>
+      <if test="roleName != null" >
+        and r.role_name = #{roleName,jdbcType=VARCHAR}
+      </if>
+      <if test="memo != null" >
+      and r.memo = #{memo,jdbcType=VARCHAR}
+      </if>
+   </where>
+ 	  order by r.sid desc
+  </select>
+  
+  <select id="selectAllRoles" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from roles r
+ 	 order by r.sid desc
+  </select>
+  
+  <select id="queryMaxRoleSid" resultType="java.lang.Long">
+		SELECT max(r.sid) 
+		from roles r  
+		
+  </select>
+	
+	
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from roles
+    where sid = #{sid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="net.shopin.wms.domain.entity.Roles" >
+    insert into roles (sid, role_name, memo
+      )
+    values (#{sid,jdbcType=BIGINT}, #{roleName,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="net.shopin.wms.domain.entity.Roles" >
+    insert into roles
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="roleName != null" >
+        role_name,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=BIGINT},
+      </if>
+      <if test="roleName != null" >
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="net.shopin.wms.domain.entity.Roles" >
+    update roles
+    <set >
+      <if test="roleName != null" >
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.shopin.wms.domain.entity.Roles" >
+    update roles
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=BIGINT}
+  </update>
+</mapper>

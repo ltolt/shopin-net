@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.shopin.wms.persistence.PageLayoutContentMapper" >
+  <resultMap id="BaseResultMap" type="net.shopin.wms.domain.entity.PageLayoutContent" >
+    <id column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="page_layout_sid" property="pageLayoutSid" jdbcType="INTEGER" />
+    <result column="main_title" property="mainTitle" jdbcType="VARCHAR" />
+    <result column="sub_title" property="subTitle" jdbcType="VARCHAR" />
+    <result column="pict" property="pict" jdbcType="VARCHAR" />
+    <result column="link" property="link" jdbcType="VARCHAR" />
+    <result column="seq" property="seq" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sid, page_layout_sid, main_title, sub_title, pict, link, seq
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from page_layout_content
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from page_layout_content
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="net.shopin.wms.domain.entity.PageLayoutContent" >
+    insert into page_layout_content (sid, page_layout_sid, main_title, 
+      sub_title, pict, link, 
+      seq)
+    values (#{sid,jdbcType=INTEGER}, #{pageLayoutSid,jdbcType=INTEGER}, #{mainTitle,jdbcType=VARCHAR}, 
+      #{subTitle,jdbcType=VARCHAR}, #{pict,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR}, 
+      #{seq,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="net.shopin.wms.domain.entity.PageLayoutContent" >
+    insert into page_layout_content
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="pageLayoutSid != null" >
+        page_layout_sid,
+      </if>
+      <if test="mainTitle != null" >
+        main_title,
+      </if>
+      <if test="subTitle != null" >
+        sub_title,
+      </if>
+      <if test="pict != null" >
+        pict,
+      </if>
+      <if test="link != null" >
+        link,
+      </if>
+      <if test="seq != null" >
+        seq,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="pageLayoutSid != null" >
+        #{pageLayoutSid,jdbcType=INTEGER},
+      </if>
+      <if test="mainTitle != null" >
+        #{mainTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="subTitle != null" >
+        #{subTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="pict != null" >
+        #{pict,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null" >
+        #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null" >
+        #{seq,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="net.shopin.wms.domain.entity.PageLayoutContent" >
+    update page_layout_content
+    <set >
+      <if test="pageLayoutSid != null" >
+        page_layout_sid = #{pageLayoutSid,jdbcType=INTEGER},
+      </if>
+      <if test="mainTitle != null" >
+        main_title = #{mainTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="subTitle != null" >
+        sub_title = #{subTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="pict != null" >
+        pict = #{pict,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null" >
+        link = #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null" >
+        seq = #{seq,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.shopin.wms.domain.entity.PageLayoutContent" >
+    update page_layout_content
+    set page_layout_sid = #{pageLayoutSid,jdbcType=INTEGER},
+      main_title = #{mainTitle,jdbcType=VARCHAR},
+      sub_title = #{subTitle,jdbcType=VARCHAR},
+      pict = #{pict,jdbcType=VARCHAR},
+      link = #{link,jdbcType=VARCHAR},
+      seq = #{seq,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.shopin.wms.persistence.PageLayoutTemplateMqlMapper" >
+  <resultMap id="BaseResultMap" type="net.shopin.wms.domain.entity.PageLayoutTemplateMql" >
+    <id column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="min_pro_quantity" property="minProQuantity" jdbcType="INTEGER" />
+    <result column="max_pro_quantity" property="maxProQuantity" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="net.shopin.wms.domain.entity.PageLayoutTemplateMql" extends="BaseResultMap" >
+    <result column="template" property="template" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sid, name, memo, min_pro_quantity, max_pro_quantity
+  </sql>
+  <sql id="Blob_Column_List" >
+    template
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from page_layout_template
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <select id="queryAllTemplates" resultMap="ResultMapWithBLOBs" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from page_layout_template
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from page_layout_template
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="net.shopin.wms.domain.entity.PageLayoutTemplateMql" >
+    insert into page_layout_template (sid, name, memo, 
+      min_pro_quantity, max_pro_quantity, template
+      )
+    values (#{sid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, 
+      #{minProQuantity,jdbcType=INTEGER}, #{maxProQuantity,jdbcType=INTEGER}, #{template,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="net.shopin.wms.domain.entity.PageLayoutTemplateMql" >
+    insert into page_layout_template
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+      <if test="minProQuantity != null" >
+        min_pro_quantity,
+      </if>
+      <if test="maxProQuantity != null" >
+        max_pro_quantity,
+      </if>
+      <if test="template != null" >
+        template,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="minProQuantity != null" >
+        #{minProQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="maxProQuantity != null" >
+        #{maxProQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="template != null" >
+        #{template,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="net.shopin.wms.domain.entity.PageLayoutTemplateMql" >
+    update page_layout_template
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="minProQuantity != null" >
+        min_pro_quantity = #{minProQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="maxProQuantity != null" >
+        max_pro_quantity = #{maxProQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="template != null" >
+        template = #{template,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.shopin.wms.domain.entity.PageLayoutTemplateMql" >
+    update page_layout_template
+    set name = #{name,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      min_pro_quantity = #{minProQuantity,jdbcType=INTEGER},
+      max_pro_quantity = #{maxProQuantity,jdbcType=INTEGER},
+      template = #{template,jdbcType=LONGVARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.shopin.wms.domain.entity.PageLayoutTemplateMql" >
+    update page_layout_template
+    set name = #{name,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      min_pro_quantity = #{minProQuantity,jdbcType=INTEGER},
+      max_pro_quantity = #{maxProQuantity,jdbcType=INTEGER}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>

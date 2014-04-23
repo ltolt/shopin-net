@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.shopin.wms.persistence.LeaveMessageTypeMapper" >
+  <resultMap id="BaseResultMap" type="net.shopin.wms.domain.entity.LeaveMessageType" >
+    <id column="tid" property="tid" jdbcType="INTEGER" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="catename" property="catename" jdbcType="VARCHAR" />
+    <result column="viewcontent" property="viewcontent" jdbcType="VARCHAR" />
+    <result column="contenttype" property="contenttype" jdbcType="INTEGER" />
+    <result column="typeorder" property="typeorder" jdbcType="INTEGER" />
+    <result column="ordernoneed" property="ordernoneed" jdbcType="INTEGER" />
+    <result column="targettype" property="targettype" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tid, pid, catename, viewcontent, contenttype, typeorder, ordernoneed, targettype
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from leavemsgtype
+    where tid = #{tid,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByPid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from leavemsgtype
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectList" resultMap="BaseResultMap" parameterType="net.shopin.wms.domain.entity.LeaveMessageType" >
+    select 
+    <include refid="Base_Column_List" />
+    from leavemsgtype
+    <where>
+      <if test="tid != null" >
+       	tid = #{tid,jdbcType=INTEGER}
+      </if>
+      <if test="pid != null" >
+        and pid = #{pid,jdbcType=INTEGER}
+      </if>
+      <if test="catename != null" >
+       and catename = #{catename,jdbcType=VARCHAR}
+      </if>
+      <if test="viewcontent != null" >
+       and viewcontent = #{viewcontent,jdbcType=VARCHAR}
+      </if>
+      <if test="contenttype != null" >
+       and contenttype = #{contenttype,jdbcType=INTEGER}
+      </if>
+      <if test="typeorder != null" >
+       and typeorder = #{typeorder,jdbcType=INTEGER}
+      </if>
+      <if test="ordernoneed != null" >
+       and ordernoneed = #{ordernoneed,jdbcType=INTEGER}
+      </if>
+      <if test="targettype != null" >
+       and targettype = #{targettype,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from leavemsgtype
+    where tid = #{tid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="net.shopin.wms.domain.entity.LeaveMessageType" >
+    insert into leavemsgtype (tid, pid, catename, 
+      viewcontent, contenttype, typeorder, 
+      ordernoneed, targettype)
+    values (#{tid,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{catename,jdbcType=VARCHAR}, 
+      #{viewcontent,jdbcType=VARCHAR}, #{contenttype,jdbcType=INTEGER}, #{typeorder,jdbcType=INTEGER}, 
+      #{ordernoneed,jdbcType=INTEGER}, #{targettype,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="net.shopin.wms.domain.entity.LeaveMessageType" >
+    insert into leavemsgtype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tid != null" >
+        tid,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="catename != null" >
+        catename,
+      </if>
+      <if test="viewcontent != null" >
+        viewcontent,
+      </if>
+      <if test="contenttype != null" >
+        contenttype,
+      </if>
+      <if test="typeorder != null" >
+        typeorder,
+      </if>
+      <if test="ordernoneed != null" >
+        ordernoneed,
+      </if>
+      <if test="targettype != null" >
+        targettype,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="catename != null" >
+        #{catename,jdbcType=VARCHAR},
+      </if>
+      <if test="viewcontent != null" >
+        #{viewcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="contenttype != null" >
+        #{contenttype,jdbcType=INTEGER},
+      </if>
+      <if test="typeorder != null" >
+        #{typeorder,jdbcType=INTEGER},
+      </if>
+      <if test="ordernoneed != null" >
+        #{ordernoneed,jdbcType=INTEGER},
+      </if>
+      <if test="targettype != null" >
+        #{targettype,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="net.shopin.wms.domain.entity.LeaveMessageType" >
+    update leavemsgtype
+    <set >
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="catename != null" >
+        catename = #{catename,jdbcType=VARCHAR},
+      </if>
+      <if test="viewcontent != null" >
+        viewcontent = #{viewcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="contenttype != null" >
+        contenttype = #{contenttype,jdbcType=INTEGER},
+      </if>
+      <if test="typeorder != null" >
+        typeorder = #{typeorder,jdbcType=INTEGER},
+      </if>
+      <if test="ordernoneed != null" >
+        ordernoneed = #{ordernoneed,jdbcType=INTEGER},
+      </if>
+      <if test="targettype != null" >
+        targettype = #{targettype,jdbcType=INTEGER},
+      </if>
+    </set>
+    where tid = #{tid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.shopin.wms.domain.entity.LeaveMessageType" >
+    update leavemsgtype
+    set pid = #{pid,jdbcType=INTEGER},
+      catename = #{catename,jdbcType=VARCHAR},
+      viewcontent = #{viewcontent,jdbcType=VARCHAR},
+      contenttype = #{contenttype,jdbcType=INTEGER},
+      typeorder = #{typeorder,jdbcType=INTEGER},
+      ordernoneed = #{ordernoneed,jdbcType=INTEGER},
+      targettype = #{targettype,jdbcType=INTEGER}
+    where tid = #{tid,jdbcType=INTEGER}
+  </update>
+</mapper>

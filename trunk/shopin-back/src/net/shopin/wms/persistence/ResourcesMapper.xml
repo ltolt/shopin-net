@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.shopin.wms.persistence.ResourcesMapper" >
+  <resultMap id="BaseResultMap" type="net.shopin.wms.domain.entity.Resources" >
+    <id column="sid" property="sid" jdbcType="BIGINT" />
+    <result column="resource_name" property="resourceName" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sid, resource_name, url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from resources
+    where sid = #{sid,jdbcType=BIGINT}
+  </select>
+   <select id="selectAllResources" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from resources r order by r.sid asc  
+  </select>
+  
+  <select id="selectResourceByName" resultMap="BaseResultMap" parameterType="net.shopin.wms.domain.entity.Resources" >
+    select 
+    <include refid="Base_Column_List" />
+    from resources r
+   <where>
+   	<if test="sid != null" >
+        r.sid = #{sid,jdbcType=BIGINT}
+      </if>
+      <if test="resourceName != null" >
+        and r.resource_name = #{resourceName,jdbcType=VARCHAR}
+      </if>
+      <if test="url != null" >
+      and r.url = #{url,jdbcType=VARCHAR}
+      </if>
+   </where>
+ 	  order by r.sid desc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from resources
+    where sid = #{sid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="net.shopin.wms.domain.entity.Resources" >
+    insert into resources (sid, resource_name, url
+      )
+    values (#{sid,jdbcType=BIGINT}, #{resourceName,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="net.shopin.wms.domain.entity.Resources" >
+    insert into resources
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="resourceName != null" >
+        resource_name,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=BIGINT},
+      </if>
+      <if test="resourceName != null" >
+        #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="net.shopin.wms.domain.entity.Resources" >
+    update resources
+    <set >
+      <if test="resourceName != null" >
+        resource_name = #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.shopin.wms.domain.entity.Resources" >
+    update resources
+    set resource_name = #{resourceName,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=BIGINT}
+  </update>
+  
+  <select id="selectList" resultMap="BaseResultMap" parameterType="net.shopin.wms.domain.entity.Resources" >
+    select 
+    <include refid="Base_Column_List" />
+    from resources r
+   <where>
+   	<if test="sid != null" >
+        r.sid = #{sid,jdbcType=BIGINT}
+      </if>
+      <if test="resourceName != null" >
+        and r.resource_name = #{resourceName,jdbcType=VARCHAR}
+      </if>
+      <if test="url != null" >
+      and r.url = #{url,jdbcType=VARCHAR}
+      </if>
+   </where>
+ 	  order by r.sid desc
+  </select>
+  
+  <select id="selectOthersByPrimaryKey" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from resources r
+    where sid not in
+    <foreach item="item" index="index" collection="list" open="( "
+			       separator="," close=" )">
+		 #{item}
+	</foreach>
+	order by r.sid asc
+  </select>
+  
+</mapper>

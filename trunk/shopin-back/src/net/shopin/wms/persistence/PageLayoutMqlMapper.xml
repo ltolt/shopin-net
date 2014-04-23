@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.shopin.wms.persistence.PageLayoutMqlMapper" >
+  <resultMap id="BaseResultMap" type="net.shopin.wms.domain.entity.PageLayoutMql" >
+    <id column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="page_layout_sid" property="pageLayoutSid" jdbcType="INTEGER" />
+    <result column="pro_link_type" property="proLinkType" jdbcType="INTEGER" />
+    <result column="seq" property="seq" jdbcType="VARCHAR" />
+    <result column="page_layout_template_sid" property="pageLayoutTemplateSid" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="title_link" property="titleLink" jdbcType="VARCHAR" />
+    <result column="page_type" property="pageType" jdbcType="INTEGER" />
+    <result column="channel_sid" property="channelSid" jdbcType="INTEGER" />
+    <result column="node_level" property="nodeLevel" jdbcType="INTEGER" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sid, page_layout_sid, pro_link_type, seq, page_layout_template_sid, title, title_link, 
+    page_type, channel_sid, node_level, start_time, end_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from page_layout
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  
+  <select id="queryMaxSid" resultType="java.lang.Integer">
+		SELECT max(p.sid) 
+		from page_layout p  
+		
+  </select>
+  
+  <select id="queryChildPageLayout" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+	  select <include refid="Base_Column_List"/>
+	   from PAGE_LAYOUT pl where pl.page_layout_sid = #{pageLayoutSid} order by pl.seq asc
+	</select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from page_layout
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="net.shopin.wms.domain.entity.PageLayoutMql" >
+    insert into page_layout (sid, page_layout_sid, pro_link_type, 
+      seq, page_layout_template_sid, title, 
+      title_link, page_type, channel_sid, 
+      node_level, start_time, end_time
+      )
+    values (#{sid,jdbcType=INTEGER}, #{pageLayoutSid,jdbcType=INTEGER}, #{proLinkType,jdbcType=INTEGER}, 
+      #{seq,jdbcType=VARCHAR}, #{pageLayoutTemplateSid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{titleLink,jdbcType=VARCHAR}, #{pageType,jdbcType=INTEGER}, #{channelSid,jdbcType=INTEGER}, 
+      #{nodeLevel,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="net.shopin.wms.domain.entity.PageLayoutMql" >
+    insert into page_layout
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="pageLayoutSid != null" >
+        page_layout_sid,
+      </if>
+      <if test="proLinkType != null" >
+        pro_link_type,
+      </if>
+      <if test="seq != null" >
+        seq,
+      </if>
+      <if test="pageLayoutTemplateSid != null" >
+        page_layout_template_sid,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="titleLink != null" >
+        title_link,
+      </if>
+      <if test="pageType != null" >
+        page_type,
+      </if>
+      <if test="channelSid != null" >
+        channel_sid,
+      </if>
+      <if test="nodeLevel != null" >
+        node_level,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="pageLayoutSid != null" >
+        #{pageLayoutSid,jdbcType=INTEGER},
+      </if>
+      <if test="proLinkType != null" >
+        #{proLinkType,jdbcType=INTEGER},
+      </if>
+      <if test="seq != null" >
+        #{seq,jdbcType=VARCHAR},
+      </if>
+      <if test="pageLayoutTemplateSid != null" >
+        #{pageLayoutTemplateSid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="titleLink != null" >
+        #{titleLink,jdbcType=VARCHAR},
+      </if>
+      <if test="pageType != null" >
+        #{pageType,jdbcType=INTEGER},
+      </if>
+      <if test="channelSid != null" >
+        #{channelSid,jdbcType=INTEGER},
+      </if>
+      <if test="nodeLevel != null" >
+        #{nodeLevel,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="net.shopin.wms.domain.entity.PageLayoutMql" >
+    update page_layout
+    <set >
+      <if test="pageLayoutSid != null" >
+        page_layout_sid = #{pageLayoutSid,jdbcType=INTEGER},
+      </if>
+      <if test="proLinkType != null" >
+        pro_link_type = #{proLinkType,jdbcType=INTEGER},
+      </if>
+      <if test="seq != null" >
+        seq = #{seq,jdbcType=VARCHAR},
+      </if>
+      <if test="pageLayoutTemplateSid != null" >
+        page_layout_template_sid = #{pageLayoutTemplateSid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="titleLink != null" >
+        title_link = #{titleLink,jdbcType=VARCHAR},
+      </if>
+      <if test="pageType != null" >
+        page_type = #{pageType,jdbcType=INTEGER},
+      </if>
+      <if test="channelSid != null" >
+        channel_sid = #{channelSid,jdbcType=INTEGER},
+      </if>
+      <if test="nodeLevel != null" >
+        node_level = #{nodeLevel,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.shopin.wms.domain.entity.PageLayoutMql" >
+    update page_layout
+    set page_layout_sid = #{pageLayoutSid,jdbcType=INTEGER},
+      pro_link_type = #{proLinkType,jdbcType=INTEGER},
+      seq = #{seq,jdbcType=VARCHAR},
+      page_layout_template_sid = #{pageLayoutTemplateSid,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      title_link = #{titleLink,jdbcType=VARCHAR},
+      page_type = #{pageType,jdbcType=INTEGER},
+      channel_sid = #{channelSid,jdbcType=INTEGER},
+      node_level = #{nodeLevel,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  
+  <select id="queryObjsCount" parameterType="net.shopin.wms.domain.entity.PageLayoutMql" resultType="java.lang.Integer" >
+	  select count(*) from PAGE_LAYOUT pl 
+	  <where>
+		<if test="pageLayoutSid != null and pageLayoutSid != '' " >
+				        pl.page_layout_sid = #{pageLayoutSid} 
+				</if>
+				<if test="proLinkType != null and proLinkType != '' " >
+				      and  pl.pro_link_type = #{proLinkType} 
+				</if>
+				<if test="seq != null and seq != '' " >
+				      and  pl.seq = #{seq} 
+				</if>
+				<if test="pageLayoutTemplateSid != null and pageLayoutTemplateSid != '' " >
+				      and  pl.page_layout_template_sid = #{pageLayoutTemplateSid} 
+				</if>
+				<if test="title != null and title != '' " >
+				      and  pl.title = #{title,jdbcType=VARCHAR} 
+				</if>
+				<if test="titleLink != null and titleLink != '' " >
+				      and  pl.title_link = #{titleLink,jdbcType=VARCHAR}
+				</if>
+				<if test="pageType != null and pageType != '' " >
+				      and  pl.page_type = #{pageType} 
+				</if>
+				<if test="channelSid != null and channelSid != '' " >
+				      and  pl.channel_sid = #{channelSid} 
+				</if>
+				<if test="nodeLevel != null and nodeLevel != '' " >
+				      and  pl.node_level = #{nodeLevel} 
+				</if>
+				<if test="startTime != null and startTime != '' " >
+				      and  pl.start_time = #{startTime} 
+				</if>
+				<if test="endTime != null and endTime != '' " >
+				      and  pl.end_time = #{endTime} 
+				</if>
+
+	   </where>
+	</select>
+	
+	 <select id="queryBySelective" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+	  select *
+	   from PAGE_LAYOUT 
+	   where channel_sid = #{channelSid,jdbcType=INTEGER}
+	<!--
+	 <where>
+		<if test="pageLayoutSid != null and pageLayoutSid != '' " >
+				      pl.page_layout_sid = #{pageLayoutSid,jdbcType=INTEGER}
+				</if>
+				<if test="proLinkType != null and proLinkType != '' " >
+				      and  pl.pro_link_type = #{proLinkType,jdbcType=INTEGER}
+				</if>
+				<if test="seq != null and seq != '' " >
+				      and  pl.seq = #{seq,jdbcType=VARCHAR}
+				</if>
+				<if test="pageLayoutTemplateSid != null and pageLayoutTemplateSid != '' " >
+				      and  pl.page_layout_template_sid = #{pageLayoutTemplateSid} 
+				</if>
+				<if test="title != null and title != '' " >
+				      and  pl.title = #{title} 
+				</if>
+				<if test="titleLink != null and titleLink != '' " >
+				      and  pl.title_link = #{titleLink} 
+				</if>
+				<if test="pageType != null and pageType != '' " >
+				      and  pl.page_type =  #{pageType,jdbcType=INTEGER} 
+				</if>
+				<if test="channelSid != null and channelSid != '' " >
+				      and  pl.channel_sid = #{channelSid,jdbcType=INTEGER} 
+				</if>
+				<if test="nodeLevel != null and nodeLevel != '' " >
+				      and  pl.node_level = #{nodeLevel,jdbcType=INTEGER} 
+				</if>
+				<if test="startTime != null and startTime != '' " >
+				      and  pl.start_time = #{startTime,jdbcType=TIMESTAMP} 
+				</if>
+				<if test="endTime != null and endTime != '' " >
+				      and  pl.end_time =#{endTime,jdbcType=TIMESTAMP}
+				</if>
+
+	   </where>
+	   -->
+	</select>
+	
+	
+</mapper>

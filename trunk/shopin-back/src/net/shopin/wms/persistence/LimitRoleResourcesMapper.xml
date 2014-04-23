@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.shopin.wms.persistence.LimitRoleResourcesMapper">
+	<resultMap id="RoleResResultMap" type="net.shopin.wms.domain.entity.LimitRoleResources" >
+    <id column="sid" property="sid" jdbcType="BIGINT" />
+    <result column="role_sid" property="roleSid" jdbcType="BIGINT" />
+    <result column="rs_sid" property="rsSid" jdbcType="BIGINT" />
+  	</resultMap>
+	<sql id="Base_Column_List">
+		sid,role_sid,rs_sid
+	</sql>
+	<select id="getAllLimitRoleResources" resultMap="RoleResResultMap">
+  		select * 
+  		from
+  		limit_role_resources
+  	</select>
+	
+	<select id="getLimitRoleResourcesByParam" parameterType="net.shopin.wms.domain.entity.LimitRoleResources"
+	 resultMap="RoleResResultMap">
+		select *
+		from
+		limit_role_resources
+		<where>
+			<if test="sid != null">
+				sid = #{sid,jdbcType=BIGINT}
+			</if>
+			<if test="roleSid != null">
+				role_sid = #{roleSid,jdbcType=BIGINT}
+			</if>
+			<if test="rsSid != null">
+				rs_sid = #{rsSid,jdbcType=BIGINT}
+			</if>
+		</where>
+	</select>
+	<insert id="insert" parameterType="net.shopin.wms.domain.entity.LimitRoleResources" useGeneratedKeys="true" keyProperty="sid">
+		insert into limit_role_resources(
+			role_sid,rs_sid
+		)values(
+			#{roleSid,jdbcType=BIGINT},
+			#{rsSid,jdbcType=BIGINT}
+		)
+	</insert>
+	
+	<update id="update" parameterType="net.shopin.wms.domain.entity.LimitRoleResources">
+		update limit_role_resources
+		<set>
+			<if test="roleSid != null">
+				role_sid = #{roleSid,jdbcType=BIGINT}
+			</if>
+			<if test="rsSid != null">
+				rs_sid = #{rsSid,jdbcType=BIGINT}
+			</if>
+		</set>
+		where sid = #{sid,jdbcType=BIGINT}
+	</update>
+	<delete id="delete" parameterType="net.shopin.wms.domain.entity.LimitRoleResources">
+		delete from limit_role_resources
+		<where>
+			<if test="sid != null">
+				sid = #{sid,jdbcType=BIGINT}
+			</if>
+			<if test="roleSid != null">
+				role_sid = #{roleSid,jdbcType=BIGINT}
+			</if>
+		</where>
+	</delete>
+
+</mapper>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+    <!DOCTYPE mapper 
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.shopin.back.mapper.TRuleNewChannelMapper">
+     <sql id="TRuleNewChannelColumns">"sid" sid,"rule_sid" ruleSid,"channel_sid" channelSid,"channel_name" channelName,"seq" seq</sql>
+    
+     <select id="findObjBySid" parameterType="int" resultType="truleNewChannelVO">
+        select <include refid="TRuleNewChannelColumns"/>
+        from "t_rule_new_channel" trnc where trnc."sid"=#{sid}
+     </select> 
+     
+     <select id="findObjByRuleSid" parameterType="int" resultType="truleNewChannelVO">
+        select <include refid="TRuleNewChannelColumns"/>
+        from "t_rule_new_channel" trnc where trnc."rule_sid"=#{ruleSid}
+     </select>  
+      <select id="findChannels"  resultType="truleNewChannelVO">
+        select  distinct "channel_sid"  channelSid  ,"channel_name"    channelName from "t_rule_new_channel" trnc order by trnc."channel_sid" desc 
+     </select>  
+     
+      <select id="findRuleSid"  parameterType="int" resultType="truleNewChannelVO">
+        select "rule_sid" ruleSid from "t_rule_new_channel" trnc where "channel_sid"  =#{channelSid}  order by trnc."rule_sid" desc 
+     </select> 
+     
+     
+     
+      <select id="queryMaxOrderNum" resultType="Integer">
+		SELECT max(trnc."seq") 
+		from "t_rule_new_channel" trnc  
+		
+	</select>
+
+	 <select id="queryObjsList" parameterType="truleNewChannelCond" resultType="truleNewChannelVO">
+        <![CDATA[
+			select * from
+			(
+			select A.*,ROWNUM RN 
+			from     
+			(    
+        ]]>
+        select <include refid="TRuleNewChannelColumns"/>  from "SPWG_0408"."t_rule_new_channel" trnc
+        <where>
+          <if test="sid != null and sid != ''">
+             and trnc."sid" = #{sid} 
+          </if>
+          <if test="ruleSid != null and ruleSid != ''">
+             and trnc."rule_sid" = #{ruleSid} 
+          </if>
+          <if test="channelName != null and channelName != ''">
+             and trnc."channel_name" = #{channelName} 
+          </if>
+          <if test="channelSid != null and channelSid != ''">
+             and trnc."channel_sid" = #{channelSid} 
+          </if>
+           <if test="seq != null and seq != ''">
+             and trnc."seq" = #{seq} 
+          </if>
+          
+        </where> 	     
+	       order by trnc."sid" desc 
+	      <![CDATA[
+	      ) A 
+	      where ROWNUM <= #{endRecords}
+	      )
+	      WHERE  RN >= #{startRecords}
+	      ]]>
+	 </select>
+
+     <select id="queryObjsCount" parameterType="truleNewChannelCond" resultType="Integer">
+         select count(*) from "SPWG_0408"."t_rule_new_channel" trnc     
+         <where>
+            <if test="sid != null and sid != ''">
+             and trnc."sid" = #{sid} 
+          </if>
+          <if test="ruleSid != null and ruleSid != ''">
+             and trnc."rule_sid" = #{ruleSid} 
+          </if>
+          <if test="channelName != null and channelName != ''">
+             and trnc."channel_name" = #{channelName} 
+          </if>
+          <if test="channelSid != null and channelSid != ''">
+             and trnc."channel_sid" = #{channelSid} 
+          </if>
+          <if test="seq != null and seq != ''">
+             and trnc."seq" = #{seq} 
+          </if>
+        </where> 	     
+     </select>
+ 
+     <insert id="insert" parameterType="truleNewChannel">
+       insert into  "SPWG_0408"."t_rule_new_channel" ("sid","rule_sid","channel_name","channel_sid", "seq" )    
+       values("t_rule_seq".nextval,#{ruleSid,jdbcType=NUMERIC},#{channelName,jdbcType=VARCHAR},#{channelSid,jdbcType=NUMERIC},#{seq,jdbcType=NUMERIC})
+     </insert>
+     
+   <!--   <insert id="insert" parameterType="truleNewChannel" >
+    insert into "SPWG_0408"."t_rule_new_channel" 
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="sid != null and sid != ''">
+              "sid" ,
+          </if>
+          <if test="ruleSid != null and ruleSid != ''">
+             "rule_sid" ,
+          </if>
+          <if test="channelName != null and channelName != ''">
+             "channel_name" ,
+          </if>
+          <if test="channelSid != null and channelSid != ''">
+             "channel_sid", 
+          </if>
+          <if test="seq != null and seq != ''">
+             "seq", 
+          </if>
+          
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			 <if test="sid != null and sid != ''">
+            #{sid} ,
+          </if>
+          <if test="ruleSid != null and ruleSid != ''">
+              #{ruleSid} ,
+          </if>
+          <if test="channelName != null and channelName != ''">
+            #{channelName} ,
+          </if>
+          <if test="channelSid != null and channelSid != ''">
+             #{channelSid} ,
+          </if>
+          <if test="seq != null and seq != ''">
+             #{seq} ,
+          </if>
+          
+		</trim>
+	</insert>
+
+    -->  
+     <update id="update" parameterType="truleNewChannel">
+       update "SPWG_0408"."t_rule_new_channel" trnc
+       <set>
+		   <if test="sid != null and sid != ''">
+             trnc."sid" = #{sid} ,
+          </if>
+          <if test="ruleSid != null and ruleSid != ''">
+             trnc."rule_sid" = #{ruleSid} ,
+          </if>
+          <if test="channelName != null and channelName != ''">
+              trnc."channel_name" = #{channelName} ,
+          </if>
+          <if test="channelSid != null and channelSid != ''">
+             trnc."channel_sid" = #{channelSid}, 
+          </if>
+          <if test="seq != null and seq != ''">
+             trnc."seq" = #{seq}, 
+          </if>
+       </set>
+       where trnc."sid"= #{sid}
+     </update>
+
+ 	<delete id="delete" parameterType="Integer">
+ 	 delete from "SPWG_0408"."t_rule_new_channel" where "sid" = #{sid}
+ 	</delete>
+ 	
+ 	<delete id="deleteByRuleSid" parameterType="Integer">
+ 	 delete from "SPWG_0408"."t_rule_new_channel" where "rule_sid" = #{ruleSid}
+ 	</delete>
+      
+</mapper>        
+        

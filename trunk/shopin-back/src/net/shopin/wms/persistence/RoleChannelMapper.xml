@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.shopin.wms.persistence.RoleChannelMapper">
+  <resultMap id="BaseResultMap" type="net.shopin.wms.domain.entity.RoleChannel">
+    <result column="roles_sid" jdbcType="BIGINT" property="rolesSid" />
+    <result column="channel_sid" jdbcType="INTEGER" property="channelSid" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    roles_sid, channel_sid
+  </sql>
+  <delete id="deleteByParamter" parameterType="net.shopin.wms.domain.entity.RoleChannel">
+  	delete from role_channel
+ 	where roles_sid = #{rolesSid, jdbcType=BIGINT} and channel_sid = #{channelSid, jdbcType=INTEGER}
+  </delete>
+  
+  <delete id="deleteByRoleSid" parameterType="net.shopin.wms.domain.entity.RoleChannel">
+  	delete from role_channel
+ 	where roles_sid = #{rolesSid, jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="net.shopin.wms.domain.entity.RoleChannel">
+    insert into role_channel (roles_sid, channel_sid)
+    values (#{rolesSid,jdbcType=BIGINT}, #{channelSid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="net.shopin.wms.domain.entity.RoleChannel">
+    insert into role_channel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rolesSid != null">
+        roles_sid,
+      </if>
+      <if test="channelSid != null">
+        channel_sid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rolesSid != null">
+        #{rolesSid,jdbcType=BIGINT},
+      </if>
+      <if test="channelSid != null">
+        #{channelSid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="selectList" parameterType="net.shopin.wms.domain.entity.RoleChannel" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List"/>
+    from role_channel r_c
+    <where>
+      <if test="rolesSid != null">
+      	r_c.roles_sid = #{rolesSid, jdbcType=BIGINT}
+      </if>
+      <if test="channelSid != null">
+        and	r_c.channel_sid = #{channelSid, jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+  <select id="selectAllRoleChannel" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List"/>
+  	from role_channel r_c
+  	order by r_c.roles_sid
+  </select>
+</mapper>

@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+    <!DOCTYPE mapper 
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.shopin.back.mapper.TRuleDetailMapper">
+     <sql id="TRuleDetailColumns">"sid" sid,"rule_sid" ruleSid,"product_class_sid" productClassSid,"product_class_name" productClassName,"brand_sid" brandSid,"brand_name" brandName,"off_min" offMin,"off_max" offMax,"price_min" priceMin,"price_max" priceMax,"stock_min" stockMin,"stock_max" stockMax,"shop_sid" shopSid,"shop_name" shopName,"sale_code" saleCode,"sale_sum" saleSum,"price_update_time" priceUpdateTime</sql>
+    
+     <select id="findObjBySid" parameterType="int" resultType="truleDetailVO">
+        select <include refid="TRuleDetailColumns"/>
+        from "t_rule_detail" trd where trd."sid"=#{sid}
+     </select> 
+     
+     <select id="findObjByRuleSid" parameterType="int" resultType="truleDetailVO">
+        select "sid" sid,"rule_sid" ruleSid,"product_class_sid" productClassSid,"product_class_name" productClassName,"brand_sid" brandSid,"brand_name" brandName,to_char("off_min",'fm999999990.999999999') offMin,to_char("off_max",'fm999999990.999999999') offMax,"price_min" priceMin,"price_max" priceMax,"stock_min" stockMin,"stock_max" stockMax,"shop_sid" shopSid,"shop_name" shopName,"sale_code" saleCode,"sale_sum" saleSum,to_char( "price_update_time",'yyyy-MM-dd HH24:mi:ss') priceUpdateTime
+        from "t_rule_detail" trd where trd."rule_sid"=#{ruleSid}
+     </select>  
+     
+    
+
+	 <select id="queryObjsList" parameterType="truleDetailCond" resultType="truleDetailVO">
+        <![CDATA[
+			select * from
+			(
+			select A.*,ROWNUM RN 
+			from     
+			(    
+        ]]>
+        select <include refid="TRuleDetailColumns"/>  from "SPWG_0408"."t_rule_detail" trd
+        <where>
+          <if test="sid != null and sid != ''">
+             and trd."sid" = #{sid} 
+          </if>
+          <if test="ruleSid != null and ruleSid != ''">
+             and trd."rule_sid" = #{ruleSid} 
+          </if>
+          <if test="productClassName != null and productClassName != ''">
+             and trd."product_class_name" = #{productClassName} 
+          </if>
+          <if test="productClassSid != null and productClassSid != ''">
+             and trd."product_class_sid" = #{productClassSid} 
+          </if>
+           <if test="brandSid != null and brandSid != ''">
+             and trd."brand_sid" = #{brandSid} 
+          </if>
+          <if test="brandName != null and brandName != ''">
+             and trd."brand_name" = #{brandName} 
+          </if>
+          
+          <if test="offMin != null and offMin != ''">
+             and trd."off_min" = #{offMin} 
+          </if>
+          <if test="offMax != null and offMax != ''">
+             and trd."off_max" = #{offMax} 
+          </if>
+          <if test="priceMin != null and priceMin != ''">
+             and trd."price_min" = #{priceMin} 
+          </if>
+          <if test="priceMax != null and priceMax != ''">
+             and trd."price_max" = #{priceMax} 
+          </if>
+          <if test="stockMin != null and stockMin != ''">
+             and trd."stock_min" = #{stockMin} 
+          </if>
+          
+          <if test="stockMax != null and stockMax != ''">
+             and trd."stock_max" = #{stockMax} 
+          </if>
+         
+          <if test="shopSid !=null and shopSid != '' ">
+            and trd."shop_sid" = #{shopSid}
+          </if>
+          <if test="shopName !=null and shopName != '' ">
+            and trd."shop_name" = #{shopName}
+          </if>
+          <if test="saleCode !=null and saleCode != '' ">
+            and trd."sale_code" = #{saleCode}
+          </if>
+           <if test="saleSum !=null and saleSum != '' ">
+            and trd."sale_sum" = #{saleSum}
+          </if>
+           <if test="priceUpdateTime !=null and priceUpdateTime != '' ">
+            and trd."price_update_time" = #{priceUpdateTime}
+          </if>
+          
+        </where> 	     
+	       order by trd."sid" desc 
+	      <![CDATA[
+	      ) A 
+	      where ROWNUM <= #{endRecords}
+	      )
+	      WHERE  RN >= #{startRecords}
+	      ]]>
+	 </select>
+
+     <select id="queryObjsCount" parameterType="truleDetailCond" resultType="Integer">
+         select count(*) from "SPWG_0408"."t_rule_detail" trd     
+         <where>
+            <if test="sid != null and sid != ''">
+             and trd."sid" = #{sid} 
+          </if>
+          <if test="ruleSid != null and ruleSid != ''">
+             and trd."rule_sid" = #{ruleSid} 
+          </if>
+          <if test="productClassName != null and productClassName != ''">
+             and trd."product_class_name" = #{productClassName} 
+          </if>
+          <if test="productClassSid != null and productClassSid != ''">
+             and trd."product_class_sid" = #{productClassSid} 
+          </if>
+           <if test="brandSid != null and brandSid != ''">
+             and trd."brand_sid" = #{brandSid} 
+          </if>
+          <if test="brandName != null and brandName != ''">
+             and trd."brand_name" = #{brandName} 
+          </if>
+               <if test="offMin != null and offMin != ''">
+             and trd."off_min" = #{offMin} 
+          </if>
+          <if test="offMax != null and offMax != ''">
+             and trd."off_max" = #{offMax} 
+          </if>
+          <if test="priceMin != null and priceMin != ''">
+             and trd."price_min" = #{priceMin} 
+          </if>
+          <if test="priceMax != null and priceMax != ''">
+             and trd."price_max" = #{priceMax} 
+          </if>
+          <if test="stockMin != null and stockMin != ''">
+             and trd."stock_min" = #{stockMin} 
+          </if>
+          
+          <if test="stockMax != null and stockMax != ''">
+             and trd."stock_max" = #{stockMax} 
+          </if>
+         
+          <if test="shopSid !=null and shopSid != '' ">
+            and trd."shop_sid" = #{shopSid}
+          </if>
+          <if test="shopName !=null and shopName != '' ">
+            and trd."shop_name" = #{shopName}
+          </if>
+          <if test="saleCode !=null and saleCode != '' ">
+            and trd."sale_code" = #{saleCode}
+          </if>
+           <if test="saleSum !=null and saleSum != '' ">
+            and trd."sale_sum" = #{saleSum}
+          </if>
+          <if test="priceUpdateTime !=null and priceUpdateTime != '' ">
+            and trd."price_update_time" = #{priceUpdateTime}
+          </if>
+        </where> 	     
+     </select>
+ 
+     <insert id="insert" parameterType="truleDetail">
+       insert into  "SPWG_0408"."t_rule_detail" ("sid","rule_sid","product_class_name","product_class_sid", "brand_sid","brand_name","off_min" ,"off_max" ,"price_min" ,"price_max" ,"stock_min" ,"stock_max" ,"shop_sid" ,"shop_name" ,"sale_code","sale_sum","price_update_time")    
+       values("t_rule_detail_seq".nextval,#{ruleSid,jdbcType=NUMERIC},#{productClassName,jdbcType=VARCHAR},#{productClassSid,jdbcType=NUMERIC},#{brandSid,jdbcType=NUMERIC},#{brandName,jdbcType=VARCHAR},#{offMin,jdbcType=NUMERIC},#{offMax,jdbcType=NUMERIC},#{priceMin,jdbcType=NUMERIC},#{priceMax,jdbcType=NUMERIC},#{stockMin,jdbcType=NUMERIC},#{stockMax,jdbcType=NUMERIC},#{shopSid,jdbcType=NUMERIC},#{shopName,jdbcType=VARCHAR},#{saleCode,jdbcType=VARCHAR},#{saleSum,jdbcType=NUMERIC},#{priceUpdateTime,jdbcType=TIMESTAMP})
+     </insert>
+     
+  <!--  <insert id="insert" parameterType="truleDetail" >
+    insert into "SPWG_0408"."t_rule_detail" 
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="sid != null and sid != ''">
+              "sid" ,
+          </if>
+          <if test="ruleSid != null and ruleSid != ''">
+             "rule_sid" ,
+          </if>
+            <if test="offMin != null and offMin != ''">
+             "off_min",
+          </if>
+          <if test="offMax != null and offMax != ''">
+             "off_max" ,
+          </if>
+          <if test="priceMin != null and priceMin != ''">
+            "price_min",
+          </if>
+          <if test="priceMax != null and priceMax != ''">
+             "price_max" ,
+          </if>
+          <if test="stockMin != null and stockMin != ''">
+             "stock_min" ,
+          </if>
+          
+          <if test="stockMax != null and stockMax != ''">
+             "stock_max" ,
+          </if>
+         
+          <if test="shopSid !=null and shopSid != '' ">
+           "shop_sid",
+          </if>
+          <if test="shopName !=null and shopName != '' ">
+           "shop_name",
+          </if>
+          <if test="saleCode !=null and saleCode != '' ">
+            "sale_code",
+          </if>
+           <if test="saleSum !=null and saleSum != '' ">
+            "sale_sum" ,
+          </if>
+          <if test="productClassName != null and productClassName != ''">
+             "product_class_name" ,
+          </if>
+          <if test="productClassSid != null and productClassSid != ''">
+             "product_class_sid", 
+          </if>
+          <if test="brandSid != null and brandSid != ''">
+             "brand_sid", 
+          </if>
+           <if test="brandName != null and brandName != ''">
+             "brand_name", 
+          </if>
+           <if test="brandName != null and brandName != ''">
+             "brand_name", 
+          </if>
+           <if test="priceUpdateTime !=null and priceUpdateTime != '' ">
+            "price_update_time",
+          </if>
+          
+          
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			 <if test="sid != null and sid != ''">
+            #{sid} ,
+          </if>
+          <if test="ruleSid != null and ruleSid != ''">
+              #{ruleSid} ,
+          </if>
+          <if test="channelName != null and channelName != ''">
+            #{channelName} ,
+          </if>
+          <if test="channelSid != null and channelSid != ''">
+             #{channelSid} ,
+          </if>
+          <if test="offMin != null and offMin != ''">
+            #{offMin} ,
+          </if>
+          <if test="offMax != null and offMax != ''">
+           #{offMax} ,
+          </if>
+          <if test="priceMin != null and priceMin != ''">
+           #{priceMin} ,
+          </if>
+          <if test="priceMax != null and priceMax != ''">
+            #{priceMax} ,
+          </if>
+          <if test="stockMin != null and stockMin != ''">
+              #{stockMin} ,
+          </if>
+          
+          <if test="stockMax != null and stockMax != ''">
+           #{stockMax} ,
+          </if>
+          
+          <if test="shopSid !=null and shopSid != '' ">
+             #{shopSid},
+          </if>
+          <if test="shopName !=null and shopName != '' ">
+             #{shopName},
+          </if>
+          <if test="saleCode !=null and saleCode != '' ">
+            #{saleCode},
+          </if>
+           <if test="saleSum !=null and saleSum != '' ">
+           #{saleSum},
+          </if>
+           <if test="priceUpdateTime !=null and priceUpdateTime != '' ">
+            #{priceUpdateTime},
+          </if>
+          
+		</trim>
+	</insert>
+
+  -->
+     <update id="update" parameterType="truleDetail">
+       update "SPWG_0408"."t_rule_detail" trd
+       <set>
+		   <if test="sid != null and sid != ''">
+             trd."sid" = #{sid} ,
+          </if>
+          <if test="ruleSid != null and ruleSid != ''">
+             trd."rule_sid" = #{ruleSid} ,
+          </if>
+          <if test="productClassName != null and productClassName != ''">
+              trd."product_class_name" = #{productClassName} ,
+          </if>
+          <if test="productClassSid != null and productClassSid != ''">
+             trd."product_class_sid" = #{productClassSid}, 
+          </if>
+          <if test="brandName != null and brandName != ''">
+             trd."brand_name" = #{brandName}, 
+          </if>
+          
+           <if test="brandSid != null and brandSid != ''">
+             trd."brand_sid" = #{brandSid}, 
+          </if>
+                   
+          <if test="offMin != null and offMin != ''">
+             trd."off_min" = #{offMin} ,
+          </if>
+          <if test="offMax != null and offMax != ''">
+             trd."off_max" = #{offMax} ,
+          </if>
+          <if test="priceMin != null and priceMin != ''">
+            trd."price_min" = #{priceMin} ,
+          </if>
+          <if test="priceMax != null and priceMax != ''">
+              trd."price_max" = #{priceMax} ,
+          </if>
+          <if test="stockMin != null and stockMin != ''">
+              trd."stock_min" = #{stockMin} ,
+          </if>
+          
+          <if test="stockMax != null and stockMax != ''">
+              trd."stock_max" = #{stockMax} ,
+          </if>
+         
+          <if test="shopSid !=null and shopSid != '' ">
+            trd."shop_sid" = #{shopSid},
+          </if>
+          <if test="shopName !=null and shopName != '' ">
+             trd."shop_name" = #{shopName},
+          </if>
+          <if test="saleCode !=null and saleCode != '' ">
+            trd."sale_code" = #{saleCode},
+          </if>
+           <if test="saleSum !=null and saleSum != '' ">
+            trd."sale_sum" = #{saleSum},
+          </if>
+            <if test="priceUpdateTime !=null and priceUpdateTime != '' ">
+            trd."price_update_time" = #{priceUpdateTime},
+          </if>
+       </set>
+       where trd."sid"= #{sid}
+     </update>
+
+ 	<delete id="delete" parameterType="Integer">
+ 	 delete from "SPWG_0408"."t_rule_detail" where "sid" = #{sid}
+ 	</delete>
+      <delete id="deleteByRuleSid" parameterType="Integer">
+ 	 delete from "SPWG_0408"."t_rule_detail" where "rule_sid" = #{ruleSid} 
+ 	</delete>
+   
+</mapper>        
+        

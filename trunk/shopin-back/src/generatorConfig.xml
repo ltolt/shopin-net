@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+ <!-- 链接数据库的驱动 可以绝对路径或者相对路径  -->
+ <classPathEntry location="E:\kingsoft\快速进入是一种信仰\wms\WebRoot\WEB-INF\lib\mysql-connector-java-5.0.8-bin.jar" />
+   <!--用来指定生产一组对象的环境,多个数据库,就建立多个context  -->
+  <context id="mysqlTables" targetRuntime="MyBatis3">
+     <!-- 去除自动生成的注释 -->
+     <commentGenerator>
+       <property name="suppressAllComments" value="true"/>
+        <!-- 是否生成注释时间戳 --> 
+       <property name="suppressDate" value="true"/>
+     </commentGenerator>
+     <!-- 数据库链接属性配置 -->
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://172.16.103.210:3306/spwg" userId="spwg" password="spwg" />
+     <!--是否强制转换 只有forceBigdecimals 一个属性  -->
+     <javaTypeResolver>
+         <!--根据数据库字段长度自动匹配 默认为false:bigdecimal , long int short 为true时始终使用bigdecimal  -->
+        <property name="forceBigDecimals" value="false"/> 
+     </javaTypeResolver>
+    <javaModelGenerator targetPackage="net.shopin.wms.domain.entity" targetProject="src">
+     <property name="enableSubPackages" value="true"/>
+     <property name="trimStrings" value="true"/>
+    </javaModelGenerator>
+    <!-- 生成xml文件 -->
+    <sqlMapGenerator targetPackage="net.shopin.wms.persistence" targetProject="src" />
+    <!-- 生成相应的接口 -->
+    <javaClientGenerator targetPackage="net.shopin.wms.persistence" targetProject="src" type="XMLMAPPER" />
+    <!-- 多用户时可能用到schema -->
+    <table schema="MYSQLADMIN" tableName="roles" domainObjectName="Roles"  enableSelectByExample="faslse" enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false" enableCountByExample="false">
+    </table>
+  </context>
+</generatorConfiguration>

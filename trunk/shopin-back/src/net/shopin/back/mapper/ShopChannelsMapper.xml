@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.shopin.back.mapper.ShopChannelsMapper"> 
+
+	<sql id="shopChannelsColumns"> SID sid,PAGE_LAYOUT_SID pageLayoutSid,PAGE_TEMPLATE_SID pageTemplateSid,DISPLAY_NAME displayName,
+        						CHANNEL_DESC channelDesc,NAME name,CHANNEL_URL channelUrl,SEQ seq,FLAG flag,SHOW show
+	</sql>
+    
+	<select id="findObjBySid" parameterType="int" resultType="shopChannelsVO" >
+		select <include refid="shopChannelsColumns"/>
+		  from SHOP_CHANNELS s  where s.SID=#{sid}
+	</select>
+	
+	<select id="queryAllChannels" resultType="shopChannelsVO" >
+	  select  <include refid="shopChannelsColumns"/>
+	  from SHOP_CHANNELS s order by s.sid asc
+	</select>
+	
+	
+	
+	<select id="queryObjsList" parameterType="shopChannelsCond" resultType="shopChannelsVO" >
+	<![CDATA[ 
+		SELECT * FROM
+		(
+		SELECT A.*, ROWNUM RN
+		FROM (
+	]]>	
+		select <include refid="shopChannelsColumns"/> 
+		 from SHOP_CHANNELS s 
+		<where>
+			<if test="sid != null and sid != '' " >
+		      and  s.SID = #{sid} 
+			</if>
+			<if test="pageLayoutSid != null and pageLayoutSid != '' " >
+		      and  s.PAGE_LAYOUT_SID = #{pageLayoutSid} 
+			</if>
+			<if test="pageTemplateSid != null and pageTemplateSid != '' " >
+		      and  s.PAGE_TEMPLATE_SID = #{pageTemplateSid} 
+			</if>
+			<if test="displayName != null and displayName != '' " >
+		      and  s.DISPLAY_NAME = #{displayName} 
+			</if>
+			<if test="channelDesc != null and channelDesc != '' " >
+		      and  s.CHANNEL_DESC = #{channelDesc} 
+			</if>
+			<if test="name != null and name != '' " >
+		      and  s.NAME = #{name} 
+			</if>
+			<if test="channelUrl != null and channelUrl != '' " >
+		      and  s.CHANNEL_URL = #{channelUrl} 
+			</if>
+			<if test="seq != null and seq != '' " >
+		      and  s.SEQ = #{seq} 
+			</if>
+			<if test="flag != null and flag != '' " >
+		      and  s.FLAG = #{flag} 
+			</if>
+			<if test="show != null and show != '' " >
+		      and  s.SHOW = #{show} 
+			</if>
+			
+		</where>
+		order by s.SID desc
+
+	<![CDATA[ 
+		) A
+		WHERE ROWNUM <= #{endRecords}
+		)
+		WHERE RN >= #{startRecords}
+	]]>
+	</select>
+
+
+	<select id="queryObjsCount" parameterType="shopChannelsCond" resultType="Integer" >
+	  select count(*) from SHOP_CHANNELS s 
+		<where>
+			<if test="sid != null and sid != '' " >
+		      and  s.SID = #{sid} 
+			</if>
+			<if test="pageLayoutSid != null and pageLayoutSid != '' " >
+		      and  s.PAGE_LAYOUT_SID = #{pageLayoutSid} 
+			</if>
+			<if test="pageTemplateSid != null and pageTemplateSid != '' " >
+		      and  s.PAGE_TEMPLATE_SID = #{pageTemplateSid} 
+			</if>
+			<if test="displayName != null and displayName != '' " >
+		      and  s.DISPLAY_NAME = #{displayName} 
+			</if>
+			<if test="channelDesc != null and channelDesc != '' " >
+		      and  s.CHANNEL_DESC = #{channelDesc} 
+			</if>
+			<if test="name != null and name != '' " >
+		      and  s.NAME = #{name} 
+			</if>
+			<if test="channelUrl != null and channelUrl != '' " >
+		      and  s.CHANNEL_URL = #{channelUrl} 
+			</if>
+			<if test="seq != null and seq != '' " >
+		      and  s.SEQ = #{seq} 
+			</if>
+			<if test="flag != null and flag != '' " >
+		      and  s.FLAG = #{flag} 
+			</if>
+			<if test="show != null and show != '' " >
+		      and  s.SHOW = #{show} 
+			</if>
+			
+		</where>
+	</select>
+
+	
+	<insert id="insert" parameterType="shopChannels">
+       insert into SHOP_CHANNELS  (SID,PAGE_LAYOUT_SID,PAGE_TEMPLATE_SID,DISPLAY_NAME,CHANNEL_DESC,NAME,CHANNEL_URL,SEQ,FLAG,SHOW)    
+       values(SHOP_CHANNELS_SEQ.nextval,#{pageLayoutSid,jdbcType=NUMERIC}, #{pageTemplateSid,jdbcType=NUMERIC}, #{displayName,jdbcType=VARCHAR}, #{channelDesc,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{channelUrl,jdbcType=VARCHAR},#{seq,jdbcType=VARCHAR},#{flag,jdbcType=NUMERIC},#{show,jdbcType=NUMERIC})
+     </insert>
+	
+<!--	<insert id="insert" parameterType="shopChannels" >
+    insert into shop_channels
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			
+			<if test="sid != null and sid != '' " >
+				SID, 
+			</if>
+			<if test="pageLayoutSid != null and pageLayoutSid != '' " >
+				PAGE_LAYOUT_SID, 
+			</if>
+			<if test="pageTemplateSid != null and pageTemplateSid != '' " >
+				PAGE_TEMPLATE_SID, 
+			</if>
+			<if test="displayName != null and displayName != '' " >
+				DISPLAY_NAME, 
+			</if>
+			<if test="channelDesc != null and channelDesc != '' " >
+				CHANNEL_DESC, 
+			</if>
+			<if test="name != null and name != '' " >
+				NAME, 
+			</if>
+			<if test="channelUrl != null and channelUrl != '' " >
+				CHANNEL_URL,
+			</if>
+			<if test="seq != null and seq != '' " >
+				SEQ,
+			</if>
+			<if test="flag != null and flag != '' " >
+				FLAG,
+			</if>
+			<if test="show != null and show != '' " >
+				SHOW,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			
+			<if test="sid != null and sid != '' " >
+				#{sid}, 
+			</if>
+			<if test="pageLayoutSid != null and pageLayoutSid != '' " >
+				#{pageLayoutSid}, 
+			</if>
+			<if test="pageTemplateSid != null and pageTemplateSid != '' " >
+				#{pageTemplateSid}, 
+			</if>
+			<if test="displayName != null and displayName != '' " >
+				#{displayName}, 
+			</if>
+			<if test="channelDesc != null and channelDesc != '' " >
+				#{channelDesc}, 
+			</if>
+			<if test="name != null and name != '' " >
+				#{name},
+			</if>
+			<if test="channelUrl != null and channelUrl != '' " >
+				#{channelUrl}, 
+			</if>
+			<if test="seq != null and seq != '' " >
+				#{seq}, 
+			</if>
+			<if test="flag != null and flag != '' " >
+				#{flag},
+			</if>
+			<if test="show != null and show != '' " >
+				#{show}, 
+			</if>
+		</trim>
+	</insert>
+  
+   -->
+	<update id="update" parameterType="shopChannels">
+		 update SHOP_CHANNELS s 
+		<set>
+			<if test="sid != null and sid != '' " >
+		        s.SID = #{sid} 
+			</if>
+		  	
+			<if test="pageLayoutSid != null and pageLayoutSid != '' " >
+		       , s.PAGE_LAYOUT_SID = #{pageLayoutSid} 
+			</if>
+			<if test="pageTemplateSid != null and pageTemplateSid != '' " >
+		      ,  s.PAGE_TEMPLATE_SID = #{pageTemplateSid} 
+			</if>
+			<if test="displayName != null and displayName != '' " >
+		      ,  s.DISPLAY_NAME = #{displayName} 
+			</if>
+			<if test="channelDesc != null and channelDesc != '' " >
+		      ,  s.CHANNEL_DESC = #{channelDesc} 
+			</if>
+			<if test="name != null and name != '' " >
+		      ,  s.NAME = #{name} 
+			</if>
+			<if test="channelUrl != null and channelUrl != '' " >
+		      ,  s.CHANNEL_URL = #{channelUrl} 
+			</if>
+			<if test="seq != null and seq != '' " >
+		      ,  s.SEQ = #{seq} 
+			</if>
+			<if test="flag != null and flag != '' " >
+		      ,  s.FLAG = #{flag} 
+			</if>
+			<if test="show != null and show != '' " >
+		      ,  s.SHOW = #{show} 
+			</if>
+		</set>
+		 where s.SID = #{sid}
+	</update>
+	
+	
+	<delete id="delete" parameterType="Integer" >
+		 delete from SHOP_CHANNELS  where SID = #{sid}
+	</delete>
+	
+</mapper>
+
