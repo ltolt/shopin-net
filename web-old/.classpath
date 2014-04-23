@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_6_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/api"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/base"/>
+	<classpathentry kind="lib" path="/lib/web/api_client_sdk.jar"/>
+	<classpathentry kind="lib" path="/lib/web/cmbJava15.jar"/>
+	<classpathentry kind="lib" path="/lib/web/commons-codec-1.4.jar"/>
+	<classpathentry kind="lib" path="/lib/web/commons-fileupload-1.2.1.jar"/>
+	<classpathentry kind="lib" path="/lib/web/commons-httpclient-3.1.jar"/>
+	<classpathentry kind="lib" path="/lib/web/commons-io-1.3.2.jar"/>
+	<classpathentry kind="lib" path="/lib/web/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/lib/web/connect.jar"/>
+	<classpathentry kind="lib" path="/lib/web/edtftpj.jar"/>
+	<classpathentry kind="lib" path="/lib/web/httpclient-4.1.1.jar"/>
+	<classpathentry kind="lib" path="/lib/web/httpcore-4.1.jar"/>
+	<classpathentry kind="lib" path="/lib/web/icbc.jar"/>
+	<classpathentry kind="lib" path="/lib/web/InfosecCrypto_Java1_02_JDK14+.jar"/>
+	<classpathentry kind="lib" path="/lib/web/json_simple-1.1.jar"/>
+	<classpathentry kind="lib" path="/lib/web/json-20070829.jar"/>
+	<classpathentry kind="lib" path="/lib/web/json-lib-2.3-jdk15.jar"/>
+	<classpathentry kind="lib" path="/lib/web/netpayclient.jar"/>
+	<classpathentry kind="lib" path="/lib/web/sitemesh-2.4.1.jar"/>
+	<classpathentry kind="lib" path="/lib/web/weibo4j-1.2.0.jar"/>
+	<classpathentry kind="lib" path="/lib/common/freemarker.jar"/>
+	<classpathentry kind="lib" path="/lib/common/org.springframework.beans-3.0.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/lib/common/org.springframework.web-3.0.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/lib/common/org.springframework.web.servlet-3.0.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/lib/common/org.springframework.context-3.0.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/lib/common/org.springframework.context.support-3.0.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/lib/common/org.springframework.core-3.0.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/lib/common/rome-1.0.jar"/>
+	<classpathentry kind="lib" path="/lib/common/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="/lib/common/jdom-1.0.jar"/>
+	<classpathentry kind="lib" path="/lib/common/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="/lib/common/xmemcached-1.2.6.1.jar"/>
+	<classpathentry kind="lib" path="/lib/common/jcaptcha-2.0-alpha-1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="/lib/common/jcaptcha-api-1.0.jar"/>
+	<classpathentry kind="lib" path="/lib/common/jackson-core-asl-1.4.1.jar"/>
+	<classpathentry kind="lib" path="/lib/common/jackson-mapper-asl-1.4.1.jar"/>
+	<classpathentry kind="lib" path="/lib/common/BouncyCastle_s.jar"/>
+	<classpathentry kind="output" path="web/WEB-INF/classes"/>
+</classpath>

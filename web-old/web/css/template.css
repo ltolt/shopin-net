@@ -1,0 +1,56 @@
+@charset "utf-8";
+/* 模板样式-------------------- */
+
+
+#content-right10{width:748px;float:left;font-size:12px;}
+
+/* 金牌买手推荐模板开始-------------------- */
+#content-right10 .content2 li{vertical-align:text-top;}
+#content-right10 .content2{margin-top:10px;}
+#content-right10 .content2 .content2-top{height:26px;border-bottom: 1px solid #E4DAD3;}
+#content-right10 .content2 .content2-bottom{height:384px;border: 1px solid #DFD5CA;border-top:none;}
+#content-right10 .content2 .content2-bottom li{float:left;height:384px;}
+#content-right10 .content2 .content2-bottom .content2-bottom1{width:585px;border-right: 1px solid #E4DAD3;}
+#content-right10 .content2 .content2-bottom .content2-bottom4{width:136px;padding:12px;}
+
+.content2-bottom1 .content2-bottom3{float:left;width:270px;padding:12px 0 0 18px;}
+.content2-bottom1 .content2-bottom3 h3{font-size:14px;color:#4D4D4D;padding-bottom:8px;}
+.content2-bottom1 .content2-bottom3 p{height:24px;line-height: 24px;}
+.content2-bottom1 .content2-bottom3 img{margin:15px 0;}
+#content-right10 .content2 .content2-bottom .content2-bottom1 .content2-bottom3 a span{color:#ff6600;}
+
+
+#content-right10 .content2 .content2-bottom .content2-bottom4 .content2-bottom4-1{background: url(http://images.shopin.net:9009/images/i-22.gif) no-repeat left 2px;text-indent: 12px;font-weight: bold;color:#4D4D4D;margin-bottom:10px;}
+
+#content-right10 .content2 .content2-bottom .content2-bottom4 img{float:left;margin:0 8px 10px 0;}
+#content-right10 .content2 .content2-bottom .content2-bottom4 .content5 .content3{float:left;width:60px;height:70px;}
+#content-right10 .content2 .content2-bottom .content2-bottom4 .content5 img{ border:1px solid #EEEEEE;}
+#content-right10 .content2 .content2-bottom .content2-bottom4 .content3 li{clear:both;width:60px; line-height:20px;}
+#content-right10 .content2 .content2-bottom .content2-bottom4 .content4{clear:both;margin-bottom:13px;width:150px;}
+#content-right10 .content2 .content2-bottom .content2-bottom4 .content4 li{clear:both;height:20px;width:140px;background: url(http://images.shopin.net:9009/images/i-23.gif) no-repeat left 6px;text-indent: 10px;}
+#content-right10 .content2 .content2-bottom .content2-bottom4 .content5{margin-top:12px;display:inline;}
+#content-right10 .content2 .content2-bottom .content2-bottom4 .content4 span{color:#666666;}
+/* 金牌买手推荐结束-------------------- */
+
+/* 自适应背景效果-------------------- */
+ul,ol,li {list-style-image:none;list-style-position:outside;list-style-type:none;overflow:hidden;}
+.background-nofont li{float:left;}
+.background-nofont .b-left{background: url(http://images.shopin.net:9009/images/w-1.gif) no-repeat left center;display: block;height: 26px;width: 5px;}
+.background-nofont .b-right{background: url(http://images.shopin.net:9009/images/w-3.gif) no-repeat left center;display: block;height: 26px;width: 6px;}
+.background-nofont .b-font{background: url(http://images.shopin.net:9009/images/w-2.gif) repeat-x center center;height: 20px;padding:6px 20px 0 20px;font-size:12px;font-weight: bold;color: #FFFFFF;}
+
+/* 热卖商品模板开始------------------------------------------------------------------------------------------------ */
+.template .hot-sku{clear:both;float:left;}
+.template .hot-sku .hot-sku-imglist li,.template .hot-sku .content2-title-1 .hot-sku-list,.template .hot-sku .hot-sku-title li {float:left;}
+.template .hot-sku{width:510px;}
+.template .hot-sku .hot-sku-title{border-bottom: 1px solid #CBCBCB;height:26px;overflow: hidden;}
+.template .hot-sku .hot-sku-title .hot-sku-more{padding:8px 0 0 370px;}
+.template .hot-sku .hot-sku-imglist{width:480px;}
+.template .hot-sku .hot-sku-imglist li{width:120px;text-align:center;}
+.template .hot-sku .hot-sku-imglist img{margin-bottom:6px;}
+.template .hot-sku .content2-title-1{border: 1px solid #DFD5CA;border-top:none;padding:13px;height:210px;}
+.template .hot-sku .content2-title-1 .hot-sku-list{width:235px;margin-top:15px;}
+.template .hot-sku .content2-title-1 .hot-sku-list li,#page #content-right .content2 .content2-bottom .channel-img-list .hot-sku-list1 li{height:23px;line-height:23px;background: url(http://images.shopin.net:9009/images/i-23.gif) no-repeat left center;padding-left:10px;}
+.template .hot-sku .content2-title-1 .hot-sku-list li{clear:both;}
+.template .hot-sku .content2-title-1 .hot-sku-imglist a{font-weight: bold;}
+/* 热卖商品模板结束------------------------------------------------------------------------------------------------ */

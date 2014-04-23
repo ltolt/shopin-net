@@ -1,0 +1,12 @@
+DIV.jqZoomTitle {
+	Z-INDEX: 5000; POSITION: absolute; TEXT-ALIGN: center; WIDTH: 100%; FONT-FAMILY: Tahoma; BACKGROUND: #999; HEIGHT: 16px; COLOR: #fff; FONT-SIZE: 11px; TOP: 0px; PADDING-TOP: 2px; LEFT: 0px
+}
+.jqZoomPup {
+	Z-INDEX: 10; BORDER-BOTTOM-STYLE: solid; BORDER-BOTTOM-COLOR: #fff; FILTER: alpha(opacity = 60); BORDER-RIGHT-STYLE: solid; BACKGROUND-COLOR: #e6eaf3; BORDER-TOP-COLOR: #fff; BORDER-TOP-STYLE: solid; BORDER-RIGHT-COLOR: #fff; BORDER-LEFT-STYLE: solid; OVERFLOW: hidden; BORDER-LEFT-COLOR: #fff; CURSOR: crosshair; opacity: 0.6; -moz-opacity: 0.6
+}
+.jqZoomPup IMG {
+	BORDER-RIGHT-WIDTH: 1px; BORDER-TOP-WIDTH: 1px; BORDER-BOTTOM-WIDTH: 1px; BORDER-LEFT-WIDTH: 1px
+}
+.jqZoomWindow {
+	BORDER-BOTTOM: #999 1px solid; BORDER-LEFT: #999 1px solid; BACKGROUND-COLOR: #fff; BORDER-TOP: #999 1px solid; BORDER-RIGHT: #999 1px solid
+}

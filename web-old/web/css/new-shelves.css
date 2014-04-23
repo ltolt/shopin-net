@@ -1,0 +1,50 @@
+@charset "utf-8";
+/* CSS Document */
+*{padding:0;margin:0;font-family: "宋体";}
+#page #content-right .content2 .content8 .value-imglist{width:700px;margin:20px auto;text-align:center;}
+#page #content-right .content2 .content8 .value-imglist li{width:230px;text-align:center;float:left;}
+#page #content-right .content2 .content8 .value-imglist div{width:196px;border: 1px solid #CCCCCC;padding:2px;}
+#page #content-right .content2 .content8 .value-imglist .height36{padding-top:8px;}
+#page #content-right .content2 .content8 .value-imglist .value-time{width:150px;height:18px;line-height:18px;color:#ffffff;background:#CC0000;border: none;margin-left:24px;}
+#page #content-right .content2 .content8{height:auto;clear:both;}
+
+
+
+#page #content-right .content2 .contentvalue{padding-top:10px;}
+.content8 .new-list{width:725px;margin:15px auto;}
+.content8 .new-list li{float:left;width:145px;text-align:center;padding:0 auto;}
+.content8 .new-list p{width:130px;height:20px;overflow: hidden;line-height: 20px;cursor: hand;}
+.content8 .new-list img{border: 1px solid #E4E4E4;}
+.content8 .new-list h3{clear:both;font-size:14px;font-weight: bold;font-family: Arial, "宋体";color:#EA6D00;height:25px;line-height: 25px;}
+.content8 .new-list em{font-style: normal;font-size:12px;font-weight: normal;color:#666666;text-decoration: line-through;margin-right:15px;}
+
+
+
+#page #content-right .contentmargintop10{padding-top:10px;}
+.content8 .new-brand-left{width:490px;float:left;}
+.content8 .new-brand-right{width:231px;float:left;}
+.content8 .new-brand-left .logo-list{width:480px;font-size: 14px;font-weight: bold;}
+.content8 .new-brand-left .logo-list{margin:10px 0;}
+.content8 .new-brand-left li{float:left;width:160px;text-align:center;}
+#page #content-right .content2 .new-brand-left .logo-list p{height:20px;line-height:20px;}
+.contentmargintop10 .new-brand-left .logo-listmargintop10px{margin-top:25px;}
+
+
+
+/* 人气榜单开始-------------------- */
+#page #content-right .content2 .month-top10{margin-top:10px;}
+#page #content-right .content2 .month-top10 li{clear:both;}
+#page #content-right .content2 .month-top10 div{font-size:14px;color:#9C0925;font-weight: bold;margin-bottom:16px;background: url(http://images.shopin.net:9009/images/i-29.gif) no-repeat 85px center;height:20px;line-height:20px;}
+#page #content-right .content2 .month-top10 span a{font-size: 12px;font-weight: normal;color:#333333;padding-left: 85px;}
+#page #content-right .content2 .month-top10 .top10-list{width:205px;padding:0 12px;}
+#page #content-right .content2 .month-top10 .top10-list .top10-icon{width:47px;display: block;}
+#page #content-right .content2 .month-top10 .top10-list .top10-name{width:70px;display: block;}
+#page #content-right .content2 .month-top10 .top10-list span{float:left;}
+#page #content-right .content2 .month-top10 .top10-list .top10-parts{width:55px;display: block;}
+#page #content-right .content2 .month-top10 .top10-list a{width:205px;display: block;height:22px;line-height:13px;}
+#page #content-right .content2 .month-top10 .top10-list a:hover{cursor: hand;}
+#page #content-right .content2 .month-top10 .bcimg-top10{background: url(http://images.shopin.net:9009/images/i-29.gif) no-repeat 95px center;}
+#page #content-right .content2 .month-top10 .bcimg-top10 span a{font-size: 12px;font-weight: normal;color:#333333;padding-left: 75px;}
+#page #content-right .content2 .month-top10 .top10-backgroundF4F0EF{background:#F4F0EF;height:20px;line-height:20px;margin-bottom:18px;width:100%;}
+/* 人气榜单结束-------------------- */
+

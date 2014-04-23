@@ -1,0 +1,19 @@
+/* iFocus style */
+#ifocus {width:510px;height:322px; position:relative; overflow:hidden;}
+#ifocus_pic { display:inline;width:510px; height:253px; overflow:hidden;  }
+#ifocus_piclist { width:100% ; position:absolute;}
+#ifocus_piclist li {width:510px; height:253px; overflow:hidden; position:relative; }
+#ifocus_piclist img { width:100%; height:100%; position:absolute; top:0;left:0; }
+#ifocus_piclist .focusTitle { width:100%;line-height:30px;height:30px; position:absolute; top:0; left:0;filter: Alpha(Opacity=50);-moz-opacity: 0.5; }
+
+
+#ifocus_btn { display:block;  position:absolute; height:64px; width:510px;  bottom:0; left:0px; overflow:hidden; }
+#ifocus_btn ul{height:57px;width:487px;float:left;padding-left:3px;}
+#ifocus_btn ul{_width:490px;_padding-left:0;}
+#ifocus_btn li {height:51px; margin:0 3px; overflow:hidden; vertical-align:bottom;text-align:center; float:left; border:#d0d4d7 solid 1px;cursor:pointer;padding:2px;}
+
+#ifocus_btn li img{ float:left; width:109px; height:50px; }
+
+#content-right .flash #ifocus #ifocus_btn div{width:10px;float:left;padding-top:10px;}
+#content-right .flash #ifocus #ifocus_btn .jiantou{width:13px;clear:both;}
+#Focus{background-image: url(http://images.shopin.net:9009/images/i-3.gif);background-repeat: repeat-x;color:#333333; }

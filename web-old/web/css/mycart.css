@@ -1,0 +1,255 @@
+@charset "utf-8";
+/* CSS Document */
+/* 公共样式开始------------------------------------------------------------------------------------------------ */
+#page #content-right .hot-sku{clear:both;float:left;}
+.content2-title li,#page #content-right .hot-sku .hot-sku-imglist li,#page #content-right .hot-sku .content2-title-1 .hot-sku-list,#page #content-right .hot-sku .hot-sku-title li {float:left;}
+#page #cart-content{ width:948px; border:1px solid #ccc; margin:10px 0px; font-size:12px; font-height:24px; color:#333; float:left}
+
+/* 公共样式结束------------------------------------------------------------------------------------------------ */
+
+/* 我的购物车开始------------------------------------------------------------------------------------------------ */
+#page #content-right .sidebar .sidebar-imgad{margin-top:23px;margin-left:11px;}
+#page .banner-channels{border-bottom: 1px solid #DFD6CC;height:57px;margin:7px 0;font-size:12px;color:#666666; width:948px; float:left;}
+#page .banner-channels li,#page .banner-channels ol{float:left;}
+#page .banner-channels p{font-size:12px;color:#666666;}
+#page .banner-channels ol{padding:7px 0 0 10px;width:180px;}
+#page .banner-channels .cart-step{float:right;
+	background-color:#fff;
+	width:600px;
+	height:26px;
+	margin:10px 0px;
+	text-align:right;
+	padding:2px;}
+#page .banner-channels img{margin-bottom:0px;}
+/* 我的购物车结束------------------------------------------------------------------------------------------------ */
+
+/* 购物车内容正文结束------------------------------------------------------------------------------------------------ */
+#cart-content .cart-tit{font-size:14px; font-weight:bold; text-indent:10px; border-bottom:1px solid #ccc; height:28px; background-color:#f0f0f0; line-height:28px;}
+#cart-content .cart-count{ padding:10px; margin:10px auto; width:96%; text-align:center; line-height:24px;}
+#cart-content .cart-count .cart-select{ border:1px solid #999; height:24px; color:#FF3300;}
+#cart-content .cart-count .csrt-button{ background-color:#fff; height:24px; color:#0033cc;}
+#cart-content .cart-add{ margin:10px auto; width:96%; line-height:24px; height:28px;}
+#cart-content .cart-add .cart-addselect{ float:left; width:40%; text-align:left;}
+#cart-content .cart-add .cart-addcount{float:right; text-align:right; font-size:14px; font-weight:bold;}
+#cart-content .cart-cartgo{ width:96%; margin:10px auto; height:60px; text-align:right;}
+#cart-content .cart-reminder{ padding:10px; margin:10px auto; width:80%; border:1px solid #ff9900; line-height:24px; height:46px;}
+#cart-content .cart-reminder img{ float:left; margin-right:10px;}
+#cart-content .cart-reminder .cart-reminderfont{ float:left; margin-top:10px; }
+
+/* 购物车内容正文结束------------------------------------------------------------------------------------------------ */
+
+/* 注册登录开始------------------------------------------------------------------------------------------------ */
+
+/* 注册登录正文开始------------------------------------------------------------------------------------------------ */
+/* 登录正文开始------------------------------------------------------------------------------------------------ */
+
+#page #mylogin-left{ border:1px solid #ffcc01; width:308px; margin:10px 10px 10px 0px; font-family:"宋体"; font-size:12px; line-height:24px; color:#666; float:left;}
+#page #mylogin-left .mylogin-ltit{ border-bottom:1px solid #ffcc01; background-color:#ffecd0; height:38px; font-size:14px; font-weight:bold; line-height:38px; text-indent:15px; color:#333;}
+#page #mylogin-left .mylogin-lcontent{ width:99%; margin:10px 0px; border-bottom:1px solid #999; text-indent:15px; padding:1px;}
+#page #mylogin-left .mylogin-lcontent .lcontent-name{ font-size:14px; font-weight:bold;text-align:left; width:98%; margin-bottom:10px;}
+.mylogin-lcontent .ipt-t {
+border:1px solid #999;
+color:#999;
+font-size:12px;
+line-height:18px;
+font-weight:normal;
+height:18px;
+margin-right:-5px;
+padding:3px 2px 2px;
+width:120px;
+}
+.mylogin-lcontent .lcontent-name-re{ font-size:12px; font-weight:normal;}
+.mylogin-lcontent .lcontent-name-lost{ font-size:12px; font-weight:normal; text-decoration:underline;}
+.mylogin-lcontent .lcontent-name-lost a{ font-size:12px; font-weight:normal; text-decoration:underline;}
+.mylogin-lcontent .lcontent-img{ margin:10px auto; text-align:center; padding:10px;}
+#page #mylogin-left .mylogin-lcontent .lcontent-ans{ font-size:12px; font-weight:normal;text-align:left; width:98%; margin-bottom:10px;}
+.lcontent-ans ul{ text-indent:15px;}
+.lcontent-ans .ans-tit{ margin-bottom:8px;}
+.lcontent-ans .ans-tit1{ margin-bottom:8px; background-image:url(http://images.shopin.net:9009/images/i-11.gif); background-repeat:no-repeat; background-position:5px 9px; margin-left:5px;}
+
+/* 登录正文结束------------------------------------------------------------------------------------------------ */
+
+/* 注册正文开始------------------------------------------------------------------------------------------------ */
+#page #mylogin-right{ border:1px solid #ffcc01; width:628px; margin:10px 0px 10px 0px; font-family:"宋体"; font-size:12px; line-height:24px; color:#666; float:right;}
+#page #mylogin-right .mylogin-rtit{ border-bottom:1px solid #ffcc01; background-color:#ffecd0; height:38px; font-size:14px; font-weight:bold; line-height:38px; text-indent:15px; color:#333;}
+#page #mylogin-right .mylogin-rtt{ width:605px;padding:10px; float:left; height:270px;}
+#mylogin-right .mylogin-rtt .mylogin-member{ border:1px solid #999; float:left; width:48%;}
+#mylogin-right .mylogin-rtt .mylogin-shopping{ border:1px solid #999; margin-right:0px; float:right; width:292px;}
+.mylogin-rtt .mylogin-rtitle{height:24px; font-size:14px; font-weight:bold; line-height:24px; text-indent:5px; color:#333; padding:15px 0 0 10px;}
+.mylogin-rtt .mylogin-rtitle img{ margin-right:8px;}
+#mylogin-right .mylogin-rcontent{ margin:0 10px 10px 0px; font-size:12px; line-height:24px;}
+.mylogin-rcontent ul{ text-indent:15px;}
+#mylogin-right .rcontent-img{text-align:center;padding-bottom:15px;}
+/* 注册正文结束------------------------------------------------------------------------------------------------ */
+
+
+/* 注册登录正文结束------------------------------------------------------------------------------------------------ */
+/* 注册登录结束------------------------------------------------------------------------------------------------ */
+
+/* 注册上品用户开始------------------------------------------------------------------------------------------------ */
+#page #mylogin-mlog{ width:948px; font-size:12px; color:#333; line-height:24px; float:left;}
+#mylogin-mlog .mylogin-logcontent{ margin:0 auto; padding:15px; line-height:24px; }
+#mylogin-mlog .mylogin-logcontent .mylogin-logid{ font-size:14px; font-weight:bold; width:780px;; margin:0 auto; height:70px;  }
+#mylogin-mlog .mylogin-logcontent .mylogin-logid .logid-input{ border:1px solid #999; width:170px; height:24px; line-height:24px; color:#333; font-weight:bold; font-size:14px;padding:3px 2px 2px; text-align:left;}
+#mylogin-mlog .mylogin-logcontent .mylogin-logid .mylogin-logadress{ float:left; width:300px;}
+#mylogin-mlog .mylogin-logcontent .mylogin-logid .logid-tips{ float:right;border:1px solid #999; text-indent:10px; height:50px; font-size:12px; font-weight:normal; width:460px; }
+#mylogin-mlog .mylogin-logcontent .mylogin-logid .login-tipimg{ float:left; width:35px; margin-top:10px; height:40px;}
+#mylogin-mlog .mylogin-logcontent .mylogin-logid .login-tipfont{width:150px; float:right;}
+
+#mylogin-mlog .mylogin-logcontent .mylogin-logid .logid-tips1{ float:right;border:1px solid #ff8080; background-color:#fff2f2; text-indent:10px; height:30px; font-size:12px; font-weight:normal; width:460px; }
+#mylogin-mlog .mylogin-logcontent .mylogin-logid .login-tip1img{ float:left; width:35px; margin-top:3px; height:26px;}
+#mylogin-mlog .mylogin-logcontent .mylogin-logid .login-tip1font{width:150px; float:right;}
+#mylogin-mlog .mylogin-logcontent .mylogin-logid1{ font-size:14px; font-weight:bold; width:780px;; margin:0 auto; height:70px; text-align:center;  }
+#mylogin-mlog .mylogin-logcontent .mylogin-agree{ font-size:14px; font-weight:bold; margin:30px auto 25px auto; height:30px; text-align:center; background:#EEEEEE; line-height:30px;}
+#mylogin-mlog .mylogin-logcontent .mylogin-agree1{font-size:14px; font-weight:normal; width:835px; margin:0 auto; text-align:left;padding-left:115px;}
+#mylogin-mlog .mylogin-logcontent .mylogin-agreebk{ border:1px solid #999; font-size:12px; font-weight:normal; width:600px;; margin:0 auto; height:300px; text-align:left;  }
+
+/* 注册上品用户结束------------------------------------------------------------------------------------------------ */
+
+/* 结算中心开始------------------------------------------------------------------------------------------------ */
+#page #cart-content .pay-kong{ height:10px;}
+#page #cart-content .pay-bk{ font-family:"宋体"; font-size:12px; line-height:24px; color:#333; border:1px solid #999;width:880px; padding:10px; margin:0 auto; height:100px; }
+#page #cart-content .pay-bk .pay-tit{ float:left; height:30px; background-color:#ffecd0; font-size:14px; padding:5px; font-weight:bold; text-align:center; width:150px; line-height:30px; }
+#page #cart-content .pay-bk .pay-content{ float:right; width:700px; margin-bottom:10px;}
+#page #cart-content .pay-bk .pay-content .pay-content1{ margin-top:5px; margin-bottom:10px; height:35px;}
+
+.pay-content .pay-but-select{float:left; border:2px solid #ff6600; background-color:#ffe1b5; height:26px; width:80px; padding:2px; margin-right:5px; text-align:center; line-height:24px;}
+.pay-content .pay-but{float:left; border:1px solid #ff6600; background-color:#fff; height:26px; width:50px; width:80px; padding:2px; margin-right:5px; text-align:center; line-height:24px;}
+.pay-content .speed-site{float:left;width:91px;}
+.pay-content .speed-site select{width:60px;font-size: 12px;color: #d4d0c8;}
+.pay-content .pay-speed{ float:left;}
+.pay-content .pay-speedf{ float:left; }
+.pay-content .pay-speedf1{ float:left; color:#ff0000; font-weight:bold;}
+.pay-content .pay-speed a{ float:left; line-height:24px;}
+
+#page #cart-content .pay-bk1{ font-family:"宋体"; font-size:12px; line-height:24px; color:#333; border:1px solid #999;width:880px; padding:10px; margin:0 auto; height:500px; }
+#page #cart-content .pay-bk1 .pay-tit{ float:left; background-color:#ffecd0; font-size:14px; padding:5px; font-weight:bold; text-align:center; width:150px; line-height:30px; }
+
+#page #cart-content .pay-bk1 .pay-info{ float:right; border:1px solid #e8e8e8; width:698px; margin-bottom:10px; text-indent:5px; margin-top:0px; padding-top:10px;}
+.pay-bk1 .pay-info .pay-infotit{font-family:"宋体"; font-size:12px; line-height:24px; color:#333; height:30px; }
+.pay-bk1 .pay-info .pay-infotit .pay-infoc{ width:100px; float:left; margin-right:5px;}
+.pay-bk1 .pay-info .pay-infotit .pay-infoc1{ width:160px; float:left; margin-right:5px;}
+
+.pay-bk1 .pay-info .pay-infotit .pay-infos{ width:150px; float:left; margin-right:5px; background-color:#fff; border:1px solid #999; height:20px; line-height:20px; text-align:center;}
+.pay-bk1 .pay-info .pay-infotit .pay-infoc2{ width:60px; float:left; text-align:left;}
+.pay-bk1 .pay-info .pay-infotit .pay-infos1{ width:50px; float:left; margin-right:5px; background-color:#fff; border:1px solid #999; height:20px; line-height:20px; text-align:center;}
+.pay-bk1 .pay-info .pay-infotit .pay-infoc3{ width:30px; float:left; margin-right:5px; text-align:left;}
+.pay-bk1 .pay-info .pay-infotit .pay-infoc4{ width:200px; float:left; margin-right:5px; text-align:left;}
+.pay-bk1 .pay-info .pay-infotit .pay-infos2{ width:180px; float:left; margin-right:5px; background-color:#fff; border:1px solid #999; height:20px; line-height:20px; text-align:center;}
+.pay-bk1 .pay-info .pay-infotit .pay-infoc5{ width:350px; float:left; margin-right:5px;}
+#page #cart-content .pay-bk1 .pay-tit1{ float:left; background-color:#ffecd0; font-size:14px; padding:5px; font-weight:bold; text-align:center; height:100px; width:150px; line-height:30px; }
+
+.pay-bk1 .pay-info .pay-infotit .pay-infos3{ width:100px; float:left; margin-right:5px; background-color:#fff; border:1px solid #999; height:100px; line-height:20px; text-align:center;}
+.pay-bk1 .pay-info .pay-infotit1 .pay-infoc6{ float:left; width:500px; float:left; margin-right:5px;}
+.pay-bk1 .pay-info .pay-infotit1 .pay-infoc7{ width:100px; float:left; margin-right:5px;}
+.pay-bk1 .pay-info .pay-infotit2{font-family:"宋体"; font-size:12px; line-height:24px; color:#333; height:30px; width:100px; float:left; margin-right:5px;}
+.pay-info .pay-content1{ float:left; margin-bottom:10px; height:35px;}
+.pay-info  .pay-but-select{float:left; border:2px solid #ff6600; background-color:#ffe1b5; height:26px; width:80px; padding:2px; margin-right:5px; text-align:center; line-height:24px;}
+.pay-info  .pay-but{float:left; border:1px solid #ff6600; background-color:#fff; height:26px; width:50px; width:80px; padding:2px; margin-right:5px; text-align:center; line-height:24px;}
+
+
+#page #cart-content .pay-bk2{ font-family:"宋体"; font-size:12px; line-height:24px; color:#333; border:1px solid #999;width:880px; padding:10px; margin:0 auto; height:350px; }
+#page #cart-content .pay-bk2 .pay-mtit{ float:left; background-color:#ffecd0; font-size:14px; padding:5px; font-weight:bold; text-align:center; width:150px; line-height:30px; }
+
+#page #cart-content .pay-bk2 .pay-minfo{ float:right; border:1px solid #ff6601; width:698px; margin-bottom:10px; text-indent:5px; margin-top:0px; padding-top:10px;}
+.pay-bk2 .pay-info .pay-minfotit{font-family:"宋体"; font-size:12px; line-height:24px; color:#333; height:30px; }
+#page #cart-content .pay-bk2 .pay-minfo1{ float:right; border:1px solid #ff6601; background-color:#fff4e6; width:698px; margin-bottom:10px; text-indent:5px; margin-top:0px; padding-top:10px; height:325px}
+.pay-bk2 .pay-minfo .pay-minfotit{font-family:"宋体"; font-size:12px; line-height:24px; color:#333; height:30px; }
+
+.pay-bk2 .pay-minfo1 .pay-minfotit1{font-family:"黑体"; font-size:20px; line-height:30px; color:#333; height:30px; border-bottom:1px solid #ffcc00; margin-bottom:5px; margin-left:5px; margin-right:5px; text-align:center;}
+.pay-bk2 .pay-minfo1 .pay-minfotit2{font-family:"宋体"; font-size:12px; line-height:24px; color:#333; height:24px; margin-bottom:5px; margin-left:5px; margin-right:5px; }
+
+#page #cart-content .pay-money{ font-family:"宋体"; font-size:12px; font-weight:bold;line-height:24px; color:#333; width:880px; padding:10px; margin:0 auto; height:60px; text-align:right; }
+#page #cart-content .pay-moneyt{ font-family:"宋体"; font-size:12px; font-weight:bold;line-height:24px; color:#333; text-align:right; }
+#page #cart-content .pay-moneyt img{ padding-right:10px; }
+
+
+#page #cart-content .pay-list{ font-family:"宋体"; font-size:12px; line-height:24px; color:#333; width:900px; padding:10px; margin:0 auto; height:160px; text-align:left; }
+#page #cart-content .pay-list .pay-listt{ font-size:14px; font-weight:bold;line-height:24px; color:#333; background-color:#fff; height:30px; text-align:left; text-indent:10px;}
+#page #cart-content .pay-list .pay-listt1{ font-size:12px; line-height:24px; color:#333; background-color:#fff; height:30px; text-align:right;}
+#page #cart-content .pay-list .pay-listt1 a{ font-size:12px; line-height:24px; color:#03c; background-color:#fff; height:30px; text-align:right;}
+#page #cart-content .pay-list .pay-listc{text-align:left; text-indent:10px;}
+#page #cart-content .pay-list .pay-listc a{font-size:12px; line-height:24px; color:#03c; background-color:#fff; height:30px; text-align:left; text-indent:10px;}
+
+/* 结算中心结束------------------------------------------------------------------------------------------------ */
+
+/* 订购成功开始------------------------------------------------------------------------------------------------ */
+#page #pays-content{width:948px;margin:10px 0px; font-size:12px; font-height:24px; color:#333; float:left}
+#page #pays-content .pay-kong1{ height:10px;}
+#page #pays-content .pays-bk{font-family:"宋体"; font-size:12px; line-height:24px; color:#333; border:1px solid #f90; width:820px; margin:0 auto; height:auto;padding:3px; }
+#page #pays-content .pays-bk0405{font-family:"宋体"; font-size:12px; line-height:24px; color:#333; width:820px; margin:0 auto; height:auto;padding:3px; }
+
+#page #pays-content .pays-bk2{width:778px;margin:0 auto;padding-left:43px; }
+
+#page #pays-content .pays-bk .pays-titimg{ width:200px; padding:5px; text-align:center; margin:0 auto;}
+#pays-content .pays-bk li{ text-indent:10px; margin-left:5px;}
+.pays-bktit{ color:#f60; font-weight:bold;}
+#page #pays-content .pays-bk1{font-family:"宋体"; font-size:12px; line-height:24px; color:#333; border:1px solid #ccc;width:820px; margin:0 auto; height:auto; }
+#page #pays-content .pays-bk1 .pays-tit{font-size:20px; font-weight:bold; height:35px; line-height:35px; text-align:center;padding-top:15px;}
+#page #pays-content .pays-bk1 .pays-tcon{font-size:12px; font-weight:bold; line-height:24px; border-bottom:1px solid #ccc; text-indent:5px; margin:5px; height:26px;}
+#page #pays-content .pays-bk1 .pays-tcony{font-size:12px; line-height:30px; background:#E5E5E5; text-indent:15px; margin:2px; height:30px;font-weight:bold;color:#940000; }
+
+#page #pays-content .pays-bk1 .pays-tcony .pay-tcon-re{font-weight:bold;  width:200px; float:left;}
+#page #pays-content .pays-bk1 .pays-tcony .pay-tcon-re1{ text-align:right; float:right;}
+
+#page #pays-content .pays-bk1 .pays-tcony1{font-size:12px; line-height:24px; border-top:1px solid #ccc; text-indent:5px; margin:5px; height:26px;}
+
+#page #pays-content .pays-bk1 .pays-tcony1 .pay-tcon-yre{font-weight:bold;  width:400px; float:left;}
+#page #pays-content .pays-bk1 .pays-tcony1 .pay-tcon-yre1{ text-align:right; float:right;}
+
+
+#pays-content .pays-bk1 .pays-tcontent{font-size:12px; line-height:24px; text-indent:10px; text-align:center;margin:25px;}
+#pays-content .pays-bk1 .pays-tcontent a{font-size:12px; line-height:24px; color:#03c;}
+#pays-content .pays-bk1 .pays-tinfo{ text-align:left;padding:10px;}
+#pays-content .pays-bk1 .pays-tinfoo{ text-align:left;}
+#pays-content .pays-bk1 .pays-tinfoo ol{list-style-type:upper-alpha;}
+#pays-content .pays-bk1 .pays-tinfo li{text-indent:10px;padding:1px 0;}
+#pays-content .pays-bk1 .pays-tinfo img{margin:3px 0;}
+#pays-content .pays-bk1 .pays-tinfoo li{ width:45%; float:left; text-indent:10px;}
+#pays-content .pays-ths{ text-align:center;}
+#pays-content .pays-ths img{ padding:5px;}
+#pays-content .pays-yes{ text-align:right;}
+#pays-content .pays-yes img{ padding:10px;}
+
+
+/* 订购成功结束------------------------------------------------------------------------------------------------ */
+
+
+.loginemail{padding:5px 0 5px 20px;}
+.loginemail input{height:20px;width:180px; line-height:20px; border:1px solid #999999;}
+#captchaImg{
+	padding-top:20px;
+	height:50px;
+}
+.mylogin-logcontent{margin-bottom:20px;}
+
+.mylogin-logcontent ol{ border-bottom:1px solid #DFD6CC;margin-bottom:20px;}
+.mylogin-logcontent ol img{margin:25px 0;}
+.mylogin-logcontent li{ text-align:center;}
+.forgetfont{ border:1px solid #FFCC01;padding:15px;width:460px;}
+.forgetfont li{ text-align:left;padding:5px;}
+
+.yunfeixiang a{
+padding-left:580px;
+	color:#0000FF;
+
+}
+
+.pays-bk0412{
+color:#333333;
+font-family:"宋体";
+font-size:12px;
+height:auto;
+line-height:24px;
+margin:0 auto 20px auto;
+padding:15px;
+width:820px;}
+
+
+.bankstyle{background:#ffffff;width:770px;margin:25px 0 0 19px;}
+.banktd{
+	display: block;
+	width: 190px;float:left;padding:6px 0;
+}
+.banktd img{border:2px solid #ffffff;}
+.banktd a:hover img{border:2px solid #F8E100;}

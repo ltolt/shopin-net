@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+				http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+				http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+    <!--default-lazy-init="true">-->
+
+    <description>Spring公共配置文件</description>
+    <context:annotation-config/>
+    <context:property-placeholder location="classpath*:*.properties"/>
+
+    <import resource="icbc.xml"/>
+    <import resource="chinapay.xml"/>
+
+    <bean id="bankConf" class="net.shopin.web.conf.BankConf">
+        <property name="v_mid" value="${bank.mid}"/>
+        <property name="v_password" value="${bank.password}"/>
+        <property name="publicKeyFile" value="${bank.publicKeyFile}"/>
+        <property name="bankVerifyURL" value="${bank.bankVerifyURL}"/>
+        <property name="taobaoVerifyURL" value="${bank.taobaoVerifyURL}"/>
+        <property name="taobaoNotifyURL" value="${bank.taobaoNotifyURL}"/>
+        <property name="partner" value="${bank.partner}"/>
+        <property name="sellerEmail" value="${bank.sellerEmail}"/>
+        <property name="sellerId" value="${bank.sellerId}"/>
+        <property name="merID" value="${bank.merID}"/>
+        <property name="merAcct" value="${bank.merAcct}"/>
+        <property name="icbcVerifyURL" value="${bank.icbcVerifyURL}"/>
+        <property name="key_password" value="${bank.key_password}"/>
+        <property name="icbcPublicFile" value="${bank.icbcPublicFile}"/>
+        <property name="icbcPrivateKey" value="${bank.icbcPrivateKey}"/>
+        <property name="tenpayKey" value="${bank.tenpayKey}"/>
+        <property name="tenpayAccount" value="${bank.tenpayAccount}"/>
+        <property name="tenpayVerifyURL" value="${bank.tenpayVerifyURL}"/>
+          <property name="alipayKJReturnURL" value="${bank.alipayKJReturnURL}"/>
+        <property name="alipayKJNotifyURL" value="${bank.alipayKJNotifyURL}"/>
+        <property name="alipayKJGateWay" value="${bank.alipayKJGateWay}"/>
+        <property name="alipayKJPayMethod" value="${bank.alipayKJPayMethod}"/>
+        <property name="alipayKJService" value="${bank.alipayKJService}"/>
+        <property name="alipayKJPartner" value="${bank.alipayKJPartner}"/>
+        <property name="alipayKJKey" value="${bank.alipayKJKey}"/>
+        <property name="alipayKJSellerEmail" value="${bank.alipayKJSellerEmail}"/>
+        <property name="alipayKJPaymentType" value="${bank.alipayKJPaymentType}"/>
+        <property name="alipayKJSignType" value="${bank.alipayKJSignType}"/>
+        
+        
+     <!--
+        <property name="cmbPublicKey" value="${bank.cmbPublicKey}"/>
+        <property name="cmbVerifyURL" value="${bank.cmbVerifyURL}"/>
+        <property name="cmbShopinKey" value="${bank.cmbShopinKey}"/>
+
+        <property name="cmbBranchID" value="${bank.cmbBranchID}"/>
+        <property name="cmbCoNo" value="${bank.cmbCoNo}"/>
+
+        <property name="chinaPayPublicKey" value="${bank.chinaPayPublicKey}"/>
+        <property name="chinaPayPrivetKey" value="${bank.chinaPayPrivetKey}"/>
+        <property name="chinaPageRetUrl" value="${bank.chinaPageRetUrl}"/>
+        <property name="chinaBgRetUrl" value="${bank.chinaBgRetUrl}"/>
+        <property name="chinaPayMerId" value="${bank.chinaPayMerId}"/>
+        -->
+    </bean>
+
+<!--ftp上传相关配置-->
+     <bean id="ftpServer" class="net.shopin.web.util.FtpServerConf">
+        <property name="host" value="${ftp.host}"/>
+        <property name="username" value="${ftp.username}"/>
+        <property name="password" value="${ftp.password}"/>
+    </bean>
+
+    <bean id="templateService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/templateService"/>
+        <property name="serviceInterface" value="net.shopin.api.ITemplateService"/>
+    </bean>
+
+    <bean id="sysParameterService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/sysParameterService"/>
+        <property name="serviceInterface" value="net.shopin.api.ISysParameterService"/>
+    </bean>
+
+    <bean id="freightService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/freightService"/>
+        <property name="serviceInterface" value="net.shopin.api.IFreightService"/>
+    </bean>
+
+    <bean id="addressService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/addressService"/>
+        <property name="serviceInterface" value="net.shopin.api.IAddressService"/>
+    </bean>
+
+    <bean id="cartService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/cartService"/>
+        <property name="serviceInterface" value="net.shopin.api.ICartService"/>
+    </bean>
+
+    <bean id="productService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/productService"/>
+        <property name="serviceInterface" value="net.shopin.api.IProductService"/>
+    </bean>
+
+    <bean id="productWebService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/productWebService"/>
+        <property name="serviceInterface" value="net.shopin.api.IProductWebService"/>
+    </bean>
+
+    <bean id="brandService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/brandService"/>
+        <property name="serviceInterface" value="net.shopin.api.IBrandService"/>
+    </bean>
+
+    <bean id="brandRankService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/brandRankService"/>
+        <property name="serviceInterface" value="net.shopin.api.IBrandRankService"/>
+    </bean>
+
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+
+    <bean id="memberService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/memberService"/>
+        <property name="serviceInterface" value="net.shopin.api.IMemberService"/>
+    </bean>
+
+    <bean id="favorService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/favorService"/>
+        <property name="serviceInterface" value="net.shopin.api.IFavorService"/>
+    </bean>
+
+    <bean id="memberAccountService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/memberAccountService"/>
+        <property name="serviceInterface" value="net.shopin.api.IMemberAccountService"/>
+    </bean>
+
+    <bean name="memberCouponService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/memberCouponService"/>
+        <property name="serviceInterface" value="net.shopin.api.IMemberCouponService"/>
+    </bean>
+
+    <bean id="memberPointService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/memberPointService"/>
+        <property name="serviceInterface" value="net.shopin.api.IMemberPointService"/>
+    </bean>
+
+    <bean id="emailService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/emailService"/>
+        <property name="serviceInterface" value="net.shopin.api.IEmailService"/>
+    </bean>
+
+    <bean id="securityService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/securityService"/>
+        <property name="serviceInterface" value="net.shopin.api.ISecurityService"/>
+    </bean>
+
+    <bean id="channelService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/channelService"/>
+        <property name="serviceInterface" value="net.shopin.api.IChannelService"/>
+    </bean>
+
+    <bean name="noticeService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/noticeService"/>
+        <property name="serviceInterface" value="net.shopin.api.INoticeService"/>
+    </bean>
+
+    <bean name="pageFieldService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/pageFieldService"/>
+        <property name="serviceInterface" value="net.shopin.api.IPageFieldService"/>
+    </bean>
+
+    <bean name="pageService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/pageService"/>
+        <property name="serviceInterface" value="net.shopin.api.IPageService"/>
+    </bean>
+
+
+    <bean name="promotionService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/promotionService"/>
+        <property name="serviceInterface" value="net.shopin.api.IPromotionService"/>
+    </bean>
+
+    <bean name="proReviewService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/proReviewService"/>
+        <property name="serviceInterface" value="net.shopin.api.IProReviewService"/>
+    </bean>
+
+    <bean name="saleRecordService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/saleRecordService"/>
+        <property name="serviceInterface" value="net.shopin.api.ISaleRecordService"/>
+    </bean>
+
+    <bean id="breadcrumbNavigationService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/breadcrumbNavigationService"/>
+        <property name="serviceInterface" value="net.shopin.api.IBreadcrumbNavigationService"/>
+    </bean>
+
+    <bean id="searchService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${search_server}/searchService"/>
+        <property name="serviceInterface" value="net.shopin.api.ISearchService"/>
+    </bean>
+
+    <bean id="productListService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${order_server}/productListService"/>
+        <property name="serviceInterface" value="net.shopin.api.IProductListService"/>
+    </bean>
+
+    <bean id="orderService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${order_server}/orderService"/>
+        <property name="serviceInterface" value="net.shopin.api.IOrderService"/>
+    </bean>
+
+    <bean id="refundService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${order_server}/refundService"/>
+        <property name="serviceInterface" value="net.shopin.api.IRefundService"/>
+    </bean>
+
+    <bean id="orderUpdateService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${order_server}/orderUpdateService"/>
+        <property name="serviceInterface" value="net.shopin.api.IOrderUpdateService"/>
+    </bean>
+
+    <bean id="paymentService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${order_server}/paymentService"/>
+        <property name="serviceInterface" value="net.shopin.api.IPaymentService"/>
+    </bean>
+
+     <bean id="factoryStoreService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/factoryStoreService"/>
+        <property name="serviceInterface" value="net.shopin.api.IFactoryStoreService"/>
+    </bean>
+    <bean id="leaveMessageService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/leaveMessageService"/>
+        <property name="serviceInterface" value="net.shopin.api.ILeaveMessageService"/>
+    </bean>
+    <!--<bean id="sizeTableService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">-->
+        <!--<property name="serviceUrl" value="${business_server}/sizeTableService"/>-->
+        <!--<property name="serviceInterface" value="net.shopin.api.ISizeTableService"/>-->
+    <!--</bean>-->
+    <bean id="flagShipStoreService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/flagShipStoreService"/>
+        <property name="serviceInterface" value="net.shopin.api.IFlagShipStorerService"/>
+    </bean>
+
+   <!-- <bean id="searchService" class="org.apache.solr.client.solrj.impl.CommonsHttpSolrServer">
+        <constructor-arg value="${search_server}"/>
+    </bean>-->
+    <!--
+       <bean id="categoryService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+           <property name="serviceUrl" value="${business_server}/categoryService"/>
+           <property name="serviceInterface" value="net.shopin.api.ICategoryService"/>
+       </bean>
+    -->
+    <bean id="storeBrandService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/storeBrandService"/>
+        <property name="serviceInterface" value="net.shopin.api.IStoreBrandService"/>
+    </bean>
+
+    <bean id="countProductService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/countProductService"/>
+        <property name="serviceInterface" value="net.shopin.api.ICountProductService"/>
+    </bean>
+
+    <bean id="orderSourcesService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${order_server}/OrderSourcesService"/>
+        <property name="serviceInterface" value="net.shopin.api.IOrderSourceService"/>
+    </bean>
+    <bean id="productStoreService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/productStoreService"/>
+        <property name="serviceInterface" value="net.shopin.api.IProductStoreService"/>
+    </bean>
+    <bean id="promotionStoreShopService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${business_server}/promotionStoreShopService"/>
+        <property name="serviceInterface" value="net.shopin.api.IPromotionStoreShopService"/>
+    </bean>
+    
+     <bean id="dmService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${order_server}/dmService"/>
+        <property name="serviceInterface" value="net.shopin.api.IDMOrderService"/>
+    </bean>
+
+</beans>

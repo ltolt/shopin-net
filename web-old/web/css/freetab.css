@@ -1,0 +1,91 @@
+
+/*default style
+.tab_nav {width:96%;height:22px;border-bottom: 1px solid #CBCBCB;margin:12px auto 0 auto;overflow: hidden;}
+.tab_nav li{list-style-type: none;}
+.tab_nav li{list-style-type:none;float:left;display:block;width:83px;height:21px;line-height:24px;cursor:pointer;text-align:center;color:#4D4D4D;background: url(http://images.shopin.net:9009/images/i-20.gif) no-repeat center 1px;}
+.tab_nav li.hover{list-style-type: none;font-weight:bold;}
+*/
+
+/*default style
+#tab_nav {width:96%;height:22px;border-bottom: 1px solid #CBCBCB;margin:12px auto 0 auto;overflow: hidden;}
+#tab_nav li{list-style-type: none;}
+#tab_nav li{list-style-type:none;float:left;display:block;width:83px;height:21px;line-height:24px;cursor:pointer;text-align:center;color:#4D4D4D;background: url(http://images.shopin.net:9009/images/i-20.gif) no-repeat center 1px;}
+#tab_nav li.hover{list-style-type: none;font-weight:bold;}
+*/
+
+.rightintro .tab_nav li {
+	border:1px solid #5A96A6;
+	font:Arial, Helvetica, sans-serif, "宋体";
+	font-size:12px;
+	color:#000000;
+	cursor:pointer;
+	display:block;
+	float:left;
+	line-height:18px;
+	margin:6px;
+	text-align:center;
+	white-space:nowrap;
+}
+
+.rightintro .tab_nav li.hover {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+background:#ffffff none repeat scroll 0 0;
+border-width:2px;
+margin:4px;
+background-image: url(http://images.shopin.net:9009/images/w-32.gif);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+
+.firstItemStyle{color:#666666}
+.tab1 .firstItemStyle{color:#666666}
+/*.tab2 .firstItemStyle{color:green}*/
+
+/*free tab1 style*/
+
+.tab1 .tab_nav {width:96%;height:22px;border-bottom: 1px solid #CBCBCB;margin:12px auto 0 auto;overflow: hidden;}
+.tab1 .tab_nav li{list-style-type:none;float:left;display:block;width:83px;height:21px;line-height:24px;cursor:pointer;text-align:center;color:#4D4D4D;background: url(http://images.shopin.net:9009/images/i-20.gif) no-repeat center 1px;}
+.tab1 .tab_nav .kong{width:10px;clear:both;background-image: none;}
+.tab1 .tab_nav .more{background-image: none;padding-left:212px;}
+.tab1 .tab_nav li.hover{font-weight:bold;}
+.tab1 .tab_nav .more a,.tab1 .tab_nav .more a:visited{color:#666666}
+.tab1 .tab_nav .more a:hover,.tab1 .tab_content .tab_item a:hover{list-style-type: none;height:21px;line-height:21px;background: url(http://images.shopin.net:9009/images/i-13.gif) no-repeat 3px;padding-left:0px;}
+.tab1 .tab_content{clear:both; margin-top:0px; border-bottom:1px solid #DFD5CA; height:210px;text-align:center;padding-top:15px;overflow: hidden;}
+.tab1 .tab_content ul{width:580px;margin:0 auto;}
+.tab1 .tab_content ul li{list-style-type:none;width:144px;height:20px;overflow: hidden;line-height: 20px;cursor: hand;}
+.tab1 .tab_content p{width:130px;height:20px;overflow: hidden;line-height: 20px;cursor: hand;text-align:center;padding:0 auto;}
+.tab1 .tab_content img{border: 1px solid #E4E4E4;}
+.tab1 .tab_content h3{clear:both;font-size:14px;font-weight: bold;font-family: Arial, "宋体";color:#EA6D00;height:25px;line-height: 25px;}
+.tab1 .tab_content em{font-style: normal;font-size:12px;font-weight: normal;color:#666666;text-decoration: line-through;margin-right:15px;}
+
+
+
+/*free tab2 style*/
+.tab2 .tab_nav {width:100%;height:26px;background: url(http://images.shopin.net:9009/images/i-17.gif) no-repeat right center;border-bottom: 1px solid #BEB4B4;}
+.tab2 .tab_nav ul{width:500px;clear:both;}
+.tab2 .tab_nav li{float:left; display:block; cursor:pointer;width:88px;text-align:center;color:#000000; margin-right:1px; height:26px;line-height:32px;background: url(http://images.shopin.net:9009/images/i-16.gif) no-repeat center 4px;}
+.tab2 .tab_nav li.hover{color:#ffffff;font-weight:bold;height:26px;line-height:26px;background: url(http://images.shopin.net:9009/images/i-15.gif) no-repeat center bottom;}
+.tab2 .tab_content .tab_item a:hover,.tab2 .tab_content .tab_item .color666666 a:hover{color:#FF6600;text-decoration: underline;}
+.tab2 .tab_content{clear:both; margin-top:0px; border:1px solid #DFD5CA; border-top:none; height:294px;text-align:center;padding-top:20px;}
+.tab2 .tab_content .tab_item ul{width:725px;margin:0 auto;}
+.tab2 .tab_content .tab_item li{float:left;width:145px;text-align:center;padding:0 auto;}
+.tab2 .tab_content .tab_item p{width:130px;height:20px;overflow: hidden;line-height: 20px;cursor: hand;}
+.tab2 .tab_content .tab_item img{border: 1px solid #E4E4E4;}
+.tab2 .tab_content .tab_item h3{clear:both;font-size:14px;font-weight: bold;font-family: Arial,"宋体";color:#EA6D00;height:25px;line-height: 25px;}
+.tab2 .tab_content .tab_item em{font-style: normal;font-size:12px;font-weight: normal;color:#666666;text-decoration: line-through;margin-right:15px;}
+.tab2 .tab_content .tab_item .tab-list{width:370px;float:left;padding:15px 0 0 0;}
+.tab2 .tab_content .tab_item .tab-list li{clear:both;width:370px;height:24px;line-height:24px;text-align: left;padding-left:22px;background-image: url(http://images.shopin.net:9009/images/i-13.gif);background-repeat: no-repeat;background-position: 15px center;}
+
+/*free tab5 style*/
+.tab5 .tab_nav ul li a:hover,.tab5 .tab_nav .current a:hover{color:#FF6600;text-decoration: none;}
+.tab5 .tab_nav{background:#F6F6F6;height:35px;border-bottom: 1px solid #E1E1E1;overflow: hidden;}
+.tab5 .tab_nav li {float:left;}
+.tab5 .tab_nav li.hover{font-weight:bold;color:#FF6600;}
+.tab5 .tab_nav ul li{float:left;padding:13px 20px 0 20px;height:35px;}
+.tab5 .tab_nav .shuxian{font-size:19px;padding-top:10px;color:#c2c2c2; }
+.tab5 .tab_nav .current-left-img{background-image: url(http://images.shopin.net:9009/images/i-93.gif);display: block;height: 36px;width: 3px;}
+.tab5 .tab_nav .current-right-img{background-image: url(http://images.shopin.net:9009/images/i-94.gif);display: block;height: 36px;width: 4px;}
+.tab5 .tab_nav .current{background: url(http://images.shopin.net:9009/images/i-95.gif) repeat-x;height:35px;font-weight: bold;color: #333333;}
+.tab5 .tab_nav .hover{height:35px;font-weight: bold;color: #333333;}

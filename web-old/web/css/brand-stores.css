@@ -1,0 +1,72 @@
+@charset "utf-8";
+/* CSS Document */
+/* 主体左右侧布局开始-------------------- */
+*{
+	font-family: "宋体";
+}
+#content-left4{width:707px;float:left;margin-right:9px;font-size:12px;line-height: 24px;}
+#content-right4{width:230px;float:left;font-size:12px;border: 1px solid #DFD5CA;}
+/* 主体左右侧布局结束-------------------- */
+#content-left4 .content2 .content8 a,#content-right4 .month-top10 .top10-list a,#content-right4 .month-top10 .top10-list a:visited,#content-right4 .month-top10 .top10-list-more a,#content-right4 .month-top10 .top10-list-more a:visited{color:#333333;}
+#content-left4 .content2 .content8 a:hover,#content-right4 .month-top10 .top10-list a:hover,#content-right4 .month-top10 .top10-list-more a:hover{color:#FF6600;text-decoration: underline;}
+#content-left4 .content2{margin-top:10px;}
+#content-left4 .content2 li{vertical-align:text-top;}
+#content-left4 .content2 .content2-top{height:26px;border-bottom: 1px solid #E4DAD3;}
+#content-left4 .content2 .content8{height:auto;border: 1px solid #DFD5CA;border-top:none;padding:10px 10px 0 10px;width:685px; }
+
+
+#content-left4 .content2 .content8 .width340{width:340px;margin-top:10px;}
+#content-left4 .content2 .content8 .width340,#content-left4 .content2 .content8 .width340 .logobrand,#content-left4 .content2 .content8 .brand-imglist{float:left;}
+#content-left4 .content2 .content8 .brand-imglist{width:162px;padding-bottom:20px;}
+#content-left4 .content2 .content8 img{margin-right:10px;}
+#content-left4 .content2 .content8 .brand-imglist li{height:18px;line-height:18px;}
+#content-left4 .content2 .content8 .brand-imglist .height60{height:60px;line-height:20px;}
+
+
+#tab1 .tab_nav{height:21px;border-bottom: 1px solid #CBCBCB;overflow: hidden;width:680px;margin-top:20px;clear:both;}
+#tab1 .tab_content{text-align:left;padding-top:10px;width:100%;height:auto;border:none;clear:both;} 
+#tab1 .tab_content .tab_item .abc{height:30px;line-height:30px;text-align:center;}
+#tab1 .tab_content .tab_item .abc span{height:20px;width:100%;display:block;float:left;margin-bottom:20px;}
+#tab1 .tab_content .tab_item .abc a{
+	font-size:16px;
+	color:#ff6600;
+	padding:0 6px 15px 6px;
+	font-family: Arial;
+	font-weight: bold;
+}
+#tab1 .tab_content .tab_item .abc img{margin:0;float:left;border:none;}
+#tab1 .tab_content .tab_item .abc-a{height:auto;clear:both;}
+#tab1 .tab_content .tab_item .abc-a .abc-height150px{width:100%;clear:both;height:135px;background:#F8F5F2;margin-bottom:25px;}
+#tab1 .tab_content .tab_item .abc-a .abc-height150px li{width:146px;text-align:center;float:left;}
+
+
+#tab1 .tab_content .tab_item .abc-a .abc-height150px1{width:740px;}
+#tab1 .tab_content .tab_item .abc-a .abc-height150px1 li{width:149px;float:left; text-align:center;height:25px; }
+
+#tab1 .tab_content .tab_item .abc-a .abc-height150px1 li p{padding-left:15px;text-align:left;}
+
+
+
+
+#tab1 .tab_content .tab_item .abc-a h3{font-family: Arial;font-size: 20px;font-weight: bold;text-indent: 20px;height:35px;line-height:35px;margin:20px 0;border-top:1px dashed #CCCCCC;margin-top:20px;}
+
+
+#content-right4{margin-top:10px;}
+#content-right4 .month-top10{padding-top:10px;}
+#content-right4 .month-top10 li{width:250px;height:20px;line-height:20px;clear:both;}
+#content-right4 .month-top10 div{font-size:14px;color:#9C0925;font-weight: bold;margin-bottom:10px;height:20px;line-height:20px;padding:0 10px;clear:both;}
+#content-right4 .month-top10 span a{font-size: 12px;font-weight: normal;color:#333333;padding-left: 20px;}
+#content-right4 .month-top10 .top10-backgroundF4F0EF{background:#F4F0EF;height:20px;line-height:20px;margin-bottom:18px;width:100%;padding:0 10px;}
+#content-right4 .month-top10 .top10-list{padding:0 20px;}
+#content-right4 .month-top10 .top10-list .top10-icon{width:30px;display: block;}
+#content-right4 .month-top10 .top10-list .top10-name{width:100px;display: block;}
+#content-right4 .month-top10 .top10-list span{float:left;}
+#content-right4 .month-top10 .top10-list .top10-parts{width:55px;display: block;}
+#content-right4 .month-top10 .top10-list a{width:205px;display: block;height:22px;line-height:14px;}
+#content-right4 .month-top10 .top10-list a:hover{cursor: hand;}
+#content-right4 .month-top10 .bcimg-top10 span a{font-size: 12px;font-weight: normal;color:#333333;padding-left: 75px;}
+#content-right4 .month-top10 .top10-list-more{padding:0 0 5px 180px;border-bottom: 1px solid #DFD5CA;}
+.content2-title{height:26px; border-bottom:1px solid #DFD5CA;}
+.abc-height150px img{width:115px;height:75px; border:1px solid #eeeeee; margin-top:20px;}
+.brandfontlist{float:left;width:740px;}
+.brandfontlist li{float:left;width:133px;padding-left:15px;height:22px; line-height:22px;}

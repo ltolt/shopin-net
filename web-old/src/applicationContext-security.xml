@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.4.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+       default-lazy-init="true">
+
+    <!--JCaptcha验证码服务 -->
+    <bean id="captchaService" class="com.octo.captcha.service.image.DefaultManageableImageCaptchaService">
+        <constructor-arg type="com.octo.captcha.service.captchastore.CaptchaStore" index="0">
+            <bean class="com.shopin.modules.security.jcaptcha.MemcacheCaptchaStore" destroy-method="cleanAndShutdown">
+                <property name="memcachedClient" ref="methodSecurityClient"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg type="com.octo.captcha.engine.CaptchaEngine" index="1">
+            <bean class="com.shopin.modules.security.jcaptcha.GMailEngine"/>
+        </constructor-arg>
+        <constructor-arg index="2">
+            <value>1800</value>
+        </constructor-arg>
+        <constructor-arg index="3">
+            <value>100000</value>
+        </constructor-arg>
+        <constructor-arg index="4">
+            <value>75000</value>
+        </constructor-arg>
+    </bean>
+
+    <bean name="methodSecurityClient"
+          class="net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean">
+        <property name="servers">
+            <value>${memcached.securityServers}</value>
+        </property>
+        <property name="weights">
+            <list>
+                <value>1</value>
+            </list>
+        </property>
+        <property name="connectionPoolSize" value="5"></property>
+        <property name="commandFactory">
+            <bean class="net.rubyeye.xmemcached.command.TextCommandFactory"></bean>
+        </property>
+        <property name="sessionLocator">
+            <bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator"></bean>
+        </property>
+        <property name="transcoder">
+            <bean class="net.rubyeye.xmemcached.transcoders.TokyoTyrantTranscoder"/>
+        </property>
+        <property name="bufferAllocator">
+            <bean class="net.rubyeye.xmemcached.buffer.SimpleBufferAllocator"></bean>
+        </property>
+    </bean>
+
+</beans>

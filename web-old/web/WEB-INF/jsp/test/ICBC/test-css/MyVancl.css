@@ -1,0 +1,45 @@
+BODY {
+	
+}
+.mySty {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; FONT-SIZE: 12px; PADDING-TOP: 0px
+}
+.mySty1 {
+	BORDER-BOTTOM: #d0d0d0 3px solid; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; FONT-SIZE: 12px; PADDING-TOP: 0px
+}
+#tabl {
+	
+}
+#tabl IMG {
+	MARGIN-BOTTOM: 5px
+}
+#myqmLf H5 {
+	BORDER-BOTTOM: #d0d0d0 3px solid; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+#myqmLf H5 SPAN {
+	BORDER-BOTTOM: #970013 3px solid
+}
+#myqmLf .myLf {
+	MARGIN-TOP: 10px; WIDTH: 1000px
+}
+#myqmLf .myLf UL {
+	PADDING-BOTTOM: 0px; MARGIN: 10px 1px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; FLOAT: left; PADDING-TOP: 0px
+}
+#myqmLf .myLf UL LI {
+	LIST-STYLE-TYPE: none; MARGIN: 15px 0px
+}
+#myqmLf P {
+	
+}
+#myqmLf P SPAN {
+	PADDING-BOTTOM: 1px; BACKGROUND-COLOR: #333; MARGIN: 0px 2px; PADDING-LEFT: 6px; PADDING-RIGHT: 6px; COLOR: #ffffff; FONT-WEIGHT: bold; PADDING-TOP: 1px
+}
+.out {
+	POSITION: relative; PADDING-BOTTOM: 2px; PADDING-LEFT: 0px; WIDTH: 100%; PADDING-RIGHT: 2px; BACKGROUND: #eeeeee; PADDING-TOP: 0px
+}
+.in {
+	BORDER-BOTTOM: #efefef 1px solid; POSITION: relative; BORDER-LEFT: #efefef 1px solid; MARGIN-BOTTOM: 0px; BACKGROUND: #fff; BORDER-TOP: #efefef 1px solid; TOP: -2px; BORDER-RIGHT: #efefef 1px solid; LEFT: -2px
+}
+.pmy {
+	TEXT-ALIGN: center; WIDTH: 150px; MARGIN-BOTTOM: 10px; FLOAT: left; HEIGHT: 100px; OVERFLOW: hidden; _width: 150px
+}

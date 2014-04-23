@@ -1,0 +1,91 @@
+@charset "utf-8";
+/* CSS Document */
+/* 公共样式开始------------------------------------------------------------------------------------------------ */
+#page #content-right .hot-sku{clear:both;float:left;}
+.content2-title li,#page #content-right .hot-sku .hot-sku-imglist li,#page #content-right .hot-sku .content2-title-1 .hot-sku-list,#page #content-right .hot-sku .hot-sku-title li {float:left;}
+/* 公共样式结束------------------------------------------------------------------------------------------------ */
+
+/* 上品会员开始------------------------------------------------------------------------------------------------ */
+#page .banner-channels{border:1px solid #DFD6CC;height:120px;margin:0 auto;font-size:12px;color:#999; text-align:center; margin:10px 0 ;}
+#page .banner-channels li,#page .banner-channels{float:left;}
+#page .banner-channels .b-font{ margin:39px 27px 11px 596px;}
+#page .banner-channels p{font-size:12px;color:#666666;}
+#page .banner-channels .member-header{
+	background-image:url(http://images.shopin.net:9009/images/y-m001.gif);
+	height:78px;
+	width:948px;
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+#page .banner-channels .member-hfont{ height:34px; padding:2px 0; line-height:24px;  }
+#hfont-color{ color:#ff6600; font-family: "宋体";	font-size: 16px;font-style: normal;	line-height: 24px;	font-weight: bold;	color: #ff6600;text-decoration: none;
+}
+
+/* 上品会员结束------------------------------------------------------------------------------------------------ */
+
+/*左右布局开始*/
+#content-left{width:298px;border: 1px solid #DFD5CA;float:left;margin-right:8px;font-size:12px;line-height: 24px;padding:10px;}
+#content-right{width:620px;float:right;font-size:12px;}
+/*左右布局结束*/
+
+/* 左侧分类开始-------------------- */
+#content-left .member-info{border-bottom: 1px solid #CBC5BE; margin-bottom:10px;}
+#content-left .member-info .member-infowelcom{ font-family:"宋体"; font-size:14px; font-weight:normal; text-indent:10px; line-height:24px; width:288px; height:130px; background:#f0f0f0; margin:5px auto; margin-bottom:10px; padding-bottom:5px; padding-top:10px;}
+
+#content-left .member-info .member-infotit{border-bottom: 1px solid #CBC5BE; font-size:14px; font-weight:bold; padding-bottom:5px; }
+#content-left .member-info1 .member-infotit{border-bottom: 1px solid #CBC5BE; font-size:14px; font-weight:bold; padding-bottom:5px; }
+#content-left .member-info1 .member-infttitl{float:left;}
+#content-left .member-info1 .member-inftmore{ float:right; font-size:14px; font-weight:normal;}
+#content-left .member-info1 .member-inftmore a{ float:right; font-size:14px; }
+#content-left .member-info .member-infttitl{float:left;}
+#content-left .member-info .member-inftmore{ float:right; font-size:14px; font-weight:normal;}
+#content-left .member-info .member-inftmore a{ float:right; font-size:14px; }
+#content-left .member-info .member-ing{ height:110px; }
+.member-ing .member-infoimg{border:1px solid #cbc5be; padding:4px 2px 2px 4px; height:84px; width:104px; margin-top:10px; margin-left:5px; float:left;}
+.member-ing .member-infocontent{width:170px; float:left; margin:10px 0px 0px 5px; text-align:center; border-bottom:1px dashed #cbc5be; padding-top:5px; padding-bottom:5px;}
+.member-ing .member-infocontent .member-infoctit{ font-size:14px; font-weight:bold;}
+.member-ing .member-infocontent .member-inggo a{text-decoration: underline;}
+#content-left .member-info1{margin-bottom:10px; width:280px;}
+#content-left .member-info1 .member-img130{ margin-top:5px; margin-left:5px; float:left;}
+#content-left .brand1{float:left;width:90px;}
+#content-left .brand2{float:left;}
+#content-left .brand1 a,#page #content-left .brand2 a{display:block;height:54px;*height:56px;width:82px;overflow:hidden;text-align:center;}
+#content-left .brand1 h3,#page #content-left .brand2 h3{font-size:12px;font-weight: normal;height:19px;line-height: 16px;}
+#content-left .brand1 img{margin:0 9px 0 1px;}
+#content-left a:hover,#content-left .brand1 a:hover,#page #content-right .content2y .top10 .store-top3 .top10-list p span{text-decoration: none;color:#FF6600;}
+#content-left .member-info .line24-dian{color:#cccccc;margin:6px 0;font-size:14px; line-height:24px;}
+#content-left .member-info .line24-dian ol{font-size:14px; background: url(http://images.shopin.net:9009/images/i-51.gif) no-repeat left center;text-indent: 10px;}
+#content-left .member-info .line24-dian ol a{color:#4B4B4B;font-weight: bold; font-size:14px;}
+#content-left .member-info .line24-dian li{padding-left:8px;}
+#content-left .member-info .brand-more img{margin:8px 0 0 40px;}
+#page #content-left .paddingbottom22px .price-search{margin-top:15px;color:#333333;font-weight: bold;}
+#page #content-left .paddingbottom22px .price-search input{width:45px;height:24px;border: 1px solid #808080;line-height:24px;margin-top:0px;}
+#page #content-left .paddingbottom22px .price-search .price-search1 img{margin-left:8px;}
+/* 左侧结束*/
+
+/* 产品循环开始-------------------- */
+#content-right .product-list li{vertical-align:text-top;}
+#content-right .product-list .list-content li {
+float:left;
+
+}
+#content-right .product-list{margin-top:0px;}
+#content-right .product-list .list-title{font-size:14px; font-weight:bold; border-top:1px solid #ccc;border-left:1px solid #ccc;border-right:1px solid #ccc; height:32px; padding-top:5px; padding-left:10px;}
+
+#content-right .product-list .list-top{height:26px;border-bottom: 1px solid #E4DAD3;}
+#content-right .product-list .list-content{border: 1px solid #DFD5CA;border-top:none;}
+#content-right .product-list li{float:left;height:auto; }
+
+.product{clear:both; margin-top:0px;text-align:center;padding-top:15px;overflow: hidden;} 
+.product ul{width:610px;margin:0 auto;}
+.product ul li{width:144px;height:20px;overflow: hidden;line-height: 20px;cursor: hand;}
+.product p{width:130px;height:20px;overflow: hidden;line-height: 20px;cursor: hand;text-align:center;padding:0 auto;}
+.product h3{clear:both;font-size:14px;font-weight: bold;font-family: Arial, "宋体";color:#EA6D00;height:25px;line-height: 25px;}
+.product em{font-style: normal;font-size:12px;font-weight: normal;color:#666666;text-decoration: line-through;margin-right:15px;}
+
+
+
+
+
+
+
