@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.shopin.wms.persistence.PromotionTypeMapper" >
+  <resultMap id="BaseResultMap" type="net.shopin.wms.domain.entity.PromotionType" >
+    <id column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="promotion_type_name" property="promotionTypeName" jdbcType="VARCHAR" />
+    <result column="promotion_type_memo" property="promotionTypeMemo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sid, promotion_type_name, promotion_type_memo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from promotion_type
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  
+   <select id="queryBySelective" resultMap="BaseResultMap" parameterType="net.shopin.wms.domain.entity.PromotionType" >
+    select 
+    <include refid="Base_Column_List" />
+    from promotion_type
+    <where>
+    	<if test="sid != null" >
+    		sid = #{sid,jdbcType=INTEGER}
+    	</if>
+    	 <if test="promotionTypeName != null" >
+        and promotion_type_name = #{promotionTypeName,jdbcType=VARCHAR}
+      </if>
+      <if test="promotionTypeMemo != null" >
+        and promotion_type_memo = #{promotionTypeMemo,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from promotion_type
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="net.shopin.wms.domain.entity.PromotionType" >
+    insert into promotion_type (sid, promotion_type_name, promotion_type_memo
+      )
+    values (#{sid,jdbcType=INTEGER}, #{promotionTypeName,jdbcType=VARCHAR}, #{promotionTypeMemo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="net.shopin.wms.domain.entity.PromotionType" >
+    insert into promotion_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="promotionTypeName != null" >
+        promotion_type_name,
+      </if>
+      <if test="promotionTypeMemo != null" >
+        promotion_type_memo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="promotionTypeName != null" >
+        #{promotionTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionTypeMemo != null" >
+        #{promotionTypeMemo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="net.shopin.wms.domain.entity.PromotionType" >
+    update promotion_type
+    <set >
+      <if test="promotionTypeName != null" >
+        promotion_type_name = #{promotionTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionTypeMemo != null" >
+        promotion_type_memo = #{promotionTypeMemo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.shopin.wms.domain.entity.PromotionType" >
+    update promotion_type
+    set promotion_type_name = #{promotionTypeName,jdbcType=VARCHAR},
+      promotion_type_memo = #{promotionTypeMemo,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>

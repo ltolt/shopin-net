@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+    <!DOCTYPE mapper 
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.shopin.back.mapper.PageLayoutMapper"> 
+
+        <sql id="pageLayoutColumns"> sid sid,page_layout_sid pageLayoutSid,pro_link_type proLinkType, seq seq,page_layout_template_sid  pageLayoutTemplateSid,title title,title_link titleLink,page_type pageType,channel_sid channelSid,node_level nodeLevel,start_time startTime,end_time endTime</sql>
+    
+	<select id="findObjBySid" parameterType="int" resultType="pageLayoutVO" >
+		select <include refid="pageLayoutColumns"/>
+		  from PAGE_LAYOUT pl  where pl.sid=#{sid}
+	</select>
+	
+	<select id="queryPageLayoutByChannel" parameterType="int" resultType="pageLayoutVO" >
+	  select <include refid="pageLayoutColumns"/>
+	   from PAGE_LAYOUT pl  where pl.channel_sid = #{channelSid}
+	</select>
+	
+	<select id="queryChildPageLayout" parameterType="int" resultType="pageLayoutVO">
+	  select <include refid="pageLayoutColumns"/>
+	   from PAGE_LAYOUT pl where pl.page_layout_sid = #{pageLayoutSid} order by pl.seq asc
+	</select>
+
+	
+	
+	
+	
+    <select id="queryObjsList" parameterType="pageLayoutCond" resultType="pageLayoutVO" >
+			<![CDATA[ 
+			SELECT * FROM
+			(
+			SELECT A.*, ROWNUM RN
+			FROM (
+			]]>	
+				select <include refid="pageLayoutColumns"/>  from PAGE_LAYOUT pl 
+				  <where>
+				<if test="pageLayoutSid != null and pageLayoutSid != '' " >
+				      and  pl.page_layout_sid = #{pageLayoutSid} 
+				</if>
+				<if test="proLinkType != null and proLinkType != '' " >
+				      and  pl.pro_link_type = #{proLinkType} 
+				</if>
+				<if test="seq != null and seq != '' " >
+				      and  pl.seq = #{seq} 
+				</if>
+				<if test="pageLayoutTemplateSid != null and pageLayoutTemplateSid != '' " >
+				      and  pl.page_layout_template_sid = #{pageLayoutTemplateSid} 
+				</if>
+				<if test="title != null and title != '' " >
+				      and  pl.title = #{title} 
+				</if>
+				<if test="titleLink != null and titleLink != '' " >
+				      and  pl.title_link = #{titleLink} 
+				</if>
+				<if test="pageType != null and pageType != '' " >
+				      and  pl.page_type = #{pageType} 
+				</if>
+				<if test="channelSid != null and channelSid != '' " >
+				      and  pl.channel_sid = #{channelSid} 
+				</if>
+				<if test="nodeLevel != null and nodeLevel != '' " >
+				      and  pl.node_level = #{nodeLevel} 
+				</if>
+				<if test="startTime != null and startTime != '' " >
+				      and  pl.start_time = #{startTime} 
+				</if>
+				<if test="endTime != null and endTime != '' " >
+				      and  pl.end_time = #{endTime} 
+				</if>
+
+				  </where>
+				order by pl.sid desc
+	
+			<![CDATA[ 
+			) A
+			WHERE ROWNUM <= #{endRecords}
+			)
+			WHERE RN >= #{startRecords}
+			]]>
+	</select>
+	
+	<select id="queryObjsCount" parameterType="pageLayoutCond" resultType="Integer" >
+	  select count(*) from PAGE_LAYOUT pl 
+	  <where>
+		<if test="pageLayoutSid != null and pageLayoutSid != '' " >
+				      and  pl.page_layout_sid = #{pageLayoutSid} 
+				</if>
+				<if test="proLinkType != null and proLinkType != '' " >
+				      and  pl.pro_link_type = #{proLinkType} 
+				</if>
+				<if test="seq != null and seq != '' " >
+				      and  pl.seq = #{seq} 
+				</if>
+				<if test="pageLayoutTemplateSid != null and pageLayoutTemplateSid != '' " >
+				      and  pl.page_layout_template_sid = #{pageLayoutTemplateSid} 
+				</if>
+				<if test="title != null and title != '' " >
+				      and  pl.title = #{title} 
+				</if>
+				<if test="titleLink != null and titleLink != '' " >
+				      and  pl.title_link = #{titleLink} 
+				</if>
+				<if test="pageType != null and pageType != '' " >
+				      and  pl.page_type = #{pageType} 
+				</if>
+				<if test="channelSid != null and channelSid != '' " >
+				      and  pl.channel_sid = #{channelSid} 
+				</if>
+				<if test="nodeLevel != null and nodeLevel != '' " >
+				      and  pl.node_level = #{nodeLevel} 
+				</if>
+				<if test="startTime != null and startTime != '' " >
+				      and  pl.start_time = #{startTime} 
+				</if>
+				<if test="endTime != null and endTime != '' " >
+				      and  pl.end_time = #{endTime} 
+				</if>
+
+	   </where>
+	</select>
+	
+	<!-- 
+	<select id="selectQueryBySid" parameterType="int" resultType="pageLayoutVO" >
+			
+				select pl.sid, pl.title, pl.title_link, pl.start_time, pl.end_time ,pt.NAME
+				
+					 from PAGE_LAYOUT pl, PAGE_LAYOUT_TEMPLATE pt
+					 
+				 where	pl.PAGE_LAYOUT_TEMPLATE_SID = pt.sid and  pl.sid = #{sid} 
+			
+	</select>
+	-->
+	<select id="selectQueryBySid" parameterType="int" resultType="pageLayoutVO" >
+			
+				select pl.sid sid, pl.title title,pl.title_link titleLink, pl.start_time startTime, pl.end_time endTime,pt.NAME name
+					 from PAGE_LAYOUT pl,PAGE_LAYOUT_TEMPLATE pt
+					 
+				 where	pl.PAGE_LAYOUT_TEMPLATE_SID = pt.sid and  pl.sid = #{sid}
+			
+	</select>
+	
+	
+	<insert id="insert" parameterType="pageLayout"  >
+	      insert into PAGE_LAYOUT (sid ,page_layout_sid  ,pro_link_type ,seq ,page_layout_template_sid,title,title_link ,page_type ,channel_sid ,node_level ,start_time ,end_time )values
+	      (PAGE_LAYOUT_SEQ.nextval,#{pageLayoutSid,jdbcType=NUMERIC} ,#{proLinkType,jdbcType=NUMERIC},#{seq,jdbcType=VARCHAR},#{pageLayoutTemplateSid,jdbcType=NUMERIC},#{title,jdbcType=VARCHAR},#{titleLink,jdbcType=VARCHAR},#{pageType,jdbcType=NUMERIC},#{channelSid,jdbcType=NUMERIC},#{nodeLevel,jdbcType=NUMERIC},#{startTime,jdbcType=TIMESTAMP},#{endTime,jdbcType=TIMESTAMP} )
+	</insert>                 
+	
+	<update id="update" parameterType="pageLayout">
+		 update PAGE_LAYOUT pl
+		 <set>
+		<if test="pageLayoutSid != null and pageLayoutSid != '' " >
+				       pl.page_layout_sid = #{pageLayoutSid},
+				</if>
+				<if test="proLinkType != null and proLinkType != '' " >
+				        pl.pro_link_type = #{proLinkType},
+				</if>
+				<if test="seq != null and seq != '' " >
+				       pl.seq = #{seq}, 
+				</if>
+				<if test="pageLayoutTemplateSid != null and pageLayoutTemplateSid != '' " >
+				        pl.page_layout_template_sid = #{pageLayoutTemplateSid},
+				</if>
+				<if test="title != null and title != '' " >
+				      pl.title = #{title},
+				</if>
+				<if test="titleLink != null and titleLink != '' " >
+				        pl.title_link = #{titleLink},
+				</if>
+				<if test="pageType != null and pageType != '' " >
+				        pl.page_type = #{pageType},
+				</if>
+				<if test="channelSid != null and channelSid != '' " >
+				      pl.channel_sid = #{channelSid}, 
+				</if>
+				<if test="nodeLevel != null and nodeLevel != '' " >
+				    pl.node_level = #{nodeLevel},  
+				</if>
+				<if test="startTime != null and startTime != '' " >
+				      pl.start_time = #{startTime},
+				</if>
+				<if test="endTime != null and endTime != '' " >
+				     pl.end_time = #{endTime} 
+				</if>
+
+		</set>
+		 where pl.sid = #{sid}
+	</update>
+	
+	<delete id="delete" parameterType="Integer" >
+		 delete from PAGE_LAYOUT  where sid = #{sid}
+	</delete>
+</mapper>
+

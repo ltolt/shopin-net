@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+    <!DOCTYPE mapper 
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.shopin.back.mapper.TRuleNewMapper">
+     <sql id="truleNewColumns">"sid" sid,"rule_name" ruleName,"active_begin_time" activeBeginTime,"active_end_time" activeEndTime, "create_user" createUser,"create_time" createTime,"update_user" updateUser,"update_time" updateTime,"flag" flag</sql>
+    
+     <select id="findObjBySid" parameterType="int" resultType="truleNewVO">
+        select <include refid="truleNewColumns"/>
+        from "t_rule_new" trn where trn."sid"=#{sid}
+     </select> 
+     
+   
+     
+      <select id="findAllRules" resultType="truleNewVO">
+        select "sid" sid,"rule_name" ruleName,to_char( "active_begin_time",'yyyy-MM-dd HH24:mi:ss') activeBeginTime,to_char( "active_end_time",'yyyy-MM-dd HH24:mi:ss') activeEndTime, "create_user" createUser,to_char( "create_time",'yyyy-MM-dd HH24:mi:ss') createTime,"update_user" updateUser,to_char( "update_time",'yyyy-MM-dd HH24:mi:ss') updateTime,"flag" flag
+        from "t_rule_new" trn  where trn."flag" = 1  order by trn."sid" desc 
+     </select>  
+     
+     <select id="queryMaxSidNum" resultType="Integer">
+		SELECT max(trn."sid") 
+		from "t_rule_new" trn  
+		
+	</select>
+
+	 <select id="queryObjsList" parameterType="truleNewCond" resultType="truleNewVO">
+        <![CDATA[
+			select * from
+			(
+			select A.*,ROWNUM RN 
+			from     
+			(    
+        ]]>
+        select <include refid="truleNewColumns"/>  from "SPWG_0408"."t_rule_new" trn
+        <where>
+          <if test="sid != null and sid != ''">
+             and trn."sid" = #{sid} 
+          </if>
+          <if test="ruleName != null and ruleName != ''">
+             and trn."rule_name" = #{ruleName} 
+          </if>
+          <if test="activeBeginTime != null and activeBeginTime != ''">
+             and trn."active_begin_time" = #{activeBeginTime} 
+          </if>
+          <if test="activeEndTime != null and activeEndTime != ''">
+             and trn."active_end_time" = #{activeEndTime} 
+          </if>
+           <if test="createUser !=null and createUser != '' ">
+            and trn."create_user" = #{createUser}
+          </if>
+           <if test="createTime !=null and createTime != '' ">
+            and trn."create_time" = #{createTime}
+          </if>
+           <if test="updateUser !=null and updateUser != '' ">
+            and trn."update_user" = #{updateUser}
+          </if>
+           <if test="updateTime !=null and updateTime != '' ">
+            and trn."update_time" = #{updateTime}
+          </if>
+          
+          <if test="flag !=null and flag != '' ">
+            and trn."flag" = #{flag}
+          </if>
+        </where> 	     
+	       order by trn."sid" desc 
+	      <![CDATA[
+	      ) A 
+	      where ROWNUM <= #{endRecords}
+	      )
+	      WHERE  RN >= #{startRecords}
+	      ]]>
+	 </select>
+
+     <select id="queryObjsCount" parameterType="truleNewCond" resultType="Integer">
+         select count(*) from "SPWG_0408"."t_rule_new" trn     
+         <where>
+            <if test="sid != null and sid != ''">
+             and trn."sid" = #{sid} 
+          </if>
+          <if test="ruleName != null and ruleName != ''">
+             and trn."rule_name" = #{ruleName} 
+          </if>
+          <if test="activeBeginTime != null and activeBeginTime != ''">
+             and trn."active_begin_time" = #{activeBeginTime} 
+          </if>
+          <if test="activeEndTime != null and activeEndTime != ''">
+             and trn."active_end_time" = #{activeEndTime} 
+          </if>
+           <if test="createUser !=null and createUser != '' ">
+            and trn."create_user" = #{createUser}
+          </if>
+           <if test="createTime !=null and createTime != '' ">
+            and trn."create_time" = #{createTime}
+          </if>
+           <if test="updateUser !=null and updateUser != '' ">
+            and trn."update_user" = #{updateUser}
+          </if>
+           <if test="updateTime !=null and updateTime != '' ">
+            and trn."update_time" = #{updateTime}
+          </if>
+
+            <if test="flag !=null and flag != '' ">
+            and trn."flag" = #{flag}
+          </if>
+        </where> 	     
+     </select>
+
+
+  <insert id="insert" parameterType="truleNew">
+       insert into "SPWG_0408"."t_rule_new"  ("sid","rule_name","active_begin_time","active_end_time" ,"create_user","create_time","update_user","update_time","flag")    
+       values("t_rule_new_seq".nextval,#{ruleName,jdbcType=VARCHAR},#{activeBeginTime,jdbcType=TIMESTAMP},#{activeEndTime,jdbcType=TIMESTAMP},#{createUser,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{updateUser,jdbcType=VARCHAR},#{updateTime,jdbcType=TIMESTAMP},#{flag,jdbcType=NUMERIC})
+     </insert>
+   
+    
+   <!-- <insert id="insert" parameterType="truleNew" >
+    insert into "SPWG_0408"."t_rule_new" 
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="sid != null and sid != ''">
+              "sid" ,
+          </if>
+          <if test="ruleName != null and ruleName != ''">
+             "rule_name" ,
+          </if>
+          <if test="activeBeginTime != null and activeBeginTime != ''">
+             "active_begin_time" ,
+          </if>
+          <if test="activeEndTime != null and activeEndTime != ''">
+             "active_end_time", 
+          </if>
+           <if test="createUser !=null and createUser != '' ">
+           "create_user",
+          </if>
+           <if test="createTime !=null and createTime != '' ">
+           "create_time",
+          </if>
+           <if test="updateUser !=null and updateUser != '' ">
+            "update_user",
+          </if>
+           <if test="updateTime !=null and updateTime != '' ">
+           "update_time" ,
+          </if>
+            <if test="flag !=null and flag != '' ">
+            "flag",
+          </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			 <if test="sid != null and sid != ''">
+            "t_rule_new_seq".nextval ,
+          </if>
+          <if test="ruleName != null and ruleName != ''">
+              #{ruleName,jdbcType=VARCHAR} ,
+          </if>
+          <if test="activeBeginTime != null and activeBeginTime != ''">
+            #{activeBeginTime,jdbcType=TIMESTAMP} ,
+          </if>
+          <if test="activeEndTime != null and activeEndTime != ''">
+             #{activeEndTime,jdbcType=TIMESTAMP} ,
+          </if>
+           <if test="createUser !=null and createUser != '' ">
+             #{createUser,jdbcType=VARCHAR},
+          </if>
+           <if test="createTime !=null and createTime != '' ">
+             #{createTime,jdbcType=TIMESTAMP},
+          </if>
+           <if test="updateUser !=null and updateUser != '' ">
+           #{updateUser,jdbcType=VARCHAR},
+          </if>
+           <if test="updateTime !=null and updateTime != '' ">
+           #{updateTime,jdbcType=TIMESTAMP},
+          </if>
+           <if test="flag !=null and flag != '' ">
+           #{flag,jdbcType=NUMERIC}
+          </if>
+          
+		</trim>
+	</insert>
+  
+  -->
+     <update id="update" parameterType="truleNew">
+       update "SPWG_0408"."t_rule_new" trn
+       <set>
+		   <if test="sid != null and sid != ''">
+              trn."sid" = #{sid} ,
+          </if>
+          <if test="ruleName != null and ruleName != ''">
+             trn."rule_name" = #{ruleName} ,
+          </if>
+          <if test="activeBeginTime != null and activeBeginTime != ''">
+             trn."active_begin_time" = #{activeBeginTime} ,
+          </if>
+          <if test="activeEndTime != null and activeEndTime != ''">
+              trn."active_end_time" = #{activeEndTime} ,
+          </if>
+           <if test="createUser !=null and createUser != '' ">
+             trn."create_user" = #{createUser},
+          </if>
+           <if test="createTime !=null and createTime != '' ">
+            trn."create_time" = #{createTime},
+          </if>
+           <if test="updateUser !=null and updateUser != '' ">
+            trn."update_user" = #{updateUser},
+          </if>
+           <if test="updateTime !=null and updateTime != '' ">
+            trn."update_time" = #{updateTime},
+          </if>
+          <if test="flag !=null and flag != '' ">
+            trn."flag" = #{flag},
+          </if>
+       </set>
+       where trn."sid"= #{sid}
+     </update>
+
+ 	<delete id="delete" parameterType="Integer">
+ 	 delete from "SPWG_0408"."t_rule_new" where "sid" = #{sid}
+ 	</delete>
+      
+</mapper>        
+        

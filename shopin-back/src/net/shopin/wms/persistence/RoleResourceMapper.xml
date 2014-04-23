@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.shopin.wms.persistence.RoleResourceMapper" >
+  <resultMap id="BaseResultMap" type="net.shopin.wms.domain.entity.RoleResource" >
+    <result column="roles_sid" property="rolesSid" jdbcType="BIGINT" />
+    <result column="resources_sid" property="resourcesSid" jdbcType="BIGINT" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    roles_sid, resources_sid
+  </sql>
+  
+  <insert id="insert" parameterType="net.shopin.wms.domain.entity.RoleResource" >
+    insert into role_resource (roles_sid, resources_sid)
+    values (#{rolesSid,jdbcType=BIGINT}, #{resourcesSid,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="net.shopin.wms.domain.entity.RoleResource" >
+    insert into role_resource
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rolesSid != null" >
+        roles_sid,
+      </if>
+      <if test="resourcesSid != null" >
+        resources_sid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rolesSid != null" >
+        #{rolesSid,jdbcType=BIGINT},
+      </if>
+      <if test="resourcesSid != null" >
+        #{resourcesSid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  
+   <select id="selectByRoleSid" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select roles_sid, resources_sid
+    from role_resource
+    where  roles_sid = #{rolesSid,jdbcType=BIGINT}
+  </select>
+  
+   <select id="selectResourceSidByRoleSid" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select resources_sid
+    from role_resource
+    where  roles_sid = #{rolesSid,jdbcType=BIGINT}
+  </select>
+  
+  
+  <delete id="deleteByRoleSid" parameterType="java.lang.Long" >
+    delete from role_resource
+    where  roles_sid = #{rolesSid,jdbcType=BIGINT}
+  </delete>
+  
+  
+</mapper>

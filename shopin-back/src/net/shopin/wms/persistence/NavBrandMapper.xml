@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.shopin.wms.persistence.NavBrandMapper" >
+  <resultMap id="BaseResultMap" type="net.shopin.wms.domain.entity.NavBrand" >
+    <id column="sid" property="sid" jdbcType="BIGINT" />
+    <result column="nav_sid" property="navSid" jdbcType="BIGINT" />
+    <result column="brand_sid" property="brandSid" jdbcType="BIGINT" />
+    <result column="brand_name" property="brandName" jdbcType="VARCHAR" />
+    <result column="brand_pic" property="brandPic" jdbcType="VARCHAR" />
+    <result column="brand_link" property="brandLink" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sid, nav_sid, brand_sid, brand_name, brand_pic, brand_link
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from nav_brand
+    where sid = #{sid,jdbcType=BIGINT}
+  </select>
+  
+   <select id="countNavBrandRecord"  parameterType="net.shopin.wms.domain.entity.NavBrand"  resultType="Integer">
+    select 
+    count(*) 
+    from nav_brand
+    where nav_sid = #{navSid,jdbcType=BIGINT} and brand_sid = #{brandSid,jdbcType=BIGINT}
+  </select>
+  
+  <select id="selectNavBrandByNavSid" resultMap="BaseResultMap" parameterType="net.shopin.wms.domain.entity.NavBrand" >
+    select 
+    <include refid="Base_Column_List" />
+    from nav_brand 
+   <where>
+   	<if test="navSid != null" >
+        nav_sid = #{navSid,jdbcType=BIGINT}
+      </if>
+   </where>
+ 	  group by brand_sid
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from nav_brand
+    where sid = #{sid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="net.shopin.wms.domain.entity.NavBrand" >
+    insert into nav_brand (sid, nav_sid, brand_sid, 
+      brand_name, brand_pic, brand_link
+      )
+    values (#{sid,jdbcType=BIGINT}, #{navSid,jdbcType=BIGINT}, #{brandSid,jdbcType=BIGINT}, 
+      #{brandName,jdbcType=VARCHAR}, #{brandPic,jdbcType=VARCHAR}, #{brandLink,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="net.shopin.wms.domain.entity.NavBrand" >
+    insert into nav_brand
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="navSid != null" >
+        nav_sid,
+      </if>
+      <if test="brandSid != null" >
+        brand_sid,
+      </if>
+      <if test="brandName != null" >
+        brand_name,
+      </if>
+      <if test="brandPic != null" >
+        brand_pic,
+      </if>
+      <if test="brandLink != null" >
+        brand_link,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=BIGINT},
+      </if>
+      <if test="navSid != null" >
+        #{navSid,jdbcType=BIGINT},
+      </if>
+      <if test="brandSid != null" >
+        #{brandSid,jdbcType=BIGINT},
+      </if>
+      <if test="brandName != null" >
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandPic != null" >
+        #{brandPic,jdbcType=VARCHAR},
+      </if>
+      <if test="brandLink != null" >
+        #{brandLink,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="net.shopin.wms.domain.entity.NavBrand" >
+    update nav_brand
+    <set >
+      <if test="navSid != null" >
+        nav_sid = #{navSid,jdbcType=BIGINT},
+      </if>
+      <if test="brandSid != null" >
+        brand_sid = #{brandSid,jdbcType=BIGINT},
+      </if>
+      <if test="brandName != null" >
+        brand_name = #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandPic != null" >
+        brand_pic = #{brandPic,jdbcType=VARCHAR},
+      </if>
+      <if test="brandLink != null" >
+        brand_link = #{brandLink,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.shopin.wms.domain.entity.NavBrand" >
+    update nav_brand
+    set nav_sid = #{navSid,jdbcType=BIGINT},
+      brand_sid = #{brandSid,jdbcType=BIGINT},
+      brand_name = #{brandName,jdbcType=VARCHAR},
+      brand_pic = #{brandPic,jdbcType=VARCHAR},
+      brand_link = #{brandLink,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+    <!DOCTYPE mapper 
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.shopin.back.mapper.BrandMapper">
+     <sql id="brandColumns">SID sid,BRAND_NAME brandName,PICTURE_URL pictureUrl,BRAND_NAME_SECOND brandNameSecond,BRAND_ACTIVE_BIT brandActiveBit,BRANDNO brandNO,BRANDCORP brandCorp,BRANDPIC1 brandPic1,BRANDPIC2 brandPic2,PHOTO_BLACKLIST_BIT photoBlacklistBit,PARENT_SID parentSid,END_BIT endBit,SPELL spell,OPT_USER_SID optUserSid,OPT_REAL_NAME optRealName,OPT_UPDATE_TIME optUpdateTime,BRAND_ROOT_SID brandRootSid</sql>
+    
+     <select id="findObjBySid" parameterType="int" resultType="BrandVO">
+        select <include refid="brandColumns"/>
+        from BRAND b where b.SID=#{sid}
+     </select>   
+
+	 <select id="queryObjsList" parameterType="brandCond" resultType="BrandVO">
+        <![CDATA[
+			select * from
+			(
+			select A.*,ROWNUM RN 
+			from     
+			(    
+        ]]>
+        select <include refid="brandColumns"/>  from BRAND b
+        <where>
+          <if test="sid != null and sid != ''">
+             and b.SID = #{sid} 
+          </if>
+          <if test="brandName != null and brandName != ''">
+             and b.BRAND_NAME = #{brandName} 
+          </if>
+          <if test="pictureUrl != null and pictureUrl != ''">
+             and b.PICTURE_URL = #{pictureUrl} 
+          </if>
+          <if test="brandNameSecond != null and brandNameSecond != ''">
+             and b.BRAND_NAME_SECOND = #{brandNameSecond} 
+          </if>
+          <if test="brandActiveBit != null and brandActiveBit != ''">
+             and b.BRAND_ACTIVE_BIT = #{brandActiveBit} 
+          </if>
+          <if test="brandNO != null and brandNO != ''">
+             and b.BRANDNO = #{brandNO} 
+          </if>
+          <if test="brandCorp != null and brandCorp != ''">
+             and b.BRANDCORP = #{brandCorp} 
+          </if>
+          <if test="brandPic1 != null and brandPic1 != ''">
+             and b.BRANDPIC1 = #{brandPic1} 
+          </if>
+          <if test="brandPic2 != null and brandPic2 != ''">
+             and b.BRANDPIC2 = #{brandPic2} 
+          </if>
+          <if test="photoBlacklistBit != null and photoBlacklistBit != ''">
+             and b.PHOTO_BLACKLIST_BIT = #{photoBlacklistBit} 
+          </if>
+          
+          <if test="parentSid != null and parentSid != ''">
+             and b.PARENT_SID = #{parentSid} 
+          </if>
+          <if test="endBit!=null and endBit != '' ">
+            and b.END_BIT = #{endBit}
+          </if>
+          <if test="spell!=null and spell != '' ">
+            and b.SPELL = #{spell}
+          </if>
+          <if test="optUserSid!=null and optUserSid != '' ">
+            and b.OPT_USER_SID = #{optUserSid}
+          </if>
+          <if test="optRealName!=null and optRealName != '' ">
+            and b.OPT_REAL_NAME = #{optRealName}
+          </if>
+          <if test="optUpdateTime!=null and optUpdateTime != '' ">
+            and b.OPT_UPDATE_TIME = #{optUpdateTime}
+          </if>
+           <if test="brandRootSid!=null and brandRootSid != '' ">
+            and b.BRAND_ROOT_SID = #{brandRootSid}
+          </if>
+        </where> 	     
+	       order by b.SID desc 
+	      <![CDATA[
+	      ) A 
+	      where ROWNUM <= #{endRecords}
+	      )
+	      WHERE  RN >= #{startRecords}
+	      ]]>
+	 </select>
+
+     <select id="queryObjsCount" parameterType="brandCond" resultType="Integer">
+         select count(*) from BRAND b      
+         <where>
+            <if test="sid != null and sid != ''">
+             and b.SID = #{sid} 
+          </if>
+          <if test="brandName != null and brandName != ''">
+             and b.BRAND_NAME = #{brandName} 
+          </if>
+          <if test="pictureUrl != null and pictureUrl != ''">
+             and b.PICTURE_URL = #{pictureUrl} 
+          </if>
+          <if test="brandNameSecond != null and brandNameSecond != ''">
+             and b.BRAND_NAME_SECOND = #{brandNameSecond} 
+          </if>
+          <if test="brandActiveBit != null and brandActiveBit != ''">
+             and b.BRAND_ACTIVE_BIT = #{brandActiveBit} 
+          </if>
+          <if test="brandNO != null and brandNO != ''">
+             and b.BRANDNO = #{brandNO} 
+          </if>
+          <if test="brandCorp != null and brandCorp != ''">
+             and b.BRANDCORP = #{brandCorp} 
+          </if>
+          <if test="brandPic1 != null and brandPic1 != ''">
+             and b.BRANDPIC1 = #{brandPic1} 
+          </if>
+          <if test="brandPic2 != null and brandPic2 != ''">
+             and b.BRANDPIC2 = #{brandPic2} 
+          </if>
+          <if test="photoBlacklistBit != null and photoBlacklistBit != ''">
+             and b.PHOTO_BLACKLIST_BIT = #{photoBlacklistBit} 
+          </if>
+          
+          <if test="parentSid != null and parentSid != ''">
+             and b.PARENT_SID = #{parentSid} 
+          </if>
+          <if test="endBit!=null and endBit != '' ">
+            and b.END_BIT = #{endBit}
+          </if>
+          <if test="spell!=null and spell != '' ">
+            and b.SPELL = #{spell}
+          </if>
+          <if test="optUserSid!=null and optUserSid != '' ">
+            and b.OPT_USER_SID = #{optUserSid}
+          </if>
+          <if test="optRealName!=null and optRealName != '' ">
+            and b.OPT_REAL_NAME = #{optRealName}
+          </if>
+          <if test="optUpdateTime!=null and optUpdateTime != '' ">
+            and b.OPT_UPDATE_TIME = #{optUpdateTime}
+          </if>
+           <if test="brandRootSid!=null and brandRootSid != '' ">
+            and b.BRAND_ROOT_SID = #{brandRootSid}
+          </if>
+        </where> 	     
+     </select>
+ <!-- 
+     <insert id="insert" parameterType="brand">
+       insert into BRAND  (SID,BRAND_NAME,PICTURE_URL,BRAND_NAME_SECOND,BRAND_ACTIVE_BIT ,BRANDNO ,BRANDCORP ,BRANDPIC1 ,BRANDPIC2 ,PHOTO_BLACKLIST_BIT ,PARENT_SID ,END_BIT ,SPELL ,OPT_USER_SID ,OPT_REAL_NAME ,OPT_UPDATE_TIME ,BRAND_ROOT_SID)    
+       values(BRAND_SEQ.nextval,#{brandName,jdbcType=VARCHAR},#{pictureUrl,jdbcType=VARCHAR}, #{brandNameSecond,jdbcType=VARCHAR}, #{brandActiveBit,jdbcType=NUMERIC}, #{brandNO,jdbcType=VARCHAR},#{brandCorp,jdbcType=VARCHAR},#{brandPic1,jdbcType=VARCHAR},#{brandPic2,jdbcType=VARCHAR},#{photoBlacklistBit,jdbcType=NUMERIC},#{parentSid,jdbcType=NUMERIC},#{endBit,jdbcType=NUMERIC},#{spell,jdbcType=VARCHAR},#{optUserSid,jdbcType=NUMERIC},#{optRealName,jdbcType=VARCHAR},#{optUpdateTime,jdbcType=DATE},#{brandRootSid,jdbcType=NUMERIC})
+     </insert>
+  -->    
+     <insert id="insert" parameterType="brand" >
+    insert into BRAND
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="sid != null and sid != ''">
+             SID, 
+          </if>
+          <if test="brandName != null and brandName != ''">
+          BRAND_NAME,
+          </if>
+          <if test="pictureUrl != null and pictureUrl != ''">
+           PICTURE_URL, 
+          </if>
+          <if test="brandNameSecond != null and brandNameSecond != ''">
+           BRAND_NAME_SECOND,
+          </if>
+          <if test="brandActiveBit != null and brandActiveBit != ''">
+          BRAND_ACTIVE_BIT, 
+          </if>
+          <if test="brandNO != null and brandNO != ''">
+           BRANDNO, 
+          </if>
+          <if test="brandCorp != null and brandCorp != ''">
+            BRANDCORP, 
+          </if>
+          <if test="brandPic1 != null and brandPic1 != ''">
+             BRANDPIC1, 
+          </if>
+          <if test="brandPic2 != null and brandPic2 != ''">
+             BRANDPIC2, 
+          </if>
+          <if test="photoBlacklistBit != null and photoBlacklistBit != ''">
+            PHOTO_BLACKLIST_BIT, 
+          </if>
+          
+          <if test="parentSid != null and parentSid != ''">
+             PARENT_SID,} 
+          </if>
+          <if test="endBit!=null and endBit != '' ">
+            END_BIT,
+          </if>
+          <if test="spell!=null and spell != '' ">
+           SPELL,
+          </if>
+          <if test="optUserSid!=null and optUserSid != '' ">
+           OPT_USER_SID,
+          </if>
+          <if test="optRealName!=null and optRealName != '' ">
+          OPT_REAL_NAME,
+          </if>
+          <if test="optUpdateTime!=null and optUpdateTime != '' ">
+            OPT_UPDATE_TIME,
+          </if>
+           <if test="brandRootSid!=null and brandRootSid != '' ">
+            BRAND_ROOT_SID,
+          </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			 <if test="sid != null and sid != ''">
+            #{sid}, 
+          </if>
+          <if test="brandName != null and brandName != ''">
+           #{brandName}, 
+          </if>
+          <if test="pictureUrl != null and pictureUrl != ''">
+           #{pictureUrl}, 
+          </if>
+          <if test="brandNameSecond != null and brandNameSecond != ''">
+           #{brandNameSecond}, 
+          </if>
+          <if test="brandActiveBit != null and brandActiveBit != ''">
+            #{brandActiveBit},
+          </if>
+          <if test="brandNO != null and brandNO != ''">
+           #{brandNO}, 
+          </if>
+          <if test="brandCorp != null and brandCorp != ''">
+            #{brandCorp}, 
+          </if>
+          <if test="brandPic1 != null and brandPic1 != ''">
+            #{brandPic1},
+          </if>
+          <if test="brandPic2 != null and brandPic2 != ''">
+           #{brandPic2}, 
+          </if>
+          <if test="photoBlacklistBit != null and photoBlacklistBit != ''">
+            #{photoBlacklistBit}, 
+          </if>
+          
+          <if test="parentSid != null and parentSid != ''">
+          #{parentSid}, 
+          </if>
+          <if test="endBit!=null and endBit != '' ">
+           #{endBit},
+          </if>
+          <if test="spell!=null and spell != '' ">
+          #{spell},
+          </if>
+          <if test="optUserSid!=null and optUserSid != '' ">
+           #{optUserSid},
+          </if>
+          <if test="optRealName!=null and optRealName != '' ">
+            #{optRealName},
+          </if>
+          <if test="optUpdateTime!=null and optUpdateTime != '' ">
+           #{optUpdateTime},
+          </if>
+           <if test="brandRootSid!=null and brandRootSid != '' ">
+            #{brandRootSid},
+          </if>
+		</trim>
+	</insert>
+  
+   
+     <update id="update" parameterType="brand">
+       update BRAND b
+       <set>
+		   <if test="sid != null and sid != ''">
+            b.SID = #{sid}, 
+          </if>
+          <if test="brandName != null and brandName != ''">
+            b.BRAND_NAME = #{brandName}, 
+          </if>
+          <if test="pictureUrl != null and pictureUrl != ''">
+            b.PICTURE_URL = #{pictureUrl}, 
+          </if>
+          <if test="brandNameSecond != null and brandNameSecond != ''">
+           b.BRAND_NAME_SECOND = #{brandNameSecond} ,
+          </if>
+          <if test="brandActiveBit != null and brandActiveBit != ''">
+           b.BRAND_ACTIVE_BIT = #{brandActiveBit}, 
+          </if>
+          <if test="brandNO != null and brandNO != ''">
+           b.BRANDNO = #{brandNO}, 
+          </if>
+          <if test="brandCorp != null and brandCorp != ''">
+            b.BRANDCORP = #{brandCorp}, 
+          </if>
+          <if test="brandPic1 != null and brandPic1 != ''">
+          b.BRANDPIC1 = #{brandPic1} ,
+          </if>
+          <if test="brandPic2 != null and brandPic2 != ''">
+           b.BRANDPIC2 = #{brandPic2}, 
+          </if>
+          <if test="photoBlacklistBit != null and photoBlacklistBit != ''">
+            b.PHOTO_BLACKLIST_BIT = #{photoBlacklistBit}, 
+          </if>
+          
+          <if test="parentSid != null and parentSid != ''">
+          b.PARENT_SID = #{parentSid}, 
+          </if>
+          <if test="endBit!=null and endBit != '' ">
+          b.END_BIT = #{endBit},
+          </if>
+          <if test="spell!=null and spell != '' ">
+           b.SPELL = #{spell},
+          </if>
+          <if test="optUserSid!=null and optUserSid != '' ">
+          b.OPT_USER_SID = #{optUserSid},
+          </if>
+          <if test="optRealName!=null and optRealName != '' ">
+           b.OPT_REAL_NAME = #{optRealName},
+          </if>
+          <if test="optUpdateTime!=null and optUpdateTime != '' ">
+            b.OPT_UPDATE_TIME = #{optUpdateTime},
+          </if>
+           <if test="brandRootSid!=null and brandRootSid != '' ">
+            b.BRAND_ROOT_SID = #{brandRootSid},
+          </if>
+       </set>
+       where b.SID = #{sid}
+     </update>
+
+ 	<delete id="delete" parameterType="Integer">
+ 	 delete from BRAND where SID = #{sid}
+ 	</delete>
+      
+</mapper>        
+        
