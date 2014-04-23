@@ -1,0 +1,89 @@
+@charset "utf-8";
+td {
+	font-family: "宋体";
+	font-size: 12px;
+	font-style: normal;
+	line-height: 150%;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: capitalize;
+	color: #646464;
+	text-decoration: none;
+}
+a {
+	color: #646464;
+	text-decoration: none;
+}
+.top_title {
+	font-family: "宋体";
+	font-size: 14px;
+	font-style: normal;
+	font-weight: bold;
+	font-variant: normal;
+	color: #cc0000;
+	text-decoration: none;
+}
+.bk {
+	border: 1px solid #e4e4e4;
+	font-size:12px;
+	text-align:left;
+	font-family:"宋体";
+}
+.brand {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #cc0000;
+	text-decoration: none;
+}
+.brand a{
+	font-family: "宋体";
+	font-size: 12px;
+	color: #cc0000;
+	text-decoration: underline;
+	font-weight:bold;
+
+}.p-title {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: bold;
+	color: #414141;
+	text-decoration: none;
+}
+.p-title1 {
+	font-family: "微软雅黑";
+	font-size: 16px;
+	line-height: 150%;
+	text-decoration: none;
+	text-align:center;
+	font-weight:bold;
+}
+.bk_bottom {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #dadada;
+}
+.product_title1 {
+	font-family: "宋体";
+	font-size: 14px;
+	line-height: 150%;
+	font-weight: bold;
+	color: #333333;
+	text-decoration: none;
+}
+.txt {
+	color: #333333;
+	text-decoration: none;
+}
+
+#tab-h{			width: 587px;
+			height: 400px;
+			overflow: hidden;
+}
+
+.menu { height:23px;width:580px;}
+.menu ul {margin:0px; padding:0px; list-style:none; text-align:center;}
+.menu li {display:inline; line-height:23px;color:#333333;}
+.menu li a {color:#333333; text-decoration:none; padding:5px 5px 6px 5px; }
+.menu li a.tabactive { color:#000000; background-color:#ffffff; font-weight:bold;  position:relative;}
+#tabcontent1,#tabcontent2,#tabcontent3,#tabcontent4,#tabcontent5,#anothercontent1,#anothercontent2, #anothercontent3, #anothercontent4,#anothercontent5, #anothercontent6 { width:578px; text-align:center;padding:6px 0px; font-size:12px; margin-bottom:5px;}
+#tabcontent1,#tabcontent2,#tabcontent3,#tabcontent4,#tabcontent5,#anothercontent1,#anothercontent2, #anothercontent3, #anothercontent4,#anothercontent5, #anothercontent6 .SlideTab{ text-align:left;}

@@ -1,0 +1,399 @@
+#body {
+	POSITION: relative; MARGIN: 0px auto; WIDTH: 980px; FONT: 100 12px "ËÎÌו"; COLOR: #999999
+}
+IMG {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px
+}
+A:link {
+	COLOR: #333333; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #333333; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #a10000; TEXT-DECORATION: none
+}
+#Head {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; WIDTH: 100%; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+DIV#headTitle {
+	MARGIN: 17px 0px 0px; HEIGHT: 19px
+}
+UL.top_nav {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; FLOAT: right; PADDING-TOP: 0px
+}
+.top_nav LI {
+	BORDER-LEFT: #999999 1px solid; DISPLAY: inline; FLOAT: left
+}
+.top_nav .first {
+	BORDER-LEFT: #999999 0px solid; DISPLAY: inline; FLOAT: left
+}
+.top_nav A {
+	TEXT-ALIGN: center; PADDING-BOTTOM: 0px; PADDING-LEFT: 10px; PADDING-RIGHT: 10px; DISPLAY: block; TEXT-DECORATION: none; PADDING-TOP: 0px
+}
+DIV.site-nav {
+	Z-INDEX: 5; POSITION: relative; HEIGHT: 30px
+}
+#floor_nav {
+	MARGIN-LEFT: 0px; VERTICAL-ALIGN: text-bottom
+}
+.site-nav .floors {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; FLOAT: left; PADDING-TOP: 0px
+}
+DIV.site-nav UL.floors LI {
+	LIST-STYLE: none none outside; PADDING-RIGHT: 2px; DISPLAY: inline; FLOAT: left
+}
+DIV.site-nav UL.floors LI IMG {
+	BORDER-BOTTOM-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-TOP-STYLE: none; BORDER-LEFT-STYLE: none
+}
+#welcome {
+	LIST-STYLE-TYPE: none; MARGIN: 17px 0px 0px 40px; FLOAT: left
+}
+#logo {
+	LIST-STYLE-TYPE: none; MARGIN: 0px; WIDTH: 306px; FLOAT: left; HEIGHT: 43px
+}
+DIV.site-nav DIV.sub-floor_menus {
+	Z-INDEX: 6; MARGIN-LEFT: 0px
+}
+DIV.sub-floor-menus DIV.menu {
+	Z-INDEX: 6; POSITION: absolute; MARGIN: 0px 0px 0px -1px; TOP: 30px
+}
+DIV.site-nav UL.floors LI A {
+	POSITION: relative; TEXT-INDENT: -9999px; WIDTH: 85px; DISPLAY: block; BACKGROUND-REPEAT: repeat-y; HEIGHT: 35px
+}
+DIV.site-nav UL.floors .bra A {
+	POSITION: relative; WIDTH: 116px; DISPLAY: block; BACKGROUND-REPEAT: repeat-y; HEIGHT: 35px
+}
+DIV.site-nav UL.floors .qingcang A {
+	WIDTH: 116px; DISPLAY: block; BACKGROUND-REPEAT: repeat-y; BACKGROUND-POSITION: 13px 4px; HEIGHT: 35px
+}
+DIV.site-nav UL.floors LI A {
+	BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: 50% bottom
+}
+DIV.site-nav UL.floors LI.index A {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/index-0.gif)
+}
+DIV.site-nav UL.floors LI.shirt A {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/shirt-0.gif)
+}
+DIV.site-nav UL.floors LI.polo A {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/polo-0.gif)
+}
+DIV.site-nav UL.floors LI.plants A {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/plants-0.gif)
+}
+DIV.site-nav UL.floors LI.men A {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/man-0.jpg)
+}
+DIV.site-nav UL.floors LI.women A {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/woman-0.jpg)
+}
+DIV.site-nav UL.floors LI.shoes A {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/shoes-0.gif)
+}
+DIV.site-nav UL.floors LI.house A {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/house-0.gif)
+}
+DIV.site-nav UL.floors LI.accessories A {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/accessories-0.jpg)
+}
+DIV.site-nav UL.floors LI.underwear A {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/underwear-0.gif)
+}
+DIV.site-nav UL.floors LI.childrenwear A {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/childrenwear-0.gif)
+}
+DIV.site-nav UL.floors LI.womanwear A {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/woman-0.gif)
+}
+DIV.site-nav UL.floors LI.bra A {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/bra-t-0.gif)
+}
+DIV.site-nav UL.floors LI.man A {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/man-0.gif)
+}
+DIV.site-nav UL.floors LI.qingcang A {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/qc-0.gif)
+}
+DIV.site-nav UL.floors LI.index A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/index-1.gif)
+}
+DIV.site-nav UL.floors LI.index A:hover {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/index-1.gif)
+}
+DIV.site-nav UL.floors LI.index A.active {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/index-1.gif)
+}
+DIV.site-nav UL.floors LI.shirt A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/shirt-1.gif)
+}
+DIV.site-nav UL.floors LI.shirt A:hover {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/shirt-1.gif)
+}
+DIV.site-nav UL.floors LI.shirt A.active {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/shirt-1.gif)
+}
+DIV.site-nav UL.floors LI.polo A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/polo-1.gif)
+}
+DIV.site-nav UL.floors LI.polo A:hover {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/polo-1.gif)
+}
+DIV.site-nav UL.floors LI.polo A.active {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/polo-1.gif)
+}
+DIV.site-nav UL.floors LI.plants A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/plants-1.gif)
+}
+DIV.site-nav UL.floors LI.plants A:hover {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/plants-1.gif)
+}
+DIV.site-nav UL.floors LI.plants A.active {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/plants-1.gif)
+}
+DIV.site-nav UL.floors LI.men A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/man-1.jpg)
+}
+DIV.site-nav UL.floors LI.men A:hover {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/man-1.jpg)
+}
+DIV.site-nav UL.floors LI.men A.active {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/man-1.jpg)
+}
+DIV.site-nav UL.floors LI.women A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/woman-1.jpg)
+}
+DIV.site-nav UL.floors LI.women A:hover {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/woman-1.jpg)
+}
+DIV.site-nav UL.floors LI.women A.active {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/woman-1.jpg)
+}
+DIV.site-nav UL.floors LI.shoes A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/shoes-1.gif)
+}
+DIV.site-nav UL.floors LI.shoes A:hover {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/shoes-1.gif)
+}
+DIV.site-nav UL.floors LI.shoes A.active {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/shoes-1.gif)
+}
+DIV.site-nav UL.floors LI.house A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/house-1.gif)
+}
+DIV.site-nav UL.floors LI.house A:hover {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/house-1.gif)
+}
+DIV.site-nav UL.floors LI.house A.active {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/house-1.gif)
+}
+DIV.site-nav UL.floors LI.accessories A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/accessories-1.jpg)
+}
+DIV.site-nav UL.floors LI.accessories A:hover {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/accessories-1.jpg)
+}
+DIV.site-nav UL.floors LI.accessories A.active {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/accessories-1.jpg)
+}
+DIV.site-nav UL.floors LI.underwear A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/underwear-1.gif)
+}
+DIV.site-nav UL.floors LI.underwear A:hover {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/underwear-1.gif)
+}
+DIV.site-nav UL.floors LI.underwear A.active {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/underwear-1.gif)
+}
+DIV.site-nav UL.floors LI.childrenwear A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/childrenwear-1.gif)
+}
+DIV.site-nav UL.floors LI.childrenwear A:hover {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/childrenwear-1.gif)
+}
+DIV.site-nav UL.floors LI.childrenwear A.active {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/childrenwear-1.gif)
+}
+DIV.site-nav UL.floors LI.womanwear A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/woman-1.gif)
+}
+DIV.site-nav UL.floors LI.womanwear A:hover {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/woman-1.gif)
+}
+DIV.site-nav UL.floors LI.womanwear A.active {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/woman-1.gif)
+}
+DIV.site-nav UL.floors LI.bra A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/bra-t-1.gif)
+}
+DIV.site-nav UL.floors LI.bra A:hover {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/bra-t-1.gif)
+}
+DIV.site-nav UL.floors LI.bra A.active {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/bra-t-1.gif)
+}
+DIV.site-nav UL.floors LI.man A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/man-1.gif)
+}
+DIV.site-nav UL.floors LI.man A:hover {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/man-1.gif)
+}
+DIV.site-nav UL.floors LI.man A.active {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/man-1.gif)
+}
+DIV.site-nav UL.floors LI.qingcang A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/qc-1.gif)
+}
+DIV.site-nav UL.floors LI.qingcang A:hover {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/qc-1.gif)
+}
+DIV.site-nav UL.floors LI.qingcang A.active {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/qc-1.gif)
+}
+DIV.site-nav UL.floors LI.index A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/index-2.gif)
+}
+DIV.site-nav UL.floors LI.shirt A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/shirt-2.gif)
+}
+DIV.site-nav UL.floors LI.polo A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/polo-2.gif)
+}
+DIV.site-nav UL.floors LI.plants A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/plants-2.gif)
+}
+DIV.site-nav UL.floors LI.men A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/man-2.jpg)
+}
+DIV.site-nav UL.floors LI.women A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/woman-2.jpg)
+}
+DIV.site-nav UL.floors LI.shoes A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/shoes-2.gif)
+}
+DIV.site-nav UL.floors LI.house A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/house-2.gif)
+}
+DIV.site-nav UL.floors LI.accessories A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/accessories-2.jpg)
+}
+DIV.site-nav UL.floors LI.underwear A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/underwear-2.gif)
+}
+DIV.site-nav UL.floors LI.childrenwear A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/childrenwear-2.gif)
+}
+DIV.site-nav UL.floors LI.womanwear A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/woman-2.gif)
+}
+DIV.site-nav UL.floors LI.bra A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/bra-t-2.gif)
+}
+DIV.site-nav UL.floors LI.man A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/man-2.gif)
+}
+DIV.site-nav UL.floors LI.qingcang A.selected {
+	BACKGROUND-IMAGE: url(http://images.vancl.com/NewVancl/top/qc-2.gif)
+}
+.dht {
+	BORDER-BOTTOM: #b4b4b4 1px solid; BORDER-LEFT: #b4b4b4 1px solid; PADDING-BOTTOM: 5px; BACKGROUND-COLOR: #ffffff; PADDING-LEFT: 15px; WIDTH: 222px; PADDING-RIGHT: 15px; FONT: 100 12px "ËÎÌו"; OVERFLOW: hidden; BORDER-TOP: #b4b4b4 1px solid; BORDER-RIGHT: #b4b4b4 1px solid; PADDING-TOP: 0px
+}
+.dht DL {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 12px
+}
+.dht DL DT {
+	PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; FLOAT: left; PADDING-TOP: 0px
+}
+.dht DL DD {
+	PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; FLOAT: left; PADDING-TOP: 0px
+}
+.dht DL DT {
+	BORDER-BOTTOM: #a10000 1px solid; PADDING-BOTTOM: 10px; MARGIN: 0px; PADDING-LEFT: 0px; WIDTH: 222px; PADDING-RIGHT: 0px; OVERFLOW: hidden; PADDING-TOP: 0px
+}
+.dht DL .dhj {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; WIDTH: 222px; PADDING-RIGHT: 0px; MARGIN-BOTTOM: 3px; PADDING-TOP: 0px; _margin-bottom: 1px
+}
+.dht DL .dhj UL {
+	
+}
+.dht DL DT UL {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+.dht DL DT UL LI {
+	PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; FLOAT: left; PADDING-TOP: 0px
+}
+.dht DL DT UL LI P {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 13px; WIDTH: 222px; PADDING-RIGHT: 0px; BACKGROUND: url(http://images.vancl.com/newvancl/top/red.jpg) no-repeat 4px 1px; PADDING-TOP: 0px
+}
+.dht DL DT UL .hj {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 13px; WIDTH: 94px; PADDING-RIGHT: 0px; COLOR: #000000; PADDING-TOP: 9px; _padding: 6px 0 0 13px
+}
+.dht DL DT UL LI P SPAN STRONG {
+	COLOR: #a10000
+}
+.dht DL DD {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; WIDTH: 222px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+.dht DL DD UL {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+.dht DL DD UL LI {
+	PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; FLOAT: left; PADDING-TOP: 0px
+}
+.dht DL DD UL LI P {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 13px; WIDTH: 222px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+.dht DL DD UL LI SPAN {
+	
+}
+.dht DL DD UL .hj {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 13px; WIDTH: 94px; PADDING-RIGHT: 0px; COLOR: #000000; PADDING-TOP: 9px; _padding: 6px 0 0 13px
+}
+.dht DL DD UL LI P SPAN STRONG {
+	COLOR: #666666
+}
+.hotCategory {
+	BACKGROUND-COLOR: #565662; WIDTH: 822px; FLOAT: left; HEIGHT: 20px; CLEAR: left; PADDING-TOP: 10px
+}
+.hotCategory SPAN {
+	MARGIN-LEFT: 8px
+}
+#keySearch {
+	MIN-HEIGHT: 10px; WIDTH: 822px; BACKGROUND: #f5f5f5; HEIGHT: 30px; CLEAR: left; VERTICAL-ALIGN: middle; OVERFLOW: hidden
+}
+#keySearch INPUT {
+	MARGIN-TOP: 2px; HEIGHT: 14px
+}
+#keySearch SELECT {
+	MARGIN-TOP: 4px; HEIGHT: 20px; FONT-SIZE: 11px
+}
+#keySearch SPAN {
+	MARGIN-TOP: 9px; MARGIN-LEFT: 10px
+}
+#tele-car {
+	TEXT-ALIGN: right; MARGIN: 0px; WIDTH: 150px; FLOAT: right
+}
+#car {
+	BORDER-BOTTOM: #999999 1px solid; TEXT-ALIGN: center; PADDING-BOTTOM: 13px; LINE-HEIGHT: 200%; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; HEIGHT: 40px; BORDER-TOP: #999999 1px solid; PADDING-TOP: 5px; _padding: 5px 0 5px 0px
+}
+#car IMG {
+	MARGIN: 3px 5px 0px 0px
+}
+#car INPUT {
+	TEXT-ALIGN: center; BORDER-RIGHT-WIDTH: 0px; WIDTH: 24px; FONT-FAMILY: Tahoma; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; COLOR: #a10000; BORDER-LEFT-WIDTH: 0px; FONT-WEIGHT: bolder
+}
+.topMenu {
+	WIDTH: 980px
+}
+.topMenu .topleft {
+	WIDTH: 790px; FLOAT: left
+}
+.topMenu .topleft .lowel {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; HEIGHT: 43px; PADDING-TOP: 0px
+}
+.topMenu .topright {
+	TEXT-ALIGN: right; WIDTH: 190px; FLOAT: left; HEIGHT: 78px
+}
+.topMenu .topright IMG {
+	MARGIN: 16px 0px 0px
+}

@@ -1,0 +1,10 @@
+product.jsp:产品页
+product-list.jsp：产品列表页，点击继续购物进入
+public-list.jsp：公共产品列表页
+size.jsp：尺码页面
+mycart.jsp：购物车页面
+mycount.jsp：结算中心页面
+myorder.jsp：订单确认页
+ouder-success.jsp：订购成功页
+
+

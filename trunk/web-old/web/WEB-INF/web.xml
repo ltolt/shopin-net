@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+    <display-name>shopin-web</display-name>
+    <!-- Spring ApplicationContext配置文件的路径,可使用通配符,多个路径用,号分隔
+         此参数用于后面的Spring Context Loader -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext*.xml</param-value>
+    </context-param>
+
+    <!-- Character Encoding filter -->
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+
+    <filter>
+        <filter-name>sitemesh</filter-name>
+        <filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
+    </filter>
+
+    <!-- SpringSide's JCaptcha filter -->
+    <filter>
+        <filter-name>jcaptchaFilter</filter-name>
+        <filter-class>com.shopin.modules.security.jcaptcha.JCaptchaFilter</filter-class>
+        <init-param>
+            <param-name>filterImageUrl</param-name>
+            <param-value>/jcaptcha.jpg</param-value>
+        </init-param>
+    </filter>
+
+    <filter>
+        <filter-name>validateFilter</filter-name>
+        <filter-class>com.shopin.modules.security.jcaptcha.ValidateFilter</filter-class>
+        <init-param>
+            <param-name>filterProcessesMethod</param-name>
+            <param-value>POST</param-value>
+        </init-param>
+    </filter>
+
+    <filter>
+        <filter-name>defaultFilter</filter-name>
+        <filter-class>com.shopin.modules.web.filter.DefaultFilter</filter-class>
+        <init-param>
+            <param-name>cartid</param-name>
+            <param-value>shopin_sid</param-value>
+        </init-param>
+        <init-param>
+            <param-name>parameters</param-name>
+            <param-value>fr,cid,wid</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+     <!-- jcaptcha图片生成URL. -->
+    <filter-mapping>
+        <filter-name>jcaptchaFilter</filter-name>
+        <url-pattern>/jcaptcha.jpg</url-pattern>
+    </filter-mapping>
+
+    <!-- jcaptcha登录表单处理URL.k-mapping定义之前 -->
+    <filter-mapping>
+        <filter-name>validateFilter</filter-name>
+        <url-pattern>/login.html</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>validateFilter</filter-name>
+        <url-pattern>/register.json</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>defaultFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>sitemesh</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!--Spring ApplicationContext 载入 -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!-- Spring 刷新Introspector防止内存泄露 -->
+    <listener>
+        <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>shopin</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>shopin</servlet-name>
+        <url-pattern>*.html</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>shopin</servlet-name>
+        <url-pattern>*.json</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>shopin</servlet-name>
+        <url-pattern>*.xml</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>shopin</servlet-name>
+        <url-pattern>*.atom</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>shopin</servlet-name>
+        <url-pattern>*.rss</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>shopin</servlet-name>
+        <url-pattern>*.jsr</url-pattern>
+    </servlet-mapping>
+
+    <!-- session超时定义,单位为分钟 -->
+    <session-config>
+        <session-timeout>20</session-timeout>
+    </session-config>
+
+    <welcome-file-list>
+        <welcome-file>/index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!-- 出错页面定义 -->
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/common/500.jsp</location>
+    </error-page>
+    
+    <error-page>
+        <error-code>500</error-code>
+        <location>/common/500.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/common/404.jsp</location>
+    </error-page>
+</web-app>

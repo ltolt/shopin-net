@@ -1,0 +1,2 @@
+http\://activemq.apache.org/schema/activemq-core.xsd =/META-INF/activemq.xsd
+http\://activemq.apache.org/schema/activemq-core-5.0.xsd = /META-INF/activemq.xsd

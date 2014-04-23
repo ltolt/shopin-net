@@ -1,0 +1,65 @@
+/*
+双飞翼栅格布局 Flying Swing Grids Layout
+理念：简单质朴，语义化布局。
+维护：玉伯<lifesinger@gmail.com>, 正淳<ragecarrier@gmail.com>
+*/
+
+/** 页面宽度 **/
+#page {
+    /* 默认宽度为 100%, 留点呼吸空间 */
+    padding: 0 10px;
+}
+
+/* 居中 */
+#header, #content, #footer {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 页面为 950px 宽 */
+.w950 #header, .w950 #content, .w950 #footer,
+/* 头尾 100%, 仅内容区域 950px */
+#content.w950 {
+    width: 950px;
+}
+
+
+/** 布局基础样式 **/
+.col-main {
+    float: left;
+    width: 100%;
+    /* bug fix: 主栏没有内容时，在 Firefox 和 Chrome 等浏览器下，布局不对 */
+    min-height: 1px;
+}
+.col-sub, .col-extra {
+    float: left;
+    /*position: relative;  按需设置，仅在需要时添加 */
+}
+
+/** 清除浮动 **/
+.layout:after, .main-wrap:after, .col-sub:after, .col-extra:after {
+	content: '\20';
+	display: block;
+	height: 0;
+	clear: both;
+}
+.layout, .main-wrap, .col-sub, .col-extra {
+    zoom: 1;
+}
+
+/** 自定义gird **/
+
+
+    .col-sub .test-box { border-color: #B3D9FF; }
+    .col-extra { background-color: #DAF7D4; }
+    .col-extra .test-box { border-color: #B3EFAA; }
+
+    .layout { margin-bottom: 20px; margin-top:10px;}
+	.test-box { font: 18px courier new, monospace; padding: 10px; height: 90px; line-height: 90px; border: #ccc 1px solid; text-align: center; }
+	.col-width { padding: 10px; }
+
+    #content { padding:0; clear: both; }
+
+	.col-main .col-width { display: none; }
+	.w950 .col-main .col-width { display: inline; }
+

@@ -1,0 +1,112 @@
+@charset "utf-8";
+/* 公共样式-------------------- */
+_body{background:#00CC33;}
+*{padding:0;margin:0;font-family: "宋体";}
+ul,ol,li {list-style-image:none;list-style-position:outside;list-style-type:none;overflow:hidden;}
+a, a:link, a:visited {text-decoration:none;}
+a:hover{text-decoration:underline;}
+img{border:0 none;}
+#l-page{width:950px;margin:10px auto;}
+#l-page li{float:left;}
+#loginbar a,#loginbar a:visited,.topnav a,.topnav a:visited,.subnav .search a,.subnav .search a:visited,.subnav .shop .shop3 a,.subnav .shop .shop3 a:visited,#header .subnav .shop .shop3 a:visited,#content-right .sidebar .sidebar-titlemore span a,#content-right .sidebar .sidebar-titlemore span a:visited,#content-right .sidebar .sidebar-titlemore1 a,#content-right .sidebar .sidebar-titlemore1 a:visited,#content-right .sidebar .sidebar-titlecontent1 a,#content-right .sidebar .sidebar-titlecontent1 a:visited,#content-left a,#content-left a:visited,.Tab2 .Contentbox #con_two_1 a,.Tab2 .Contentbox #con_two_1 a:visited,#Tab1 .Menubox1 .Menubox1-more a,#Tab1 .Menubox1 .Menubox1-more a:visited,#Tab1 .Contentbox1 #con_one_1 a,#Tab1 .Contentbox1 #con_one_1 a:visited,#l-page #content-right .content2 .content2-bottom .content2-bottom1 .content2-bottom3 a,#l-page #content-right .content2 .content2-bottom .content2-bottom1 .content2-bottom3 a:visited,#l-page #content-right .content2 .content2-bottom .content2-bottom4 .content5 a,#l-page #content-right .content2 .content2-bottom .content2-bottom4 .content5 a:visited,#l-page #content-right .content2 .content2-bottom .content2-bottom4 .content4 a,#l-page #content-right .content2 .content2-bottom .content2-bottom4 .content4 a:visited,#l-page #content-right .content2 .content2-top .content2-title .content2-title2 a,#l-page #content-right .content2 .content2-top .content2-title .content2-title2 a:visited,#l-page #content-right .content2 .content2-top .content2-title .content2-title3 a,#l-page #content-right .content2 .content2-top .content2-title .content2-title3 a:visited,#l-page #content-right .content2 .content8 .content8-1 .hot a,#l-page #content-right .content2 .content8 .content8-1 .hot a:visited,#l-page #content-right .content2 .content8 .content8-1 .img-list a,#l-page #content-right .content2 .content8 .content8-1 .img-list a:visited,#l-page #content-right .content2 .content8 .content8-1 .img-list1 a,#l-page #content-right .content2 .content8 .content8-1 .img-list1 a:visited,#l-page #content-right .content2 .content8 .content8-1 .content8-1-2 .tab-list a,#l-page #content-right .content2 .content8 .content8-1 .content8-1-2 .tab-list a:visited,#l-page #content-right .newsbrand .hot a,#l-page #content-right .newsbrand .hot a:visited,#l-page #content-right .newsbrand .listbrand a,#l-page #content-right .newsbrand .listbrand a:visited,#l-page #content-right .content2 .top10 .month-top10 .top10-list a,#l-page #content-right .content2 .top10 .month-top10 .top10-list a:visited,#l-page #content-right .content2 .news .news-list a,#l-page #content-right .content2 .news .news-list a:visited,#l-page #content-right .content2 .news .hot a,#l-page #content-right .content2 .news .hot a:visited,#l-page #shangpin a,#l-page #shangpin a:visited,#l-page .about .about-list li a,#l-page .about .about-list li a:visited,#l-page .bottomnav a,#l-page .bottomnav1 a,#l-page .bottomnav a,#l-page .bottomnav1 a:visited{color:#333333;}
+#content-left .line24-dian a,#l-page #content-left .brand1 h3 a,#l-page #content-right .Tab2 .Contentbox #con_two_1 .color666666 a,#l-page #content-right .content2 .content2-bottom .content2-bottom1 #Tab1 .Contentbox1 #con_one_1 .color666666 a,#l-page #content-right .content2 .content8 .content8-1 .content8-1-1 a,#l-page #content-left .paddingbottom22px .line24-sanjiao a{color:#666666;}
+#loginbar a:hover,.topnav a:hover,.subnav .search a:hover,.subnav .shop .shop3 a:hover,#content-right .sidebar .sidebar-titlemore span a:hover,#content-right .sidebar .sidebar-titleh1 a:hover,#content-right .sidebar .sidebar-titlecontent a:hover,#content-right .sidebar .sidebar-titlemore1 a:hover,#content-right .sidebar .sidebar-titlecontent1 a:hover,#content-left a:hover,#l-page #content-left .line24-dian a:hover,#l-page #content-left a:hover,.Tab2 .Contentbox #con_two_1 a:hover,#l-page #content-right .Tab2 .Contentbox #con_two_1 .color666666 a:hover,#Tab1 .Menubox1 .Menubox1-more a:hover,#Tab1 .Contentbox1 #con_one_1 a:hover,#l-page #content-right .content2 .content2-bottom .content2-bottom1 .content2-bottom3 a:hover,#l-page #content-right .content2 .content2-bottom .content2-bottom4 .content5 a:hover,#l-page #content-right .content2 .content2-bottom .content2-bottom4 .content4 a:hover,#l-page #content-right .content2 .content2-top .content2-title .content2-title2 a:hover,#l-page #content-right .content2 .content2-top .content2-title .content2-title3 a:hover,#l-page #content-right .content2 .content8 .content8-1 .hot a:hover,#l-page #content-right .content2 .content8 .content8-1 .content8-1-1 a:hover,#l-page #content-right .content2 .content8 .content8-1 .content8-1-2 .tab-list a:hover,#l-page #content-right .content2 .content8 .content8-1 .img-list a:hover,#l-page #content-right .newsbrand .hot a:hover,#l-page #content-right .newsbrand .listbrand a:hover,#l-page #content-right .content2 .top10 .month-top10 .top10-list a:hover,#l-page #content-right .content2 .top10 .store-top3 .top10-list a:hover p,#l-page #content-right .content2 .news .news-list a:hover,#l-page #content-right .content2 .news .hot a:hover,#l-page #shangpin a:hover,#l-page .about .about-list li a:hover,#l-page .bottomnav a:hover,#l-page .bottomnav1 a:hover,#l-page #content-left .paddingbottom22px .line24-sanjiao ol a:hover{color:#FF6600;text-decoration: underline;}
+.line24-dian{height:21px;line-height:21px;background: url(../images/i-13.gif) no-repeat 3px;padding-left:14px;}
+#Tab1 .Contentbox1 img,.img-list img,#l-page #content-right .newsbrand .listbrand img,#l-page #content-right .content2 .top10 .store-top3 .top10-list .topup-img img{border: 1px solid #E4E4E4;}
+.height10{height:10px;overflow:hidden}
+/* 公共样式结束------------------------------------------------------------ */
+
+/* 主体左右侧布局开始-------------------- */
+#content-left{width:200px;border: 1px solid #DFD5CA;float:left;margin-right:8px;font-size:12px;line-height: 24px;}
+#content-right{width:730px;font-size:12px;border: 1px solid #DFD5CA; float:right;}
+/* 主体左右侧布局结束-------------------- */
+
+
+/* 左侧分类开始-------------------- */
+#content-left .top-left{
+	text-align:center;
+	font-size: 15px;
+	line-height: 38px;
+	font-weight: bold;
+	background-image: url(http://images.shopin.net:9009/images/l-30.gif);
+	color: #FFFFFF;
+}
+#content-left .top-left3{margin:10px 0; line-height:22px; }
+#content-left .top-left3 img{ margin-left:30px; margin-top:7px; margin-bottom:7px;}
+#l-page #content-left .focus11,#l-page #content-left .focus11 a{color:#FF6600}
+#content-left .top01{
+	width:200px;
+	height:31px;
+	background-image:url(http://images.shopin.net:9009/images/l_dh002.jpg);
+	line-height: 31px;
+	margin-top: 5px;
+}
+#content-left .top01 span{ margin-left:15px;}
+
+/* 左侧分类结束-------------------- */
+
+
+/* 右侧分类开始-------------------- */
+#l-page .s4{ margin:10px auto; font-size:14px; line-height:30px;}
+#l-page .s5 { margin:5px auto; text-align:center; font-size:16px; font-weight:bold;}
+#content-right{ margin-bottom:15px; padding-bottom:12px;}	
+
+
+
+#l-page #content-rightweihzi{
+	width:705px;
+	font-size:12px;
+	float:right;
+}
+#l-page #content-rightweihzi .wenzi{ text-align:left;
+	width:675px;
+	line-height: 30px;
+	padding-right:15px;margin-top:10px;clear:both;
+
+}
+#l-page #content-rightweihzi .wenzi li{ text-align:left;
+	width:620px;
+	padding:5px 5px 5px 0;clear:both;
+
+}
+
+.wenzi .tu{ text-align:center;
+	line-height: 30px;
+	
+}
+#l-page #content-rightweihzi .wenzi h3 a{ margin-left:10px; font-size:13px; color:#333333;line-height:30px;}
+#l-page #content-rightweihzi .daohang{
+	float:left;
+	background-image: url(http://images.shopin.net:9009/images/l_dh001.jpg);
+	width: 680px;
+	height: 31px;
+	line-height: 31px;
+	border: 1px solid #D3D3D3;
+	overflow: hidden;
+}
+.maodian{ 
+	line-height: 30px;
+	height:30px;
+	color:#333333;
+	text-align:center;
+	font-size:13px;
+	font-weight:bold;
+	margin-bottom:10px;
+}
+
+#l-page #content-rightweihzi .wenzi h3{ float:left;line-height:30px;}
+#l-page #content-rightweihzi .wenzi .fent{ float:left; width:650px; line-height:30px; margin-top:18px;}
+#l-page #content-rightweihzi .wenzi .fent a{ color:#990000;
+}
+.STYLE1 {
+	color: #990000
+}
+#l-page #content-rightweihzi .daohang span{ margin-left:15px;}
+
+
+.wzbiankuang{ border:1px solid #CCCCCC;}
+
+
+
+/* 右侧分类结束-------------------- */
+.s4-0408{background:#F0EEEE;font-size:14px;line-height:26px;padding:20px 30px;clear:both;}

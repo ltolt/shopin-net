@@ -1,0 +1,102 @@
+.jcarousel-container {
+	POSITION: relative
+}
+.jcarousel-clip {
+	Z-INDEX: 2; POSITION: relative; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; OVERFLOW: hidden; PADDING-TOP: 0px
+}
+.jcarousel-list {
+	Z-INDEX: 1; POSITION: relative; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; OVERFLOW: hidden; TOP: 0px; PADDING-TOP: 0px; LEFT: 0px
+}
+.jcarousel-list LI {
+	FLOAT: left
+}
+.jcarousel-item {
+	FLOAT: left
+}
+.jcarousel-next {
+	Z-INDEX: 3; DISPLAY: none
+}
+.jcarousel-prev {
+	Z-INDEX: 3; DISPLAY: none
+}
+.jcarousel-skin-tango .jcarousel-container {
+	
+}
+.jcarousel-skin-tango .jcarousel-container-horizontal {
+	WIDTH: 565px; HEIGHT: 76px
+}
+.jcarousel-skin-tango .jcarousel-container-vertical {
+	WIDTH: 76px; HEIGHT: 446px; PADDING-TOP: 16px
+}
+.jcarousel-skin-tango .jcarousel-clip-horizontal {
+	TEXT-ALIGN: center; WIDTH: 550px; HEIGHT: 76px; MARGIN-LEFT: 4px
+}
+.jcarousel-skin-tango .jcarousel-clip-vertical {
+	WIDTH: 76px; HEIGHT: 429px
+}
+.jcarousel-skin-tango .jcarousel-item-horizontal {
+	MARGIN: 0px 8px
+}
+.jcarousel-skin-tango .jcarousel-item-vertical {
+	MARGIN: 3px 0px
+}
+.jcarousel-skin-tango .jcarousel-item-placeholder {
+	BACKGROUND: #fff; COLOR: #000
+}
+.jcarousel-skin-tango .jcarousel-next-horizontal {
+	POSITION: absolute; WIDTH: 10px; BACKGROUND: url(http://images.vancl.com/NewVancl/ProductDetial/yfxj.png) no-repeat 0px 0px; HEIGHT: 32px; TOP: 38px; CURSOR: pointer; RIGHT: 0px
+}
+.jcarousel-skin-tango .jcarousel-next-disabled-horizontal {
+	BACKGROUND: url(http://images.vancl.com/NewVancl/ProductDetial/RGray.png) no-repeat 0px 0px; CURSOR: default
+}
+.jcarousel-skin-tango .jcarousel-next-disabled-horizontal:hover {
+	BACKGROUND: url(http://images.vancl.com/NewVancl/ProductDetial/RGray.png) no-repeat 0px 0px; CURSOR: default
+}
+.jcarousel-skin-tango .jcarousel-next-disabled-horizontal:active {
+	BACKGROUND: url(http://images.vancl.com/NewVancl/ProductDetial/RGray.png) no-repeat 0px 0px; CURSOR: default
+}
+.jcarousel-skin-tango .jcarousel-prev-horizontal {
+	POSITION: absolute; WIDTH: 8px; BACKGROUND: url(http://images.vancl.com/NewVancl/ProductDetial/zfxj.png) no-repeat 0px 0px; HEIGHT: 32px; TOP: 38px; CURSOR: pointer; LEFT: 0px
+}
+.jcarousel-skin-tango .jcarousel-prev-disabled-horizontal {
+	BACKGROUND: url(http://images.vancl.com/NewVancl/ProductDetial/LGray.png) no-repeat 0px 0px; CURSOR: default
+}
+.jcarousel-skin-tango .jcarousel-prev-disabled-horizontal:hover {
+	BACKGROUND: url(http://images.vancl.com/NewVancl/ProductDetial/LGray.png) no-repeat 0px 0px; CURSOR: default
+}
+.jcarousel-skin-tango .jcarousel-prev-disabled-horizontal:active {
+	BACKGROUND: url(http://images.vancl.com/NewVancl/ProductDetial/LGray.png) no-repeat 0px 0px; CURSOR: default
+}
+.jcarousel-skin-tango .jcarousel-next-vertical {
+	POSITION: absolute; WIDTH: 32px; BOTTOM: 5px; BACKGROUND: url(http://images.vancl.com/NewVancl/ProductDetial/dpy__r23_c6.png) no-repeat 0px 0px; HEIGHT: 8px; CURSOR: pointer; LEFT: 33px
+}
+.jcarousel-skin-tango .jcarousel-next-disabled-vertical {
+	BACKGROUND: url(http://images.vancl.com/NewVancl/ProductDetial/BGray.png) no-repeat 0px 0px; CURSOR: default
+}
+.jcarousel-skin-tango .jcarousel-next-disabled-vertical:hover {
+	BACKGROUND: url(http://images.vancl.com/NewVancl/ProductDetial/BGray.png) no-repeat 0px 0px; CURSOR: default
+}
+.jcarousel-skin-tango .jcarousel-next-disabled-vertical:active {
+	BACKGROUND: url(http://images.vancl.com/NewVancl/ProductDetial/BGray.png) no-repeat 0px 0px; CURSOR: default
+}
+.jcarousel-skin-tango .jcarousel-prev-vertical {
+	POSITION: absolute; WIDTH: 32px; BACKGROUND: url(http://images.vancl.com/NewVancl/ProductDetial/dpy__r8_c6.png) no-repeat 0px 0px; HEIGHT: 32px; TOP: 5px; CURSOR: pointer; LEFT: 33px
+}
+.jcarousel-skin-tango .jcarousel-prev-disabled-vertical {
+	BACKGROUND: url(http://images.vancl.com/NewVancl/ProductDetial/TGray.png) no-repeat 0px 0px; CURSOR: default
+}
+.jcarousel-skin-tango .jcarousel-prev-disabled-vertical:hover {
+	BACKGROUND: url(http://images.vancl.com/NewVancl/ProductDetial/TGray.png) no-repeat 0px 0px; CURSOR: default
+}
+.jcarousel-skin-tango .jcarousel-prev-disabled-vertical:active {
+	BACKGROUND: url(http://images.vancl.com/NewVancl/ProductDetial/TGray.png) no-repeat 0px 0px; CURSOR: default
+}
+#mycarousel LI {
+	TEXT-ALIGN: center; PADDING-BOTTOM: 2px; PADDING-LEFT: 0px; WIDTH: 76px; PADDING-RIGHT: 0px; DISPLAY: inline; FLOAT: left; HEIGHT: 76px; PADDING-TOP: 2px
+}
+#mycarousel LI IMG {
+	BORDER-BOTTOM: #cecece 1px solid; BORDER-LEFT: #cecece 1px solid; PADDING-BOTTOM: 2px; MARGIN: 0px auto; PADDING-LEFT: 1px; WIDTH: 68px; PADDING-RIGHT: 1px; DISPLAY: inline; BACKGROUND: #fff; HEIGHT: 68px; BORDER-TOP: #cecece 1px solid; CURSOR: pointer; BORDER-RIGHT: #cecece 1px solid; PADDING-TOP: 2px
+}
+#mycarousel .curr {
+	BORDER-BOTTOM: #369 2px solid; BORDER-LEFT: #369 2px solid; PADDING-BOTTOM: 1px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BORDER-TOP: #369 2px solid; BORDER-RIGHT: #369 2px solid; PADDING-TOP: 1px
+}

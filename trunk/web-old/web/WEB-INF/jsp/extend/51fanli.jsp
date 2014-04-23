@@ -1,0 +1,1 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><c:forEach var="p" items="${list}" varStatus="status">${p.time}|${p.orderCode}|shopin|123456|${p.userid}|${p.productCode} |_|${p.count}|${p.price/p.count}|0|${p.username}|_|<br/></c:forEach>
