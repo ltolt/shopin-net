@@ -27,7 +27,7 @@ public abstract class JedisCommandTestBase extends JedisTestBase {
 		jedis.connect();
 //		jedis.auth("foobared");
 		jedis.configSet("timeout", "300");
-		jedis.flushAll();
+//		jedis.flushAll();
 	}
 
 	@After

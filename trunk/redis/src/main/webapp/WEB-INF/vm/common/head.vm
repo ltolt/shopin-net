@@ -1,0 +1,25 @@
+<head>
+	<link rel="shortcut icon" href="http://www.jd.com/favicon.ico">
+    
+
+   <script type="text/javascript" charset="utf-8" src="http://cdn.sencha.io/ext-4.2.0-gpl/ext-all.js"></script>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">	
+/* 出错样式 */
+input.error, textarea.error
+{
+    border: solid 1px #CD0A0A;
+}
+label.error
+{
+    color:#CD0A0A;
+    margin-left:5px;
+}
+/* 深红色文字 */
+.textred
+{
+    color:#CD0A0A;
+}
+</style>
+</head>
