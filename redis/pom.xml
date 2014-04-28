@@ -19,7 +19,7 @@
 		
 
 		<!-- Spring -->
-		<spring-framework.version>3.2.3.RELEASE</spring-framework.version>
+		<spring-framework.version>3.1.1.RELEASE</spring-framework.version>
 
 		<!-- Hibernate / JPA -->
 		<hibernate.version>4.2.1.Final</hibernate.version>
@@ -34,6 +34,58 @@
 	</properties>
 	
 	<dependencies>
+	
+		<!-- json -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-jaxrs</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+		
+		
+		<!-- json jar begin -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20090211</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.ezmorph</groupId>
+			<artifactId>ezmorph</artifactId>
+			<version>1.0.6</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.morph</groupId>
+			<artifactId>morph</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<classifier>jdk15</classifier>
+			<version>2.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.2.4</version>
+		</dependency>
+            
+		
+		<!-- json jar end -->
+
+	
 	
 	   <!-- Redis client Jedis -->
 		<dependency>
@@ -99,7 +151,20 @@
 			<version>${hibernate.version}</version>
 		</dependency>
 
-		
+	    <dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity-tools</artifactId>
+			<version>2.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>1.7</version>
+		</dependency>
+	    
+	    
+	  	
 		<!-- Test Artifacts -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -107,6 +172,8 @@
 			<version>4.4</version>
 		</dependency>
 
+
+  
 	</dependencies>	
 	
 	
@@ -118,8 +185,8 @@
 	 			<artifactId>maven-compiler-plugin</artifactId>
 	 			<version>2.3.2</version>
 				<configuration> 
-	                <source>1.7</source> 
-	                <target>1.7</target> 
+	                <source>1.6</source> 
+	                <target>1.6</target> 
 	                <encoding>UTF8</encoding> 
 	            </configuration> 	 			
 		 			

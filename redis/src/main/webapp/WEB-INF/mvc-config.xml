@@ -10,13 +10,56 @@
          <context:component-scan
             base-package="org.springframework.samples.web"/>  -->
 
+    <context:component-scan base-package="net.shopin.web" />
+    
+    
+	<!-- ajax json对于时间的配置 -->
+	<bean id="jacksonObjectMapper" class="org.codehaus.jackson.map.ObjectMapper" />
+	<bean id="jacksonObjectMapperInit" class="net.shopin.util.JacksonObjectMapperInit" init-method="init">
+		<property name="objectMapper" ref="jacksonObjectMapper"></property>
+	</bean>
 
-    <mvc:annotation-driven />
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+	</bean>
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+					<property name="supportedMediaTypes">
+						<list>
+							<value>text/plain;charset=UTF-8</value>
+						</list>
+					</property>
+				</bean>
+				<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+					<property name="objectMapper" ref="jacksonObjectMapper"></property>
+				</bean>
+			</list>
+		</property>
+	</bean>
 
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-	        <!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->
-	        <property name="prefix" value="/WEB-INF/view/"/>
-	        <property name="suffix" value=".jsp"/>
+	<!-- velocity配置 begin -->
+	<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath" value="." />
+		<property name="configLocation" value="classpath:velocity.properties" />
+		<property name="velocityProperties">
+			<props>
+				<prop key="input.encoding">UTF-8</prop><!-- 指定模板引擎进行模板处理的编码 -->
+				<prop key="output.encoding">UTF-8</prop><!-- 指定输出流的编码 -->
+				<prop key="contentType">text/html;charset=UTF-8</prop><!-- contentType -->
+			</props>
+		</property>
+	</bean>
+
+	<bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+		<property name="cache" value="false"></property><!--是否缓存模板 -->
+		<property name="suffix" value=".vm" />
+		<property name="prefix" value="/WEB-INF/vm/" />
+		<property name="layoutUrl" value="/WEB-INF/vm/layout/default.vm" />
+		<property name="exposeSpringMacroHelpers" value="true" />
+		<property name="dateToolAttribute" value="dateTool" />
+		<property name="numberToolAttribute" value="numberTool" />
+		<property name="contentType" value="text/html;charset=UTF-8"></property>
 	</bean>
 
 </beans>

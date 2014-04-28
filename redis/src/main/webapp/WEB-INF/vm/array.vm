@@ -1,0 +1,85 @@
+<script type="text/javascript">
+  //javascript array
+  //数组对象的作用是：使用单独的变量名来存储一系列的值。
+
+  document.write("创建数组，为其赋值，然后输出这些值。<br />"); 
+  
+  var mycars = new Array()
+  mycars[0] = "assb";
+  mycars[1] = "Volvo"
+  mycars[2] = "BMW"
+  for(i=0;i<mycars.length;i++){
+    document.write(mycars[i] + "<br />");
+  }
+  document.write("//使用 for...in 声明来循环输出数组中的元素。<br />");
+  
+  var x
+  for(x in mycars)
+  {
+    document.write(mycars[x] + "<br />");
+  }
+
+  document.write(" 如何使用 concat() 方法来合并两个数组。。<br />");
+    var arr = new Array(3)
+    arr[0] = "George"
+    arr[1] = "John"
+    arr[2] = "Thomas"
+    
+    var arr2 = new Array(3)
+    arr2[0] = "James"
+    arr2[1] = "Adrew"
+    arr2[2] = "Martin"
+    document.write(arr.concat(arr2))
+   document.write(" 如何使用 join() 方法将数组的所有元素组成一个字符串。<br />");
+   document.write(arr.join());	
+	document.write("<br/>");
+	document.write(arr.join("."));
+	document.write(" 如何使用 sort() 方法从字面上对数组进行排序。。<br />");
+	var arr5 = new Array(6)
+    arr5[0] = "George"
+    arr5[1] = "John"
+    arr5[2] = "Thomas"
+    arr5[3] = "James"
+    arr5[4] = "Adrew"
+    arr5[5] = "Martin"
+	document.write(arr5 + "<br />")
+	document.write(arr5.sort())
+	document.write(" 如何使用 sort() 方法从数值上对数组进行排序。<br />");
+	var arr6 = new Array(6)
+    arr6[0] = "10"
+    arr6[1] = "5"
+    arr6[2] = "40"
+    arr6[3] = "25"
+    arr6[4] = "1000"
+    arr6[5] = "1"
+	
+	document.write(arr6 + "<br />")
+	function sortNum(a,b){
+	 return a - b;
+	}
+	document.write(arr6.sort(sortNum))
+	
+	document.write("<br/>pop() 方法将删除 arrayObject 的最后一个元素，把数组长度减 1，并且返回它删除的元素的值。如果数组已经为空，则 pop() 不改变数组，并返回 undefined 值。");
+	  document.write("<br />")
+	document.write(arr5)
+    document.write("<br />")
+    document.write(arr5.pop())
+	document.write("<br />")
+	document.write(arr5)
+	
+	document.write("<br />")
+document.write("push() 方法可把它的参数顺序添加到 arrayObject 的尾部。它直接修改 arrayObject，而不是创建一个新的数组。push() 方法和 pop() 方法使用数组提供的先进后出栈的功能。");
+ document.write(arr5.push("cersi"))
+ document.write("<br />")
+ document.write(arr5)
+ document.write("<br />")
+ document.write("shift() 方法用于把数组的第一个元素从其中删除，并返回第一个元素的值。");
+ document.write("<br />")
+ document.write(arr5 + "<br>")
+ document.write(arr5.shift() + "<br>")
+ document.write(arr5 + "<br>")
+ document.write("unshift() 方法可向数组的开头添加一个或更多元素，并返回新的长度 注释：unshift() 方法无法在 Internet Explorer 中正确地工作！。");
+  document.write("<br />")
+   document.write(arr5.unshift("Willian") + "<br>")
+ document.write(arr5 + "<br>")
+</script>
