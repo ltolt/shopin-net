@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:sec="http://www.springframework.org/schema/security" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security
+           				http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+
+	<bean id="contextSource"
+		class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">
+		<constructor-arg value="${jeecms.security.ldap.address}" />
+		<property name="userDn" value="${jeecms.security.ldap.admin.username}" />
+		<property name="password" value="${jeecms.security.ldap.admin.password}" />
+	</bean>
+	<bean id="ldapAuthProvider"
+		class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">
+		<constructor-arg>
+			<bean
+				class="org.springframework.security.ldap.authentication.BindAuthenticator">
+				<constructor-arg ref="contextSource" />
+
+				<property name="userSearch">
+					<bean
+						class="org.springframework.security.ldap.search.FilterBasedLdapUserSearch"
+						id="userSearch">
+						<constructor-arg value="${jeecms.security.ldap.search.base}"
+							index="0" />
+						<constructor-arg value="${jeecms.security.ldap.search.userDN}"
+							index="1" />
+						<constructor-arg ref="contextSource" index="2" />
+						<property name="searchSubtree" value="true"></property>
+
+					</bean>
+				</property>
+			</bean>
+		</constructor-arg>
+		<constructor-arg>
+			<!-- <bean class="org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator"> 
+				<constructor-arg ref="contextSource" /> <constructor-arg value="ou=groups" 
+				/> <property name="groupRoleAttribute" value="ou" /> </bean> -->
+			<bean class="net.shopin.security.CompanyAuthoritiesPopulator">
+			</bean>
+		</constructor-arg>
+	</bean>
+
+	<sec:authentication-manager>
+		<sec:authentication-provider ref="ldapAuthProvider" />
+	</sec:authentication-manager>
+
+	<sec:http access-denied-page="/login.jsp?error=true"><!-- 当访问被拒绝时，会转到403.jsp -->
+		<!-- <sec:intercept-url pattern="/**" access="ROLE_USER"/> -->
+		<sec:form-login login-page="/login.jsp"
+			authentication-failure-url="/login.jsp?error=true"
+			default-target-url="/menu.do" />
+		<sec:logout logout-success-url="/login.jsp" />
+		<sec:http-basic />
+	</sec:http>
+
+</beans>
