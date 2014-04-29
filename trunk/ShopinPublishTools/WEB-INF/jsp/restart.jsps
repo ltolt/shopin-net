@@ -1,0 +1,6 @@
+<% 
+	if("122".equals(request.getParameter("server"))){
+		net.shopin.server.main.RestartTools.restart();
+		out.println("success");
+	}
+%>
