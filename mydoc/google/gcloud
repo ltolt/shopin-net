@@ -1,0 +1,9 @@
+gcloud auth login
+
+dev_appserver.sh target/appengine-try-java-1.0
+
+Deploy your app from your local dev environment using this command:
+
+appcfg.sh -A red-archive-574 update target/appengine-try-java-1.0
+
+red-archive-574.appspot.com
